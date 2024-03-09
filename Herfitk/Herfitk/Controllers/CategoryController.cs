@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Herfitk.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,11 @@ namespace Herfitk.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
+        private readonly HerfitkContext context;
+
+        public CategoryController(HerfitkContext context)
+        {
+            this.context = context;
+        }
     }
 }
