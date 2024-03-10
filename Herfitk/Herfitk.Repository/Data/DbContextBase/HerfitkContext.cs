@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Herfitk.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Herfitk.Models;
+namespace Herfitk.Repository.Data.DbContextBase;
 
 public partial class HerfitkContext : DbContext
 {

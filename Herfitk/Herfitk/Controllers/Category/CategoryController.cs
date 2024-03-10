@@ -1,4 +1,5 @@
 ﻿using Herfitk.Models;
+using Herfitk.Repository.Data.DbContextBase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Herfitk.Controllers
+namespace Herfitk.Controllers.Category
 {
     [Route("api/[controller]")]
     [ApiController]
