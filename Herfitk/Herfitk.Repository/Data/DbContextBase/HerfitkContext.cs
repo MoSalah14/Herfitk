@@ -43,7 +43,7 @@ public partial class HerfitkContext : DbContext
             entity.ToTable("Category");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                //.ValueGeneratedNever()
                 .HasColumnName("ID");
             entity.Property(e => e.Type).HasMaxLength(100);
         });
@@ -55,7 +55,7 @@ public partial class HerfitkContext : DbContext
             entity.ToTable("Client");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                //.ValueGeneratedNever()
                 .HasColumnName("ID");
             entity.Property(e => e.UserId).HasColumnName("User_ID");
 
@@ -94,7 +94,7 @@ public partial class HerfitkContext : DbContext
             entity.ToTable("Herfiy");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                //.ValueGeneratedNever()
                 .HasColumnName("ID");
             entity.Property(e => e.Speciality).HasMaxLength(100);
             entity.Property(e => e.UserId).HasColumnName("User_ID");

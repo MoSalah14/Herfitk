@@ -1,15 +1,26 @@
 
+using Herfitk.Core.Models.Identity;
+using Herfitk.Core.Repository;
 using Herfitk.Models;
+using Herfitk.Repository;
 using Herfitk.Repository.Data.DbContextBase;
+using Herfitk.Repository.Idintity.IdentityContext;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.PortableExecutable;
 
 namespace Herfitk
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+
+
 
             #region Configure Services
             // Add services to the container.
@@ -19,14 +30,51 @@ namespace Herfitk
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+            //Allow DbContext D_Injection
             builder.Services.AddDbContext<HerfitkContext>(Use =>
-           Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
+            Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
+
+
+            //Allow Identity D_Injection
+
+            builder.Services.AddDbContext<IdentityContext>(optionBuilder =>
+            optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+            //Allow Generic Repository
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
             #endregion
 
 
 
-            #region MiddleWares
+
+
             var app = builder.Build();
+
+            using var scope = app.Services.CreateScope();
+
+            var services = scope.ServiceProvider;
+            var _Context = services.GetRequiredService<HerfitkContext>();
+
+            var IdentityDbContext = services.GetRequiredService<IdentityContext>();
+
+            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+            try
+            {
+                await _Context.Database.MigrateAsync(); // Update Database
+                await IdentityDbContext.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "Error When Try Update Database");
+
+            }
+
+
+            #region MiddleWares
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -40,7 +88,7 @@ namespace Herfitk
             app.UseAuthorization();
 
 
-            app.MapControllers(); 
+            app.MapControllers();
             #endregion
 
             app.Run();

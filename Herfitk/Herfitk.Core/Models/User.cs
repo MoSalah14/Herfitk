@@ -19,9 +19,9 @@ public partial class User
 
     public string? NationalId { get; set; }
 
-    public byte[]? PersonalImage { get; set; }
+    public string? PersonalImage { get; set; }
 
-    public byte[]? NationalIdImage { get; set; }
+    public string? NationalIdImage { get; set; }
 
     public string? AccountState { get; set; }
 

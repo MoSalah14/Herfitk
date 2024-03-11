@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk", "Herfitk\Herfitk.csproj", "{3A7FC028-CFE6-4574-BC31-6F43153A6345}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk.API", "Herfitk\Herfitk.API.csproj", "{3A7FC028-CFE6-4574-BC31-6F43153A6345}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Herfitk.Core", "Herfitk.Core\Herfitk.Core.csproj", "{86FBF45D-8265-4E33-9F46-73174D2B62EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk.Core", "Herfitk.Core\Herfitk.Core.csproj", "{86FBF45D-8265-4E33-9F46-73174D2B62EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Herfitk.Repository", "Herfitk.Repository\Herfitk.Repository.csproj", "{7E540FB8-1997-468D-8FBE-560CAC7FB488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk.Repository", "Herfitk.Repository\Herfitk.Repository.csproj", "{7E540FB8-1997-468D-8FBE-560CAC7FB488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
