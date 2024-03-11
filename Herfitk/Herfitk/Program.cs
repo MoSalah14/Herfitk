@@ -1,5 +1,6 @@
 
 using Herfitk.Models;
+using Herfitk.Repository.Data.DbContextBase;
 using Microsoft.EntityFrameworkCore;
 
 namespace Herfitk
@@ -10,6 +11,7 @@ namespace Herfitk
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            #region Configure Services
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -19,9 +21,11 @@ namespace Herfitk
 
             builder.Services.AddDbContext<HerfitkContext>(Use =>
            Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
+            #endregion
 
 
 
+            #region MiddleWares
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,7 +40,8 @@ namespace Herfitk
             app.UseAuthorization();
 
 
-            app.MapControllers();
+            app.MapControllers(); 
+            #endregion
 
             app.Run();
         }
