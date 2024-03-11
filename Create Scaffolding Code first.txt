@@ -1,1 +1,10 @@
 Scaffold-DbContext "Data Source=.;Initial Catalog=Herifa_Web;Integrated Security=True;encrypt=false" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+
+
+add Node Module
+First Run This 
+
+1- npm install -g @angular/cli
+2- npm install
+
