@@ -1,6 +1,0 @@
-@Herfitk_UP.Server_HostAddress = http://localhost:5044
-
-GET {{Herfitk_UP.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
