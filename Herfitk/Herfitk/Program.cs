@@ -8,6 +8,7 @@ using Herfitk.Repository.Idintity.IdentityContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection.PortableExecutable;
 
 namespace Herfitk
@@ -31,6 +32,9 @@ namespace Herfitk
             builder.Services.AddSwaggerGen();
 
 
+            //Allow Generic Repository
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
             //Allow DbContext D_Injection
             builder.Services.AddDbContext<HerfitkContext>(Use =>
             Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
@@ -41,10 +45,11 @@ namespace Herfitk
             builder.Services.AddDbContext<IdentityContext>(optionBuilder =>
             optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
-            //Allow Generic Repository
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddAuthentication();
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentityContext>();
+            //builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<IdentityContext>();
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+
             #endregion
 
 
@@ -53,6 +58,7 @@ namespace Herfitk
 
             var app = builder.Build();
 
+            #region AutoUpdate Database
             using var scope = app.Services.CreateScope();
 
             var services = scope.ServiceProvider;
@@ -72,6 +78,7 @@ namespace Herfitk
                 logger.LogError(ex, "Error When Try Update Database");
 
             }
+            #endregion
 
 
             #region MiddleWares
@@ -82,6 +89,8 @@ namespace Herfitk
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            //app.MapIdentityApi<AppUser>();
 
             app.UseHttpsRedirection();
 

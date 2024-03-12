@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Herfitk.Repository.Identity.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20240311231553_IdentityUpdatesAppUser")]
-    partial class IdentityUpdatesAppUser
+    [Migration("20240312054111_TestIdentity1")]
+    partial class TestIdentity1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,8 +62,7 @@ namespace Herfitk.Repository.Identity.Migrations
 
                     b.Property<string>("NationalId")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalIdImage")
                         .HasColumnType("nvarchar(max)");
@@ -93,10 +92,6 @@ namespace Herfitk.Repository.Identity.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
