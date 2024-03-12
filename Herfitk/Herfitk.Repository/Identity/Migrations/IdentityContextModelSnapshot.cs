@@ -59,8 +59,7 @@ namespace Herfitk.Repository.Identity.Migrations
 
                     b.Property<string>("NationalId")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalIdImage")
                         .HasColumnType("nvarchar(max)");
@@ -90,10 +89,6 @@ namespace Herfitk.Repository.Identity.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 

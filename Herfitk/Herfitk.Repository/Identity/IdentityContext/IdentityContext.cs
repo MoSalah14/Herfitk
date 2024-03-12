@@ -17,7 +17,13 @@ namespace Herfitk.Repository.Idintity.IdentityContext
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-       
+            builder.Entity<AppUser>()
+             .Ignore(u => u.UserName);
+        }
+
     }
 }
