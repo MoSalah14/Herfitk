@@ -10,5 +10,9 @@ namespace Herfitk.Core.Repository
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id);
+        T ADD(T name);
+        T UPDATE(T name,int id);
+        T DELETE(int id);   
+
     }
 }
