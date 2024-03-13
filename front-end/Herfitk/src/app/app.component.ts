@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './Home/header/header.component';
 import { LoginComponent } from './Home/login/login.component';
 import { RegisterComponent } from './Home/register/register.component';
 import { AboutComponent } from './Home/about/about.component';
@@ -8,6 +7,7 @@ import { ViewprofileComponent } from './Profile/viewprofile/viewprofile.componen
 import { DynamicBackgroundDirectiveDirective } from './Directives/dynamic-background-directive.directive';
 import { ContactusComponent } from './Home/contactus/contactus.component';
 import { CategoryComponent } from './Home/category/category.component';
+import { HeaderComponent } from './Home/header/header.component';
 
 
 

@@ -5,10 +5,11 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from './Home/header/header.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/header', pathMatch: 'full' },
+  // { path: '', redirectTo: '/header', pathMatch: 'full' },
   {path: "login" , component:LoginComponent},
   {path: "register" , component:RegisterComponent},
   {path: "header" , component:HeaderComponent},
+
 
 
 ];

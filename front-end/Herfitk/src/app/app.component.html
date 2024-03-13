@@ -23,7 +23,7 @@
               <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Contact Us</a> <!-- Added margin-right for space -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Login</a> <!-- Added margin-right for space -->
+              <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;" routerLink="/login">Login</a> <!-- Added margin-right for space -->
             </li>
           </ul>
         </div>
@@ -32,13 +32,11 @@
   </nav>
 
 
-<!-- <app-about></app-about> -->
 <!-- <app-register></app-register> -->
-
 <app-header></app-header>
 <app-about></app-about>
-<app-login></app-login>
-<app-register></app-register>
-
+<app-category></app-category>
+<app-contactus></app-contactus>
 <!-- profile -->
 <app-viewprofile></app-viewprofile>
+<router-outlet></router-outlet>
