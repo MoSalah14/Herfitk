@@ -32,8 +32,9 @@ namespace Herfitk
             builder.Services.AddSwaggerGen();
 
 
-            //Allow Generic Repository
+            //Allow  Repository
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
 
             //Allow DbContext D_Injection
             builder.Services.AddDbContext<HerfitkContext>(Use =>
@@ -44,6 +45,10 @@ namespace Herfitk
 
             builder.Services.AddDbContext<IdentityContext>(optionBuilder =>
             optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+
+            builder.Services.AddAutoMapper(typeof(Program));
+
 
             builder.Services.AddAuthentication();
             builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentityContext>();

@@ -1,65 +1,62 @@
 ﻿using Herfitk.Core.Repository;
+using Herfitk.Models;
 using Herfitk.Repository.Data.DbContextBase;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Herfitk.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly HerfitkContext _context;
-        
+
         public GenericRepository(HerfitkContext context)
         {
             _context = context;
         }
 
-        public T ADD(T name)
+
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+            => await _context.Set<T>().ToListAsync();
+
+
+        public async Task<T?> GetByIdAsync(int id)
+            => await _context.Set<T>().FindAsync(id);
+
+        public async Task<T> AddAsync(T name)
         {
-           
-             _context.Set<T>().Add(name);
-            _context.SaveChanges();
+            await _context.Set<T>().AddAsync(name);
+            await _context.SaveChangesAsync();
             return name;
         }
 
-        public T DELETE(int id)
+        public async Task<T> UpdateAsync(T entity, int id)
         {
-            T entity = _context.Set<T>().Find(id);
-            if (entity == null) {
-                _context.Set<T>().Remove(entity);
-                _context.SaveChanges();
-                return entity;
-            }
-            else
+            T oldentity = await _context.Set<T>().FindAsync(id);
+            if (oldentity != null)
             {
-                return null;
-            }
-        }
-
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _context.Set<T>().ToListAsync();
-        }
-
-        public async Task<T?> GetByIdAsync(int id)
-        {   
-            return await _context.Set<T>().FindAsync(id);
-        }
-
-        public T UPDATE(T entity,int id)
-        {
-            T oldentity = _context.Set<T>().Find(id);
-            oldentity = entity;
-                _context.Set<T>().Update(oldentity);
-                _context.SaveChanges();
+                //_context.Set<T>().Update(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
                 return entity;
-          
+            }
+            return oldentity;
         }
 
-      
+        public async Task<T> DeleteAsync(int id)
+        {
+            var entity = await GetByIdAsync(id);
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
     }
 }

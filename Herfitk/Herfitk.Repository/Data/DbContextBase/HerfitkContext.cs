@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Herfitk.Core.Models;
 using Herfitk.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,8 +32,9 @@ public partial class HerfitkContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Staff> Staff { get; set; }
+    public virtual DbSet<HerifyAppUser> AppUser { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -59,9 +61,9 @@ public partial class HerfitkContext : DbContext
                 .HasColumnName("ID");
             entity.Property(e => e.UserId).HasColumnName("User_ID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Clients)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Client__User_ID__3F466844");
+            //entity.HasOne(d => d.UserId).WithMany(p => p.Clients)
+            //    .HasForeignKey(d => d.UserId)
+            //    .HasConstraintName("FK__Client__User_ID__3F466844");
         });
 
         modelBuilder.Entity<ClientHerify>(entity =>
@@ -100,9 +102,9 @@ public partial class HerfitkContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("User_ID");
             entity.Property(e => e.Zone).HasMaxLength(100);
 
-            entity.HasOne(d => d.User).WithMany(p => p.Herfiys)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Herfiy__User_ID__4222D4EF");
+            //entity.HasOne(d => d.)
+            //    .HasForeignKey(d => d.UserId)
+            //    .HasConstraintName("FK__Herfiy__User_ID__4222D4EF");
         });
 
         modelBuilder.Entity<HerifyCategory>(entity =>
@@ -152,9 +154,9 @@ public partial class HerfitkContext : DbContext
             entity.Property(e => e.Type).HasMaxLength(50);
             entity.Property(e => e.UserId).HasColumnName("User_ID");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Roles)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Role__User_ID__398D8EEE");
+            //entity.HasOne(d => d.User).WithMany(p => p.Roles)
+            //    .HasForeignKey(d => d.UserId)
+            //    .HasConstraintName("FK__Role__User_ID__398D8EEE");
         });
 
         modelBuilder.Entity<Staff>(entity =>
@@ -167,32 +169,49 @@ public partial class HerfitkContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("User_ID");
             entity.Property(e => e.WorkHours).HasColumnName("Work_Hours");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Staff)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Staff__User_ID__3C69FB99");
+            //entity.HasOne(d => d.User).WithMany(p => p.Staff)
+            //    .HasForeignKey(d => d.UserId)
+            //    .HasConstraintName("FK__Staff__User_ID__3C69FB99");
         });
 
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__User__3214EC272A074D8C");
+        //modelBuilder.Entity<User>(entity =>
+        //{
+        //    entity.HasKey(e => e.Id).HasName("PK__User__3214EC272A074D8C");
 
-            entity.ToTable("User");
+        //    entity.ToTable("User");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.AccountState)
-                .HasMaxLength(50)
-                .HasColumnName("Account_State");
-            entity.Property(e => e.Address).HasMaxLength(100);
-            entity.Property(e => e.Email).HasMaxLength(200);
-            entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.NationalId)
-                .HasMaxLength(15)
-                .HasColumnName("National_ID");
-            entity.Property(e => e.NationalIdImage).HasColumnName("NationalID_Image");
-            entity.Property(e => e.Password).HasMaxLength(100);
-            entity.Property(e => e.PersonalImage).HasColumnName("Personal_Image");
-            entity.Property(e => e.Phone).HasMaxLength(15);
-        });
+        //    entity.Property(e => e.Id).HasColumnName("ID");
+        //    entity.Property(e => e.AccountState)
+        //        .HasMaxLength(50)
+        //        .HasColumnName("Account_State");
+        //    entity.Property(e => e.Address).HasMaxLength(100);
+        //    entity.Property(e => e.Email).HasMaxLength(200);
+        //    entity.Property(e => e.Name).HasMaxLength(100);
+        //    entity.Property(e => e.NationalId)
+        //        .HasMaxLength(15)
+        //        .HasColumnName("National_ID");
+        //    entity.Property(e => e.NationalIdImage).HasColumnName("NationalID_Image");
+        //    entity.Property(e => e.Password).HasMaxLength(100);
+        //    entity.Property(e => e.PersonalImage).HasColumnName("Personal_Image");
+        //    entity.Property(e => e.Phone).HasMaxLength(15);
+        //});
+
+        modelBuilder.Entity<Herfiy>()
+         .HasKey(h => h.Id);
+
+        modelBuilder.Entity<Herfiy>()
+            .Property(h => h.Id)
+            .HasColumnName("HerfiyId"); // Assuming 'HerfiyId' is the actual column name in the database for the primary key
+
+        modelBuilder.Entity<Herfiy>()
+            .Property(h => h.UserId)
+            .HasColumnName("User_ID"); // Assuming 'User_ID' is the actual column name in the database for the foreign key
+
+        modelBuilder.Entity<Herfiy>()
+            .HasOne(h => h.User)
+            .WithOne()
+            .HasForeignKey<Herfiy>(h => h.UserId); // Define the foreign key relationship
+
 
         OnModelCreatingPartial(modelBuilder);
     }
