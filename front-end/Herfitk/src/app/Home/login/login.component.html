@@ -1,1 +1,106 @@
-<p>login works!</p>
+<!--
+<section class="h-100 gradient-form body" >
+  <div class="container py-5 h-100" >
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-9" >
+        <div class="card rounded-3 text-black" style="background-color: #eee;">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-1 mx-md-4" >
+                <div class="text-center" >
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    style="width: 185px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">We are The Herfitk Team</h4>
+                </div>
+                <form>
+                  <p>Please login to your account</p>
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form2Example11" required class="form-control"
+                      placeholder="email@example.com" #inputEmail />
+                    <label class="form-label" for="form2Example11">Email</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form2Example22" class="form-control" #inputPassword/>
+                    <label class="form-label" for="form2Example22">Password</label>
+
+                  </div>
+
+                  <div class="text-center pt-1 mb-2 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="width: 100%;"
+                    type="button">Login</button>
+                  </div>
+                  <div class="text-center pt-1 mb-1 pb-1">
+                    <a class="text-muted" href="#!">Forgot password?</a>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <button type="button" class="btn btn-outline-danger" routerLink="/register">Create new</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="h-100 gradient-form body">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-9">
+        <div class="card rounded-3 text-black" style="background-color: #eee;">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-1 mx-md-4">
+                <div class="text-center" >
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    style="width: 185px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">We are The Herfitk Team</h4>
+                </div>
+                <form (ngSubmit)="onSubmit()" [formGroup]="FormValdiation">
+                  <div class="form-outline mb-4">
+                    <input formControlName="email" type="email" name="email" class="form-control" placeholder="email@example.com" [(ngModel)]="email" #inputEmail required>
+                    @if (validEmail == false) {
+                      <div style="color: red;">
+                        Email Not Valid
+                      </div>}
+                    <label class="form-label">Email</label>
+                    <div *ngIf="!email && submitted" class="text-danger">Email is required</div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input formControlName="password" type="text" name="password" class="form-control" placeholder="Password" [(ngModel)]="password" #inputPass required>
+                    @if (validPass == false) {
+                      <div style="color: red;">
+                        Password Not Valid
+                      </div>
+                    }
+                    <label class="form-label">Password</label>
+                    <div *ngIf="!password && submitted" class="text-danger">Password is required</div>
+                  </div>
+
+                  <div class="text-center pt-1 mb-2 pb-1">
+                    <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="width: 100%;" type="submit" (click)="logSuc()">
+                  </div>
+                  <div class="text-center pt-1 mb-1 pb-1">
+                    <a class="text-muted" href="#!">Forgot password?</a>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <button type="button" class="btn btn-outline-danger" routerLink="/register">Create new</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

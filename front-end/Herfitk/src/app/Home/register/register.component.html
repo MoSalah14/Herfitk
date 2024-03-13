@@ -1,1 +1,88 @@
-<p>register works!</p>
+<section class="h-100 gradient-form body">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-9">
+        <div class="card rounded-3 text-black" style="background-color: #eee;">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-1 mx-md-4">
+                <div class="text-center">
+                  <h4 class="mt-1 mb-5 pb-1">Registration</h4>
+                </div>
+                <form (ngSubmit)="onSubmit()" [formGroup]="FormValdiation">
+                  <div class="form-outline mb-4">
+                    <input formControlName="name" type="text" name="name" class="form-control" placeholder="Enter Your Name" [(ngModel)]="name" required>
+                    @if (validname == false) {
+                      <div style="color: red;">
+                        Name Not Valid
+                      </div>}
+                    <label class="form-label">Name</label>
+                    <div *ngIf="!name && submitted" class="text-danger">Name is required</div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input formControlName="email" type="email" name="email" class="form-control" placeholder="email@example.com" [(ngModel)]="email" required>
+                    @if (validEmail == false) {
+                      <div style="color: red;">
+                        Email Not Valid
+                      </div>}
+                    <label class="form-label">Email</label>
+                    <div *ngIf="!email && submitted" class="text-danger">Email is required</div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input formControlName="phone" type="tel" name="phone" class="form-control" placeholder="Enter Phone Number" [(ngModel)]="phone" required>
+                    @if (validPhone == false) {
+                      <div style="color: red;">
+                        Phone Not Valid
+                      </div>}
+                    <label class="form-label">Phone</label>
+                    <div *ngIf="!phone && submitted" class="text-danger">Phone number is required</div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" name="Adress" class="form-control" placeholder="Adress" [(ngModel)]="adress" required>
+                    @if (validAdress == false) {
+                      <div style="color: red;">
+                        Adress Not Valid
+                      </div>}
+                    <label class="form-label">Adress</label>
+                    <div *ngIf="!adress && submitted" class="text-danger">Adress is required</div>
+                  </div>
+                  <!-- <div class="form-outline mb-4">
+                    <input type="text" name="National Id" class="form-control" placeholder="National Id" [(ngModel)]="naId" required>
+                    <label class="form-label">National Id</label>
+                    <div *ngIf="!naId && submitted" class="text-danger">National Id is required</div>
+                  </div> -->
+                  <div class="form-outline mb-4">
+                    <input formControlName="password" type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="password" required>
+                    @if (validPass == false) {
+                      <div style="color: red;">
+                        Password Not Valid
+                      </div>}
+                    <label class="form-label">Password</label>
+                    <div *ngIf="!password && submitted" class="text-danger">Password is required</div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input formControlName="confirmPassword" type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password" [(ngModel)]="confirmPassword" required>
+                    @if (validConfirmPass == false) {
+                      <div style="color: red;">
+                        Confirm Password Not Valid
+                      </div>}
+                    <label class="form-label">Confirm Password</label>
+                    <div *ngIf="!confirmPassword && submitted" class="text-danger">Confirm password is required</div>
+                    <div *ngIf="password !== confirmPassword && submitted" class="text-danger">Passwords do not match</div>
+                  </div>
+
+                  <div class="text-center pt-1 mb-2 pb-1">
+                    <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="width: 100%;" type="submit" (click)="logSuc()">Registration
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
