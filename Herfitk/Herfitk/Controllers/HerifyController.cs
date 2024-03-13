@@ -1,60 +1,66 @@
-﻿using Herfitk.Core.Repository;
+﻿using AutoMapper;
+using Herfitk.API.DTO;
+using Herfitk.Core.Repository;
 using Herfitk.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Policy;
 
 namespace Herfitk.API.Controllers
 {
-    public class HerifyController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class HerifyController : ControllerBase
     {
-        private readonly IGenericRepository<Herfiy> context;
-        public HerifyController(IGenericRepository<Herfiy> _context)
+        private readonly IHerifyRepository repository;
+        private readonly IMapper mapper;
+
+        public HerifyController(IHerifyRepository genericRepository, IMapper mapper)
         {
-            context = _context;
+            repository = genericRepository;
+            this.mapper = mapper;
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var herify=await context.GetByIdAsync(id);               
-                return Ok(herify);                
+                var herify = await repository.GetByIdAsyncWithInclude(id);
+                if (herify == null)
+                    return NotFound();
+
+                return Ok(mapper.Map<Herfiy, HerfiyDto>(herify));
             }
             else
-            {
                 return BadRequest();
-            }
         }
 
-        [HttpPost("AddOne")]
-        public IActionResult AddOne(Herfiy herify)
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(Herfiy herify)
         {
             if (ModelState.IsValid)
             {
-                var entity = context.ADD(herify);
+                var entity = await repository.AddAsync(herify);
                 //string url = Url.Action(nameof(GetById), new { id = herify.Id });
                 //return Created(url, new { herify, Message = "Added" });
-                
                 return Ok(entity);
             }
             else
-            {
                 return BadRequest(ModelState);
-            }
-           
         }
-        [HttpPut("update")]
-        public IActionResult update(Herfiy herify,[FromHeader]int id)
-        { 
-            if(ModelState.IsValid) {
-                var entity = context.UPDATE(herify, id);
-                return StatusCode(204, new { message = "Updated",herify });
 
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(Herfiy herify, [FromHeader] int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var entity = await repository.UpdateAsync(herify, id);
+                return StatusCode(204, new { message = "Updated", entity });
             }
             return BadRequest(ModelState);
         }
 
-     
+
     }
 }

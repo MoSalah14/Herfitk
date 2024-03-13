@@ -6,11 +6,42 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Herfitk.Repository.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ReCreat : Migration
+    public partial class TestIntegrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AppUser",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonalImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NationalIdImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccountState = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUser", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
@@ -22,27 +53,6 @@ namespace Herfitk.Repository.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Category__3214EC279B2D105D", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    National_ID = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    Personal_Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalID_Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Account_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__User__3214EC272A074D8C", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,32 +68,6 @@ namespace Herfitk.Repository.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Client__3214EC272790489E", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__Client__User_ID__3F466844",
-                        column: x => x.User_ID,
-                        principalTable: "User",
-                        principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Herfiy",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Zone = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    History = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Speciality = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Herfiy__3214EC27C698B292", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__Herfiy__User_ID__4222D4EF",
-                        column: x => x.User_ID,
-                        principalTable: "User",
-                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -98,11 +82,6 @@ namespace Herfitk.Repository.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Role__3214EC27D1EB7E98", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__Role__User_ID__398D8EEE",
-                        column: x => x.User_ID,
-                        principalTable: "User",
-                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -119,11 +98,28 @@ namespace Herfitk.Repository.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Staff__3214EC27832438F9", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Herfiy",
+                columns: table => new
+                {
+                    HerfiyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Zone = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    History = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Speciality = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    User_ID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Herfiy__3214EC27C698B292", x => x.HerfiyId);
                     table.ForeignKey(
-                        name: "FK__Staff__User_ID__3C69FB99",
+                        name: "FK_Herfiy_AppUser_User_ID",
                         column: x => x.User_ID,
-                        principalTable: "User",
-                        principalColumn: "ID");
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,7 +148,7 @@ namespace Herfitk.Repository.Data.Migrations
                         name: "FK__Client_He__Herif__4D94879B",
                         column: x => x.Herify_ID,
                         principalTable: "Herfiy",
-                        principalColumn: "ID");
+                        principalColumn: "HerfiyId");
                 });
 
             migrationBuilder.CreateTable(
@@ -173,7 +169,7 @@ namespace Herfitk.Repository.Data.Migrations
                         name: "FK__Herify_Ca__Herif__48CFD27E",
                         column: x => x.Herify_ID,
                         principalTable: "Herfiy",
-                        principalColumn: "ID");
+                        principalColumn: "HerfiyId");
                 });
 
             migrationBuilder.CreateTable(
@@ -195,13 +191,8 @@ namespace Herfitk.Repository.Data.Migrations
                         name: "FK__Payment__Herify___46E78A0C",
                         column: x => x.Herify_ID,
                         principalTable: "Herfiy",
-                        principalColumn: "ID");
+                        principalColumn: "HerfiyId");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Client_User_ID",
-                table: "Client",
-                column: "User_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Client_Herify_Client_ID",
@@ -216,7 +207,8 @@ namespace Herfitk.Repository.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Herfiy_User_ID",
                 table: "Herfiy",
-                column: "User_ID");
+                column: "User_ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Herify_Category_Category_ID",
@@ -232,16 +224,6 @@ namespace Herfitk.Repository.Data.Migrations
                 name: "IX_Payment_Herify_ID",
                 table: "Payment",
                 column: "Herify_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Role_User_ID",
-                table: "Role",
-                column: "User_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Staff_User_ID",
-                table: "Staff",
-                column: "User_ID");
         }
 
         /// <inheritdoc />
@@ -272,7 +254,7 @@ namespace Herfitk.Repository.Data.Migrations
                 name: "Herfiy");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "AppUser");
         }
     }
 }
