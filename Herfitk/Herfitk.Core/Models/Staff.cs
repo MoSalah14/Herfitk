@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Herfitk.Core.Models;
+using Herfitk.Core.Models.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Herfitk.Models;
 
@@ -14,6 +17,7 @@ public partial class Staff
     public int? WorkHours { get; set; }
 
     public int? UserId { get; set; }
+    [NotMapped]
 
-    public virtual User? User { get; set; }
+    public virtual HerifyAppUser? User { get; set; }
 }

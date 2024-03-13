@@ -17,10 +17,94 @@ namespace Herfitk.Repository.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Herfitk.Core.Models.HerifyAppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AccountState")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NationalIdImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonalImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUser");
+                });
 
             modelBuilder.Entity("Herfitk.Models.Category", b =>
                 {
@@ -62,8 +146,6 @@ namespace Herfitk.Repository.Data.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK__Client__3214EC272790489E");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Client", (string)null);
                 });
@@ -118,7 +200,7 @@ namespace Herfitk.Repository.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnName("HerfiyId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -129,8 +211,9 @@ namespace Herfitk.Repository.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int")
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("User_ID");
 
                     b.Property<string>("Zone")
@@ -140,7 +223,8 @@ namespace Herfitk.Repository.Data.Migrations
                     b.HasKey("Id")
                         .HasName("PK__Herfiy__3214EC27C698B292");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Herfiy", (string)null);
                 });
@@ -218,8 +302,6 @@ namespace Herfitk.Repository.Data.Migrations
                     b.HasKey("Id")
                         .HasName("PK__Role__3214EC27D1EB7E98");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Role", (string)null);
                 });
 
@@ -250,72 +332,7 @@ namespace Herfitk.Repository.Data.Migrations
                     b.HasKey("Id")
                         .HasName("PK__Staff__3214EC27832438F9");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Staff");
-                });
-
-            modelBuilder.Entity("Herfitk.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountState")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Account_State");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("NationalId")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
-                        .HasColumnName("National_ID");
-
-                    b.Property<string>("NationalIdImage")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("NationalID_Image");
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PersonalImage")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Personal_Image");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasKey("Id")
-                        .HasName("PK__User__3214EC272A074D8C");
-
-                    b.ToTable("User", (string)null);
-                });
-
-            modelBuilder.Entity("Herfitk.Models.Client", b =>
-                {
-                    b.HasOne("Herfitk.Models.User", "User")
-                        .WithMany("Clients")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Client__User_ID__3F466844");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Herfitk.Models.ClientHerify", b =>
@@ -337,10 +354,11 @@ namespace Herfitk.Repository.Data.Migrations
 
             modelBuilder.Entity("Herfitk.Models.Herfiy", b =>
                 {
-                    b.HasOne("Herfitk.Models.User", "User")
-                        .WithMany("Herfiys")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Herfiy__User_ID__4222D4EF");
+                    b.HasOne("Herfitk.Core.Models.HerifyAppUser", "User")
+                        .WithOne()
+                        .HasForeignKey("Herfitk.Models.Herfiy", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -372,26 +390,6 @@ namespace Herfitk.Repository.Data.Migrations
                     b.Navigation("Herify");
                 });
 
-            modelBuilder.Entity("Herfitk.Models.Role", b =>
-                {
-                    b.HasOne("Herfitk.Models.User", "User")
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Role__User_ID__398D8EEE");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Herfitk.Models.Staff", b =>
-                {
-                    b.HasOne("Herfitk.Models.User", "User")
-                        .WithMany("Staff")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Staff__User_ID__3C69FB99");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Herfitk.Models.Client", b =>
                 {
                     b.Navigation("ClientHerifies");
@@ -402,17 +400,6 @@ namespace Herfitk.Repository.Data.Migrations
                     b.Navigation("ClientHerifies");
 
                     b.Navigation("Payments");
-                });
-
-            modelBuilder.Entity("Herfitk.Models.User", b =>
-                {
-                    b.Navigation("Clients");
-
-                    b.Navigation("Herfiys");
-
-                    b.Navigation("Roles");
-
-                    b.Navigation("Staff");
                 });
 #pragma warning restore 612, 618
         }

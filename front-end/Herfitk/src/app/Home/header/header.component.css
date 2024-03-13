@@ -1,1 +1,87 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-size: cover;
+}
 
+.navbar-brand a {
+  text-decoration: none;
+  color: rgb(22, 22, 22); /* لون النص */
+  font-weight: bold;
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-left: 20px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: rgb(19, 19, 19); /* لون النص */
+  font-weight: bold;
+}
+
+.carousel-item {
+  /* position: relative; */
+  height: 700px;
+}
+
+/* .carousel-item .banner {
+  
+  
+ 
+  /* position: absolute; */
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* text-align: center; */
+  /* color: #f13e3e; 
+} */
+
+.carousel-item .banner h1,
+.carousel-item .banner p,
+.carousel-item .banner a {
+  color:#575757;
+  position: absolute;
+  left: 20%;
+ 
+}
+
+.carousel-item .banner h1 {
+  font-size: 3em;
+  font-weight: bold;
+  top: 35%;
+}
+
+.carousel-item .banner p {
+  font-size: 1.5em;
+  top: 45%;
+}
+
+.carousel-item .banner a {
+  text-decoration: none;
+  background-color: #aaaaaa;
+  padding: 15px 20px;
+  border-radius: 20px;
+  top: 53%;
+}
+
+.carousel-item .banner a:hover {
+  background-color:#7d7d7d;
+  color: #000;
+}
+
+  

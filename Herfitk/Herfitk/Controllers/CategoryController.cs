@@ -15,14 +15,14 @@ namespace Herfitk.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly HerfitkContext context;
         private readonly IGenericRepository<Category> repository;
 
-        public CategoryController(HerfitkContext _context, IGenericRepository<Category> repository)
+        public CategoryController( IGenericRepository<Category> repository)
         {
-            context = _context;
             this.repository = repository;
         }
+
+
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -47,6 +47,23 @@ namespace Herfitk.Controllers
 
         }
 
+        //[HttpPost]
+        //public IActionResult Add(Category category)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var newcategory=repository.ADD(category);
+        //        return Ok(newcategory);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //}
+        
+
+        
         //[HttpPost]
         //public IActionResult AddCategory(Category cat)
         //{

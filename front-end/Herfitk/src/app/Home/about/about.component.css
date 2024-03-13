@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    
+    color: #0e0e0e;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.about-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.content {
+    flex: 1;
+}
+
+.image {
+    flex: 1;
+    text-align: center;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+}
