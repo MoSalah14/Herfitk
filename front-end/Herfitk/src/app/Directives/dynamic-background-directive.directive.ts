@@ -8,7 +8,6 @@ export class DynamicBackgroundDirectiveDirective  implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    // Subscribe to carousel slide event
     this.el.nativeElement.addEventListener('slid.bs.carousel', () => {
       const carousel = document.getElementById('carouselExampleIndicators');
       if (carousel) {
