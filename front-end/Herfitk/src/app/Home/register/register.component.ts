@@ -38,44 +38,21 @@ export class RegisterComponent {
   password: any = '';
   confirmPassword: any = '';
   submitted: boolean = false;
+  showEmailRequiredMessage: boolean = false;
   constructor(private router:Router){}
   // constructor() { }
 
   onSubmit() {
     this.submitted = true;
 
-    if (!this.name.trim()) {
-      alert('Name is required');
-      return;
-    }
-    if (!this.email.trim()) {
-      alert('Email is required');
-      return;
-    }
-    // if (!this.naId.trim()) {
-    //   alert('National Id is required');
-    //   return;
-    // }
-    if (!this.phone.trim()) {
-      alert('Phone number is required');
-      return;
-    }
-
-    if (this.password !== this.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
-
-
-
   }
 
   FormValdiation = new FormGroup({
-    name: new FormControl("",[Validators.maxLength(10)]),
+    name: new FormControl("",[Validators.maxLength(20)]),
     email: new FormControl("",[Validators.email]),
     phone: new FormControl("",[Validators.maxLength(11)]),
-    adress: new FormControl("",[Validators.maxLength(30)]),
-    // naId: new FormControl(null ,[Validators.maxLength(14)]),
+    adress: new FormControl("",[Validators.minLength(3) , Validators.maxLength(30)]),
+    naId: new FormControl("",[Validators.minLength(14),Validators.maxLength(14)]),
     password: new FormControl("",[Validators.minLength(8)]),
     confirmPassword: new FormControl("",[Validators.minLength(8)])
 
@@ -93,9 +70,9 @@ export class RegisterComponent {
   get validAdress() {
     return this.FormValdiation.controls['adress'].valid
   }
-  // get validnaId() {
-  //   return this.FormValdiation.controls['naTd'].valid
-  // }
+  get validnaId() {
+    return this.FormValdiation.controls['naId'].valid
+  }
   get validPass() {
     return this.FormValdiation.controls['password'].valid
   }
@@ -103,10 +80,12 @@ export class RegisterComponent {
     return this.FormValdiation.controls['confirmPassword'].valid
   }
 
-  logSuc(){
+  logSuc(name:any , email:any , phone:any , adress:any , naId:any , password:any ,  confirmPassword:any){
+
+      this.showEmailRequiredMessage = true;
     if(this.FormValdiation.valid) {
       alert( "Register suc")
-      this.router.navigate(['/header']);
+      this.router.navigate(['app']);
     }
   }
 }

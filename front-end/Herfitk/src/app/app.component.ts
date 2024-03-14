@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './Home/login/login.component';
 import { RegisterComponent } from './Home/register/register.component';
 import { AboutComponent } from './Home/about/about.component';
@@ -8,6 +8,7 @@ import { DynamicBackgroundDirectiveDirective } from './Directives/dynamic-backgr
 import { ContactusComponent } from './Home/contactus/contactus.component';
 import { CategoryComponent } from './Home/category/category.component';
 import { HeaderComponent } from './Home/header/header.component';
+import { NavbarComponent } from './Home/navbar/navbar.component';
 
 
 
@@ -25,7 +26,8 @@ import { HeaderComponent } from './Home/header/header.component';
   CategoryComponent,
   ViewprofileComponent,
   ContactusComponent,
-  DynamicBackgroundDirectiveDirective
+  DynamicBackgroundDirectiveDirective,
+  NavbarComponent
 
   ],
   templateUrl: './app.component.html',
@@ -35,5 +37,6 @@ import { HeaderComponent } from './Home/header/header.component';
 export class AppComponent {
   title = 'Herfitk';
 
+ 
 
 }
