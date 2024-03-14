@@ -1,23 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component,HostListener } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
   //  //Go To Login Page
 
-  //  constructor(public router:Router){}
+   constructor(public router:Router){}
 
 
-  // loginForm() {
-  //   this.router.navigate(['login']);
-  // }
+  loginForm() {
+    this.router.navigate(['login']);
+  }
 
   isSticky: boolean = false;
 
