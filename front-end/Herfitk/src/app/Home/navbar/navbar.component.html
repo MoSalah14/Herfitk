@@ -1,6 +1,6 @@
 <!-- app.component.html -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container d-flex justify-content-between">
     <a class="navbar-brand" href="#" style="font-size: 40px;">Navbar</a>
     <div>
@@ -11,22 +11,40 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Home</a> <!-- Added margin-right for space -->
+            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Home</a> 
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">About</a> <!-- Added margin-right for space -->
+            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">About</a> 
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Category</a> <!-- Added margin-right for space -->
+            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Category</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Contact Us</a> <!-- Added margin-right for space -->
+            <a class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;">Contact Us</a> 
           </li>
           <li class="nav-item">
-            <button class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;" (click)="loginForm()">Login</button> <!-- Added margin-right for space -->
+            <button class="nav-link" href="#" style="font-size: 30px; margin-right: 10px;" (click)="loginForm()">Login</button> 
           </li>
         </ul>
       </div>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<header [ngClass]="{'sticky': isSticky}">
+  <!-- <a href="#" class="logo">Herfitk</a> -->
+  <h1 class="logo "> Herfitk</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About US</a></li>
+      <li><a href="#">Category</a></li>
+      <li><a href="#">Contact US</a></li>
+      <li><a href="#">Login</a></li>
+    </ul>
+</header>
+
+<section class="banner">
+  <div class="overlay">
+    <h1>We are service</h1>
+  </div>
+</section>
