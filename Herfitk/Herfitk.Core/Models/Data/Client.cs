@@ -1,9 +1,7 @@
-﻿using Herfitk.Core.Models.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Herfitk.Models;
+namespace Herfitk.Core.Models.Data;
 
 public partial class Client
 {
@@ -13,10 +11,9 @@ public partial class Client
 
     public string? Review { get; set; }
 
-    public int? UserId { get; set; }
+    public string? UserId { get; set; }
 
     public virtual ICollection<ClientHerify> ClientHerifies { get; set; } = new List<ClientHerify>();
 
-    [NotMapped]
-    public virtual AppUser? User { get; set; }
+    public virtual AppUser? ClientUser { get; set; }
 }

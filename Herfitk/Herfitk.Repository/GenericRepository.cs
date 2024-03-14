@@ -1,6 +1,5 @@
-﻿using Herfitk.Core.Repository;
-using Herfitk.Models;
-using Herfitk.Repository.Data.DbContextBase;
+﻿using Herfitk.Core.Models.Data;
+using Herfitk.Core.Repository;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -39,15 +38,14 @@ namespace Herfitk.Repository
 
         public async Task<T> UpdateAsync(T entity, int id)
         {
-            T oldentity = await _context.Set<T>().FindAsync(id);
-            if (oldentity != null)
+            T existingEntity = await _context.Set<T>().FindAsync(id);
+            if (existingEntity != null)
             {
-                //_context.Set<T>().Update(entity);
-                _context.Entry(entity).State = EntityState.Modified;
+                _context.Entry(existingEntity).CurrentValues.SetValues(entity);
                 await _context.SaveChangesAsync();
-                return entity;
+                return existingEntity;
             }
-            return oldentity;
+            return null;
         }
 
         public async Task<T> DeleteAsync(int id)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Herfitk.Models;
+namespace Herfitk.Core.Models.Data;
 
 public partial class ClientHerify
 {

@@ -1,6 +1,5 @@
-﻿using Herfitk.Core.Repository;
-using Herfitk.Models;
-using Herfitk.Repository.Data.DbContextBase;
+﻿using Herfitk.Core.Models.Data;
+using Herfitk.Core.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,9 +20,19 @@ namespace Herfitk.Repository
 
         public async Task<Herfiy> GetByIdAsyncWithInclude(int id)
         {
-            var GetWithInclude = await context.Herfiys.Include(e => e.User).FirstOrDefaultAsync(e => e.Id == id);
-
-            return GetWithInclude;
+            var getData = await context.Herfiys
+                                .Include(x => x.HerfiyUser)
+                                .Include(x => x.ClientHerifies)
+                                .Include(x => x.Payments)
+                                .FirstOrDefaultAsync(e => e.Id == id);
+            return getData;
         }
+
+        //public async Task<Herfiy> GetByIdAsyncWithInclude(int id)
+        //{
+        //    var GetWithInclude = await context.Herfiys.Include(e => e.User).FirstOrDefaultAsync(e => e.Id == id);
+
+        //    return GetWithInclude;
+        //}
     }
 }

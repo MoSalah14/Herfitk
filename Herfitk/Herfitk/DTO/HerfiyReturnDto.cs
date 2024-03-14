@@ -1,8 +1,7 @@
-﻿using Herfitk.Models;
-
+﻿
 namespace Herfitk.API.DTO
 {
-    public class HerfiyDto
+    public class HerfiyReturnDto
     {
         public int Id { get; set; }
         public string? Name { get; set; }//
@@ -12,12 +11,6 @@ namespace Herfitk.API.DTO
         public string? Phone { get; set; }
         public string? History { get; set; }
         public string? PersonalImage { get; set; }//
-
-
-
-
-
-
 
     }
 }

@@ -1,10 +1,11 @@
 
-using Herfitk.Core.Models.Identity;
+using Herfitk.Core.Models;
+using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
-using Herfitk.Models;
+
 using Herfitk.Repository;
-using Herfitk.Repository.Data.DbContextBase;
-using Herfitk.Repository.Idintity.IdentityContext;
+//using Herfitk.Repository.Data.DbContextBase;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -40,18 +41,11 @@ namespace Herfitk
             builder.Services.AddDbContext<HerfitkContext>(Use =>
             Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 
-
-            //Allow Identity D_Injection
-
-            builder.Services.AddDbContext<IdentityContext>(optionBuilder =>
-            optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
-
-
             builder.Services.AddAutoMapper(typeof(Program));
 
 
             builder.Services.AddAuthentication();
-            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentityContext>();
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<HerfitkContext>();
             //builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<IdentityContext>();
 
 
@@ -69,7 +63,7 @@ namespace Herfitk
             var services = scope.ServiceProvider;
             var _Context = services.GetRequiredService<HerfitkContext>();
 
-            var IdentityDbContext = services.GetRequiredService<IdentityContext>();
+            var IdentityDbContext = services.GetRequiredService<HerfitkContext>();
 
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
             try

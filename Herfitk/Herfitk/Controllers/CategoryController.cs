@@ -1,6 +1,6 @@
-﻿using Herfitk.Core.Repository;
-using Herfitk.Models;
-using Herfitk.Repository.Data.DbContextBase;
+﻿using Herfitk.Core.Models.Data;
+using Herfitk.Core.Repository;
+//using Herfitk.Repository.Data.DbContextBase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -4,6 +4,7 @@ using Herfitk.Core.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Herfitk.Repository.Data.Migrations
 {
     [DbContext(typeof(HerfitkContext))]
-    partial class HerfitkContextModelSnapshot : ModelSnapshot
+    [Migration("20240313200233_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,9 +97,6 @@ namespace Herfitk.Repository.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserRole")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -106,10 +106,6 @@ namespace Herfitk.Repository.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("UserRole")
-                        .IsUnique()
-                        .HasFilter("[UserRole] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -468,15 +464,6 @@ namespace Herfitk.Repository.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Herfitk.Core.Models.AppUser", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
-                        .WithOne()
-                        .HasForeignKey("Herfitk.Core.Models.AppUser", "UserRole");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Herfitk.Core.Models.Data.Client", b =>

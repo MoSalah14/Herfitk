@@ -1,4 +1,4 @@
-﻿using Herfitk.Models;
+﻿using Herfitk.Core.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
