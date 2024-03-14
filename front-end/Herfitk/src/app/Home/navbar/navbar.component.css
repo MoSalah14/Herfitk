@@ -1,0 +1,33 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  justify-content: space-between;
+
+  width: 100%;
+}
+ .navbar-toggler {
+  display: none;
+}
+
+ .navbar-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 5;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.nav-link {
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-link:hover {
+  color: #f2ea07;
+}
