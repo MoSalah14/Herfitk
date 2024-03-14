@@ -16,6 +16,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   submitted: boolean = false;
+  showEmailRequiredMessage: boolean = false;
 
   // constructor() { }
   constructor(private router:Router){}
@@ -27,18 +28,25 @@ export class LoginComponent {
     email: new FormControl("",[Validators.email]),
     password: new FormControl("",[Validators.minLength(8) , Validators.maxLength(12)])
   })
+
   get validEmail() {
-    return this.FormValdiation.controls['email'].valid
+      return this.FormValdiation.controls['email'].valid ;
+
   }
   get validPass() {
-    return this.FormValdiation.controls['password'].valid
+      return this.FormValdiation.controls['password'].valid
   }
-  logSuc(){
-    if(this.FormValdiation.valid) {
-      alert( "login suc")
-      this.router.navigate(['/header']);
+  logSuc(email:any , password:any){
+
+    if(!email || !password) {
+      this.showEmailRequiredMessage = true;
     }
+    if(this.FormValdiation.valid){
+        alert( "login suc")
+        this.router.navigate(['app']);
+
+    }
+  }
 
 
-}
 }
