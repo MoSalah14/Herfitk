@@ -1,27 +1,30 @@
-import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { Component , OnInit  } from '@angular/core'; // AfterViewInit, ViewChild
+declare var $: any; // Declare jQuery
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
-export class CategoryComponent {
-  slide(direction: string) {
-    const cards = Array.from(document.querySelectorAll('.card')) as HTMLElement[];
-    const cardWidth = cards[0].clientWidth;
+export class CategoryComponent implements OnInit {
 
-    if (direction === 'left') {
-      cards.forEach((card: HTMLElement, index: number) => {
-        const offset = index * cardWidth;
-        card.style.transform = `translateX(-${offset}px)`;
+  constructor() { }
+
+  ngOnInit(): void {
+    $(document).ready(function(){
+      $(".owl-carousel").owlCarousel({
+        
+        margin: 20,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+      
       });
-    } else if (direction === 'right') {
-      cards.forEach((card: HTMLElement, index: number) => {
-        const offset = index * cardWidth;
-        card.style.transform = `translateX(${offset}px)`;
-      });
-    }
+    });
   }
+
 }
