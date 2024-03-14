@@ -12,12 +12,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 export class NavbarComponent {
   //  //Go To Login Page
 
-   constructor(public router:Router){}
+  //  constructor(public router:Router){}
 
 
-  loginForm() {
-    this.router.navigate(['login']);
-  }
+  // loginForm() {
+  //   this.router.navigate(['login']);
+  // }
 
   isSticky: boolean = false;
 
