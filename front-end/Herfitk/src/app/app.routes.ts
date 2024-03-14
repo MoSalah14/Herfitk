@@ -5,13 +5,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
- { path: '', redirectTo: 'login', pathMatch: 'full' },
+//  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: "app" , component:AppComponent},
   {path: "login" , component:LoginComponent},
   {path: "register" , component:RegisterComponent},
-
-
-
 ];
 
 @NgModule({
