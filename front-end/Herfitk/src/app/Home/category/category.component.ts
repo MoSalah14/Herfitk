@@ -20,8 +20,8 @@ export class CategoryComponent implements OnInit {
         
         margin: 20,
         loop: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
+        // autoplay: true,
+        // autoplayTimeout: 5000,
       
       });
     });

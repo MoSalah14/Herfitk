@@ -15,6 +15,13 @@ section.card {
   overflow: hidden;
   perspective: 1000px;
   transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Center the card horizontally */
+  margin: 0 auto;
+
+  /* Add space from the left */
+  margin-left: 40px; /* Adjust as needed */
+ 
 }
 .card svg {
   fill: #000;
@@ -35,7 +42,7 @@ section.card {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   background-color: #868686;
   transform: rotateX(-90deg);
