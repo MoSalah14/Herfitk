@@ -27,9 +27,9 @@ export class LoginComponent {
 
   // constructor() { }
   constructor(private router:Router){}
-  onSubmit() {
-    this.submitted = true;
-  }
+  // onSubmit() {
+
+  // }
 
   FormValdiation = new FormGroup({
     email: new FormControl("",[Validators.email]),
@@ -44,10 +44,12 @@ export class LoginComponent {
       return this.FormValdiation.controls['password'].valid
   }
   logSuc(email:any , password:any){
-
-    if(!email || !password) {
-      this.showEmailRequiredMessage = true;
-    }
+      if (email == '' || password == '') {
+        this.showEmailRequiredMessage = true;
+      }
+      else {
+        this.submitted = true;
+      }
     if(this.FormValdiation.valid){
         alert( "login suc")
         this.router.navigate(['app']);
@@ -55,5 +57,4 @@ export class LoginComponent {
     }
   }
 
- 
 }

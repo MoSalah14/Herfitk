@@ -1,9 +1,8 @@
 <div class="popup-overlay" (click)="closeLoginForm()"></div>
 <div class="popup">
-
 <div class="card">
     <div class="card2">
-      <form class="form" (ngSubmit)="onSubmit()" [formGroup]="FormValdiation">
+      <form class="form" [formGroup]="FormValdiation">
         <p id="heading">Login</p>
         <label class="form-label">Email</label>
         <div class="field">
@@ -31,5 +30,4 @@
       </form>
     </div>
   </div>
-  
 </div>

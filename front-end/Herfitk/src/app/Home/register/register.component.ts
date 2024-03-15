@@ -42,11 +42,6 @@ export class RegisterComponent {
   constructor(private router:Router){}
   // constructor() { }
 
-  onSubmit() {
-    this.submitted = true;
-
-  }
-
   FormValdiation = new FormGroup({
     name: new FormControl("",[Validators.maxLength(20)]),
     email: new FormControl("",[Validators.email]),
@@ -82,7 +77,22 @@ export class RegisterComponent {
 
   logSuc(name:any , email:any , phone:any , adress:any , naId:any , password:any ,  confirmPassword:any){
 
+    if (email == '' || password == '' || name == '') {
       this.showEmailRequiredMessage = true;
+    }
+    else if (phone == '' || adress == '' || naId == '') {
+      this.showEmailRequiredMessage = true;
+    }
+   else if (confirmPassword == '') {
+      this.showEmailRequiredMessage = true;
+    }
+    // else if (email.valid) {
+    //   this.submitted = true;
+    // }
+
+    if(password !== confirmPassword) {
+      alert("The Password Not Match With Confirm Password");
+    }
     if(this.FormValdiation.valid) {
       alert( "Register suc")
       this.router.navigate(['app']);
