@@ -23,7 +23,7 @@ namespace Herfitk.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("Getall")]
         public async Task<ActionResult> GetAll()
         {
             if (ModelState.IsValid)

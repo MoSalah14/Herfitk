@@ -90,7 +90,7 @@ namespace Herfitk
             }
 
             //app.MapIdentityApi<AppUser>();
-
+            app.UseCors(option => option.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
