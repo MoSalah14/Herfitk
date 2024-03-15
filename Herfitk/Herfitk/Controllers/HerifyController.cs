@@ -20,6 +20,21 @@ namespace Herfitk.API.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet("HerfiySpeciality")]
+        public async Task<IActionResult> GetAllHerafiySpeciality([FromHeader] string type)
+        {
+            if (ModelState.IsValid)
+            {
+                var alldata = await repository.GetAllAsync();
+                var GetDataWithFIlter = alldata.Where(e => e.Speciality == type).ToList();
+                var mappedData = GetDataWithFIlter.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
+                return Ok(mappedData);
+            }
+            return BadRequest(ModelState);
+        }
+
+
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
