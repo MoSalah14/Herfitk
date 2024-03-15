@@ -50,7 +50,8 @@ public partial class HerfitkContext : IdentityDbContext<AppUser>
             entity.ToTable("Category");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Type).HasMaxLength(100);
+            entity.Property(e => e.CategoryName).HasMaxLength(100);
+
         });
 
         modelBuilder.Entity<Client>(entity =>
