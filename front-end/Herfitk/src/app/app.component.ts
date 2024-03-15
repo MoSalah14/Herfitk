@@ -34,15 +34,36 @@ import { FooterComponent } from './Home/footer/footer.component';
   styleUrl: './app.component.css'
 })
 
+
+
+
 export class AppComponent implements AfterViewInit {
-  constructor(private elementRef: ElementRef) {}
-  ngAfterViewInit() {
-      this.elementRef.nativeElement.ownerDocument
-          .body.style.backgroundColor = '#17191a';
-  }
-  
   title = 'Herfitk';
 
- 
+  constructor(private elementRef: ElementRef) {}
 
+@ViewChild('translateElement') translateElement!: ElementRef;
+
+ngAfterViewInit(): void {
+  this.elementRef.nativeElement.ownerDocument
+        .body.style.backgroundColor = '#17191a';
+  this.loadGoogleTranslateScript();
 }
+
+  private loadGoogleTranslateScript(): void {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.text = `
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      }
+    `;
+    this.translateElement.nativeElement.appendChild(script);
+  }
+}
+
+
+
+
+
+
