@@ -1,5 +1,4 @@
 
-
 /* New Form  */
 .card {
   width: 90%;
@@ -15,7 +14,7 @@
   padding-left: 2em;
   padding-right: 2em;
   padding-bottom: 0.4em;
-  background-color: #171717;
+  background-color: #17191a;
   border-radius: 25px;
   transition: 0.4s ease-in-out;
 }

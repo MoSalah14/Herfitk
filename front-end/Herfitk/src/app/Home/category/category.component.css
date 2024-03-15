@@ -1,6 +1,16 @@
 
+
 h1{
   text-align: center;
+  color:#cdcccb;
+  font-family:Arial, Helvetica, sans-serif;
+  
+  padding: 20px 0;
+
+}
+
+h1:hover {
+  color: #f6fa11; /* Change the color on hover */
 }
 /* css for card  */
 section.card {
@@ -23,10 +33,18 @@ section.card {
   margin-left: 40px; /* Adjust as needed */
  
 }
-.card svg {
+/* .card svg {
   fill: #000;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border-radius: 3px;
+} */
+
+.card img {
+  fill: #000; /* Since img tags don't have a fill property, this line won't have any effect */
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* This line won't have any effect */
+  border-radius: 3px;
+  height: 100%; 
+  width: 100%; 
 }
 .card:hover {
   transform: scale(1.05);

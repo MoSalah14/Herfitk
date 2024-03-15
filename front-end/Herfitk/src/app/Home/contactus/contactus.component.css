@@ -1,25 +1,47 @@
 
-/* *{
-    box-sizing: border-box;
-    background-image: url("/Image/contact.jpg");
-} */
+h1{
+  text-align: center;
+  color:#cdcccb;
+  font-family:Arial, Helvetica, sans-serif;
+  
+  padding: 20px 0;
 
+}
+p{
+  color:#cdcccb;
+}
+h2{
+  color:#cdcccb;
+}
+h1:hover {
+  color: #f6fa11; /* Change the color on hover */
+}
+h5{
+  text-align: center;
+  font-size: 50px;
+  color: #cdcccb;
+}
  #formcolor{
-    background-color: #141414;
+    background-color:#2a2a2a;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-left: 2em;
     padding-right: 2em;
     padding-bottom: 0.4em;
-    background-color: #171717;
+   
     border-radius: 25px;
     transition: .4s ease-in-out;
  }
-.form-label
+ .form-label
  {
-    color: white;
- } 
+    color:#cdcccb;
+    font-size: 20pz;
+ }  
+ .form-control:hover{
+  color:#f6fa11 ;
+
+ }
  
 
 
@@ -38,22 +60,19 @@
     border: none;
     cursor: pointer;
     text-align: center;
-    /* -ms-transform: translateY(-10%);
-       transform: translateX(50%); */
+  
        
 
   }
   button:hover {
-    background-color: black;
-    color: white;
+    background-color: #f6fa11 ;
+    color:   #262421;
   }
    
 
   /* Style the container/contact section */
   .container {
     border-radius: 5px;
-    background-color: #f2f2f2;
-    /* background-color: #f2f2f2; */
     padding: 10px;
   }
   
@@ -83,13 +102,13 @@
 
   /* part Links */
   .main {
+    text-align: center;
     display: flex;
     flex-direction: column;
     padding-left: 20%; 
     gap: 0.5em;
     margin: auto;
-    /* width: 70%; */
-    /* padding: 20%; */
+    
   }
   
   .up {
@@ -105,6 +124,7 @@
   }
   
   .card1 {
+    text-align: center;
     width: 90px;
     height: 90px;
     outline: none;
