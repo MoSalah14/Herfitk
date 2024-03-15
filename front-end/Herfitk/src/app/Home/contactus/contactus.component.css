@@ -43,7 +43,11 @@ h5{
 
  }
  
-
+ .form-label :hover
+ {
+    color:#cdcccb;
+    
+ } 
 
  /* Style inputs */
   input,  textarea {
@@ -105,7 +109,7 @@ h5{
     text-align: center;
     display: flex;
     flex-direction: column;
-    padding-left: 20%; 
+    padding-left:35%; 
     gap: 0.5em;
     margin: auto;
     
@@ -231,3 +235,5 @@ h5{
   .card4:hover .gmail {
     fill: white;
   }
+
+ 
