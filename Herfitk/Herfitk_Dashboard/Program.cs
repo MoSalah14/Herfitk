@@ -1,7 +1,15 @@
+using Herfitk.Core.Models.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<HerfitkContext>(Use =>
+Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
+
+
 
 var app = builder.Build();
 

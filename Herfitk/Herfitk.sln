@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk.Core", "Herfitk.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk.Repository", "Herfitk.Repository\Herfitk.Repository.csproj", "{7E540FB8-1997-468D-8FBE-560CAC7FB488}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herfitk_Dashboard", "Herfitk_Dashboard\Herfitk_Dashboard.csproj", "{734A4ABA-8C03-49A9-912A-7794E383890F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7E540FB8-1997-468D-8FBE-560CAC7FB488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E540FB8-1997-468D-8FBE-560CAC7FB488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E540FB8-1997-468D-8FBE-560CAC7FB488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{734A4ABA-8C03-49A9-912A-7794E383890F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734A4ABA-8C03-49A9-912A-7794E383890F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734A4ABA-8C03-49A9-912A-7794E383890F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734A4ABA-8C03-49A9-912A-7794E383890F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
