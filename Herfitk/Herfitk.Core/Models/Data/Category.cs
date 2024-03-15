@@ -8,4 +8,7 @@ public partial class Category
     public int Id { get; set; }
 
     public string? Type { get; set; }
+    //public string? Descraption { get; set; }
+    //public string? Image { get; set; }
+
 }
