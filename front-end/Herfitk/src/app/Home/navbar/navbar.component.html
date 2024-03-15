@@ -1,15 +1,19 @@
 
 <header [ngClass]="{'sticky': isSticky}">
-  <!-- <a href="#" class="logo">Herfitk</a> -->
-  <h1 class="logo "> Herfitk</h1>
+  <!-- <a href="#" class="logo">Herfitk</a>  -->
+   <h1 class="logo "> Herfitk</h1>
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">About US</a></li>
       <li><a href="#">Category</a></li>
       <li><a href="#">Contact US</a></li>
-      <!-- <li><button (click)="loginForm()">Login</button></li> -->
-    </ul>
-</header>
+      <!-- <li><a href="#">Login</a></li>  -->
+   
+      <li><a href="#" (click)="openLoginForm()">Login</a></li>
+     </ul>
+</header> 
+<!-- Login Popup -->
+<app-login *ngIf="isLoginPopupOpen" (close)="closeLoginForm()"></app-login>
 
 <section class="banner">
   <div class="overlay">

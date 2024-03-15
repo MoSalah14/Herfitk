@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
+import { Component,Output, EventEmitter } from '@angular/core';
 import { RegisterComponent } from '../register/register.component';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
-  imports: [RegisterComponent , RouterModule , FormsModule, CommonModule , ReactiveFormsModule ],
+  imports: [RegisterComponent,RouterModule , FormsModule, CommonModule , ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
+
+  closeLoginForm(): void {
+    this.close.emit();
+  }
+
+
   email: string = '';
   password: string = '';
   submitted: boolean = false;
@@ -48,5 +55,5 @@ export class LoginComponent {
     }
   }
 
-
+ 
 }

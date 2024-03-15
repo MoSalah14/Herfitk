@@ -1,23 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component,HostListener } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, CommonModule, RouterLinkActive],
+  imports: [CommonModule,
+  LoginComponent
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  //  //Go To Login Page
+  isLoginPopupOpen: boolean = false;
 
-  //  constructor(public router:Router){}
+  openLoginForm(): void {
+    this.isLoginPopupOpen = true;
+  }
 
+  closeLoginForm(): void {
+    this.isLoginPopupOpen = false;
+  }
 
-  // loginForm() {
-  //   this.router.navigate(['login']);
-  // }
 
   isSticky: boolean = false;
 
@@ -27,4 +31,5 @@ export class NavbarComponent {
     this.isSticky = scrollY > 0;
   }
 
+ 
 }
