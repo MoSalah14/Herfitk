@@ -1,5 +1,10 @@
-import { Component, ViewChild ,AfterViewInit,ElementRef} from '@angular/core';
-import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import {
+  Router,
+  RouterLink,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { LoginComponent } from './Home/login/login.component';
 import { RegisterComponent } from './Home/register/register.component';
 import { AboutComponent } from './Home/about/about.component';
@@ -9,46 +14,41 @@ import { CategoryComponent } from './Home/category/category.component';
 import { HeaderComponent } from './Home/header/header.component';
 import { NavbarComponent } from './Home/navbar/navbar.component';
 import { FooterComponent } from './Home/footer/footer.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-  HeaderComponent,
-  LoginComponent,
-  RegisterComponent,
-  AboutComponent,
-  RouterModule,
-  RouterLink,
-  RouterOutlet,
-  CategoryComponent,
-  ViewprofileComponent,
-  ContactusComponent,
-  NavbarComponent,
-  FooterComponent
-
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent,
+    AboutComponent,
+    RouterModule,
+    RouterLink,
+    RouterOutlet,
+    CategoryComponent,
+    ViewprofileComponent,
+    ContactusComponent,
+    NavbarComponent,
+    FooterComponent,
+    HttpClientModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-
-
-
-
 export class AppComponent implements AfterViewInit {
   title = 'Herfitk';
 
   constructor(private elementRef: ElementRef) {}
 
-@ViewChild('translateElement') translateElement!: ElementRef;
+  @ViewChild('translateElement') translateElement!: ElementRef;
 
-ngAfterViewInit(): void {
-  this.elementRef.nativeElement.ownerDocument
-        .body.style.backgroundColor = '#17191a';
-  this.loadGoogleTranslateScript();
-}
+  ngAfterViewInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
+      '#17191a';
+    this.loadGoogleTranslateScript();
+  }
 
   private loadGoogleTranslateScript(): void {
     const script = document.createElement('script');
@@ -61,9 +61,3 @@ ngAfterViewInit(): void {
     this.translateElement.nativeElement.appendChild(script);
   }
 }
-
-
-
-
-
-

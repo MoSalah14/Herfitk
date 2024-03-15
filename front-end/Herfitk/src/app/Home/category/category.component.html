@@ -2,11 +2,12 @@
 <h1 id="Category">Category</h1>
 <br /><br />
 <div class="owl-carousel owl-theme">
+  @for (item of Category; track $index) {
   <section id="card1" class="card">
     <img src="assets/Image/2.jpg" alt="Your Image" height="10" width="10" />
     <div class="card__content">
       <br />
-      <p class="card__title">Plumbing</p>
+      <p class="card__title">{{ item.type }}</p>
       <p class="card__description">
         <br />
         Plumbing is any system that conveys fluids for a wide range of
@@ -18,8 +19,10 @@
       </p>
     </div>
   </section>
+  }
+</div>
 
-  <!-- حل الكونفليكت -->
+<!-- حل الكونفليكت
   <section id="card2" class="card">
     <img
       src="assets/Image/electrical/2.jpg"
@@ -83,5 +86,4 @@
         <button class="contactButton">Show More</button>
       </p>
     </div>
-  </section>
-</div>
+  </section> -->
