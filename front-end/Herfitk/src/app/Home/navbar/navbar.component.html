@@ -1,7 +1,10 @@
 
 <header [ngClass]="{'sticky': isSticky}">
   <!-- <a href="#" class="logo">Herfitk</a>  -->
+  <!-- For Translat -->
   <div id="google_translate_element" ></div>
+  <!-- For Dark Mode -->
+
    <h1 class="logo "> Herfitk</h1>
     <ul>
       <li><a href="#">Home</a></li>
@@ -15,7 +18,6 @@
 </header>
 <!-- Login Popup -->
 <app-login *ngIf="isLoginPopupOpen" (close)="closeLoginForm()"></app-login>
-
 <section class="banner">
   <div class="overlay">
     <h1>We are service</h1>

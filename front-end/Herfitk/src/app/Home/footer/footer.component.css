@@ -39,9 +39,9 @@ h1{
 }
 .single-footer-widget ul li {
     display:  inherit;
-    -webkit-transition: .5s; 
-    -moz-transition:.5s; 
-    -ms-transition:.5s; 
+    -webkit-transition: .5s;
+    -moz-transition:.5s;
+    -ms-transition:.5s;
     -o-transition:.5s;
     transition: .5s;
 }
@@ -113,7 +113,7 @@ h1{
 .footer-social i:hover{opacity: .70;}
 /*.footer-copyright */
 
-  
+
 
 .card {
     /* width: fit-content; */ /* Remove this line */
@@ -193,3 +193,4 @@ h1{
         opacity: 1;
     }
 }
+
