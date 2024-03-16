@@ -7,6 +7,10 @@ namespace Herfitk.Core.Models.Data;
 
 public partial class HerfitkContext : IdentityDbContext<AppUser>
 {
+    public HerfitkContext()
+    {
+    }
+
     public HerfitkContext(DbContextOptions<HerfitkContext> options)
         : base(options)
     {
