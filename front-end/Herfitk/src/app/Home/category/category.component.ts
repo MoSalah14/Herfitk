@@ -2,19 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core'; // AfterViewInit, ViewChild
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 declare var $: any; // Declare jQuery
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
 })
 export class CategoryComponent implements OnInit {
+  constructor(private router: Router, private httpClient: HttpClient) {}
   baseUrl = environment.apiUrl;
-  httpClient = inject(HttpClient);
   Category: any = [];
+
   FetchCategory(): void {
     this.httpClient
       .get(this.baseUrl + 'Category/Getall')
@@ -34,5 +36,9 @@ export class CategoryComponent implements OnInit {
         // autoplayTimeout: 5000,
       });
     });
+  }
+
+  GOto() {
+    this.router.navigate(['/Display']);
   }
 }

@@ -38,6 +38,7 @@ namespace Herfitk
             builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
 
             //Allow DbContext D_Injection
+            
             builder.Services.AddDbContext<HerfitkContext>(Use =>
             Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 

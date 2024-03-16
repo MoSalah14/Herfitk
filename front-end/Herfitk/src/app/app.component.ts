@@ -15,6 +15,8 @@ import { HeaderComponent } from './Home/header/header.component';
 import { NavbarComponent } from './Home/navbar/navbar.component';
 import { FooterComponent } from './Home/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DisplayHerfiysComponent } from './Display_Herfiys/display-herfiys/display-herfiys.component';
+import { HomePageComponent } from './Home/home-page/home-page.component';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     HttpClientModule,
+    DisplayHerfiysComponent,
+    HomePageComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
