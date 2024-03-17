@@ -13,7 +13,12 @@
         {{ item.descraption }}
         <br /><br /><br />
         <br />
-        <button class="contactButton" (click)="GOto()">Show More</button>
+        <button
+          class="contactButton"
+          (click)="GOto(); GetHerfiyByCategory(item.id)"
+        >
+          Show More
+        </button>
       </p>
     </div>
   </section>

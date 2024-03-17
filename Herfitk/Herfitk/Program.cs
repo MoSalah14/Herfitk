@@ -36,9 +36,10 @@ namespace Herfitk
             //Allow  Repository
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
+            builder.Services.AddScoped(typeof(IHerifyCategoriesRepository), typeof(HerifyCategoriesRepository));
 
             //Allow DbContext D_Injection
-            
+
             builder.Services.AddDbContext<HerfitkContext>(Use =>
             Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 

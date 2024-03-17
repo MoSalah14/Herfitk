@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core'; // AfterViewInit, ViewChild
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core'; // AfterViewInit, ViewChild
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
@@ -14,9 +14,11 @@ declare var $: any; // Declare jQuery
 })
 export class CategoryComponent implements OnInit {
   constructor(private router: Router, private httpClient: HttpClient) {}
+  @Output() MyEvent = new EventEmitter();
   baseUrl = environment.apiUrl;
   Category: any = [];
-
+  Herfiys: any = [];
+  categoryid: any;
   FetchCategory(): void {
     this.httpClient
       .get(this.baseUrl + 'Category/Getall')
@@ -26,12 +28,20 @@ export class CategoryComponent implements OnInit {
       });
   }
 
-  // GetHerfiyByCategiry(){
-  //   this.httpClient.get(`${this.baseUrl}/${}`)// I Test Here Caren
-  // }
+  GetHerfiyByCategory(catId: number) {
+    this.httpClient
+      .get(`${this.baseUrl}HerifyCategories/${catId}`)
+      .subscribe((obj: any) => {
+        this.Herfiys = obj;
+        this.MyEvent.emit(this.Herfiys);
+        console.log(this.Herfiys);
+      });
+  }
 
   ngOnInit(): void {
     this.FetchCategory();
+    this.GetHerfiyByCategory(this.categoryid);
+
     $(document).ready(function () {
       $('.owl-carousel').owlCarousel({
         margin: 20,

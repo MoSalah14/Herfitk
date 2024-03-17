@@ -2,6 +2,7 @@
 {
     public class HerifyDto
     {
+        public string? HerifyId { get; set; }
         public string? Zone { get; set; }
 
         public string? History { get; set; }

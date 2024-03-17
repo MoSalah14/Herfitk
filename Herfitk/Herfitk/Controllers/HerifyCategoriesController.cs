@@ -17,41 +17,44 @@ namespace Herfitk.API.Controllers
     [ApiController]
     public class HerifyCategoriesController : ControllerBase
     {
-        private readonly IGenericRepository<HerifyCategory> context;
+        private readonly IHerifyCategoriesRepository context;
         private readonly IMapper mapper;
 
-        public HerifyCategoriesController(IGenericRepository<HerifyCategory> context, IMapper mapper)
+        public HerifyCategoriesController(IHerifyCategoriesRepository context, IMapper mapper)
         {
             this.context = context;
-            this.mapper = mapper;
+            this.mapper = mapper; 
         }
 
         // GET: api/HerifyCategories
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetAllHerifyByCatID(int id)
+        [HttpGet("{catid}")]
+        public async Task<IActionResult> GetAllHerifyByCatID(int catid)
         {
-            var GetAll = await context.GetAllAsync();
+            var GetAll = await context.GetAllHerfiyWithIncludeAsync();
 
-            var GetAllMapped = GetAll.Select(item => mapper.Map<HerifyCategory, HerifyDto>(item));
+            var HerfiyInCategory = GetAll.Where(e=>e.CategoryId == catid).ToList();
 
-            return Ok(GetAllMapped);
+            //var GetAllMapped = GetAll.Select(item => mapper.Map<HerifyCategory, HerifyDto>(item));
+            var herifyDtos = mapper.Map<List<HerifyCategory>, List<HerifyDto>>(HerfiyInCategory);
+
+            return Ok(herifyDtos);
         }
 
         // GET: api/HerifyCategories/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetHerifyCategory(int id) // This Make error Because table is composite primary Key
-        {
-            var herifyCategory = await context.GetByIdAsync(id);   // This Get one value but must get 2 value
+        //[HttpGet("get/{id}")]
+        //public async Task<IActionResult> GetHerifyCategory(int id) // This Make error Because table is composite primary Key
+        //{
+        //    var herifyCategory = await context.GetByIdAsync(id);   // This Get one value but must get 2 value
 
-            if (herifyCategory == null)
-                return NotFound();
-
-
-            return Ok(herifyCategory);
-        }
+        //    if (herifyCategory == null)
+        //        return NotFound();
 
 
-        [HttpPut("{id}")]
+        //    return Ok(herifyCategory);
+        //}
+
+
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateHerifyCategory(int id, HerifyCategory herifyCategory)
         {
             if (id != herifyCategory.CategoryId)
@@ -70,7 +73,7 @@ namespace Herfitk.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateHerifyCategory(HerifyCategory herifyCategory)
         {
             try
@@ -86,7 +89,7 @@ namespace Herfitk.API.Controllers
         }
 
         // DELETE: api/HerifyCategories/5
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteHerifyCategory(int id)
         {
             var herifyCategory = await context.GetByIdAsync(id);

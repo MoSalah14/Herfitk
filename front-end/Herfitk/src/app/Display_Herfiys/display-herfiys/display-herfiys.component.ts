@@ -1,6 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,30 +9,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './display-herfiys.component.css',
 })
 export class DisplayHerfiysComponent implements OnInit {
-  baseUrl = environment.apiUrl;
-  AllHerify: any = [];
+  @Input() receivedHerfiys: any;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.fetchCategory('string');
-  }
-
-  fetchCategory(type: string): void {
-    const url = `${this.baseUrl}Herify/HerfiySpeciality`;
-    const headers = { type }; // Set the type parameter in the request header
-
-    this.httpClient.get(url, { headers }).subscribe(
-      (data: any) => {
-        console.log(url);
-        console.log(headers);
-        this.AllHerify = data;
-        console.log(this.AllHerify);
-      },
-      (error) => {
-        console.error('Error fetching Herfiy:', error);
-        // Handle error, e.g., show an error message to the user
-      }
-    );
+    console.log(this.receivedHerfiys); // This Come With Undefind I will solve it tommorow
   }
 }
