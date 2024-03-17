@@ -13,10 +13,7 @@
         {{ item.descraption }}
         <br /><br /><br />
         <br />
-        <button
-          class="contactButton"
-          (click)="GOto(); GetHerfiyByCategory(item.id)"
-        >
+        <button class="contactButton" (click)="goToDisplay(item.id)">
           Show More
         </button>
       </p>

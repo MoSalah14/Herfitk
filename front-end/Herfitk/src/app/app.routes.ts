@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DisplayHerfiysComponent } from './Display_Herfiys/display-herfiys/display-herfiys.component';
 import { HomePageComponent } from './Home/home-page/home-page.component';
+import { AboutComponent } from './Home/about/about.component';
 
 export const routes: Routes = [
   //  { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -12,7 +13,8 @@ export const routes: Routes = [
   { path: 'Home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'Display', component: DisplayHerfiysComponent },
+  { path: 'display/:id', component: DisplayHerfiysComponent },
+  { path: 'about', component: AboutComponent },
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
 ];
 

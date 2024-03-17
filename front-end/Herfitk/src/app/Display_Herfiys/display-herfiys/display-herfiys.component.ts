@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DataSharingService } from '../../data-sharing.service';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-display-herfiys',
@@ -9,11 +13,26 @@ import { CommonModule } from '@angular/common';
   styleUrl: './display-herfiys.component.css',
 })
 export class DisplayHerfiysComponent implements OnInit {
-  @Input() receivedHerfiys: any;
+  herfiys: any[] = [];
+  apiUrl = environment.apiUrl;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
-    console.log(this.receivedHerfiys); // This Come With Undefind I will solve it tommorow
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      console.log('ID from URL:', id);
+      this.getHerfiysByCategory(id);
+    });
+  }
+
+  getHerfiysByCategory(categoryId: number) {
+    this.http
+      .get<any[]>(`${this.apiUrl}HerifyCategories/${categoryId}`)
+      .subscribe(data => {
+        this.herfiys = data;
+        console.log('Herfiys:', this.herfiys);
+        // You can now use this.herfiys in your template or component logic
+      });
   }
 }
