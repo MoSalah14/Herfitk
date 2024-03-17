@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Herfitk.Core.Models.Data;
+using Herfitk.Core.Repository;
+using Herfitk.Repository;
+using AutoMapper;
+using Herfitk.API.DTO;
 
 namespace Herfitk.API.Controllers
 {
@@ -13,85 +17,69 @@ namespace Herfitk.API.Controllers
     [ApiController]
     public class HerifyCategoriesController : ControllerBase
     {
-        private readonly HerfitkContext _context;
+        private readonly IGenericRepository<HerifyCategory> context;
+        private readonly IMapper mapper;
 
-        public HerifyCategoriesController(HerfitkContext context)
+        public HerifyCategoriesController(IGenericRepository<HerifyCategory> context, IMapper mapper)
         {
-            _context = context;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         // GET: api/HerifyCategories
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<HerifyCategory>>> GetHerifyCategories()
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAllHerifyByCatID(int id)
         {
-            return await _context.HerifyCategories.ToListAsync();
+            var GetAll = await context.GetAllAsync();
+
+            var GetAllMapped = GetAll.Select(item => mapper.Map<HerifyCategory, HerifyDto>(item));
+
+            return Ok(GetAllMapped);
         }
 
         // GET: api/HerifyCategories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<HerifyCategory>> GetHerifyCategory(int id)
+        public async Task<IActionResult> GetHerifyCategory(int id) // This Make error Because table is composite primary Key
         {
-            var herifyCategory = await _context.HerifyCategories.FindAsync(id);
+            var herifyCategory = await context.GetByIdAsync(id);   // This Get one value but must get 2 value
 
             if (herifyCategory == null)
-            {
                 return NotFound();
-            }
 
-            return herifyCategory;
+
+            return Ok(herifyCategory);
         }
 
-        // PUT: api/HerifyCategories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHerifyCategory(int id, HerifyCategory herifyCategory)
+        public async Task<IActionResult> UpdateHerifyCategory(int id, HerifyCategory herifyCategory)
         {
             if (id != herifyCategory.CategoryId)
-            {
                 return BadRequest();
-            }
-
-            _context.Entry(herifyCategory).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.UpdateAsync(herifyCategory, id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HerifyCategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/HerifyCategories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPost]
-        public async Task<ActionResult<HerifyCategory>> PostHerifyCategory(HerifyCategory herifyCategory)
+        public async Task<IActionResult> CreateHerifyCategory(HerifyCategory herifyCategory)
         {
-            _context.HerifyCategories.Add(herifyCategory);
             try
             {
-                await _context.SaveChangesAsync();
+                await context.AddAsync(herifyCategory);
             }
             catch (DbUpdateException)
             {
-                if (HerifyCategoryExists(herifyCategory.CategoryId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return CreatedAtAction("GetHerifyCategory", new { id = herifyCategory.CategoryId }, herifyCategory);
@@ -101,21 +89,14 @@ namespace Herfitk.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHerifyCategory(int id)
         {
-            var herifyCategory = await _context.HerifyCategories.FindAsync(id);
+            var herifyCategory = await context.GetByIdAsync(id);
             if (herifyCategory == null)
-            {
                 return NotFound();
-            }
 
-            _context.HerifyCategories.Remove(herifyCategory);
-            await _context.SaveChangesAsync();
+            await context.DeleteAsync(id);
 
             return NoContent();
         }
 
-        private bool HerifyCategoryExists(int id)
-        {
-            return _context.HerifyCategories.Any(e => e.CategoryId == id);
-        }
     }
 }

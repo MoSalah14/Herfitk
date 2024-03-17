@@ -26,6 +26,10 @@ export class CategoryComponent implements OnInit {
       });
   }
 
+  // GetHerfiyByCategiry(){
+  //   this.httpClient.get(`${this.baseUrl}/${}`)// I Test Here Caren
+  // }
+
   ngOnInit(): void {
     this.FetchCategory();
     $(document).ready(function () {

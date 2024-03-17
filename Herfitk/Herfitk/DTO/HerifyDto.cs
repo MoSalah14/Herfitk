@@ -7,5 +7,8 @@
         public string? History { get; set; }
 
         public string? Speciality { get; set; }
+        public string? Image { get; set; }
+
+
     }
 }

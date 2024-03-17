@@ -16,13 +16,14 @@ namespace Herfitk.API.Maping_Classes
                 .ForMember(e => e.PersonalImage, e => e.MapFrom(e => e.HerfiyUser.PersonalImage));
 
 
-            CreateMap<HerifyDto, Herfiy>()
-               .ForMember(e => e.Zone, e => e.MapFrom(e => e.Zone))
-               .ForMember(e => e.History, e => e.MapFrom(e => e.History))
-               .ForMember(e => e.Speciality, e => e.MapFrom(e => e.Speciality));
-            
+            CreateMap<HerifyDto, HerifyCategory>()
+               .ForMember(e => e.Herify.HerfiyUser.PersonalImage, e => e.MapFrom(e => e.Image))
+               .ForMember(e => e.Herify.Zone, e => e.MapFrom(e => e.Zone))
+               .ForMember(e => e.Herify.History, e => e.MapFrom(e => e.History))
+               .ForMember(e => e.Herify, e => e.MapFrom(e => e.Speciality));
 
-            
+
+
 
         }
     }
