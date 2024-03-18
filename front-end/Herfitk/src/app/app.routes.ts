@@ -13,6 +13,7 @@ export const routes: Routes = [
   {path: "app" , component:AppComponent},
   {path: "login" , component:LoginComponent},
   {path: "register" , component:RegisterComponent},
+  {path: "profile" , component:ViewprofileComponent},
 ];
 
 @NgModule({
