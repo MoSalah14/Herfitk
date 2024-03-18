@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//Allow Debdancy Injection 
+builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
 builder.Services.AddDbContext<HerfitkContext>(Use =>
 Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 builder.Services.AddAutoMapper(typeof(Program));

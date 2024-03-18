@@ -1,4 +1,5 @@
-﻿using Herfitk.Core.Models.Data;
+﻿using Herfitk.Core.Models;
+using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,11 +29,15 @@ namespace Herfitk.Repository
             return getData;
         }
 
-        //public async Task<Herfiy> GetByIdAsyncWithInclude(int id)
-        //{
-        //    var GetWithInclude = await context.Herfiys.Include(e => e.User).FirstOrDefaultAsync(e => e.Id == id);
+        public async Task<List<Herfiy>> GetAllHerfyIncluding()
+        {
 
-        //    return GetWithInclude;
-        //}
+            var getData = await context.Herfiys
+                                .Include(x => x.HerfiyUser)
+                                .Include(x => x.ClientHerifies)
+                                .Include(x => x.Payments).ToListAsync();
+
+            return getData;
+        }
     }
 }

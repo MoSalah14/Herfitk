@@ -34,7 +34,6 @@ public partial class HerfitkContext : IdentityDbContext<AppUser>
 
 
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
