@@ -4,7 +4,13 @@
 <div class="owl-carousel owl-theme">
   @for (item of Category; track $index) {
   <section id="card1" class="card">
-    <img src="{{ item.image }}" alt="Your Image" height="10" width="10" />
+    <img
+      [src]="'/assets' + item.image"
+      alt="Uploaded Image"
+    />
+
+    alt="Your Image" height="10" width="10" /> alt="Your Image" height="10"
+    width="10" />
     <div class="card__content">
       <br />
       <p class="card__title">{{ item.categoryName }}</p>

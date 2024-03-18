@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Herfitk.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class StartScaffold : Migration
+    public partial class startscaffolding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

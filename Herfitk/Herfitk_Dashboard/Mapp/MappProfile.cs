@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Herfitk.API.DTO;
 using Herfitk.Core.Models.Data;
+using Herfitk_Dashboard.Models;
 
 namespace Herfitk_Dashboard.Mapp
 {
@@ -14,9 +15,10 @@ namespace Herfitk_Dashboard.Mapp
                .ForMember(e => e.PersonalImage, e => e.MapFrom(e => e.HerfiyUser.PersonalImage));
 
             CreateMap<HerfiyReturnDto, Herfiy>();
-          
-                
+
+            CreateMap<Category, CategoryViewModel>().ReverseMap();
+
         }
-       
+
     }
 }

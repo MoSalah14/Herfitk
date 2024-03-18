@@ -21,10 +21,10 @@ namespace Herfitk.API.Dto
         [StringLength(14, MinimumLength = 14, ErrorMessage = "National ID must Be 14 characters")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "National ID must contain only numeric characters")]
         public string NationalId { get; set; }
-        public string? PersonalImage { get; set; }
+        public IFormFile? PersonalImage { get; set; }
 
 
-        public string? NationalIdImage { get; set; }
+        public IFormFile? NationalIdImage { get; set; }
 
 
     }

@@ -41,7 +41,7 @@ namespace Herfitk.API.Controllers
 
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegisterDto model)
+        public async Task<IActionResult> Register(RegisterDto model, IFormFile nationalIdImage, IFormFile personalImage)
         {
             var user = new AppUser()
             {
@@ -52,18 +52,53 @@ namespace Herfitk.API.Controllers
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
                 NationalId = model.NationalId,
-                NationalIdImage = model.NationalIdImage,
-                PersonalImage = model.PersonalImage
             };
 
+            // Handle National ID Image Upload
+            if (nationalIdImage != null && nationalIdImage.Length > 0)
+            {
+                var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads Photos");
+                if (!Directory.Exists(uploadsDirectory))
+                    Directory.CreateDirectory(uploadsDirectory);
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + nationalIdImage.FileName;
+                var filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    await nationalIdImage.CopyToAsync(fileStream);
+                
+
+                user.NationalIdImage = "/Uploads Photos/" + uniqueFileName; // Assuming NationalIdImage is the property to store the image path
+            }
+
+            // Handle Personal Image Upload
+            if (personalImage != null && personalImage.Length > 0)
+            {
+                var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads Photos");
+                if (!Directory.Exists(uploadsDirectory))
+                    Directory.CreateDirectory(uploadsDirectory);
+                
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + personalImage.FileName;
+                var filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    await personalImage.CopyToAsync(fileStream);
+
+                user.PersonalImage = "/Uploads Photos/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
+            }
 
             var result = await userManager.CreateAsync(user, user.PasswordHash);
-            if (result.Succeeded is false) return BadRequest(result.Errors);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
 
             return Ok(result);
         }
 
-       
+
+
     }
 
 }

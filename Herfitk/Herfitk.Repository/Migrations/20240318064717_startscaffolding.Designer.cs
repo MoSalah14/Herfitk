@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Herfitk.Repository.Migrations
 {
     [DbContext(typeof(HerfitkContext))]
-    [Migration("20240316232543_StartScaffold")]
-    partial class StartScaffold
+    [Migration("20240318064717_startscaffolding")]
+    partial class startscaffolding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

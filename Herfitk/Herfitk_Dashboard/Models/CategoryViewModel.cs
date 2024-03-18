@@ -12,7 +12,7 @@ namespace Herfitk_Dashboard.Models
         public string? CategoryName { get; set; }
         [Required(ErrorMessage = "Description is Required")]
         public string? Descraption { get; set; }
-        [Required(ErrorMessage = "Iamge is Required")]
-        public string? Image { get; set; }
+        
+        public IFormFile? Image { get; set; }
     }
 }
