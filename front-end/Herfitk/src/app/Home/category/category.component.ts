@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit {
     private router: Router,
     private httpClient: HttpClient,
     private dataSharingService: DataSharingService
-  ) {}
+  ) {this.FetchCategory();}
   @Output() MyEvent = new EventEmitter();
   baseUrl = environment.apiUrl;
   Category: any = [];
@@ -35,7 +35,6 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.FetchCategory();
     $(document).ready(function () {
       $('.owl-carousel').owlCarousel({
         margin: 20,

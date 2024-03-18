@@ -4,13 +4,10 @@
 <div class="owl-carousel owl-theme">
   @for (item of Category; track $index) {
   <section id="card1" class="card">
-    <img
-      [src]="'/assets' + item.image"
-      alt="Uploaded Image"
-    />
+    <img [src]="'/assets' + item.image" alt="Uploaded Image" />
 
-    alt="Your Image" height="10" width="10" /> alt="Your Image" height="10"
-    width="10" />
+    <!-- alt="Your Image" height="10" width="10" /> alt="Your Image" height="10"
+    width="10" /> -->
     <div class="card__content">
       <br />
       <p class="card__title">{{ item.categoryName }}</p>
@@ -25,71 +22,5 @@
       </p>
     </div>
   </section>
-  }
+}
 </div>
-
-<!-- حل الكونفليكت
-  <section id="card2" class="card">
-    <img
-      src="assets/Image/electrical/2.jpg"
-      alt="Your Image"
-      height="10"
-      width="10"
-    />
-    <div class="card__content">
-      <br />
-      <p class="card__title">Electrical</p>
-      <p class="card__description">
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae
-        justo vel lorem tincidunt ultrices at non nunc. Donec in sapien viverra,
-        tincidunt augue id, efficitur massa.
-        <br /><br /><br />
-        <br />
-        <button class="contactButton">Show More</button>
-      </p>
-    </div>
-  </section>
-
-  <section id="card3" class="card">
-    <img
-      src="assets/Image/carpenter/4.jpg"
-      alt="Your Image"
-      height="10"
-      width="10"
-    />
-    <div class="card__content">
-      <br />
-      <p class="card__title">Carpentry</p>
-      <p class="card__description">
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae
-        justo vel lorem tincidunt ultrices at non nunc. Donec in sapien viverra,
-        tincidunt augue id, efficitur massa.
-        <br /><br /><br />
-        <br />
-        <button class="contactButton">Show More</button>
-      </p>
-    </div>
-  </section>
-  <section id="card4" class="card">
-    <img
-      src="assets/Image/Blacksmith/5.jpg"
-      alt="Your Image"
-      height="10"
-      width="10"
-    />
-    <div class="card__content">
-      <br />
-      <p class="card__title">Blacksmith</p>
-      <p class="card__description">
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae
-        justo vel lorem tincidunt ultrices at non nunc. Donec in sapien viverra,
-        tincidunt augue id, efficitur massa.
-        <br /><br /><br />
-        <br />
-        <button class="contactButton">Show More</button>
-      </p>
-    </div>
-  </section> -->
