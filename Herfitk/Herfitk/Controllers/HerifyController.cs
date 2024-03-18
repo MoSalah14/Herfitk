@@ -20,19 +20,30 @@ namespace Herfitk.API.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("HerfiySpeciality")]
-        public async Task<IActionResult> GetAllHerafiySpeciality([FromHeader] string type)
+        [HttpGet("AllHerfiy")]
+        public async Task<IActionResult> GetAllHerfiys()
         {
             if (ModelState.IsValid)
             {
                 var alldata = await repository.GetAllAsync();
-                var GetDataWithFIlter = alldata.Where(e => e.Speciality == type).ToList();
-                var mappedData = GetDataWithFIlter.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
+                var mappedData = alldata.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
                 return Ok(mappedData);
             }
             return BadRequest(ModelState);
         }
-
+        
+        //[HttpGet("Specialist/{catName}")]
+        //public async Task<IActionResult> GetAllHerfiysByCategory(string catName)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var alldata = await repository.GetAllAsync();
+        //        var GetDataWithFilter = alldata.Where(e => e.Speciality == catName).ToList();
+        //        var mappedData = GetDataWithFilter.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
+        //        return Ok(mappedData);
+        //    }
+        //    return BadRequest(ModelState);
+        //}
 
 
         [HttpGet("{id:int}")]

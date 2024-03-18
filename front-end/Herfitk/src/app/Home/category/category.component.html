@@ -1,21 +1,21 @@
 <br /><br /><br />
-<h1 id="Category">Category</h1>
+<h1 id="categorySection">Category</h1>
 <br /><br />
 <div class="owl-carousel owl-theme">
   @for (item of Category; track $index) {
   <section id="card1" class="card">
-    <img src="assets/Image/2.jpg" alt="Your Image" height="10" width="10" />
+    <img src="{{ item.image }}" alt="Your Image" height="10" width="10" />
     <div class="card__content">
       <br />
-      <p class="card__title">{{ item.type }}</p>
+      <p class="card__title">{{ item.categoryName }}</p>
       <p class="card__description">
         <br />
-        Plumbing is any system that conveys fluids for a wide range of
-        applications. Plumbing uses pipes, valves, plumbing fixtures, tanks, and
-        other apparatuses to convey fluids.
+        {{ item.descraption }}
         <br /><br /><br />
         <br />
-        <button class="contactButton">Show More</button>
+        <button class="contactButton" (click)="goToDisplay(item.id)">
+          Show More
+        </button>
       </p>
     </div>
   </section>

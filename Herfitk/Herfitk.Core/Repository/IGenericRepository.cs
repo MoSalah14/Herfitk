@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Herfitk.Core.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Herfitk.Core.Repository
         Task<T?> GetByIdAsync(int id);
         Task<T> AddAsync(T name);
         Task<T> UpdateAsync(T name,int id);
-        Task<T> DeleteAsync(int id);   
-
+        Task<T> DeleteAsync(int id);
+      
     }
 }

@@ -4,16 +4,19 @@ using Herfitk.Core.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Herfitk.Repository.Data.Migrations
+namespace Herfitk.Repository.Migrations
 {
     [DbContext(typeof(HerfitkContext))]
-    partial class HerfitkContextModelSnapshot : ModelSnapshot
+    [Migration("20240316232543_StartScaffold")]
+    partial class StartScaffold
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,19 +258,21 @@ namespace Herfitk.Repository.Data.Migrations
 
             modelBuilder.Entity("Herfitk.Core.Models.Data.HerifyCategory", b =>
                 {
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int")
                         .HasColumnName("Category_ID");
 
-                    b.Property<int?>("HerifyId")
+                    b.Property<int>("HerifyId")
                         .HasColumnType("int")
                         .HasColumnName("Herify_ID");
+
+                    b.HasKey("CategoryId", "HerifyId");
 
                     b.HasIndex(new[] { "CategoryId" }, "IX_Herify_Category_Category_ID");
 
                     b.HasIndex(new[] { "HerifyId" }, "IX_Herify_Category_Herify_ID");
 
-                    b.ToTable("Herify_Category", (string)null);
+                    b.ToTable("HerifyCategories");
                 });
 
             modelBuilder.Entity("Herfitk.Core.Models.Data.Payment", b =>
@@ -527,11 +532,15 @@ namespace Herfitk.Repository.Data.Migrations
                     b.HasOne("Herfitk.Core.Models.Data.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK__Herify_Ca__Categ__49C3F6B7");
 
                     b.HasOne("Herfitk.Core.Models.Data.Herfiy", "Herify")
                         .WithMany()
                         .HasForeignKey("HerifyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK__Herify_Ca__Herif__48CFD27E");
 
                     b.Navigation("Category");

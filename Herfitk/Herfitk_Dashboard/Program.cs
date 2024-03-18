@@ -1,4 +1,6 @@
 using Herfitk.Core.Models.Data;
+using Herfitk.Core.Repository;
+using Herfitk.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,9 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddDbContext<HerfitkContext>(Use =>
 Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
-
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 var app = builder.Build();
@@ -34,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Herify}/{action=Index}/{id?}");
 
 app.Run();

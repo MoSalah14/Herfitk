@@ -32,7 +32,6 @@ namespace Herfitk.Controllers
                 return Ok(alldata);
             }
             return BadRequest(ModelState);
-
         }
 
         [HttpGet("{id:int}")]

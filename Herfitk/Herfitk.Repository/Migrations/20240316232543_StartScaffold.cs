@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Herfitk.Repository.Data.Migrations
+namespace Herfitk.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class Test : Migration
+    public partial class StartScaffold : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,43 +26,14 @@ namespace Herfitk.Repository.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonalImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalIdImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountState = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    CategoryName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Descraption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,6 +59,43 @@ namespace Herfitk.Repository.Data.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonalImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NationalIdImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountState = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserRole = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetRoles_UserRole",
+                        column: x => x.UserRole,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -267,24 +275,27 @@ namespace Herfitk.Repository.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Herify_Category",
+                name: "HerifyCategories",
                 columns: table => new
                 {
-                    Herify_ID = table.Column<int>(type: "int", nullable: true),
-                    Category_ID = table.Column<int>(type: "int", nullable: true)
+                    Herify_ID = table.Column<int>(type: "int", nullable: false),
+                    Category_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_HerifyCategories", x => new { x.Category_ID, x.Herify_ID });
                     table.ForeignKey(
                         name: "FK__Herify_Ca__Categ__49C3F6B7",
                         column: x => x.Category_ID,
                         principalTable: "Category",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK__Herify_Ca__Herif__48CFD27E",
                         column: x => x.Herify_ID,
                         principalTable: "Herfiy",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -342,6 +353,13 @@ namespace Herfitk.Repository.Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_UserRole",
+                table: "AspNetUsers",
+                column: "UserRole",
+                unique: true,
+                filter: "[UserRole] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -384,12 +402,12 @@ namespace Herfitk.Repository.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Herify_Category_Category_ID",
-                table: "Herify_Category",
+                table: "HerifyCategories",
                 column: "Category_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Herify_Category_Herify_ID",
-                table: "Herify_Category",
+                table: "HerifyCategories",
                 column: "Herify_ID");
 
             migrationBuilder.CreateIndex(
@@ -432,16 +450,13 @@ namespace Herfitk.Repository.Data.Migrations
                 name: "Client_Herify");
 
             migrationBuilder.DropTable(
-                name: "Herify_Category");
+                name: "HerifyCategories");
 
             migrationBuilder.DropTable(
                 name: "Payment");
 
             migrationBuilder.DropTable(
                 name: "Staff");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Client");
@@ -454,6 +469,9 @@ namespace Herfitk.Repository.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
         }
     }
 }

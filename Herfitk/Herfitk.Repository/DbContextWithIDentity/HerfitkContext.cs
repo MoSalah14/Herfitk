@@ -7,15 +7,17 @@ namespace Herfitk.Core.Models.Data;
 
 public partial class HerfitkContext : IdentityDbContext<AppUser>
 {
-    public HerfitkContext()
-    {
-    }
-
     public HerfitkContext(DbContextOptions<HerfitkContext> options)
         : base(options)
     {
     }
-
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (!optionsBuilder.IsConfigured)
+    //    {
+    //        optionsBuilder.UseSqlServer("Server = .; Database = Herifa_Web; Trusted_Connection = True;encrypt=false");
+    //    }
+    //}
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -121,9 +123,8 @@ public partial class HerfitkContext : IdentityDbContext<AppUser>
 
         modelBuilder.Entity<HerifyCategory>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Herify_Category");
+            modelBuilder.Entity<HerifyCategory>()
+            .HasKey(hc => new { hc.CategoryId, hc.HerifyId });
 
             entity.HasIndex(e => e.CategoryId, "IX_Herify_Category_Category_ID");
 
