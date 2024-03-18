@@ -17,6 +17,8 @@ import { FooterComponent } from './Home/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DisplayHerfiysComponent } from './Display_Herfiys/display-herfiys/display-herfiys.component';
 import { HomePageComponent } from './Home/home-page/home-page.component';
+import { PrivacypolicyComponent } from './Home/privacypolicy/privacypolicy.component';
+import { TermsofservicesComponent } from './Home/termsofservices/termsofservices.component';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +39,8 @@ import { HomePageComponent } from './Home/home-page/home-page.component';
     HttpClientModule,
     DisplayHerfiysComponent,
     HomePageComponent,
+    PrivacypolicyComponent,
+    TermsofservicesComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

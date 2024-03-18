@@ -4,6 +4,8 @@ import { CategoryComponent } from '../category/category.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactusComponent } from '../contactus/contactus.component';
 import { RouterLink, RouterModule } from '@angular/router';
+import { PrivacypolicyComponent } from '../privacypolicy/privacypolicy.component';
+import { TermsofservicesComponent } from '../termsofservices/termsofservices.component';
 
 @Component({
   selector: 'app-home-page',
@@ -13,6 +15,8 @@ import { RouterLink, RouterModule } from '@angular/router';
     CategoryComponent,
     AboutComponent,
     ContactusComponent,
+    PrivacypolicyComponent,
+    TermsofservicesComponent,
     RouterModule,
     RouterLink
   ],
