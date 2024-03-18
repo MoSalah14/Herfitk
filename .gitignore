@@ -402,3 +402,4 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/csharp
 Herfitk/Herfitk/appsettings.json
 front-end/Herfitk/src/app/environments/environment.ts
+/Herfitk/Herfitk_Dashboard/appsettings.json
