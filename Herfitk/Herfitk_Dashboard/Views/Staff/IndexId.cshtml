@@ -1,0 +1,40 @@
+﻿@model Herfitk.API.DTO.StaffDto
+
+@{
+    ViewData["Title"] = "IndexId";
+}
+
+<h1>Staff</h1>
+
+
+<div class="container">
+    <h1 class="text-center">Details of Herify</h1>
+    <hr />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">Staff Name</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.DisplayName)</dd>
+            <dt class="col-sm-2">Adress</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Address)</dd>
+            <dt class="col-sm-2">NationalId</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.NationalId)</dd>
+            <dt class="col-sm-2">PersonalImage</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.PersonalImage)</dd>
+            <dt class="col-sm-2">UserRole</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.UserRole)</dd>
+            <dt class="col-sm-2">Image</dt>
+           @*  <dd class="col-sm-10">@Html.DisplayFor(model => model.StaffUser.Id)</dd>
+            <dt class="col-sm-2">Image</dt> *@
+            <dd class="col-sm-10">
+           @*  <dd class="col-sm-10">
+                    @if (Model.PersonalImage != null && Model.PersonalImage.Length > 0)
+                    {
+                    <img src="@Model.PersonalImage" alt="Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+            </dd> *@
+        </dl>
+    </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
