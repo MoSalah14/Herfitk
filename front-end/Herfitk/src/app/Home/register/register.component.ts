@@ -41,47 +41,51 @@ export class RegisterComponent {
   }
 
   createRegistrationForm(): FormGroup {
-    return this.fb.group(
-      {
-        DisplayName: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(20),
-          ],
+    return this.fb.group({
+      DisplayName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
         ],
-        Email: ['', [Validators.required, Validators.email]],
-        PhoneNumber: [
-          '',
-          [Validators.required, Validators.pattern(/^(010|011|012|015)\d{8}$/)],
+      ],
+      Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(/^(010|011|012|015)\d{8}$/)],
+      ],
+      Address: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30),
         ],
-        Address: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(30),
-          ],
+      ],
+      NationalId: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(14),
+          Validators.maxLength(14),
         ],
-        NationalId: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(14),
-            Validators.maxLength(14),
-          ],
-        ],
-        PersonalImage: [null, [Validators.required]],
-        Password: ['', [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ['', Validators.required],
-      },
-      { validator: passwordMatchValidator }
-    );
+      ],
+      PersonalImage: [null, [Validators.required]],
+      Password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, passwordMatchValidator]],
+    });
   }
 
   onSubmit() {
     this.submitted = true;
+    const password = this.registrationForm.get('Password')?.value;
+    const confirmPassword = this.registrationForm.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      alert('The Password does not match with Confirm Password');
+      return;
+    }
     if (this.registrationForm.invalid) {
       return;
     }
@@ -103,14 +107,17 @@ export class RegisterComponent {
   }
 
   saveUserInApi(formData: FormData) {
-    console.log(formData);
-    this.registerService.CreateRegistration(formData).subscribe((response) => {
-      console.log(response);
-
-      console.log('Registration successful!', response);
-      alert('Registration successful!');
-      this.router.navigate(['/login']);
-    });
+    this.registerService.CreateRegistration(formData).subscribe(
+      (response) => {
+        console.log('Registration successful!', response);
+        alert('Registration successful!');
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Registration error:', error);
+        alert(error); // Display the error message received from the API
+      }
+    );
   }
 
   onChange(event: any) {

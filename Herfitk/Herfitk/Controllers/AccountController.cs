@@ -14,6 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Talabat.API.DTOs;
+using Talabat.API.Errors;
 
 namespace Herfitk.API.Controllers
 {
@@ -38,7 +39,8 @@ namespace Herfitk.API.Controllers
         {
             var user = await userManager.FindByEmailAsync(login.Email);
             if (user is null)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse(401));
+
 
             var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
@@ -61,6 +63,9 @@ namespace Herfitk.API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDto model)
         {
+            if (CheckEmailExists(model.Email).Result.Value)
+                return BadRequest(new ApiValidationErrorResponse() { Errors = new string[] { "This Email is Already Exist" } });
+
             var user = new AppUser()
             {
                 DisplayName = model.DisplayName,
@@ -130,9 +135,8 @@ namespace Herfitk.API.Controllers
 
             var result = await userManager.CreateAsync(user, user.PasswordHash);
             if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
+                return BadRequest(new ApiResponse(400));
+            
 
             return Ok(result);
         }
@@ -164,7 +168,11 @@ namespace Herfitk.API.Controllers
         }
 
 
-
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExists(string email)
+        {
+            return await userManager.FindByEmailAsync(email) is not null;
+        }
 
     }
 }
