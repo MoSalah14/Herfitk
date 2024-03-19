@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Herfitk.Core.Models.Data;
 
-public partial class HerfitkContext : IdentityDbContext<AppUser>
+public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
     public HerfitkContext(DbContextOptions<HerfitkContext> options)
         : base(options)
     {
     }
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    if (!optionsBuilder.IsConfigured)
-    //    {
-    //        optionsBuilder.UseSqlServer("Server = .; Database = Herifa_Web; Trusted_Connection = True;encrypt=false");
-    //    }
-    //}
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -45,7 +39,7 @@ public partial class HerfitkContext : IdentityDbContext<AppUser>
             modelBuilder.Entity<AppUser>()
                 .HasOne(u => u.Role)
                 .WithOne()
-                .HasForeignKey<AppUser>(u => u.UserRole);
+                .HasForeignKey<AppUser>(u => u.UserRoleID);
         });
 
 

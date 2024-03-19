@@ -1,11 +1,19 @@
 ﻿using Herfitk.API.Dto;
+using Herfitk.API.TokenService;
 using Herfitk.Core.Models;
+using Microsoft.AspNetCore.Authorization;
+
 //using Herfitk.Repository.Data.DbContextBase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Talabat.API.DTOs;
 
 namespace Herfitk.API.Controllers
 {
@@ -15,11 +23,13 @@ namespace Herfitk.API.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly IAuthService authService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAuthService authService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.authService = authService;
         }
 
 
@@ -35,8 +45,17 @@ namespace Herfitk.API.Controllers
             if (result.Succeeded is false)
                 return Unauthorized();
 
-            return Ok("LoginSuccess");
-
+            if (result.Succeeded)
+            {
+                var TokenString = authService.GenerateTokinString(login);
+                return Ok(new UserDto()
+                {
+                    DisplayName = user.DisplayName,
+                    Email = user.Email,
+                    Token = TokenString
+                });
+            }
+            return BadRequest();
         }
 
         [HttpPost("Register")]
@@ -117,6 +136,36 @@ namespace Herfitk.API.Controllers
 
             return Ok(result);
         }
+
+
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<AppUser>> GetCurrentUser()
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            //if (await )
+            //{
+
+            //}
+
+            var Email = User.FindFirstValue(ClaimTypes.Email);
+
+            var user = await userManager.FindByEmailAsync(Email);
+
+            return Ok(new AppUser()
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                //Token = await _authService.CreateTokinAsync(user, _userManager)
+            });
+
+        }
+
+
+
+
     }
 }
 

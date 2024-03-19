@@ -1,5 +1,7 @@
 ﻿using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
+using Microsoft.AspNetCore.Authorization;
+
 //using Herfitk.Repository.Data.DbContextBase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +24,7 @@ namespace Herfitk.Controllers
             this.repository = repository;
         }
 
-
+        //[Authorize]
         [HttpGet("Getall")]
         public async Task<ActionResult> GetAll()
         {

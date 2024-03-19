@@ -1,16 +1,21 @@
 
+using Herfitk.API.TokenService;
 using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
 
 using Herfitk.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 //using Herfitk.Repository.Data.DbContextBase;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection.PortableExecutable;
+using System.Text;
 
 namespace Herfitk
 {
@@ -20,8 +25,7 @@ namespace Herfitk
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
-
+            builder.Services.AddAuthorization();
 
 
             #region Configure Services
@@ -43,11 +47,39 @@ namespace Herfitk
             builder.Services.AddDbContext<HerfitkContext>(Use =>
             Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 
+            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
             builder.Services.AddAutoMapper(typeof(Program));
 
 
             builder.Services.AddAuthentication();
-            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<HerfitkContext>();
+            builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<HerfitkContext>().AddDefaultTokenProviders();
+
+            //builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+            builder.Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateActor = true,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    RequireExpirationTime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
+                    ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
+                    (builder.Configuration.GetSection("Jwt:Key").Value))
+
+                };
+            });
+
+
+            builder.Services.ConfigureApplicationCookie(options => { options.Cookie.SameSite = SameSiteMode.None; }); ///////
+
             //builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<IdentityContext>();
 
 
@@ -59,6 +91,13 @@ namespace Herfitk
 
             var app = builder.Build();
 
+            app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager) => /////////////////////////////////
+                    {
+                        await signInManager.SignOutAsync().ConfigureAwait(false);
+                    }).RequireAuthorization(); // So that only authorized users can use this endpoint
+
+
+            //app.MapIdentityApi<AppUser>();
             #region AutoUpdate Database
             using var scope = app.Services.CreateScope();
 
@@ -92,14 +131,15 @@ namespace Herfitk
             }
 
             //app.MapIdentityApi<AppUser>();
-            app.UseStaticFiles();
-            app.UseCors(option => option.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            app.UseAuthorization();
 
+            app.UseCors(option => option.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
 
             app.MapControllers();
+            app.UseAuthentication();
+            app.UseAuthorization();
             #endregion
 
             app.Run();
