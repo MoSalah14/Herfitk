@@ -20,8 +20,6 @@ namespace Herfitk.Repository
             _context = context;
         }
 
-
-
         public async Task<IEnumerable<T>> GetAllAsync()
             => await _context.Set<T>().ToListAsync();
 
