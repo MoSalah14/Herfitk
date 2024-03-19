@@ -29,7 +29,7 @@ namespace Herfitk.API.Maping_Classes
                 .ForMember(s => s.HireDate, s => s.MapFrom(s => s.StaffUser.UserStaff.HireDate))
                 .ForMember(s => s.PersonalImage, s => s.MapFrom(s => s.StaffUser.PersonalImage))
                 .ForMember(s => s.WorkHours, s => s.MapFrom(s => s.StaffUser.UserStaff.WorkHours))
-                .ForMember(s => s.UserRole, s => s.MapFrom(s => s.StaffUser.UserRole));
+                .ForMember(s => s.UserRole, s => s.MapFrom(s => s.StaffUser.Role));
 
             //CreateMap<Staff, StaffDto>().ReverseMap();
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Herfitk.Repository.Migrations
 {
     [DbContext(typeof(HerfitkContext))]
-    [Migration("20240318064717_startscaffolding")]
-    partial class startscaffolding
+    [Migration("20240319003838_startScaffolding")]
+    partial class startScaffolding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,11 @@ namespace Herfitk.Repository.Migrations
 
             modelBuilder.Entity("Herfitk.Core.Models.AppUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -97,8 +100,8 @@ namespace Herfitk.Repository.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserRole")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UserRoleID")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -110,9 +113,9 @@ namespace Herfitk.Repository.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("UserRole")
+                    b.HasIndex("UserRoleID")
                         .IsUnique()
-                        .HasFilter("[UserRole] IS NOT NULL");
+                        .HasFilter("[UserRoleID] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -157,16 +160,15 @@ namespace Herfitk.Repository.Migrations
                     b.Property<string>("Review")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
                         .HasColumnName("User_ID");
 
                     b.HasKey("Id")
                         .HasName("PK__Client__3214EC272790489E");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[User_ID] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex(new[] { "UserId" }, "IX_Client_User_ID")
                         .HasDatabaseName("IX_Client_User_ID1");
@@ -235,8 +237,8 @@ namespace Herfitk.Repository.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
                         .HasColumnName("User_ID");
 
                     b.Property<string>("Zone")
@@ -247,8 +249,7 @@ namespace Herfitk.Repository.Migrations
                         .HasName("PK__Herfiy__3214EC27C698B292");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[User_ID] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex(new[] { "UserId" }, "IX_Herfiy_User_ID")
                         .HasDatabaseName("IX_Herfiy_User_ID1");
@@ -327,8 +328,8 @@ namespace Herfitk.Repository.Migrations
                     b.Property<decimal?>("Salary")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
                         .HasColumnName("User_ID");
 
                     b.Property<int?>("WorkHours")
@@ -339,8 +340,7 @@ namespace Herfitk.Repository.Migrations
                         .HasName("PK__Staff__3214EC27832438F9");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[User_ID] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex(new[] { "UserId" }, "IX_Staff_User_ID")
                         .HasDatabaseName("IX_Staff_User_ID1");
@@ -348,10 +348,13 @@ namespace Herfitk.Repository.Migrations
                     b.ToTable("Staff");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -375,7 +378,7 @@ namespace Herfitk.Repository.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -389,9 +392,8 @@ namespace Herfitk.Repository.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -400,7 +402,7 @@ namespace Herfitk.Repository.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -414,9 +416,8 @@ namespace Herfitk.Repository.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -425,7 +426,7 @@ namespace Herfitk.Repository.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -436,9 +437,8 @@ namespace Herfitk.Repository.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -447,13 +447,13 @@ namespace Herfitk.Repository.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -462,10 +462,10 @@ namespace Herfitk.Repository.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -483,9 +483,9 @@ namespace Herfitk.Repository.Migrations
 
             modelBuilder.Entity("Herfitk.Core.Models.AppUser", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", "Role")
                         .WithOne()
-                        .HasForeignKey("Herfitk.Core.Models.AppUser", "UserRole");
+                        .HasForeignKey("Herfitk.Core.Models.AppUser", "UserRoleID");
 
                     b.Navigation("Role");
                 });
@@ -495,6 +495,8 @@ namespace Herfitk.Repository.Migrations
                     b.HasOne("Herfitk.Core.Models.AppUser", "ClientUser")
                         .WithOne("UserClient")
                         .HasForeignKey("Herfitk.Core.Models.Data.Client", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK__Client__User_ID__3F466844");
 
                     b.Navigation("ClientUser");
@@ -522,6 +524,8 @@ namespace Herfitk.Repository.Migrations
                     b.HasOne("Herfitk.Core.Models.AppUser", "HerfiyUser")
                         .WithOne("UserHerify")
                         .HasForeignKey("Herfitk.Core.Models.Data.Herfiy", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK__Herfiy__User_ID__4222D4EF");
 
                     b.Navigation("HerfiyUser");
@@ -563,21 +567,23 @@ namespace Herfitk.Repository.Migrations
                     b.HasOne("Herfitk.Core.Models.AppUser", "StaffUser")
                         .WithOne("UserStaff")
                         .HasForeignKey("Herfitk.Core.Models.Data.Staff", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK__Staff__User_ID__3C69FB99");
 
                     b.Navigation("StaffUser");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.HasOne("Herfitk.Core.Models.AppUser", null)
                         .WithMany()
@@ -586,7 +592,7 @@ namespace Herfitk.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.HasOne("Herfitk.Core.Models.AppUser", null)
                         .WithMany()
@@ -595,9 +601,9 @@ namespace Herfitk.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -610,7 +616,7 @@ namespace Herfitk.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.HasOne("Herfitk.Core.Models.AppUser", null)
                         .WithMany()

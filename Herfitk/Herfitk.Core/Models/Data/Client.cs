@@ -11,7 +11,7 @@ public partial class Client
 
     public string? Review { get; set; }
 
-    public string? UserId { get; set; }
+    public int UserId { get; set; }
 
     public virtual ICollection<ClientHerify> ClientHerifies { get; set; } = new List<ClientHerify>();
 

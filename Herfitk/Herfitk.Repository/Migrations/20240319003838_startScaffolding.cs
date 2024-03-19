@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Herfitk.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class startscaffolding : Migration
+    public partial class startScaffolding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,8 @@ namespace Herfitk.Repository.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -46,7 +47,7 @@ namespace Herfitk.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -65,14 +66,15 @@ namespace Herfitk.Repository.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PersonalImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NationalIdImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccountState = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserRole = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserRoleID = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -92,8 +94,8 @@ namespace Herfitk.Repository.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetRoles_UserRole",
-                        column: x => x.UserRole,
+                        name: "FK_AspNetUsers_AspNetRoles_UserRoleID",
+                        column: x => x.UserRoleID,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id");
                 });
@@ -104,7 +106,7 @@ namespace Herfitk.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -126,7 +128,7 @@ namespace Herfitk.Repository.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,8 +145,8 @@ namespace Herfitk.Repository.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,7 +169,7 @@ namespace Herfitk.Repository.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -191,7 +193,7 @@ namespace Herfitk.Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     History = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Review = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    User_ID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    User_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,7 +202,8 @@ namespace Herfitk.Repository.Migrations
                         name: "FK__Client__User_ID__3F466844",
                         column: x => x.User_ID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,7 +215,7 @@ namespace Herfitk.Repository.Migrations
                     Zone = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     History = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Speciality = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    User_ID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    User_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -221,7 +224,8 @@ namespace Herfitk.Repository.Migrations
                         name: "FK__Herfiy__User_ID__4222D4EF",
                         column: x => x.User_ID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,7 +237,7 @@ namespace Herfitk.Repository.Migrations
                     Salary = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     Hire_Date = table.Column<DateOnly>(type: "date", nullable: true),
                     Work_Hours = table.Column<int>(type: "int", nullable: true),
-                    User_ID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    User_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -242,7 +246,8 @@ namespace Herfitk.Repository.Migrations
                         name: "FK__Staff__User_ID__3C69FB99",
                         column: x => x.User_ID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -353,11 +358,11 @@ namespace Herfitk.Repository.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_UserRole",
+                name: "IX_AspNetUsers_UserRoleID",
                 table: "AspNetUsers",
-                column: "UserRole",
+                column: "UserRoleID",
                 unique: true,
-                filter: "[UserRole] IS NOT NULL");
+                filter: "[UserRoleID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -370,8 +375,7 @@ namespace Herfitk.Repository.Migrations
                 name: "IX_Client_User_ID",
                 table: "Client",
                 column: "User_ID",
-                unique: true,
-                filter: "[User_ID] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Client_User_ID1",
@@ -392,8 +396,7 @@ namespace Herfitk.Repository.Migrations
                 name: "IX_Herfiy_User_ID",
                 table: "Herfiy",
                 column: "User_ID",
-                unique: true,
-                filter: "[User_ID] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Herfiy_User_ID1",
@@ -419,8 +422,7 @@ namespace Herfitk.Repository.Migrations
                 name: "IX_Staff_User_ID",
                 table: "Staff",
                 column: "User_ID",
-                unique: true,
-                filter: "[User_ID] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staff_User_ID1",

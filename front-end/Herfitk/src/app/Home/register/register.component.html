@@ -5,8 +5,9 @@
       <label class="form-label">Name</label>
       <div class="field">
         <input
-          formControlName="name"
+          formControlName="DisplayName"
           type="text"
+          id="name"
           name="name"
           class="input-field"
           placeholder="Enter Your Name"
@@ -15,7 +16,7 @@
         />
       </div>
       <div
-        *ngIf="formControls['name'].invalid && submitted"
+        *ngIf="formControls['DisplayName'].invalid && submitted"
         style="color: red"
         id="not"
       >
@@ -25,7 +26,7 @@
       <label class="form-label">Email</label>
       <div class="field">
         <input
-          formControlName="email"
+          formControlName="Email"
           type="email"
           name="email"
           class="input-field"
@@ -35,7 +36,7 @@
         />
       </div>
       <div
-        *ngIf="formControls['email'].invalid && submitted"
+        *ngIf="formControls['Email'].invalid && submitted"
         style="color: red"
       >
         Please enter a valid email address
@@ -44,7 +45,7 @@
       <label class="form-label">Phone</label>
       <div class="field">
         <input
-          formControlName="phone"
+          formControlName="PhoneNumber"
           type="tel"
           name="phone"
           class="input-field"
@@ -54,7 +55,7 @@
         />
       </div>
       <div
-        *ngIf="formControls['phone'].invalid && submitted"
+        *ngIf="formControls['PhoneNumber'].invalid && submitted"
         style="color: red"
       >
         Please enter a valid phone number (e.g., 010xxxxxxxx)
@@ -63,7 +64,7 @@
       <label class="form-label">Address</label>
       <div class="field">
         <input
-          formControlName="address"
+          formControlName="Address"
           type="text"
           name="address"
           class="input-field"
@@ -73,7 +74,7 @@
         />
       </div>
       <div
-        *ngIf="formControls['address'].invalid && submitted"
+        *ngIf="formControls['Address'].invalid && submitted"
         style="color: red"
       >
         Please enter your address (minimum 3 characters, maximum 30 characters)
@@ -82,7 +83,7 @@
       <label class="form-label">National ID</label>
       <div class="field">
         <input
-          formControlName="naId"
+          formControlName="NationalId"
           type="text"
           name="naId"
           class="input-field"
@@ -91,14 +92,17 @@
           autocomplete="on"
         />
       </div>
-      <div *ngIf="formControls['naId'].invalid && submitted" style="color: red">
+      <div
+        *ngIf="formControls['NationalId'].invalid && submitted"
+        style="color: red"
+      >
         Please enter a valid 14-digit national ID
       </div>
 
       <label class="form-label">Password</label>
       <div class="field">
         <input
-          formControlName="password"
+          formControlName="Password"
           type="password"
           name="password"
           class="input-field"
@@ -107,7 +111,7 @@
         />
       </div>
       <div
-        *ngIf="formControls['password'].invalid && submitted"
+        *ngIf="formControls['Password'].invalid && submitted"
         style="color: red"
       >
         Please enter a password (minimum 8 characters)
@@ -125,26 +129,33 @@
         />
       </div>
       <div
-        *ngIf="formControls['confirmPassword'].invalid && submitted"
+        *ngIf="
+          formControls['confirmPassword'].hasError('passwordMismatch') &&
+          formControls['confirmPassword'].touched
+        "
         style="color: red"
       >
-        Please confirm your password (minimum 8 characters)
+        Passwords do not match
       </div>
 
-      <label class="form-label">Upload Personal Photo</label>
-      <div class="field">
+      <div class="form-group">
+        <label for="personalImage" class="form-label"
+          >Upload Personal Photo:</label
+        >
+        <br />
         <input
+          class="m-2 text-light"
           type="file"
-          accept=".png, .jpg"
-          formControlName="personalPhoto"
-          (change)="onFileChange($event)"
+          id="personalImage"
+          formControlName="PersonalImage"
+          (change)="onChange($event)"
         />
-      </div>
-      <div
-        *ngIf="formControls['personalPhoto'].invalid && submitted"
-        style="color: red"
-      >
-        Please upload your personal photo
+        <div
+          *ngIf="formControls['PersonalImage'].invalid && submitted"
+          style="color: red"
+        >
+          Please select a photo.
+        </div>
       </div>
 
       <div class="btn">
