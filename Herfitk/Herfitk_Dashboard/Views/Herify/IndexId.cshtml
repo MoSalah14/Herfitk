@@ -1,70 +1,34 @@
-﻿@model IEnumerable<Herfitk.API.DTO.HerfiyReturnDto>
+﻿@model Herfitk.API.DTO.HerfiyReturnDto
 
 @{
     ViewData["Title"] = "IndexId";
 }
 
-<h1>IndexId</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Zone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.History)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Speciality)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.History)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonalImage)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Zone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.History)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Speciality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Zone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.History)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PersonalImage)
-                </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h1 class="text-center">Details</h1>
+<div class="container">
+    <h1 class="text-center">Details of Herify</h1>
+    <hr />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">Category Name</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Id)</dd>
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+            <dt class="col-sm-2">Phone</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Phone)</dd>
+            <dt class="col-sm-2">Speciality</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Speciality)</dd>
+            <dt class="col-sm-2">Image</dt>
+            <dd class="col-sm-10">
+            <dd class="col-sm-10">
+                    @if (Model.PersonalImage != null && Model.PersonalImage.Length > 0)
+                    {
+                    <img src="@Model.PersonalImage" alt="Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+            </dd>
+        </dl>
+    </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'app', component: AppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ViewprofileComponent },
+  { path: 'profile/:id', component: ViewprofileComponent },
   { path: 'privacy', component: PrivacypolicyComponent },
   { path: 'termofservices', component: TermsofservicesComponent },
   { path: 'display/:id', component: DisplayHerfiysComponent },

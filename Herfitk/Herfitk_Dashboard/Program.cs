@@ -13,6 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//Allow Debdancy Injection 
+builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
+
+builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
+
 builder.Services.AddDbContext<HerfitkContext>(Use =>
 Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 builder.Services.AddAutoMapper(typeof(Program));
@@ -37,6 +42,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Herify}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

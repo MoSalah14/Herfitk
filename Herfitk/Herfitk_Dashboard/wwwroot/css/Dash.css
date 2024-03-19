@@ -1,0 +1,35 @@
+@@ -0,0 +1,33 @@
+/* Custom styles for this template */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.dashboard-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Light mode */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #000;
+}
+
+/* Dark mode */
+body.dark-mode {
+    --bg-color: #17191a;
+    --text-color: #f6fa11;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

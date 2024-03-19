@@ -28,7 +28,6 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
 
 
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

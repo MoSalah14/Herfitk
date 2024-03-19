@@ -41,6 +41,9 @@ namespace Herfitk
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
             builder.Services.AddScoped(typeof(IHerifyCategoriesRepository), typeof(HerifyCategoriesRepository));
+            builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
+
+            
 
             //Allow DbContext D_Injection
 
