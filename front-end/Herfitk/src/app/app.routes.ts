@@ -13,14 +13,15 @@ import { PrivacypolicyComponent } from './Home/privacypolicy/privacypolicy.compo
 import { TermsofservicesComponent } from './Home/termsofservices/termsofservices.component';
 
 export const routes: Routes = [
-//  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path: "" , component:HomePageComponent},
-  {path: "app" , component:AppComponent},
-  {path: "login" , component:LoginComponent},
-  {path: "register" , component:RegisterComponent},
-  {path: "profile" , component:ViewprofileComponent},
-  {path: "privacy" , component:PrivacypolicyComponent},
-  {path: "termofservices" , component:TermsofservicesComponent},
+  //  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', component: HomePageComponent },
+  { path: 'app', component: AppComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ViewprofileComponent },
+  { path: 'privacy', component: PrivacypolicyComponent },
+  { path: 'termofservices', component: TermsofservicesComponent },
+  { path: 'display/:id', component: DisplayHerfiysComponent },
   // {path: "about" , component:AboutComponent},
   // {path: "category" , component:CategoryComponent},
   // {path: "contact" , component:ContactusComponent},

@@ -2,34 +2,39 @@
 using Herfitk.API.DTO;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
+using Herfitk.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic;
 using System.Threading.Tasks;
-
+using Herfitk_Dashboard.Models;
 namespace Herfitk_Dashboard.Controllers
 {
     public class HerifyController : Controller
     {
-        private readonly IGenericRepository<Herfiy> repository;
+       
+        private readonly IHerifyRepository repository;
         private readonly IMapper mapper;
-        public HerifyController(IGenericRepository<Herfiy> repository, IMapper mapper)
+        public HerifyController(IHerifyRepository repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
         }
 
-        //Get All Herifys
+       // Get All Herifys
         public async Task<IActionResult> Index()
         {
-            var herifys = await repository.GetAllAsync();
+            var herifys = await repository.GetAllHerfyIncluding();
+    
             // Using Mapper To Transform From DTO To Model 
-           // var herifyDtos = mapper.Map<List<Herfiy>, List<HerfiyReturnDto>>((List<Herfiy>)herifys);
-           if(herifys == null)
+            // var herifyDtos = mapper.Map<List<Herfiy>, List<HerfiyReturnDto>>((List<Herfiy>)herifys);
+            if (herifys == null)
             {
                 return NotFound();
             }
-            var mappedData = herifys.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
+            // Add List For Loop On every Elemnt 
+            var mappedData =  mapper.Map<List< Herfiy>, List<HerfiyReturnDto>>(herifys);
+
             return View(mappedData);
         }
 

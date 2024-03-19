@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import {
   FormControl,
@@ -41,101 +41,82 @@ import {
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  name: any = '';
-  email: any = '';
-  phone: any = '';
-  adress: any = '';
-  naId: any = '';
-  password: any = '';
-  confirmPassword: any = '';
-  submitted: boolean = false;
-  showEmailRequiredMessage: boolean = false;
-  registrationData: any;
+  registrationForm: FormGroup;
+  submitted = false;
+  showEmailRequiredMessage = false;
 
-  constructor(private router: Router) {}
-  // constructor() { }
-
-  FormValdiation = new FormGroup({
-    name: new FormControl('', [
-      Validators.maxLength(20),
-      Validators.minLength(2),
-    ]),
-    email: new FormControl('', [Validators.email]),
-    phone: new FormControl('', [
-      Validators.maxLength(11),
-      Validators.minLength(11),
-      Validators.pattern(/^(010|011|012|015)\d{8}$/),
-    ]),
-    adress: new FormControl('', [
-      Validators.minLength(3),
-      Validators.maxLength(30),
-    ]),
-    naId: new FormControl('', [
-      Validators.minLength(14),
-      Validators.maxLength(14),
-    ]),
-    password: new FormControl('', [Validators.minLength(8)]),
-    confirmPassword: new FormControl('', [Validators.minLength(8)]),
-  });
-  get validname() {
-    return this.FormValdiation.controls['name'].valid;
+  constructor(private router: Router, private fb: FormBuilder) {
+    this.registrationForm = this.fb.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      phone: [
+        '',
+        [Validators.required, Validators.pattern(/^(010|011|012|015)\d{8}$/)],
+      ],
+      address: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30),
+        ],
+      ],
+      naId: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(14),
+          Validators.maxLength(14),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      personalPhoto: [null, [Validators.required]],
+    });
   }
-  get validEmail() {
-    return this.FormValdiation.controls['email'].valid;
-  }
-  get validPhone() {
-    return this.FormValdiation.controls['phone'].valid;
-  }
-  get validAdress() {
-    return this.FormValdiation.controls['adress'].valid;
-  }
-  get validnaId() {
-    return this.FormValdiation.controls['naId'].valid;
-  }
-  get validPass() {
-    return this.FormValdiation.controls['password'].valid;
-  }
-  get validConfirmPass() {
-    return this.FormValdiation.controls['confirmPassword'].valid;
-  }
-
-  RegisterSuccess(
-    name: any,
-    email: any,
-    phone: any,
-    adress: any,
-    naId: any,
-    password: any,
-    confirmPassword: any
-  ) {
-    if (email == '' || password == '' || name == '') {
-      this.showEmailRequiredMessage = true;
-    } else if (phone == '' || adress == '' || naId == '') {
-      this.showEmailRequiredMessage = true;
-    } else if (confirmPassword == '') {
-      this.showEmailRequiredMessage = true;
+  onSubmit() {
+    
+    this.submitted = true;
+    if (this.registrationForm.invalid) {
+      return;
     }
-    // else if (email.valid) {
-    //   this.submitted = true;
-    // }
+    const formData = new FormData();
+    formData.append('name', this.registrationForm.value.name);
+    formData.append('email', this.registrationForm.value.email);
+    formData.append('phone', this.registrationForm.value.phone);
+    formData.append('address', this.registrationForm.value.address);
+    formData.append('naId', this.registrationForm.value.naId);
+    formData.append('password', this.registrationForm.value.password);
+    formData.append(
+      'confirmPassword',
+      this.registrationForm.value.confirmPassword
+    );
+    formData.append('personalPhoto', this.registrationForm.value.personalPhoto);
 
-    if (password !== confirmPassword) {
-      alert('The Password Not Match With Confirm Password');
-    }
-    if (this.FormValdiation.valid) {
-      this.registrationData = {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        address: this.adress,
-        naId: this.naId,
-        password: this.password,
-        confirmPassword: this.confirmPassword,
-      };
-      console.log(this.registrationData);
+    console.log(formData);
 
-      alert('Register suc');
-      this.router.navigate(['app']);
+    alert('Registration successful!');
+    this.router.navigate(['/login']); // Redirect to login page after successful registration
+  }
+
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length) {
+      const file = target.files[0];
+      this.registrationForm.patchValue({
+        personalPhoto: file,
+      });
+      this.registrationForm.get('personalPhoto')?.updateValueAndValidity();
     }
+  }
+  get formControls() {
+    return this.registrationForm.controls;
   }
 }

@@ -39,9 +39,8 @@ namespace Herfitk.API.Controllers
 
         }
 
-
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegisterDto model, IFormFile nationalIdImage, IFormFile personalImage)
+        public async Task<IActionResult> Register(RegisterDto model)
         {
             var user = new AppUser()
             {
@@ -55,37 +54,59 @@ namespace Herfitk.API.Controllers
             };
 
             // Handle National ID Image Upload
-            if (nationalIdImage != null && nationalIdImage.Length > 0)
+            if (model.NationalIdImage != null && model.NationalIdImage.Length > 0)
             {
-                var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads Photos");
-                if (!Directory.Exists(uploadsDirectory))
-                    Directory.CreateDirectory(uploadsDirectory);
+                var currentDirectory = Directory.GetCurrentDirectory();
+                var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
+                var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "imageID");
+                var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "imageID");
 
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + nationalIdImage.FileName;
-                var filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+                if (!Directory.Exists(wwwrootUploadsDirectory))
+                    Directory.CreateDirectory(wwwrootUploadsDirectory);
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    await nationalIdImage.CopyToAsync(fileStream);
-                
+                if (!Directory.Exists(assetsUploadsDirectory))
+                    Directory.CreateDirectory(assetsUploadsDirectory);
 
-                user.NationalIdImage = "/Uploads Photos/" + uniqueFileName; // Assuming NationalIdImage is the property to store the image path
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + model.NationalIdImage.FileName;
+                var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
+                var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
+
+                using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
+                using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
+                {
+                    await model.NationalIdImage.CopyToAsync(wwwrootFileStream);
+                    await model.NationalIdImage.CopyToAsync(assetsFileStream);
+                }
+
+                user.NationalIdImage = "/imageID/" + uniqueFileName; // Assuming NationalIdImage is the property to store the image path
             }
 
             // Handle Personal Image Upload
-            if (personalImage != null && personalImage.Length > 0)
+            if (model.PersonalImage != null && model.PersonalImage.Length > 0)
             {
-                var uploadsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads Photos");
-                if (!Directory.Exists(uploadsDirectory))
-                    Directory.CreateDirectory(uploadsDirectory);
-                
+                var currentDirectory = Directory.GetCurrentDirectory();
+                var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
+                var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "PersonalImage");
+                var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "PersonalImage");
 
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + personalImage.FileName;
-                var filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+                if (!Directory.Exists(wwwrootUploadsDirectory))
+                    Directory.CreateDirectory(wwwrootUploadsDirectory);
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    await personalImage.CopyToAsync(fileStream);
+                if (!Directory.Exists(assetsUploadsDirectory))
+                    Directory.CreateDirectory(assetsUploadsDirectory);
 
-                user.PersonalImage = "/Uploads Photos/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + model.PersonalImage.FileName;
+                var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
+                var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
+
+                using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
+                using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
+                {
+                    await model.PersonalImage.CopyToAsync(wwwrootFileStream);
+                    await model.PersonalImage.CopyToAsync(assetsFileStream);
+                }
+
+                user.PersonalImage = "/PersonalImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
             }
 
             var result = await userManager.CreateAsync(user, user.PasswordHash);
@@ -96,10 +117,8 @@ namespace Herfitk.API.Controllers
 
             return Ok(result);
         }
-
-
-
     }
-
 }
+
+
 
