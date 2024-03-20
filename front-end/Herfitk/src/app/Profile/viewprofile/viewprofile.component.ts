@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, Directive, NgModule, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DataSharingService } from '../../data-sharing.service';
@@ -14,6 +14,7 @@ import { concatWith } from 'rxjs';
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule
+ 
   ],
   providers:[
     DataSharingService
@@ -24,7 +25,9 @@ import { concatWith } from 'rxjs';
 export class ViewprofileComponent implements OnInit {
   ID=0;
   profile:any;
+  alldata:any;
   reviews:any;
+  
 constructor(private myid:ActivatedRoute,private service:DataSharingService){
 this.ID=myid.snapshot.params["id"];
 }
@@ -32,7 +35,7 @@ this.ID=myid.snapshot.params["id"];
    this.service.getherifybyid(this.ID).subscribe({
   next:(info)=>{
     this.profile=info;
-    console.log(this.profile);
+   // console.log(this.profile);
    },
    error:(err)=>{
     console.log(err);
@@ -40,8 +43,14 @@ this.ID=myid.snapshot.params["id"];
   });
   this.service.getreviewherify().subscribe({
     next:(info)=>{
-     this.reviews=info;
+     this.alldata=info;
+    //  this.reviews = [...this.alldata.filter((a: { herifyId: number; }) => a.herifyId === this.ID)];
+    //  this.reviews = this.alldata.filter((a=>a.herifyId==this.ID ));
+     this.reviews = [...this.alldata.filter((rev: any) => rev.herifyId == this.ID)]; 
+
      console.log(this.reviews);
+     console.log(this.alldata);
+
     },
     error:(err)=>{
       console.log(err);
