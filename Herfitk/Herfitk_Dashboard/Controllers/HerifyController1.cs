@@ -102,7 +102,7 @@ namespace Herfitk_Dashboard.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("Zone,History,Speciality")] HerifyViewModel herifyViewModel)
+        public async Task<IActionResult> Add([Bind("Zone,History,Speciality")] HerifyViewModel herifyViewModel , Herfiy herfiy)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Herfitk_Dashboard.Controllers
                         return RedirectToAction(nameof(Index));
                     }
                 }
-                return View(herifyViewModel);
+                return View(herfiy);
 
             }
             catch(Exception)
