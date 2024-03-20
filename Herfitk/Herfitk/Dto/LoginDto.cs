@@ -10,5 +10,8 @@ namespace Herfitk.API.Dto
         [Required]
 
         public string Password { get; set; }
+
+
+
     }
 }

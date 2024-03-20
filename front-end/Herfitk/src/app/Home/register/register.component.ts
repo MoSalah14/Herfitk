@@ -1,53 +1,48 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
 import {
-  FormControl,
+  FormBuilder,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  GoogleLoginProvider,
-  SocialAuthServiceConfig,
-  SocialLoginModule,
-} from '@abacritt/angularx-social-login';
+import { Router } from '@angular/router';
+import { RegisterService } from './register.service';
+import { CommonModule } from '@angular/common';
+
+const passwordMatchValidator = (control: FormGroup) => {
+  const password = control.get('Password');
+  const confirmPassword = control.get('confirmPassword');
+
+  return password && confirmPassword && password.value !== confirmPassword.value
+    ? { passwordMismatch: true }
+    : null;
+};
+
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [
-    RouterModule,
-    FormsModule,
-    CommonModule,
-    ReactiveFormsModule,
-    SocialLoginModule,
-  ],
   templateUrl: './register.component.html',
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('Google-Client-ID-Goes-Here'),
-          },
-        ],
-      } as SocialAuthServiceConfig,
-    },
-  ],
-  styleUrl: './register.component.css',
+  styleUrls: ['./register.component.css'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
+  providers: [RegisterService],
 })
 export class RegisterComponent {
   registrationForm: FormGroup;
   submitted = false;
-  showEmailRequiredMessage = false;
+  file: File | undefined;
 
-  constructor(private router: Router, private fb: FormBuilder) {
-    this.registrationForm = this.fb.group({
-      name: [
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private registerService: RegisterService
+  ) {
+    this.registrationForm = this.createRegistrationForm();
+  }
+
+  createRegistrationForm(): FormGroup {
+    return this.fb.group({
+      DisplayName: [
         '',
         [
           Validators.required,
@@ -55,12 +50,12 @@ export class RegisterComponent {
           Validators.maxLength(20),
         ],
       ],
-      email: ['', [Validators.required, Validators.email]],
-      phone: [
+      Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: [
         '',
         [Validators.required, Validators.pattern(/^(010|011|012|015)\d{8}$/)],
       ],
-      address: [
+      Address: [
         '',
         [
           Validators.required,
@@ -68,7 +63,7 @@ export class RegisterComponent {
           Validators.maxLength(30),
         ],
       ],
-      naId: [
+      NationalId: [
         '',
         [
           Validators.required,
@@ -76,46 +71,62 @@ export class RegisterComponent {
           Validators.maxLength(14),
         ],
       ],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-      personalPhoto: [null, [Validators.required]],
+      PersonalImage: [null, [Validators.required]],
+      Password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, passwordMatchValidator]],
     });
   }
+
   onSubmit() {
-    
     this.submitted = true;
+    const password = this.registrationForm.get('Password')?.value;
+    const confirmPassword = this.registrationForm.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      alert('The Password does not match with Confirm Password');
+      return;
+    }
     if (this.registrationForm.invalid) {
       return;
     }
+
     const formData = new FormData();
-    formData.append('name', this.registrationForm.value.name);
-    formData.append('email', this.registrationForm.value.email);
-    formData.append('phone', this.registrationForm.value.phone);
-    formData.append('address', this.registrationForm.value.address);
-    formData.append('naId', this.registrationForm.value.naId);
-    formData.append('password', this.registrationForm.value.password);
-    formData.append(
-      'confirmPassword',
-      this.registrationForm.value.confirmPassword
-    );
-    formData.append('personalPhoto', this.registrationForm.value.personalPhoto);
 
-    console.log(formData);
-
-    alert('Registration successful!');
-    this.router.navigate(['/login']); // Redirect to login page after successful registration
-  }
-
-  onFileChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    if (target.files && target.files.length) {
-      const file = target.files[0];
-      this.registrationForm.patchValue({
-        personalPhoto: file,
-      });
-      this.registrationForm.get('personalPhoto')?.updateValueAndValidity();
+    // Append form field values to formData
+    formData.append('DisplayName', this.registrationForm.value.DisplayName);
+    formData.append('Email', this.registrationForm.value.Email);
+    formData.append('PhoneNumber', this.registrationForm.value.PhoneNumber);
+    formData.append('Address', this.registrationForm.value.Address);
+    formData.append('NationalId', this.registrationForm.value.NationalId);
+    formData.append('Password', this.registrationForm.value.Password);
+    if (this.file) {
+      // Append file data if available
+      formData.append('personalImage', this.file);
     }
+    this.saveUserInApi(formData);
   }
+
+  saveUserInApi(formData: FormData) {
+    this.registerService.CreateRegistration(formData).subscribe(
+      (response) => {
+        console.log('Registration successful!', response);
+        alert('Registration successful!');
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Registration error:', error);
+        alert(error); // Display the error message received from the API
+      }
+    );
+  }
+
+  onChange(event: any) {
+    this.file =
+      event.target.files && event.target.files.length > 0
+        ? event.target.files.item(0)
+        : undefined;
+  }
+
   get formControls() {
     return this.registrationForm.controls;
   }
