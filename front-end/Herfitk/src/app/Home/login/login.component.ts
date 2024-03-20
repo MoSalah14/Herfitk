@@ -82,7 +82,7 @@ export class LoginComponent {
           if (response && response.token) {
             console.log(response);
 
-            this.cookieService.set('authToken', response.token);
+            this.cookieService.set('authToken', response.token, 60 / (24 * 60)); // 60 minutes converted to days
 
             this.router.navigate(['Home']);
             setTimeout(() => {
