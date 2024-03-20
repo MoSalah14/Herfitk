@@ -13,7 +13,7 @@ public partial class Herfiy
 
     public string? Speciality { get; set; }
 
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
 
     public virtual ICollection<ClientHerify> ClientHerifies { get; set; } = new List<ClientHerify>();
 
