@@ -23,7 +23,9 @@ namespace Herfitk.API.TokenService
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.Name,user.DisplayName)
+                new Claim(ClaimTypes.Name,user.DisplayName),
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+
             };
             var userRoles = await userManager.GetRolesAsync(user);
 
@@ -45,14 +47,6 @@ namespace Herfitk.API.TokenService
 
             string TokinString = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
-            var response = httpContextAccessor.HttpContext.Response;
-            response.Cookies.Append("authToken", TokinString, new CookieOptions
-            {
-                HttpOnly = true, // Ensure HttpOnly for security
-                Secure = true, // Secure cookie for HTTPS
-                Expires = DateTime.Now.AddMinutes(tokenExpirationMinutes), // Set expiration time
-                SameSite = SameSiteMode.Strict // Adjust SameSite attribute as needed
-            });
 
             return TokinString;
 
