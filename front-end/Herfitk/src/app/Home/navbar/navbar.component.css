@@ -63,7 +63,7 @@ header ul {
 header ul li {
   position: relative;
   list-style: none;
-  margin-left: 60px; /* Add margin for better spacing */
+  margin-left: 40px; /* Add margin for better spacing */
 }
 
 header ul li a {

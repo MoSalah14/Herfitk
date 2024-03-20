@@ -13,7 +13,7 @@ public partial class Staff
 
     public int? WorkHours { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
     public virtual AppUser? StaffUser { get; set; }
 }

@@ -7,5 +7,6 @@
 
         public DateOnly? HireDate { get; set; }
         public int? WorkHours { get; set; }
+        public int UserId { get; set; }
     }
 }
