@@ -1,9 +1,11 @@
 ﻿using Herfitk.API.Dto;
+using Herfitk.Core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Herfitk.API.TokenService
 {
     public interface IAuthService
     {
-        public string GenerateTokinString(LoginDto login);
+        public  Task<string> GenerateTokinString(AppUser user, UserManager<AppUser> userManager);
     }
 }

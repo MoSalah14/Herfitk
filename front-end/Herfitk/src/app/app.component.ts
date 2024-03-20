@@ -19,6 +19,7 @@ import { DisplayHerfiysComponent } from './Display_Herfiys/display-herfiys/displ
 import { HomePageComponent } from './Home/home-page/home-page.component';
 import { PrivacypolicyComponent } from './Home/privacypolicy/privacypolicy.component';
 import { TermsofservicesComponent } from './Home/termsofservices/termsofservices.component';
+import { DataSharingService } from './data-sharing.service';
 
 @Component({
   selector: 'app-root',
@@ -44,6 +45,7 @@ import { TermsofservicesComponent } from './Home/termsofservices/termsofservices
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  providers:[DataSharingService]
 })
 export class AppComponent implements AfterViewInit {
   title = 'Herfitk';

@@ -10,6 +10,9 @@ namespace Herfitk.API.Dto
         [Required]
 
         public string Password { get; set; }
+        public string? DisplayName { get; set; }
+
+
 
 
 
