@@ -15,7 +15,11 @@ export class RegisterService {
     return this.http.post(`${this.BaseUrl}Account/Register`, formData).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'An error occurred during registration.';
-        if (error.error && error.error.errors && error.error.errors.length > 0) {
+        if (
+          error.error &&
+          error.error.errors &&
+          error.error.errors.length > 0
+        ) {
           errorMessage = error.error.errors[0];
         }
         return throwError(errorMessage);
