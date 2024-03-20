@@ -1,18 +1,58 @@
 import { CommonModule } from '@angular/common';
-import { Component,HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { LoginComponent } from '../login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,
-  LoginComponent
-  ],
+  imports: [CommonModule, LoginComponent],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    CookieService,
+  ],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isLoginPopupOpen: boolean = false;
+
+  userEmail: string | undefined;
+  UserName: string | undefined;
+  UserRole: string | undefined;
+  isLoggedIn: boolean = false;
+
+  constructor(
+    private cookieService: CookieService,
+    private jwtHelper: JwtHelperService // Inject JwtHelperService
+  ) {}
+  ngOnInit(): void {
+    const authToken = this.cookieService.get('authToken');
+
+    if (authToken) {
+      const decodedToken = this.jwtHelper.decodeToken(authToken);
+      console.log(decodedToken);
+      // Assuming the user's name is stored in the 'name' claim of the token
+      this.userEmail =
+        decodedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+        ];
+      console.log(this.userEmail);
+      this.UserName =
+        decodedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+        ];
+      console.log(this.UserName);
+
+      this.UserRole =
+        decodedToken[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ];
+      console.log(this.UserRole);
+    }
+  }
 
   openLoginForm(): void {
     this.isLoginPopupOpen = true;
@@ -22,7 +62,6 @@ export class NavbarComponent {
     this.isLoginPopupOpen = false;
   }
 
-
   isSticky: boolean = false;
 
   @HostListener('window:scroll', [])
@@ -30,6 +69,4 @@ export class NavbarComponent {
     const scrollY = window.scrollY || window.pageYOffset;
     this.isSticky = scrollY > 0;
   }
-
- 
 }
