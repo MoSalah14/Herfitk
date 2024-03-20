@@ -7,6 +7,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { PrivacypolicyComponent } from '../privacypolicy/privacypolicy.component';
 import { TermsofservicesComponent } from '../termsofservices/termsofservices.component';
 
+
 @Component({
   selector: 'app-home-page',
   standalone: true,

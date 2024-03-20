@@ -40,7 +40,8 @@ import { TermsofservicesComponent } from './Home/termsofservices/termsofservices
     DisplayHerfiysComponent,
     HomePageComponent,
     PrivacypolicyComponent,
-    TermsofservicesComponent
+    TermsofservicesComponent,
+   
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
