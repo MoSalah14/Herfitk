@@ -93,7 +93,6 @@ namespace Herfitk_Dashboard.Controllers
             try
             {
                 return View(new Herfiy());
-
             }
             catch
             {
@@ -102,7 +101,7 @@ namespace Herfitk_Dashboard.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("Zone,History,Speciality")] HerifyViewModel herifyViewModel , Herfiy herfiy)
+        public async Task<IActionResult> Add([Bind("UserId,Zone,History,Speciality")] HerifyViewModel herifyViewModel , Herfiy herfiy)
         {
             try
             {
@@ -114,9 +113,10 @@ namespace Herfitk_Dashboard.Controllers
                         {
                             Zone = herifyViewModel.Zone,
                             History = herifyViewModel.History,
-                            Speciality = herifyViewModel.Speciality
+                            Speciality = herifyViewModel.Speciality,
+                            UserId = herifyViewModel.UserId
                         };
-
+                        //Must Be 4 ....Herfy 
                         await repository.AddAsync(newHerfy);
 
                         return RedirectToAction(nameof(Index));
@@ -152,7 +152,7 @@ namespace Herfitk_Dashboard.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edite(int id , [Bind("Id,Zone,History,Speciality")] HerifyViewModel herifyViewModel)
+        public async Task<IActionResult> Edite(int id , [Bind("Id,UserId,Zone,History,Speciality")] HerifyViewModel herifyViewModel)
         {
             if (id != herifyViewModel.Id)
                 return NotFound();
@@ -167,11 +167,14 @@ namespace Herfitk_Dashboard.Controllers
                     }
                     else
                     {
+                        
                         herfyUpdate.Zone = herifyViewModel.Zone;
                         herfyUpdate.History = herifyViewModel.History;
                         herfyUpdate.Speciality = herifyViewModel.Speciality;
+                        //I don't no the edite here right or not ... tell the logic 
+                        herfyUpdate.UserId = herifyViewModel.UserId;
                     }
-
+                    
                     await repository.UpdateAsync(herfyUpdate, id);
                     return RedirectToAction(nameof(Index));
                 }
@@ -182,9 +185,7 @@ namespace Herfitk_Dashboard.Controllers
             }
 
             return View(herifyViewModel);
-
         }
-
         //Delete Herifys
         public async Task<IActionResult> Delete(int id)
         {
@@ -201,8 +202,6 @@ namespace Herfitk_Dashboard.Controllers
             {
                 return Content("Error With Data");
             }
-        
-
         }
 
     }

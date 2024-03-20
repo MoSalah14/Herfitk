@@ -92,7 +92,7 @@ namespace Herfitk_Dashboard.Controllers
         //Add Staff 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("Salary,HireDate,WorkHours")] StaffViewModel staffViewModel , Staff staff)
+        public async Task<IActionResult> Add([Bind("Salary,HireDate,WorkHours,UserId")] StaffViewModel staffViewModel , Staff staff)
         {
             try
             {
@@ -104,9 +104,12 @@ namespace Herfitk_Dashboard.Controllers
                         {
                             Salary = staffViewModel.Salary,
                             HireDate = staffViewModel.HireDate,
-                            WorkHours = staffViewModel.WorkHours
+                            WorkHours = staffViewModel.WorkHours,
+                            UserId = staffViewModel.UserId
+                            
                         };
-
+                        //Must Be Check To 1 or 2 Admin Or Herfy ..........................
+                  
                         await repository.AddAsync(newStaff);
 
                         return RedirectToAction(nameof(Index));
@@ -142,7 +145,7 @@ namespace Herfitk_Dashboard.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Edite(int id, [Bind("Id,Salary,HireDate,WorkHours")] StaffViewModel staffViewModel , Staff staff)
+        public async Task<IActionResult> Edite(int id, [Bind("Id,UserId,Salary,HireDate,WorkHours")] StaffViewModel staffViewModel , Staff staff)
         {
             if (id != staffViewModel.Id)
                 return NotFound();
@@ -159,9 +162,10 @@ namespace Herfitk_Dashboard.Controllers
                     {
                         herfyUpdate.Salary = staffViewModel.Salary;
                         herfyUpdate.HireDate = staffViewModel.HireDate;
-                        herfyUpdate.WorkHours = staffViewModel.WorkHours;
+                        herfyUpdate.WorkHours = herfyUpdate.WorkHours;
+                        herfyUpdate.UserId = herfyUpdate.UserId;
                     }
-
+                    //Must Be 1 Or 2 Admin Or Staff 
                     await repository.UpdateAsync(herfyUpdate, id);
                     return RedirectToAction(nameof(Index));
                 }
