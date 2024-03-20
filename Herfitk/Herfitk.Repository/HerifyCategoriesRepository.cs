@@ -21,7 +21,7 @@ namespace Herfitk.Repository
         public async Task<List<HerifyCategory>> GetAllHerfiyWithIncludeAsync()
         {
             return await context.HerifyCategories.Include(e => e.Herify)
-                    .Include(e => e.Category)
+                    .Include(e => e.Category).Include(e=>e.Herify.HerfiyUser)
                     .ToListAsync();
 
 

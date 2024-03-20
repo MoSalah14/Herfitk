@@ -12,6 +12,7 @@ public partial class Herfiy
     public string? History { get; set; }
 
     public string? Speciality { get; set; }
+    //public string? Image { get; set; }
 
     public int UserId { get; set; }
 
