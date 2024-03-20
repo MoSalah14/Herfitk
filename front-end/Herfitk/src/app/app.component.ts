@@ -41,7 +41,8 @@ import { DataSharingService } from './data-sharing.service';
     DisplayHerfiysComponent,
     HomePageComponent,
     PrivacypolicyComponent,
-    TermsofservicesComponent
+    TermsofservicesComponent,
+   
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

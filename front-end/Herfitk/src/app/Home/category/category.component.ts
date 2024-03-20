@@ -13,7 +13,8 @@ declare var $: any; // Declare jQuery
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent  {
+  
   constructor(
     private router: Router,
     private httpClient: HttpClient,
@@ -33,18 +34,6 @@ export class CategoryComponent implements OnInit {
         console.log(this.Category);
       });
   }
-
-  ngOnInit(): void {
-    $(document).ready(function () {
-      $('.owl-carousel').owlCarousel({
-        margin: 20,
-        loop: true,
-        // autoplay: true,
-        // autoplayTimeout: 5000,
-      });
-    });
-  }
-
   goToDisplay(id: number) {
     this.router.navigate(['/display', id]);
   }
