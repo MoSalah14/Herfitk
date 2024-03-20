@@ -4,9 +4,8 @@ import { CategoryComponent } from '../category/category.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactusComponent } from '../contactus/contactus.component';
 import { RouterLink, RouterModule } from '@angular/router';
-import { PrivacypolicyComponent } from '../privacypolicy/privacypolicy.component';
-import { TermsofservicesComponent } from '../termsofservices/termsofservices.component';
-
+import { TermsofservicesComponent } from '../../termsofservices/termsofservices.component';
+import { PrivacypolicyComponent } from '../../privacypolicy/privacypolicy.component';
 
 @Component({
   selector: 'app-home-page',
@@ -19,7 +18,7 @@ import { TermsofservicesComponent } from '../termsofservices/termsofservices.com
     PrivacypolicyComponent,
     TermsofservicesComponent,
     RouterModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',

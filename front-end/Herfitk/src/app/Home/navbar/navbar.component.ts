@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../../Account/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 

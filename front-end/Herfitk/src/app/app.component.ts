@@ -5,8 +5,8 @@ import {
   RouterModule,
   RouterOutlet,
 } from '@angular/router';
-import { LoginComponent } from './Home/login/login.component';
-import { RegisterComponent } from './Home/register/register.component';
+import { LoginComponent } from './Account/login/login.component';
+import { RegisterComponent } from './Account/register/register.component';
 import { AboutComponent } from './Home/about/about.component';
 import { ViewprofileComponent } from './Profile/viewprofile/viewprofile.component';
 import { ContactusComponent } from './Home/contactus/contactus.component';
@@ -17,9 +17,10 @@ import { FooterComponent } from './Home/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DisplayHerfiysComponent } from './Display_Herfiys/display-herfiys/display-herfiys.component';
 import { HomePageComponent } from './Home/home-page/home-page.component';
-import { PrivacypolicyComponent } from './Home/privacypolicy/privacypolicy.component';
-import { TermsofservicesComponent } from './Home/termsofservices/termsofservices.component';
 import { DataSharingService } from './data-sharing.service';
+import { RegsHerifyComponent } from './Account/regs-herify/regs-herify.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { TermsofservicesComponent } from './termsofservices/termsofservices.component';
 
 @Component({
   selector: 'app-root',
@@ -42,11 +43,11 @@ import { DataSharingService } from './data-sharing.service';
     HomePageComponent,
     PrivacypolicyComponent,
     TermsofservicesComponent,
-   
+    RegsHerifyComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers:[DataSharingService]
+  providers: [DataSharingService],
 })
 export class AppComponent implements AfterViewInit {
   title = 'Herfitk';
