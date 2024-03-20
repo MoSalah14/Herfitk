@@ -71,6 +71,9 @@
         >
           Password is required
         </div>
+        <label style="color: red" *ngIf="errorText" class="error-label">{{
+          errorText
+        }}</label>
         <div class="btn">
           <button class="button1" type="submit">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

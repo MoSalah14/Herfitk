@@ -14,7 +14,8 @@ import { TermsofservicesComponent } from './Home/termsofservices/termsofservices
 
 export const routes: Routes = [
   //  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', component: HomePageComponent },
+  { path: '', redirectTo: '/Home', pathMatch: 'full' },
+  { path: 'Home', component: HomePageComponent },
   { path: 'app', component: AppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacypolicyComponent },
   { path: 'termofservices', component: TermsofservicesComponent },
   { path: 'display/:id', component: DisplayHerfiysComponent },
+  { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},
   // {path: "category" , component:CategoryComponent},
   // {path: "contact" , component:ContactusComponent},

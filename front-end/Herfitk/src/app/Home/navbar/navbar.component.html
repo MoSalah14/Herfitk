@@ -1,23 +1,34 @@
-
-<header [ngClass]="{'sticky': isSticky}">
+<header [ngClass]="{ sticky: isSticky }">
   <!-- <a href="#" class="logo">Herfitk</a>  -->
   <!-- For Translat -->
   <!-- <div id="google_translate_element" ></div> -->
   <!-- For Dark Mode -->
 
   <h1 class="logo">
-    <img src="assets/Image/logo.png" alt="Herfitk Logo">
+    <img src="assets/Image/logo.png" alt="Herfitk Logo" />
     Herfitk
-</h1>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#About">About US</a></li>
-      <li><a href="#category">Category</a></li>
-      <li><a href="#contact">Contact US</a></li>
-      <!-- <li><a href="#">Login</a></li>  -->
-
-      <li><a href="#" (click)="openLoginForm()">Login</a></li>
-     </ul>
+  </h1>
+  <ul>
+    <li
+      *ngIf="
+        (isLoggedIn && UserRole === 'Admin') ||
+        (isLoggedIn && UserRole === 'Staff')
+      "
+    >
+      <a href="/dashboard">Dashboard</a>
+    </li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#About">About US</a></li>
+    <li><a href="#category">Category</a></li>
+    <li><a href="#contact">Contact US</a></li>
+    <li>
+      <a *ngIf="!isLoggedIn" (click)="openLoginForm()" href="/login">Login</a>
+      <a *ngIf="isLoggedIn" (click)="logout()" href="/">Logout</a>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <span style="color: #ffd700">Welcome {{ UserName }}</span>
+    </li>
+  </ul>
 </header>
 <!-- Login Popup -->
 <app-login *ngIf="isLoginPopupOpen" (close)="closeLoginForm()"></app-login>
