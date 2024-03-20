@@ -35,7 +35,6 @@ this.ID=myid.snapshot.params["id"];
    this.service.getherifybyid(this.ID).subscribe({
   next:(info)=>{
     this.profile=info;
-   // console.log(this.profile);
    },
    error:(err)=>{
     console.log(err);
@@ -44,8 +43,6 @@ this.ID=myid.snapshot.params["id"];
   this.service.getreviewherify().subscribe({
     next:(info)=>{
      this.alldata=info;
-    //  this.reviews = [...this.alldata.filter((a: { herifyId: number; }) => a.herifyId === this.ID)];
-    //  this.reviews = this.alldata.filter((a=>a.herifyId==this.ID ));
      this.reviews = [...this.alldata.filter((rev: any) => rev.herifyId == this.ID)]; 
 
      console.log(this.reviews);

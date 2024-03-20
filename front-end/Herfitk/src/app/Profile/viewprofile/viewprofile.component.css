@@ -86,12 +86,7 @@
   }
 
   .column {
-    /* float: left;
-    width: 30%;
-    height: auto;
-    margin-top: 10px;
-       */
-   
+  
     float: left;
     width: 300px;
     margin-top: 10px;
@@ -126,12 +121,6 @@
     width: 100px;
     border-radius: 50%;
   } 
-/* .reviews .card{
-    height: 270px;
-    padding-left: 10px;
-    margin-left: 10px;
-    text-align: left;   
-} */
 
 /* <!-- Add Review By Client --> */
 
@@ -146,11 +135,7 @@
   font-size: 50px;
   font-family: "Space Grotesk", sans-serif;
   text-align: left;
-  /* background-image: radial-gradient(farthest-side, #afc8f9 90%, #fff0), radial-gradient(farthest-side, #ddc1fb 90%, #fff0), radial-gradient(circle at 0 0, #d5e0fa, #e5d5f6) !important;
-  background-size: 7rem 7rem, 6rem 6rem, auto;
-  background-position: 30% 10%, 80% 90%, 0;
-  background-repeat: no-repeat;
-  backdrop-filter: blur(50px); */
+  
 }
 
 .wrapper {
@@ -168,13 +153,6 @@
   font-size: 20px;
   font-family: "Space Grotesk", sans-serif;
   color: white;
-  /* align-items: center;
-
-  background-image: radial-gradient(farthest-side, #d2d2e0 90%, rgba(92, 81, 81, 0)), radial-gradient(farthest-side, #ddc1fb 90%, #fff0), radial-gradient(circle at 0 0, #d5e0fa, #e5d5f6) !important;
-  background-size: 7rem 7rem, 6rem 6rem, auto;
-  background-position: 30% 10%, 80% 90%, 0;
-  background-repeat: no-repeat;
-  backdrop-filter: blur(50px); */
 }
 .wrapper .title {
   font-weight: bold;
@@ -237,17 +215,8 @@ textarea::placeholder {
   color: #aaa;
 }
 textarea:focus {
-  outline-color: #d1b973;
-}
 
-/* .submit-btn {
-  padding: 2px 3px;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3), -3px -3px 8px rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: #008cff;
-  transition: all 0.2s;
+  color: black;
+  background-color: #ffcc33;
+  border-radius:5px ;
 }
-.submit-btn:active {
-  transform: translate(2px, 2px);
-} */
