@@ -103,7 +103,7 @@ header ul li a:hover {
 }
 
 header.sticky ul li a {
-  color: #090909;
+  color:#fff;
 }
 
 header.sticky ul li a:hover {

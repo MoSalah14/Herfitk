@@ -9,6 +9,8 @@ import {
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
 
 const passwordMatchValidator = (control: FormGroup) => {
   const password = control.get('Password');
@@ -24,12 +26,15 @@ const passwordMatchValidator = (control: FormGroup) => {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,FormsModule],
   providers: [RegisterService],
 })
 export class RegisterComponent {
+  selectedRole: string = ''; // Define clientVerification property
+
+  submitted: boolean = false; // Define submitted property only once
   registrationForm: FormGroup;
-  submitted = false;
+  // submitted = false;
   file: File | undefined;
 
   constructor(

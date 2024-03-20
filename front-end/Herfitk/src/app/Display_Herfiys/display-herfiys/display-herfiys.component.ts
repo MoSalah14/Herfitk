@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataSharingService } from '../../data-sharing.service';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule,Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+// import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-display-herfiys',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './display-herfiys.component.html',
   styleUrl: './display-herfiys.component.css',
 })
@@ -16,7 +17,7 @@ export class DisplayHerfiysComponent implements OnInit {
   herfiys: any[] = [];
   apiUrl = environment.apiUrl;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient,private router: Router,) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -35,4 +36,9 @@ export class DisplayHerfiysComponent implements OnInit {
         // You can now use this.herfiys in your template or component logic
       });
   }
+
+  goToDisplay(id: number) {
+    this.router.navigate(['/profile', id]);
+  }
+
 }
