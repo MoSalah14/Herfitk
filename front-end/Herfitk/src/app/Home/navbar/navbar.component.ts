@@ -18,7 +18,6 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 })
 export class NavbarComponent implements OnInit {
   isLoginPopupOpen: boolean = false;
-
   userEmail: string | undefined;
   UserName: string | undefined;
   UserRole: string | undefined;
@@ -29,29 +28,32 @@ export class NavbarComponent implements OnInit {
     private jwtHelper: JwtHelperService // Inject JwtHelperService
   ) {}
   ngOnInit(): void {
-    const authToken = this.cookieService.get('authToken');
+    this.checkAuthStatus();
+  }
 
+  checkAuthStatus(): void {
+    const authToken = this.cookieService.get('authToken');
     if (authToken) {
       const decodedToken = this.jwtHelper.decodeToken(authToken);
-      console.log(decodedToken);
-      // Assuming the user's name is stored in the 'name' claim of the token
       this.userEmail =
         decodedToken[
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
         ];
-      console.log(this.userEmail);
       this.UserName =
         decodedToken[
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
         ];
-      console.log(this.UserName);
-
       this.UserRole =
         decodedToken[
           'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
         ];
-      console.log(this.UserRole);
+      this.isLoggedIn = true;
     }
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
+    this.cookieService.delete('authToken');
   }
 
   openLoginForm(): void {

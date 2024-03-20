@@ -33,6 +33,7 @@ export class LoginComponent {
   // Declare the submitted property
   submitted: boolean = false;
   showEmailRequiredMessage: boolean = false;
+  errorText: string | null = null;
 
   constructor(
     private router: Router,
@@ -78,22 +79,25 @@ export class LoginComponent {
 
       this.loginService.makeLoginWithToken(email, password).subscribe({
         next: (response: any) => {
-          console.log(response);
+          if (response && response.token) {
+            console.log(response);
 
-          this.cookieService.set('authToken', response.token);
+            this.cookieService.set('authToken', response.token, 60 / (24 * 60)); // 60 minutes converted to days
 
-          this.router.navigate(['app']); // Navigate to the desired route on success
+            this.router.navigate(['Home']);
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          } else {
+            console.error('Invalid response:', response);
+            this.errorText = 'Email or Password Incorrect.';
+          }
         },
         error: (error) => {
-          // Handle login error
           console.error('Login error:', error);
-          // You can display an error message to the user or handle it in any way you prefer
-          alert('Login failed. Please try again.'); // Example alert for login failure
         },
       });
     }
-
-    // Set submitted to true after attempting login
     this.submitted = true;
   }
 
