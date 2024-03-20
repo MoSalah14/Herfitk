@@ -1,4 +1,4 @@
-﻿@model Herfitk.API.DTO.HerfiyReturnDto
+﻿@model Herfitk.Core.Models.Data.Herfiy
 
 @{
     ViewData["Title"] = "IndexId";
@@ -13,19 +13,19 @@
             <dt class="col-sm-2">Category Name</dt>
             <dd class="col-sm-10">@Html.DisplayFor(model => model.Id)</dd>
             <dt class="col-sm-2">Name</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Zone)</dd>
             <dt class="col-sm-2">Phone</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Phone)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.History)</dd>
             <dt class="col-sm-2">Speciality</dt>
             <dd class="col-sm-10">@Html.DisplayFor(model => model.Speciality)</dd>
-            <dt class="col-sm-2">Image</dt>
-            <dd class="col-sm-10">
-            <dd class="col-sm-10">
+@*             <dt class="col-sm-2">Image</dt>
+            <dd class="col-sm-10"> *@
+          @*   <dd class="col-sm-10">
                     @if (Model.PersonalImage != null && Model.PersonalImage.Length > 0)
                     {
                     <img src="@Model.PersonalImage" alt="Image" style="max-width: 100px; max-height: 100px;" />
                     }
-            </dd>
+            </dd> *@
         </dl>
     </div>
 <div>

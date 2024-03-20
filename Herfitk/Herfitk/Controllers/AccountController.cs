@@ -39,17 +39,17 @@ namespace Herfitk.API.Controllers
         {
             var user = await userManager.FindByEmailAsync(login.Email);
             if (user is null)
-                return Unauthorized(new ApiResponse(401));
+                return Unauthorized(new ApiResponse(401, "Invalid email or password."));
 
 
             var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
             if (result.Succeeded is false)
-                return Unauthorized();
+                return Unauthorized(new ApiResponse(401, "Invalid email or password."));
 
             if (result.Succeeded)
             {
-                var TokenString = authService.GenerateTokinString(login);
+                var TokenString = await authService.GenerateTokinString(user, userManager);
                 return Ok(new UserDto()
                 {
                     DisplayName = user.DisplayName,
@@ -75,6 +75,7 @@ namespace Herfitk.API.Controllers
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
                 NationalId = model.NationalId,
+                UserRoleID = model.RoleId
             };
 
             // Handle National ID Image Upload
@@ -136,7 +137,7 @@ namespace Herfitk.API.Controllers
             var result = await userManager.CreateAsync(user, user.PasswordHash);
             if (!result.Succeeded)
                 return BadRequest(new ApiResponse(400));
-            
+
 
             return Ok(result);
         }
@@ -145,20 +146,14 @@ namespace Herfitk.API.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<AppUser>> GetCurrentUser()
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             if (!ModelState.IsValid) return BadRequest();
-
-            //if (await )
-            //{
-
-            //}
-
             var Email = User.FindFirstValue(ClaimTypes.Email);
 
             var user = await userManager.FindByEmailAsync(Email);
 
-            return Ok(new AppUser()
+            return Ok(new UserDto()
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
