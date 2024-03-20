@@ -196,7 +196,6 @@
 .rate-box input {
   display: none;
   font-weight: bold;
-  size: 100px;
 }
 .rate-box input:hover ~ .star:before {
   color: rgba(255, 204, 51, 0.5);
@@ -212,7 +211,7 @@
   content: "★";
   display: inline-block;
   font-family: "Potta One", cursive;
-  font-size: 0.6rem;
+  font-size: 30px;
   cursor: pointer;
   color: #0000;
   text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
@@ -241,7 +240,7 @@ textarea:focus {
   outline-color: #d1b973;
 }
 
-.submit-btn {
+/* .submit-btn {
   padding: 2px 3px;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3), -3px -3px 8px rgba(255, 255, 255, 0.8);
   border-radius: 10px;
@@ -251,4 +250,4 @@ textarea:focus {
 }
 .submit-btn:active {
   transform: translate(2px, 2px);
-}
+} */
