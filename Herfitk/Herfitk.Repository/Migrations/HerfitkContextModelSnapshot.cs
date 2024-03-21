@@ -230,6 +230,9 @@ namespace Herfitk.Repository.Migrations
                     b.Property<string>("History")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Speciality")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");

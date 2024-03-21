@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Herfitk.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class startScaffolding : Migration
+    public partial class EditRoles : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -215,6 +215,7 @@ namespace Herfitk.Repository.Migrations
                     Zone = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     History = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Speciality = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     User_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -358,11 +359,10 @@ namespace Herfitk.Repository.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_UserRoleID",
-                table: "AspNetUsers",
-                column: "UserRoleID",
-                unique: true,
-                filter: "[UserRoleID] IS NOT NULL");
+                 name: "IX_AspNetUsers_UserRoleID",
+                 table: "AspNetUsers",
+                 column: "UserRoleID",
+                 filter: "[UserRoleID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
