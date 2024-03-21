@@ -72,6 +72,30 @@
         >
           History is required.
         </div>
+        <label class="form-label">Category</label>
+        <div class="field">
+          <select
+            formControlName="CategoryName"
+            class="input-field"
+            required
+            style="background-color: #171717; color: white"
+          >
+            <option value="" disabled>Select Category</option>
+            <option *ngFor="let category of CategoryName" [value]="category.id">
+              {{ category.categoryName }}
+            </option>
+          </select>
+        </div>
+        <div
+          style="color: red"
+          *ngIf="
+            formControls['CategoryName'].invalid &&
+            formControls['CategoryName'].touched
+          "
+          class="validation-error"
+        >
+          Category is required.
+        </div>
         <label class="form-label">Specialist</label>
         <div class="field">
           <svg
@@ -87,9 +111,9 @@
             ></path>
           </svg>
           <input
-            formControlName="Specialist"
+            formControlName="Speciality"
             type="text"
-            name="Specialist"
+            name="Speciality"
             class="input-field"
             #inputEmail
             required
@@ -100,8 +124,8 @@
         <div
           style="color: red"
           *ngIf="
-            formControls['Specialist'].invalid &&
-            formControls['Specialist'].touched
+            formControls['Speciality'].invalid &&
+            formControls['Speciality'].touched
           "
           class="validation-error"
         >
@@ -115,8 +139,8 @@
           <input
             class="m-2 text-light"
             type="file"
-            id="file"
-            formControlName="file"
+            id="Image"
+            formControlName="Image"
             (change)="onChange($event)"
           />
         </div>

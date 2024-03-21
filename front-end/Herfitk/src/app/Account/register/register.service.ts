@@ -20,7 +20,23 @@ export class RegisterService {
           error.error.errors &&
           error.error.errors.length > 0
         ) {
-          errorMessage = error.error.errors[0];
+          errorMessage = error.error.errors;
+        }
+        return throwError(errorMessage);
+      })
+    );
+  }
+
+  CreateClient(formData: FormData) {
+    return this.http.post(`${this.BaseUrl}Clients/Add`, formData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'An error occurred during registration.';
+        if (
+          error.error &&
+          error.error.errors &&
+          error.error.errors.length > 0
+        ) {
+          errorMessage = error.error.errors;
         }
         return throwError(errorMessage);
       })

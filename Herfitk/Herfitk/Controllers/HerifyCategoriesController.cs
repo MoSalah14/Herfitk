@@ -23,7 +23,7 @@ namespace Herfitk.API.Controllers
         public HerifyCategoriesController(IHerifyCategoriesRepository context, IMapper mapper)
         {
             this.context = context;
-            this.mapper = mapper; 
+            this.mapper = mapper;
         }
 
         // GET: api/HerifyCategories
@@ -32,9 +32,7 @@ namespace Herfitk.API.Controllers
         {
             var GetAll = await context.GetAllHerfiyWithIncludeAsync();
 
-            var HerfiyInCategory = GetAll.Where(e=>e.CategoryId == catid).ToList();
-
-            //var GetAllMapped = GetAll.Select(item => mapper.Map<HerifyCategory, HerifyDto>(item));
+            var HerfiyInCategory = GetAll.Where(e => e.CategoryId == catid).ToList();
             var herifyDtos = mapper.Map<List<HerifyCategory>, List<HerifyDto>>(HerfiyInCategory);
 
             return Ok(herifyDtos);
@@ -74,18 +72,24 @@ namespace Herfitk.API.Controllers
 
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateHerifyCategory(HerifyCategory herifyCategory)
+        public async Task<IActionResult> CreateHerifyCategory(HerifyCategoryDto herifyCategory)
         {
             try
             {
-                await context.AddAsync(herifyCategory);
+                var getHerifyAndCategoryID = new HerifyCategory
+                {
+                    CategoryId = herifyCategory.CategoryID,
+                    HerifyId = herifyCategory.HerifyID
+                };
+
+                await context.AddAsync(getHerifyAndCategoryID);
+                return Ok();
+
             }
             catch (DbUpdateException)
             {
                 throw;
             }
-
-            return CreatedAtAction("GetHerifyCategory", new { id = herifyCategory.CategoryId }, herifyCategory);
         }
 
         // DELETE: api/HerifyCategories/5

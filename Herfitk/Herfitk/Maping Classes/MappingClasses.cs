@@ -17,7 +17,7 @@ namespace Herfitk.API.Maping_Classes
 
 
             CreateMap<HerifyCategory, HerifyDto>()
-               .ForMember(e => e.Image, e => e.MapFrom(e => e.Herify.HerfiyUser.PersonalImage))
+               .ForMember(e => e.DisplayImage, e => e.MapFrom(e => e.Herify.HerfiyUser.PersonalImage))
                .ForMember(e => e.Zone, e => e.MapFrom(e => e.Herify.Zone))
                .ForMember(e => e.History, e => e.MapFrom(e => e.Herify.History))
                .ForMember(e => e.Speciality, e => e.MapFrom(e => e.Herify.Speciality));

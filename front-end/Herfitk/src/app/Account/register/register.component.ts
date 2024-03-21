@@ -11,6 +11,7 @@ import { RegisterService } from './register.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AutofocusDirective } from './autofocus.directive';
+import { CookieService } from 'ngx-cookie-service';
 
 const passwordMatchValidator = (control: FormGroup) => {
   const password = control.get('Password');
@@ -41,7 +42,8 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private cookieService: CookieService
   ) {
     this.registrationForm = this.createRegistrationForm();
   }
@@ -82,7 +84,9 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required, passwordMatchValidator]],
     });
   }
-
+  onRoleChange(event: any) {
+    this.selectedRole = event.target.value;
+  }
   onSubmit() {
     this.submitted = true;
     const password = this.registrationForm.get('Password')?.value;
@@ -109,19 +113,55 @@ export class RegisterComponent {
       // Append file data if available
       formData.append('personalImage', this.file);
     }
-    this.saveUserInApi(formData);
-  }
 
-  saveUserInApi(formData: FormData) {
+    if (this.selectedRole === 'verified') {
+      this.registerService.CreateClient(formData).subscribe(
+        (response: any) => {
+          if (response && response.token) {
+            const expiryMinutes = 60;
+            this.cookieService.set(
+              'authToken',
+              response.token,
+              expiryMinutes * 60
+            );
+            console.log('Registration successful!', response);
+            alert('Registration successful!');
+            this.router.navigate(['/Home']);
+          } else {
+            console.error('Token not found in response.');
+            alert('Token not found in response.');
+          }
+        },
+        (error) => {
+          console.error('Registration error:', error);
+          alert('Registration error:' + error);
+        }
+      );
+    } else if (this.selectedRole === 'unverified') {
+      this.saveUserInApi(formData, '/regherify');
+    }
+  }
+  saveUserInApi(formData: FormData, endpoint: string) {
     this.registerService.CreateRegistration(formData).subscribe(
-      (response) => {
-        console.log('Registration successful!', response);
-        alert('Registration successful!');
-        this.router.navigate(['/login']);
+      (response: any) => {
+        if (response && response.token) {
+          const expiryMinutes = 60;
+          this.cookieService.set(
+            'authToken',
+            response.token,
+            expiryMinutes * 60
+          );
+          console.log('Registration successful!', response);
+          alert('Registration successful!');
+          this.router.navigate([endpoint]);
+        } else {
+          console.error('Token not found in response.');
+          alert('Token not found in response.');
+        }
       },
       (error) => {
         console.error('Registration error:', error);
-        alert(error); // Display the error message received from the API
+        alert('Registration error:' + error);
       }
     );
   }

@@ -39,5 +39,12 @@ namespace Herfitk.Repository
 
             return getData;
         }
+
+        public async Task<int?> GetLastHerifyIdAsync()
+        {
+            var lastHerfiy = await context.Herfiys.OrderByDescending(e => e.Id).FirstOrDefaultAsync();
+            return lastHerfiy?.Id;
+        }
+
     }
 }

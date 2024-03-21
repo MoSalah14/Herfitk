@@ -66,11 +66,42 @@ namespace Herfitk.API.Controllers
         {
             if (ModelState.IsValid)
             {
+                var HerifyUser = new Herfiy
+                {
+                    History = herify.History,
+                    Speciality = herify.Speciality,
+                    Zone = herify.Zone,
+                    UserId = herify.HerifyUserId
+                };
 
-                var mappedHerify = mapper.Map<HerifyDto, Herfiy>(herify);
-                var entity = await repository.AddAsync(mappedHerify);
-                //string url = Url.Action(nameof(GetById), new { id = herify.Id });
-                //return Created(url, new { herify, Message = "Added" });
+                if (herify.Image != null && herify.Image.Length > 0)
+                {
+                    var currentDirectory = Directory.GetCurrentDirectory();
+                    var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
+                    var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "HerifyImage");
+                    var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "HerifyImage");
+
+                    if (!Directory.Exists(wwwrootUploadsDirectory))
+                        Directory.CreateDirectory(wwwrootUploadsDirectory);
+
+                    if (!Directory.Exists(assetsUploadsDirectory))
+                        Directory.CreateDirectory(assetsUploadsDirectory);
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + herify.Image.FileName;
+                    var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
+                    var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
+
+                    using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
+                    using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
+                    {
+                        await herify.Image.CopyToAsync(wwwrootFileStream);
+                        await herify.Image.CopyToAsync(assetsFileStream);
+                    }
+
+                    HerifyUser.Image = "/HerifyImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
+                }
+
+                var entity = await repository.AddAsync(HerifyUser);
                 return Ok(entity);
             }
             else
@@ -95,7 +126,11 @@ namespace Herfitk.API.Controllers
             return BadRequest(ModelState);
         }
 
-
-
+        [HttpGet("lastId")]
+        public async Task<IActionResult> GetLastHerify()
+        {
+            var getLastHerifyID = await repository.GetLastHerifyIdAsync();
+            return Ok(getLastHerifyID);
+        }
     }
 }

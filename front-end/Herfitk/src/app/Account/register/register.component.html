@@ -171,10 +171,10 @@
           id="role"
           name="role"
           class="input-field"
-          [(ngModel)]="selectedRole"
           required
+          (change)="onRoleChange($event)"
         >
-          <option value="" disabled selected>Select Role</option>
+          <option value="" disabled>Select Role</option>
           <option value="verified">Client</option>
           <option value="unverified">Herify</option>
         </select>
@@ -182,7 +182,6 @@
       <div *ngIf="!selectedRole && submitted" style="color: red" id="not">
         You Should Choose your Role.
       </div>
-
       <div class="btn">
         <button class="button3" type="submit">Sign Up</button>
       </div>
