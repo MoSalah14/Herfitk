@@ -33,7 +33,10 @@
       <span>{{ item.name }}</span>
       <p class="job">{{ item.speciality }}</p>
       <p class="job">{{ item.zone }}</p>
-      <button class="btn card_btn">View Profile</button>
+      <!-- <button class="btn card_btn">View Profile</button> -->     
+      <button class="contactButton" (click)="goToDisplay(item.id)"> View profile</button>
+      
+     
     </div>
   }
 </div>

@@ -10,6 +10,7 @@ using Herfitk.Core.Repository;
 using AutoMapper;
 using Herfitk_Dashboard.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NuGet.Protocol.Core.Types;
 
 namespace Herfitk_Dashboard.Controllers
 {
@@ -26,8 +27,20 @@ namespace Herfitk_Dashboard.Controllers
         }
 
         // GET: Categ
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            var category = await context.GetAllAsync();
+            // Filter herifys based on the searchString
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                category = category.Where(herify => herify.CategoryName.Contains(searchString)).ToList();
+
+            }
+            if (int.TryParse(searchString, out int id))
+            {
+                // Redirect to IndexId action if the searchString is a valid ID
+                return RedirectToAction(nameof(Details), new { id });
+            }
             return View(await context.GetAllAsync());
         }
 
