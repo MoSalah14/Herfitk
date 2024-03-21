@@ -4,14 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center">Herify</h1>
 
+<h1 class="text-center">Herify</h1>
 <p>
-    <a asp-action="Add">Create New Herify</a>
+    <a asp-action="Add" class="btn btn-primary">Create New Herify</a>
 </p>
 <form asp-controller="Herify" asp-action="Index" method="get">
     <p>
-        Title: <input type="text" name="SearchString" />
+        Search: <input type="text" name="SearchString" />
         <input type="submit" value="Search" />
       @*   <input type="submit" formaction="@Url.Action("Index", "Herify")" value="Reset" />
         <input type="submit" formaction="@Url.Action("IndexId", "Herify")" value="Get Herfy By Id" /> *@
@@ -95,13 +95,13 @@
                 </td>
     *@
             <td>
-                <a asp-action="Edite" asp-route-id="@item.Id">Edite</a> |
+                    <a asp-action="Edite" asp-route-id="@item.Id" class="btn btn-primary">Edite</a> |
             </td>
             <td>
-                <a asp-action="IndexId" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="IndexId" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
             </td>
             <td>
-                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a> |
             </td>
         </tr>
 }
