@@ -137,9 +137,18 @@ namespace Herfitk.API.Controllers
             var result = await userManager.CreateAsync(user, user.PasswordHash);
             if (!result.Succeeded)
                 return BadRequest(new ApiResponse(400));
+            if (result.Succeeded)
+            {
+                var TokenString = await authService.GenerateTokinString(user, userManager);
+                return Ok(new UserDto()
+                {
+                    DisplayName = user.DisplayName,
+                    Email = user.Email,
+                    Token = TokenString
+                });
+            }
 
-
-            return Ok(result);
+            return BadRequest();
         }
 
 

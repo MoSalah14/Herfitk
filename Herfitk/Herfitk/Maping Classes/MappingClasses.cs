@@ -17,7 +17,7 @@ namespace Herfitk.API.Maping_Classes
 
 
             CreateMap<HerifyCategory, HerifyDto>()
-               .ForMember(e=>e.Image, e => e.MapFrom(e => e.Herify.HerfiyUser.PersonalImage))
+               .ForMember(e => e.Image, e => e.MapFrom(e => e.Herify.HerfiyUser.PersonalImage))
                .ForMember(e => e.Zone, e => e.MapFrom(e => e.Herify.Zone))
                .ForMember(e => e.History, e => e.MapFrom(e => e.Herify.History))
                .ForMember(e => e.Speciality, e => e.MapFrom(e => e.Herify.Speciality));
@@ -31,16 +31,12 @@ namespace Herfitk.API.Maping_Classes
                 .ForMember(s => s.WorkHours, s => s.MapFrom(s => s.StaffUser.UserStaff.WorkHours))
                 .ForMember(s => s.UserRole, s => s.MapFrom(s => s.StaffUser.Role));
 
-            //CreateMap<Staff, StaffDto>().ReverseMap();
 
-            //CreateMap<StaffDto, Staff>();
-                
 
-            //CreateMap<Herfiy, HerifyDto>()
-            //  .ForMember(e => e.Image, e => e.MapFrom(e => e.HerfiyUser.PersonalImage))
-            //  .ForMember(e => e.Zone, e => e.MapFrom(e => e.Zone))
-            //  .ForMember(e => e.History, e => e.MapFrom(e => e.History))
-            //  .ForMember(e => e.Speciality, e => e.MapFrom(e => e.Speciality));
+            CreateMap<Client, ClientDto>().ReverseMap();
+
+            //CreateMap<ClientDto, Client>()
+            
 
         }
     }

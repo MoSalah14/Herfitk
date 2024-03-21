@@ -1,7 +1,12 @@
-<br><br>
+<br /><br />
 <div class="card">
   <div class="card2">
-    <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <form
+      class="form"
+      appAutofocus
+      [formGroup]="registrationForm"
+      (ngSubmit)="onSubmit()"
+    >
       <p id="heading">Registration</p>
       <label class="form-label">Name</label>
       <div class="field">
@@ -14,6 +19,7 @@
           placeholder="Enter Your Name"
           required
           autocomplete="on"
+          appAutofocus
         />
       </div>
       <div
@@ -158,25 +164,25 @@
           Please select a photo.
         </div>
       </div>
-     
+
       <label class="form-label">Register AS</label>
       <div class="field">
-        <select 
-    id="role" 
-    name="role" 
-    class="input-field"
-    [(ngModel)]="selectedRole"
-    required
-  >
-    <option value="" disabled selected>Select Role</option>
-    <option value="verified">Client</option>
-    <option value="unverified">Herify</option>
-  </select>
+        <select
+          id="role"
+          name="role"
+          class="input-field"
+          [(ngModel)]="selectedRole"
+          required
+        >
+          <option value="" disabled selected>Select Role</option>
+          <option value="verified">Client</option>
+          <option value="unverified">Herify</option>
+        </select>
       </div>
       <div *ngIf="!selectedRole && submitted" style="color: red" id="not">
         You Should Choose your Role.
       </div>
-    
+
       <div class="btn">
         <button class="button3" type="submit">Sign Up</button>
       </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { AutofocusDirective } from './autofocus.directive';
 
 const passwordMatchValidator = (control: FormGroup) => {
   const password = control.get('Password');
@@ -26,10 +26,11 @@ const passwordMatchValidator = (control: FormGroup) => {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, AutofocusDirective],
   providers: [RegisterService],
 })
 export class RegisterComponent {
+  @ViewChild('firstNameInput') firstNameInput!: ElementRef;
   selectedRole: string = ''; // Define clientVerification property
 
   submitted: boolean = false; // Define submitted property only once
