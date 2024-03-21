@@ -17,6 +17,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
 
 builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
+builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
 builder.Services.AddDbContext<HerfitkContext>(Use =>
 Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));

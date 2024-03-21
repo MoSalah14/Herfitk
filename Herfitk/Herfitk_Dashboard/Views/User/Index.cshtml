@@ -39,9 +39,6 @@
                 @Html.DisplayNameFor(model => model.Role)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
@@ -66,16 +63,27 @@
                     @Html.DisplayFor(modelItem => item.NationalId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PersonalImage)
+                    @if (!string.IsNullOrEmpty(item.PersonalImage))
+                    {
+                        <img src="@item.PersonalImage" alt="Personal Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>No image available</span>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NationalIdImage)
+                    @if (!string.IsNullOrEmpty(item.NationalIdImage))
+                    {
+                        <img src="@item.NationalIdImage" alt="National ID Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>No image available</span>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Role.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
+                    @Html.DisplayFor(modelItem => item.Role.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
