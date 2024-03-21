@@ -10,7 +10,7 @@ namespace Herfitk_Dashboard.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IGenericRepository<AppUser> repository;
+        public readonly IGenericRepository<AppUser> repository;
         private readonly IMapper mapper;
         public UserController(IGenericRepository<AppUser> repository , IMapper mapper)
         {
@@ -19,7 +19,6 @@ namespace Herfitk_Dashboard.Controllers
         }
         public async Task<IActionResult> Index(string searchString)
         {
-
             try
             {
                 var users = await repository.GetAllAsync();
@@ -42,7 +41,6 @@ namespace Herfitk_Dashboard.Controllers
                 }
                 //Continu Later ****
                 // var mappedData = mapper.Map<IEnumerable<AppUser>, List<RegisterDto>>(users);
-
                 return View(users);
             }
             catch (Exception)
@@ -72,7 +70,7 @@ namespace Herfitk_Dashboard.Controllers
         {
             try
             {
-                return View(new AppUser());
+                return View(new RegisterViewModel());
             }
             catch
             {
@@ -81,25 +79,28 @@ namespace Herfitk_Dashboard.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-       //
-        public async Task<IActionResult> Add( AppUser appUser,[ Bind("DisplayName,Address,Email,PhoneNumber,Password,NationalId,RoleId,PersonalImage,NationalIdImage")] RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Add(RegisterViewModel appUser)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (registerViewModel != null)
+
+                    if (appUser != null)
                     {
                         var newUser = new AppUser
                         {
-                            DisplayName = registerViewModel.DisplayName,
-                            Address = registerViewModel.Address,
-                            Email = registerViewModel.Email,
-                            PhoneNumber = registerViewModel.PhoneNumber,
-                            NationalId = registerViewModel.NationalId,
-                            //RoleId = registerViewModel.RoleId,
+                            DisplayName = appUser.DisplayName,
+                            Address = appUser.Address,
+                            Email = appUser.Email,
+                            UserName = appUser.Email,
+                            PhoneNumber = appUser.PhoneNumber,
+                            NationalId = appUser.NationalId,
+                            UserRoleID = appUser.RoleId,
                             //PersonalImage = registerViewModel.PersonalImage,
-                            //PersonalImage = registerViewModel.NationalIdImage
+                            //NationalIdImage = registerViewModel.NationalIdImage,
+                            PasswordHash = appUser.Password
+                            
                         };
 
                         await repository.AddAsync(newUser);
@@ -136,33 +137,31 @@ namespace Herfitk_Dashboard.Controllers
                 return Content("Error With Data");
             }
         }
-
         [HttpPost]
-        public async Task<IActionResult> Edite(int id, AppUser appUser , [Bind("DisplayName,Address,Email,PhoneNumber,Password,NationalId,RoleId,PersonalImage,NationalIdImage")] RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Edite(int id,RegisterViewModel appUser)
         {
-            //if (id != registerViewModel.Id)
-                return NotFound();
+           
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //var registerViewModel = await repository.GetByIdAsync(id);
-                    if (registerViewModel == null)
+                    var newRegister = await repository.GetByIdAsync(id);
+                    if (appUser == null)
                     {
                         return NotFound();
                     }
-                    else
+                    else 
                     {
-                        registerViewModel.DisplayName = registerViewModel.DisplayName;
-                        registerViewModel.Address = registerViewModel.Address;
-                        registerViewModel.Email = registerViewModel.Email;
-                        registerViewModel.PhoneNumber = registerViewModel.PhoneNumber;
-                        registerViewModel.NationalId = registerViewModel.NationalId;
-                        registerViewModel.PersonalImage = registerViewModel.PersonalImage;
-                        registerViewModel.NationalIdImage = registerViewModel.NationalIdImage;
+                        newRegister.DisplayName = appUser.DisplayName;
+                        newRegister.Address = appUser.Address;
+                        newRegister.Email = appUser.Email;
+                        newRegister.PhoneNumber = appUser.PhoneNumber;
+                        newRegister.NationalId = appUser.NationalId;
+                        //newRegister.PersonalImage = appUser.PersonalImage;
+                        //newRegister.NationalIdImage = appUser.NationalIdImage;
                     }
 
-                    //await repository.UpdateAsync(registerViewModel, id);
+                    await repository.UpdateAsync(newRegister, id);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception)

@@ -1,4 +1,5 @@
 ﻿using Herfitk.Core.Models.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Herfitk.Core.Models
         public virtual Staff? UserStaff { get; set; }
         public virtual Client? UserClient { get; set; }
 
-        public virtual IdentityRole<int> Role { get; set; }
+        public virtual IdentityRole<int>? Role { get; set; }
 
 
 
