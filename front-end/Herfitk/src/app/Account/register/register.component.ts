@@ -144,7 +144,7 @@ export class RegisterComponent {
             this.cookieService.set(
               'authToken',
               response.token,
-              expiryMinutes * 60
+              expiryMinutes / (24 * 60)
             );
             const token = this.cookieService.get('authToken');
             if (token) {
