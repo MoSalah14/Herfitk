@@ -7,9 +7,6 @@
 
 }
 
-.navbar {
-    margin-bottom: 20px;
-}
 
 .dashboard-content {
     flex: 1;
@@ -33,3 +30,19 @@ body {
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+
+.sidebar.sidebar-open {
+    transform: translateX(-100%);
+}
+
+/* CSS for navbar transition */
+.navbar {
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+    .navbar.navbar-open {
+        transform: translateX(250px); /* Adjust as necessary */
+
+    }
