@@ -13,7 +13,8 @@ namespace Herfitk.API.Maping_Classes
             CreateMap<Herfiy, HerfiyReturnDto>()
                 .ForMember(e => e.Name, e => e.MapFrom(e => e.HerfiyUser.DisplayName))
                 .ForMember(e => e.Phone, e => e.MapFrom(e => e.HerfiyUser.PhoneNumber))
-                .ForMember(e => e.PersonalImage, e => e.MapFrom(e => e.HerfiyUser.PersonalImage));
+                .ForMember(e => e.PersonalImage, e => e.MapFrom(e => e.HerfiyUser.PersonalImage))
+                .ForMember(e => e.ImageWork, e => e.MapFrom(e => e.Image));
 
 
             CreateMap<HerifyCategory, HerifyDto>()
