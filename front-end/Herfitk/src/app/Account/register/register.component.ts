@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AutofocusDirective } from './autofocus.directive';
 import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from 'jwt-decode';
+import { EMPTY, concatMap } from 'rxjs';
 
 const passwordMatchValidator = (control: FormGroup) => {
   const password = control.get('Password');
@@ -38,6 +40,8 @@ export class RegisterComponent {
   registrationForm: FormGroup;
   // submitted = false;
   file: File | undefined;
+  jwtHelper: any;
+  UserID: any;
 
   constructor(
     private router: Router,
@@ -112,11 +116,29 @@ export class RegisterComponent {
     if (this.file) {
       // Append file data if available
       formData.append('personalImage', this.file);
+      console.log('Selected Role:', this.selectedRole);
+    }
+    if (this.selectedRole === 'client') this.saveUserInApi(formData, '/Home');
+    else if (this.selectedRole === 'herify')
+      this.saveUserInApi(formData, '/regherify');
+  }
+
+  saveUserInApi(formData: FormData, endpoint: string) {
+    let RoleId: number = 0;
+
+    if (this.selectedRole === 'client') {
+      RoleId = 3; // Assuming 3 represents the client role ID
+    } else if (this.selectedRole === 'herify') {
+      RoleId = 4; // Assuming 4 represents the Herify role ID
     }
 
-    if (this.selectedRole === 'verified') {
-      this.registerService.CreateClient(formData).subscribe(
-        (response: any) => {
+    // Add userRoleID to formData
+    formData.append('RoleId', RoleId.toString());
+
+    this.registerService
+      .CreateRegistration(formData)
+      .pipe(
+        concatMap((response: any) => {
           if (response && response.token) {
             const expiryMinutes = 60;
             this.cookieService.set(
@@ -124,46 +146,36 @@ export class RegisterComponent {
               response.token,
               expiryMinutes * 60
             );
-            console.log('Registration successful!', response);
-            alert('Registration successful!');
-            this.router.navigate(['/Home']);
-          } else {
-            console.error('Token not found in response.');
-            alert('Token not found in response.');
+            const token = this.cookieService.get('authToken');
+            if (token) {
+              const decodedToken: any = jwtDecode(token);
+              this.UserID =
+                decodedToken[
+                  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+                ];
+            }
+            console.log(this.UserID);
+            const clientDto: any = {
+              UserId: this.UserID,
+            };
+            // Return an observable for CreateClient
+            return this.registerService.CreateClient(clientDto);
           }
+          // If there is no token or an issue with the response, return an empty observable
+          return EMPTY;
+        })
+      )
+      .subscribe(
+        (clientResponse: any) => {
+          console.log('Registration successful!', clientResponse);
+          alert('Registration as Client successful!');
+          this.router.navigate([endpoint]);
         },
-        (error) => {
-          console.error('Registration error:', error);
-          alert('Registration error:' + error);
+        (clientError) => {
+          console.error('Client registration error:', clientError);
+          alert('Client registration error:' + clientError);
         }
       );
-    } else if (this.selectedRole === 'unverified') {
-      this.saveUserInApi(formData, '/regherify');
-    }
-  }
-  saveUserInApi(formData: FormData, endpoint: string) {
-    this.registerService.CreateRegistration(formData).subscribe(
-      (response: any) => {
-        if (response && response.token) {
-          const expiryMinutes = 60;
-          this.cookieService.set(
-            'authToken',
-            response.token,
-            expiryMinutes * 60
-          );
-          console.log('Registration successful!', response);
-          alert('Registration successful!');
-          this.router.navigate([endpoint]);
-        } else {
-          console.error('Token not found in response.');
-          alert('Token not found in response.');
-        }
-      },
-      (error) => {
-        console.error('Registration error:', error);
-        alert('Registration error:' + error);
-      }
-    );
   }
 
   onChange(event: any) {
