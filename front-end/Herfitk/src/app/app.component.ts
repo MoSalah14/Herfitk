@@ -21,6 +21,7 @@ import { DataSharingService } from './data-sharing.service';
 import { RegsHerifyComponent } from './Account/regs-herify/regs-herify.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { TermsofservicesComponent } from './termsofservices/termsofservices.component';
+import { UserprofileComponent } from './Profile/userprofile/userprofile.component';
 
 @Component({
   selector: 'app-root',
@@ -44,6 +45,7 @@ import { TermsofservicesComponent } from './termsofservices/termsofservices.comp
     PrivacypolicyComponent,
     TermsofservicesComponent,
     RegsHerifyComponent,
+    UserprofileComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
