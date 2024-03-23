@@ -13,6 +13,7 @@ import { RegsHerifyComponent } from './Account/regs-herify/regs-herify.component
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { TermsofservicesComponent } from './termsofservices/termsofservices.component';
 import { UserprofileComponent } from './Profile/userprofile/userprofile.component';
+import { ChatComponent } from './Chats/chat/chat.component';
 
 export const routes: Routes = [
   //  { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -26,6 +27,8 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacypolicyComponent },
   { path: 'termofservices', component: TermsofservicesComponent },
   { path: 'display/:id', component: DisplayHerfiysComponent },
+  { path: 'user', component:UserprofileComponent  },
+  {path: 'chat', component:ChatComponent },
   { path: 'user/:id', component: UserprofileComponent },
 
   { path: '**', redirectTo: '/Home' },
