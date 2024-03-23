@@ -1,19 +1,32 @@
-
 <div class="container">
-    <div *ngFor="let user of userData">
-        <img class="profile-image" [src]="user.profileImage" alt="Profile Picture">
-        <div class="profile-info">
-            <label for="name">Name:</label><p id="name">{{ user.name }}</p><br>
-            <label for="email">Email:</label><p id="email">{{ user.email }}</p><br>
-            <label for="phone">Phone:</label><p id="phone">{{ user.phone }}</p><br>
-            <label for="address">Address:</label><p id="address">{{ user.address }}</p><br>
-            <label for="nationalid">NationalID:</label><p id="nationalid">{{ user.nationalId }}</p><br>
-            <label for="password">Password:</label><p id="password">{{ user.password }}</p><br>
-        </div>
+  <div>
+    <img
+      class="profile-image"
+      [src]="'assets' + userData.image"
+      alt="Profile Picture"
+    />
+    <div class="profile-info">
+      <label for="name">Name:</label>
+      <p id="name">{{ userData.displayName }}</p>
+      <br />
+      <label for="email">Email:</label>
+      <p id="email">{{ userData.email }}</p>
+      <br />
+      <label for="phone">Phone:</label>
+      <p id="phone">{{ userData.phoneNumber }}</p>
+      <br />
+      <label for="address">Address:</label>
+      <p id="address">{{ userData.address }}</p>
+      <br />
+      <label for="nationalid">NationalID:</label>
+      <p id="nationalid">{{ userData.nationalId }}</p>
+      <br />
+      <label for="password">Password:</label>
+      <p id="password">{{ userData.password }}</p>
+      <br />
     </div>
-    <hr>
   </div>
-  
+</div>
 
 <!-- input label -->
 <!-- <div class="profile-info">

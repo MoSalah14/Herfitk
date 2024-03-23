@@ -1,4 +1,5 @@
-
+using Herfitk.API.ChatServices;
+using Herfitk.API.Hubs;
 using Herfitk.API.TokenService;
 using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
@@ -30,7 +31,10 @@ namespace Herfitk
 
             #region Configure Services
             // Add services to the container.
-
+            builder.Services.AddSignalR();
+            builder.Services.AddCors(options => {
+                options.AddPolicy("CORSPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed((hosts) => true));
+            });
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -42,7 +46,8 @@ namespace Herfitk
             builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
             builder.Services.AddScoped(typeof(IHerifyCategoriesRepository), typeof(HerifyCategoriesRepository));
             builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
-
+            builder.Services.AddSingleton<ChatService>();
+            builder.Services.AddSignalR();
             
 
             //Allow DbContext D_Injection
@@ -136,9 +141,10 @@ namespace Herfitk
             //app.MapIdentityApi<AppUser>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors("CORSPolicy");
 
-
-            app.UseCors(option => option.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
+            app.MapHub<ChatHub>("/hubs/chat");
+            //app.UseCors(option => option.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
 
             app.MapControllers();
             app.UseAuthentication();

@@ -23,13 +23,11 @@ export class NavbarComponent implements OnInit {
   UserName: string | undefined;
   UserRole: string | undefined;
   isLoggedIn: boolean = false;
-  userName: string = "John"; // Example user name
-  userId: number = 1; // Example user ID
-
+  userId: any; // Example user ID
 
   constructor(
     private cookieService: CookieService,
-    private jwtHelper: JwtHelperService ,// Inject JwtHelperService
+    private jwtHelper: JwtHelperService, // Inject JwtHelperService
     private router: Router
   ) {}
   ngOnInit(): void {
@@ -53,6 +51,11 @@ export class NavbarComponent implements OnInit {
           'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
         ];
       this.isLoggedIn = true;
+
+      this.userId =
+        decodedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ];
     }
   }
 
@@ -78,7 +81,6 @@ export class NavbarComponent implements OnInit {
   }
 
   goToDisplay() {
-    
-    this.router.navigate(['/user', this.userId]); // Navigate to '/user/:id' route
+    this.router.navigate(['/user/' + this.userId]); // Navigate to '/user/:id' route
   }
 }
