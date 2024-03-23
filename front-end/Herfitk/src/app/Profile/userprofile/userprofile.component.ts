@@ -4,11 +4,12 @@ import { UserService } from './user.service';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-userprofile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,FormsModule],
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css',
   providers: [UserService, CookieService],
