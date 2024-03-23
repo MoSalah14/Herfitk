@@ -27,8 +27,8 @@ export class RegisterService {
     );
   }
 
-  CreateClient(formData: FormData) {
-    return this.http.post(`${this.BaseUrl}Clients/Add`, formData).pipe(
+  CreateClient(user_id: any) {
+    return this.http.post(`${this.BaseUrl}Clients/Add`, user_id).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'An error occurred during registration.';
         if (

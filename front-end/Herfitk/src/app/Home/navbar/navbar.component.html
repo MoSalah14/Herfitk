@@ -26,7 +26,10 @@
       <a *ngIf="isLoggedIn" (click)="logout()" href="/">Logout</a>
     </li>
     <li *ngIf="isLoggedIn">
-      <span style="color: #ffd700">Welcome {{ UserName }}</span>
+      <!-- <span style="color: #ffd700">Welcome {{ UserName }}</span> -->
+      <button (click)="goToDisplay()"> 
+        <span style="color: #ffd700">Welcome {{ UserName }}</span>
+      </button>
     </li>
   </ul>
 </header>

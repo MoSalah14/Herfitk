@@ -175,8 +175,8 @@
           (change)="onRoleChange($event)"
         >
           <option value="" disabled>Select Role</option>
-          <option value="verified">Client</option>
-          <option value="unverified">Herify</option>
+          <option value="client">Client</option>
+          <option value="herify">Herify</option>
         </select>
       </div>
       <div *ngIf="!selectedRole && submitted" style="color: red" id="not">

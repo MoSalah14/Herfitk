@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { LoginComponent } from '../../Account/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -22,10 +23,12 @@ export class NavbarComponent implements OnInit {
   UserName: string | undefined;
   UserRole: string | undefined;
   isLoggedIn: boolean = false;
+  userId: any; // Example user ID
 
   constructor(
     private cookieService: CookieService,
-    private jwtHelper: JwtHelperService // Inject JwtHelperService
+    private jwtHelper: JwtHelperService, // Inject JwtHelperService
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.checkAuthStatus();
@@ -48,6 +51,11 @@ export class NavbarComponent implements OnInit {
           'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
         ];
       this.isLoggedIn = true;
+
+      this.userId =
+        decodedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ];
     }
   }
 
@@ -70,5 +78,9 @@ export class NavbarComponent implements OnInit {
   onWindowScroll() {
     const scrollY = window.scrollY || window.pageYOffset;
     this.isSticky = scrollY > 0;
+  }
+
+  goToDisplay() {
+    this.router.navigate(['/user/' + this.userId]); // Navigate to '/user/:id' route
   }
 }

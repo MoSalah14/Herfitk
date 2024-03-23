@@ -1,4 +1,5 @@
 ﻿using Herfitk.API.Dto;
+using Herfitk.API.DTO;
 using Herfitk.API.TokenService;
 using Herfitk.Core.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -174,9 +175,38 @@ namespace Herfitk.API.Controllers
 
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckEmailExists(string email)
+             => await userManager.FindByEmailAsync(email) is not null;
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserByID(int id)
         {
-            return await userManager.FindByEmailAsync(email) is not null;
+            var user = await userManager.Users.Include(u => u.UserHerify).SingleOrDefaultAsync(u => u.Id == id);
+            if (user == null)
+                return NotFound(new ApiResponse(404, "User not found."));
+
+            var userProfileDto = new UserProfileDto()
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address
+            };
+
+            
+            if (user.UserHerify != null)
+            {
+                userProfileDto.Speciality = user.UserHerify.Speciality;
+                userProfileDto.Zone = user.UserHerify.Zone;
+            }
+
+            
+            if (!string.IsNullOrEmpty(user.PersonalImage))
+                         userProfileDto.Image = user.PersonalImage;
+            
+
+            return Ok(userProfileDto);
         }
+
 
     }
 }

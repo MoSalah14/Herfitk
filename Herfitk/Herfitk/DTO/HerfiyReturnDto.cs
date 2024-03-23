@@ -11,5 +11,7 @@ namespace Herfitk.API.DTO
         public string? History { get; set; }
         public string? PersonalImage { get; set; }
 
+        public string? ImageWork { get; set; }
+
     }
 }

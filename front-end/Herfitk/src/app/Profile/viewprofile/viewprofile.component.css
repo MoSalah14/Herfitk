@@ -1,126 +1,122 @@
-*{
-    margin: 0%;
-    padding: 0%;
+* {
+  margin: 0%;
+  padding: 0%;
 }
 .card {
-    width: 350px;
-    height: 600px;
-    background: rgb(39, 39, 39);
-    border-radius: 12px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.123);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    transition-duration: .5s;
-   margin-top: 50px;
-  }
-  
-  .image_profile {
-    background: linear-gradient(to right,rgb(54, 54, 54),rgb(32, 32, 32));
-    margin-top: 20px;
-    width: 250px;
-    height: 200px;
-    border-radius: 50%;
-    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.329);
-  }
-  
-  .textContainer {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 500px;
+  width: 350px;
+  height: 600px;
+  background: rgb(39, 39, 39);
+  border-radius: 12px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.123);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition-duration: 0.5s;
+  margin-top: 50px;
+}
 
-  }
-  
-  .name {
-    font-size: 0.9em;
-    font-weight: 600;
-    color: white;
-    letter-spacing: 0.5px;
-  }
-  
-  .profile {
-    font-size: 0.84em;
-    color: rgb(194, 194, 194);
-    letter-spacing: 0.2px;
-  }
-  
-  .card:hover {
-    background-color: rgb(43, 43, 43);
-    transition-duration: .5s;
-  }
+.image_profile {
+  background: linear-gradient(to right, rgb(54, 54, 54), rgb(32, 32, 32));
+  margin-top: 20px;
+  width: 250px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.329);
+}
 
+.textContainer {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 500px;
+}
 
-  /* buttonMessage */
-  button {
-    padding: 10px 20px;
-    margin: 2px;
-    text-transform: uppercase;
-    border-radius: 8px;
-    font-size: 17px;
-    font-weight: 500;
-    color: #ffffff80;
-    text-shadow: none;
-    background: transparent;
-    cursor: pointer;
-    box-shadow: transparent;
-    border: 1px solid #ffffff80;
-    transition: 0.5s ease;
-    user-select: none;
-    width: 120px;
+.name {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.5px;
+}
 
-  }
-  
-  #btn:hover,
-  :focus {
-    color: #ffffff;
-    background: #008cff;
-    border: 1px solid #008cff;
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
-      0 0 100px #008cff;
-  }
+.profile {
+  font-size: 0.84em;
+  color: rgb(194, 194, 194);
+  letter-spacing: 0.2px;
+}
 
-  .column {
-  
-    float: left;
-    width: 300px;
-    margin-top: 10px;
-    padding: 15px;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .Information,.images{
-    color: white;
-    /* border-left: 1px solid white ; */
-    margin-left: 5px;
-    padding-left: 5px;
-    
-  }
+.card:hover {
+  background-color: rgb(43, 43, 43);
+  transition-duration: 0.5s;
+}
 
-  .w3-half img {
-    margin-bottom: -6px;
-    margin-top: 16px;
-    opacity: 0.8;
-    cursor: pointer
-  }
+/* buttonMessage */
+button {
+  padding: 10px 20px;
+  margin: 2px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff80;
+  text-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  box-shadow: transparent;
+  border: 1px solid #ffffff80;
+  transition: 0.5s ease;
+  user-select: none;
+  width: 120px;
+}
 
-  .w3-half img:hover {
-    opacity: 1
-  }
-  .reviews img {
-    width: 100px;
-    border-radius: 50%;
-  } 
+#btn:hover,
+:focus {
+  color: #ffffff;
+  background: #008cff;
+  border: 1px solid #008cff;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+    0 0 100px #008cff;
+}
+
+.column {
+  float: left;
+  width: 300px;
+  margin-top: 10px;
+  padding: 15px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.Information,
+.images {
+  color: white;
+  /* border-left: 1px solid white ; */
+  margin-left: 5px;
+  padding-left: 5px;
+}
+
+.w3-half img {
+  margin-bottom: -6px;
+  margin-top: 16px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.w3-half img:hover {
+  opacity: 1;
+}
+.reviews img {
+  width: 100px;
+  border-radius: 50%;
+}
 
 /* <!-- Add Review By Client --> */
 
@@ -135,7 +131,6 @@
   font-size: 50px;
   font-family: "Space Grotesk", sans-serif;
   text-align: left;
-  
 }
 
 .wrapper {
@@ -169,7 +164,6 @@
   flex-direction: row-reverse;
   gap: 0.5rem;
   size: 50px;
-
 }
 .rate-box input {
   display: none;
@@ -183,7 +177,8 @@
 }
 .rate-box input:checked ~ .star:before {
   color: #ffcc33;
-  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3), -3px -3px 8px rgba(255, 255, 255, 0.8);
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3),
+    -3px -3px 8px rgba(255, 255, 255, 0.8);
 }
 .rate-box .star:before {
   content: "★";
@@ -208,15 +203,15 @@ textarea {
   font-family: inherit;
   line-height: 1.5;
   border-radius: 0.2rem;
-  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3), inset -2px -2px 8px rgba(255, 255, 255, 0.8);
+  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3),
+    inset -2px -2px 8px rgba(255, 255, 255, 0.8);
   background-color: rgba(255, 255, 255, 0.3);
 }
 textarea::placeholder {
   color: #aaa;
 }
 textarea:focus {
-
   color: black;
-  background-color: #ffcc33;
-  border-radius:5px ;
+  background-color: #ece74f;
+  border-radius: 5px;
 }

@@ -1,17 +1,32 @@
 <div class="container">
-    <img class="profile-image" src="assets/Image/1.jpg" alt="Profile Picture">
+  <div>
+    <img
+      class="profile-image"
+      [src]="'assets' + userData.image"
+      alt="Profile Picture"
+    />
     <div class="profile-info">
-        <label for="name">Name:</label><p id="name">John Doe</p><br>
-        <label for="email">Email:</label><p id="email">johndoe.com</p><br>
-        <label for="phone">Phone:</label><p id="phone">+1 234 567 890</p><br>
-        <label for="address">Address:</label><p id="address">123 Main Street, City, Country</p><br>
-        <label for="nationalid">NationalID:</label><p id="address">123654789</p><br>
-        <label for="password">Password:</label><p id="address">123 </p><br>
-        
+      <label for="name">Name:</label>
+      <p id="name">{{ userData.displayName }}</p>
+      <br />
+      <label for="email">Email:</label>
+      <p id="email">{{ userData.email }}</p>
+      <br />
+      <label for="phone">Phone:</label>
+      <p id="phone">{{ userData.phoneNumber }}</p>
+      <br />
+      <label for="address">Address:</label>
+      <p id="address">{{ userData.address }}</p>
+      <br />
+      <label for="nationalid">NationalID:</label>
+      <p id="nationalid">{{ userData.nationalId }}</p>
+      <br />
+      <label for="password">Password:</label>
+      <p id="password">{{ userData.password }}</p>
+      <br />
     </div>
-    <hr>
+  </div>
 </div>
-  
 
 <!-- input label -->
 <!-- <div class="profile-info">

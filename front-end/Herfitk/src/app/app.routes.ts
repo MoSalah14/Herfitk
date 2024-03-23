@@ -29,6 +29,7 @@ export const routes: Routes = [
   { path: 'display/:id', component: DisplayHerfiysComponent },
   { path: 'user', component:UserprofileComponent  },
   {path: 'chat', component:ChatComponent },
+  { path: 'user/:id', component: UserprofileComponent },
 
   { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},
