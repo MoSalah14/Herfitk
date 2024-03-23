@@ -26,7 +26,7 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacypolicyComponent },
   { path: 'termofservices', component: TermsofservicesComponent },
   { path: 'display/:id', component: DisplayHerfiysComponent },
-  { path: 'user', component:UserprofileComponent  },
+  { path: 'user/:id', component: UserprofileComponent },
 
   { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},
