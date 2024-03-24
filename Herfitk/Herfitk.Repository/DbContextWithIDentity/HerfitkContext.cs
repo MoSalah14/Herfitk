@@ -82,10 +82,7 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ClientId).HasColumnName("Client_ID");
             entity.Property(e => e.ClientReview).HasColumnName("Client_Review");
-            entity.Property(e => e.Cost).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.HerifyId).HasColumnName("Herify_ID");
-            entity.Property(e => e.HerifyReview).HasColumnName("Herify_Review");
-            entity.Property(e => e.State).HasMaxLength(50);
 
             entity.HasOne(d => d.Client).WithMany(p => p.ClientHerifies)
                 .HasForeignKey(d => d.ClientId)

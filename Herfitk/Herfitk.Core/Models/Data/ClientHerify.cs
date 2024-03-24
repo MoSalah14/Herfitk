@@ -7,18 +7,12 @@ public partial class ClientHerify
 {
     public int Id { get; set; }
 
-    public decimal? Cost { get; set; }
-
-    public DateOnly? Date { get; set; }
-
-    public string? State { get; set; }
-
+    public DateOnly Date { get; set; }
     public string? ClientReview { get; set; }
-
-    public string? HerifyReview { get; set; }
 
     public int? ClientId { get; set; }
 
+    public int? Rate { get; set; }
     public int? HerifyId { get; set; }
 
     public virtual Client? Client { get; set; }

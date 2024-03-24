@@ -74,12 +74,9 @@ button {
 
 #btn:hover,
 :focus {
-  color: #ffffff;
-  background: #008cff;
-  border: 1px solid #008cff;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
-    0 0 100px #008cff;
+  color: rgb(43, 43, 43);
+  background-color: rgb(110, 109, 109);
+  transition-duration: 0.5s;
 }
 
 .column {
@@ -210,8 +207,8 @@ textarea {
 textarea::placeholder {
   color: #aaa;
 }
-textarea:focus {
+/* textarea:focus {
   color: black;
   background-color: #ece74f;
   border-radius: 5px;
-}
+} */

@@ -4,6 +4,7 @@ using Herfitk.Core.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Herfitk.Repository.Migrations
 {
     [DbContext(typeof(HerfitkContext))]
-    partial class HerfitkContextModelSnapshot : ModelSnapshot
+    [Migration("20240323221925_EditTableHerifyReview")]
+    partial class EditTableHerifyReview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,15 +193,12 @@ namespace Herfitk.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Client_Review");
 
-                    b.Property<DateOnly>("Date")
+                    b.Property<DateOnly?>("Date")
                         .HasColumnType("date");
 
                     b.Property<int?>("HerifyId")
                         .HasColumnType("int")
                         .HasColumnName("Herify_ID");
-
-                    b.Property<int?>("Rate")
-                        .HasColumnType("int");
 
                     b.HasKey("Id")
                         .HasName("PK__Client_H__3214EC27824A65FA");

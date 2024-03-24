@@ -45,7 +45,7 @@ import { UserprofileComponent } from './Profile/userprofile/userprofile.componen
     PrivacypolicyComponent,
     TermsofservicesComponent,
     RegsHerifyComponent,
-    UserprofileComponent
+    UserprofileComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -61,17 +61,17 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
       '#17191a';
-    this.loadGoogleTranslateScript();
+    // this.loadGoogleTranslateScript();
   }
 
-  private loadGoogleTranslateScript(): void {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.text = `
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-      }
-    `;
-    this.translateElement.nativeElement.appendChild(script);
-  }
+  // private loadGoogleTranslateScript(): void {
+  //   const script = document.createElement('script');
+  //   script.type = 'text/javascript';
+  //   script.text = `
+  //     function googleTranslateElementInit() {
+  //       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  //     }
+  //   `;
+  //   this.translateElement.nativeElement.appendChild(script);
+  // }
 }
