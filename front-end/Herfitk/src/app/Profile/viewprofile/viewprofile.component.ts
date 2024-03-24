@@ -98,20 +98,18 @@ export class ViewprofileComponent implements OnInit {
         };
         // Dont Forget Handle Messages
         this.service.SendReview(feedbackData).subscribe(
-          (response) => {
-            this.Errormessage = 'Feedback submitted successfully!';
-            console.log('Feedback submitted successfully:', response);
+          () => {
+            alert((this.Errormessage = 'Feedback submitted successfully!'));
           },
-          (error) => {
+          () => {
             this.Errormessage = 'Error submitting feedback. Please try again.';
-            console.error('Error submitting feedback:', error);
           }
         );
       } else {
-        console.log('You are not authorized to submit feedback.');
+        this.Errormessage = 'Your Account Cant Review ';
       }
     } else {
-      console.log('Please Login First');
+      this.Errormessage = 'Please Login First';
     }
   }
 }

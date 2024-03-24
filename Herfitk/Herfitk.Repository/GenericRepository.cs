@@ -21,27 +21,13 @@ namespace Herfitk.Repository
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            if (typeof(T) == typeof(ClientHerify))
-            {
-                var GetData = await _context.ClientHerifies.Include(e => e.Client.ClientUser).ToListAsync();
-                return GetData as IEnumerable<T>;
-            }
-            return await _context.Set<T>().ToListAsync();
-        }
+            => await _context.Set<T>().ToListAsync();
+
 
 
         public async Task<T?> GetByIdAsync(int id)
-        {
-            if (typeof(T) == typeof(ClientHerify))
-            {
-                var getData = await _context.ClientHerifies.Include(e => e.Client.ClientUser).FirstOrDefaultAsync(e => e.Id == id);
-                return getData as T;
-            }
-            else
-                return await _context.Set<T>().FindAsync(id);
+             => await _context.Set<T>().FindAsync(id);
 
-        }
 
 
         public async Task<T> AddAsync(T name)

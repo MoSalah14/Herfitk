@@ -16,10 +16,10 @@ namespace Herfitk.API.Controllers
     [ApiController]
     public class ClientHerifiesController : ControllerBase
     {
-        private readonly IGenericRepository<ClientHerify> repository;
+        private readonly IClientHerifyRepository repository;
         private readonly IMapper mapper;
 
-        public ClientHerifiesController(IGenericRepository<ClientHerify> repository,IMapper mapper)
+        public ClientHerifiesController(IClientHerifyRepository repository,IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
@@ -29,7 +29,7 @@ namespace Herfitk.API.Controllers
         [HttpGet("GetAll/{id}")]
         public async Task<IActionResult> GetClientHerifies(int id)
         {
-            var GetAll = await repository.GetAllAsync();
+            var GetAll = await repository.GetAllReviewsAsync();
             var GetALlByID = GetAll.Where(x => x.HerifyId == id);
            var MapData =  mapper.Map<List<Herify_ReviewDto>>(GetALlByID);
 
@@ -71,12 +71,14 @@ namespace Herfitk.API.Controllers
             var MapData = new ClientHerify
             {
                 HerifyId = clientHerify.HerifyID,
-                ClientId = clientHerify.ClientId,
                 ClientReview = clientHerify.Review,
                 Date = clientHerify.ReviewDate,
                 Rate = clientHerify.Rate
             };
-            // Create Get Client ID By User ID
+            var GetClientID = await repository.GetClientByIdAsync(clientHerify.ClientId);
+
+            MapData.ClientId = GetClientID.Id;
+
             var CreateReview = await repository.AddAsync(MapData);
             return Ok(CreateReview);
         }
