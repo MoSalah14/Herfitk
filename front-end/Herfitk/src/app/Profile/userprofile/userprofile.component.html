@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div>
     <img
       class="profile-image"
@@ -6,6 +6,7 @@
       alt="Profile Picture"
     />
     <div class="profile-info">
+      
       <label for="name">Name:</label>
       <p id="name">{{ userData.displayName }}</p>
       <br />
@@ -21,21 +22,46 @@
       <label for="nationalid">NationalID:</label>
       <p id="nationalid">{{ userData.nationalId }}</p>
       <br />
-      <label for="password">Password:</label>
-      <p id="password">{{ userData.password }}</p>
-      <br />
+      
+    </div>
+  </div>
+</div> -->
+
+<div class="edit-container">
+  <button class="Btn">Edit My Profile 
+    <svg class="svg" viewBox="0 0 512 512">
+      <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+    </svg>
+  </button>
+</div>
+<div class="container">
+  <img class="profile-image" [src]="'assets' + userData.image" alt="Profile Picture" />
+  <div class="profile-info">
+    <div class="input-row">
+      <label for="name">Name: </label>
+      <input required="" type="text" id="name" name="text" class="input" [value]="userData.displayName" readonly />
+    </div>
+    <div class="input-row">
+      <label for="email">E-mail: </label>
+      <input required="" type="text" id="email" email="text" class="input" [value]="userData.email" readonly />
+    </div>
+    <div class="input-row">
+      <label for="Phone">Phone: </label>
+      <input required="" type="text" id="Phone" name="text" class="input" [value]="userData.phoneNumber" readonly />
+    </div>
+    <div class="input-row">
+      <label for="adress">Address:</label>
+      <input required="" type="text" id="adress" name="text" class="input" [value]="userData.address" readonly />
+    </div>
+  </div>
+  <div class="buttons">
+    <!-- <button class="edit-button">Edit</button> -->
+    <div class="button-row">
+    <button class="pay">
+      Pay subscribe
+      <svg class="svgIcon" viewBox="0 0 576 512"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
+    </button>
+   
     </div>
   </div>
 </div>
-
-<!-- input label -->
-<!-- <div class="profile-info">
-    <label for="name">Name:</label>
-    <input type="text" id="name" placeholder="Enter your name"><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" placeholder="Enter your email"><br>
-    <label for="phone">Phone:</label>
-    <input type="tel" id="phone" placeholder="Enter your phone number"><br>
-    <label for="address">Address:</label>
-    <input type="text" id="address" placeholder="Enter your address"><br>
-</div> -->

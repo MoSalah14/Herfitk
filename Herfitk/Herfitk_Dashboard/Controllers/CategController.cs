@@ -33,7 +33,7 @@ namespace Herfitk_Dashboard.Controllers
             // Filter herifys based on the searchString
             if (!string.IsNullOrEmpty(searchString))
             {
-                category = category.Where(herify => herify.CategoryName.Contains(searchString)).ToList();
+                category = category.Where(category => category.CategoryName.Contains(searchString)).ToList();
 
             }
             if (int.TryParse(searchString, out int id))
@@ -41,7 +41,7 @@ namespace Herfitk_Dashboard.Controllers
                 // Redirect to IndexId action if the searchString is a valid ID
                 return RedirectToAction(nameof(Details), new { id });
             }
-            return View(await context.GetAllAsync());
+            return View(category);
         }
 
         // GET: Categ/Details/5
