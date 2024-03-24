@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  HostListener,
+  ElementRef,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import {
   FormBuilder,
@@ -39,7 +45,8 @@ export class LoginComponent {
     private router: Router,
     private loginService: LoginService,
     private fb: FormBuilder,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private elementRef: ElementRef
   ) {
     this.FormValidation = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -62,7 +69,12 @@ export class LoginComponent {
   get validPass() {
     return this.FormValidation.controls['password'].valid;
   }
-
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.closeLoginForm();
+    }
+  }
   logSuc() {
     const emailControl = this.FormValidation.get('email');
     const passwordControl = this.FormValidation.get('password');

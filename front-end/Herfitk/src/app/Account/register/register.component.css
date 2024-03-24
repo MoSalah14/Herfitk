@@ -1,9 +1,8 @@
-
 /* New Form  */
 .card {
   width: 50%;
   height: 50%;
-  margin-left:20%;
+  margin-left: 20%;
 }
 .form-label {
   color: #ecf008;
@@ -18,7 +17,6 @@
   background-color: #17191a;
   border-radius: 25px;
   transition: 0.4s ease-in-out;
-  
 }
 
 .card {
@@ -134,7 +132,6 @@
   color: white;
 }
 
-
 .custum-file-upload {
   height: 200px;
   width: 300px;
@@ -178,19 +175,19 @@
   display: none;
 }
 
-.input-field{
+/* .input-field{
   color: #050505;
   
-}
+} */
 
 .input-field:checked {
   background-color: yellow; /* Set background color to yellow for the selected option */
 }
 
-#role.input-field{
-  color: #050505;
+#role.input-field {
+  color: #f9f9f9;
 }
 
-#role.input-field :checked{
-  color: #ecf008;
-}
+/* #role.input-field :checked {
+  color: #000000;
+} */
