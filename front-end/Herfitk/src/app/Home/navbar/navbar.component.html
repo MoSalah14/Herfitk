@@ -22,11 +22,13 @@
     <li><a href="#category">Category</a></li>
     <li><a href="#contact">Contact US</a></li>
      <!-- Dark And Light Mode -->
-     <li>
+     <!-- <li>
       <input type="checkbox" id="switch" (change)="toggleBackground()">
       <label for="switch"></label>
-      </li>
+      </li> -->
+     
     <li>
+     
       <a *ngIf="!isLoggedIn" (click)="openLoginForm()" href="/login">Login</a>
       <a *ngIf="isLoggedIn" (click)="logout()" href="/">Logout</a>
     </li>
@@ -36,6 +38,12 @@
         <span style="color: #ffd700">Welcome {{ UserName }}</span>
       </button>
     </li>
+    <li>
+    <label class="switch">
+      <input type="checkbox" id="switch" (change)="toggleBackground()">
+      <span class="slider"></span>
+    </label>
+  </li>
   </ul>
 </header>
 <!-- Login Popup -->

@@ -138,14 +138,14 @@ header.sticky ul li a:hover {
 
 /* Dark and Light Mode */
 /* Satart input*/
-#switch {
+/* #switch {
   width: 0;
   height: 0;
   visibility: hidden;
-}
+} */
 /* End input */
 /* Start label */
-label {
+/* label {
   display: block;
   border-radius: 50px;
   width: 120px;
@@ -154,10 +154,10 @@ label {
   position: relative;
   transition: 0.5s;
   cursor: pointer;
-}
+} */
 /* End label */
 /* Start after */
-label::after {
+/* label::after {
   content: "";
   background-color: white;
   width: 40px;
@@ -166,20 +166,91 @@ label::after {
   position: absolute;
   top: 5px;
   left: 5px;
-}
+} */
 /* End after */
 /* Start mochan*/
-#switch:checked + label {
+/* #switch:checked + label {
   background-color: white;
-}
-#switch:checked + label::after {
+} */
+/* #switch:checked + label::after {
   background-color: black;
 
   left: calc(100% - 5px);
   transition: 0.5s;
   transform: translate(-100%);
-}
+} */
 /* End mochan*/
-label:active:after  {
+/* label:active:after  {
   width: 50px;
+} */
+
+/* The switch - the box around the slider */
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  transition: .4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  border-radius: 20px;
+  left: 0.3em;
+  bottom: 0.3em;
+  background-color: rgb(219, 198, 2);
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #fff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #fff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(1.5em);
+}
+
+.slider::after {
+  width: 20px;
+  height: 20px;
+  left: 20%;
+  top: 10%;
+  border-radius: 50%;
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  transition: ease 0.4s;
+}
+
+input:checked + .slider::after {
+  left: 80%;
+  width: 0px;
+  height: 0px;
 }

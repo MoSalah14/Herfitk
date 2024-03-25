@@ -32,6 +32,7 @@ export const routes: Routes = [
   { path: 'user', component:UserprofileComponent  },
   {path: 'chat', component:ChatComponent },
   { path: 'user/:id', component: UserprofileComponent },
+  {path: 'payment', component:PaymentComponent },
 
   { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},
