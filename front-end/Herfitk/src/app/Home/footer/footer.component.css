@@ -107,17 +107,17 @@ h1 {
 }
 
 .foot-email-box .form-control:hover {
-    box-shadow: 0 5px 15px #f6fa11;
+    box-shadow: 0 5px 15px #ffd541;
 }
 
 .footer-copyright {
     padding: 20px 0 17px;
-    border-top: 1px solid #434859;
+    border-top: 1px solid #a8a9bf;
 }
 
 .footer-copyright p,
 .footer-copyright p a {
-    color: #a8a9bf;
+    color: #fff;
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;

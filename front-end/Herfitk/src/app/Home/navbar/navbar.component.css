@@ -23,7 +23,7 @@ header.sticky {
 }
 
 header.sticky:hover {
-  color: #ffd700;
+  color: #ffd541;
 }
 
 header.logo {
@@ -75,14 +75,14 @@ header ul li a {
 }
 
 header ul li a:hover {
-  color: #ffd700;
+  color: #ffd541;
 }
 
 .banner {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url("../../../assets/Image/8.jpg");
+  background: url("../../../assets/Image/15.jpg");
   background-size: cover;
 }
 
@@ -96,18 +96,21 @@ header ul li a:hover {
 
 .overlay h1 {
   color: white;
-  font-size: 2.5em; /* Adjusted font size for responsiveness */
+  font-size: 2.5em; 
   text-transform: uppercase;
-  letter-spacing: 1px; /* Adjusted letter spacing for responsiveness */
+  letter-spacing: 1px; 
   margin: 0;
+  transition: font-size 0.3s; 
 }
-
+.overlay h1:hover {
+  font-size: 30px; 
+}
 header.sticky ul li a {
   color:#fff;
 }
 
 header.sticky ul li a:hover {
-  color: #ffd700;
+  color: #ffd541;
 }
 
 /* Media Query for Small Screens (360x740) */

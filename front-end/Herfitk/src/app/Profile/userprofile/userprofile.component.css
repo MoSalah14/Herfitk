@@ -80,7 +80,7 @@ body {
     color: #fff;
     font-size: 15px;
     background-color: transparent;
-    box-shadow: 3px 3px 10px rgb(221, 217, 11),
+    box-shadow: 3px 3px 10px #ffd541,
     -1px -1px 6px rgba(255, 255, 255, 0.4);
     margin-left: 100px; /* Adjust as needed */
     margin-right:40px; /* Add margin between input and label */

@@ -6,14 +6,14 @@ body {
   }
   
   header {
-   
+    
     color: #fff;
     padding: 20px;
     text-align: center;
   }
   header:hover{
 
-    color: #ffd541;
+    color:#ffd541;
   }
   
   main {
@@ -25,15 +25,11 @@ body {
   }
   
   h2 {
-    color:#fff;
+    color: #fff;
+  }
+  h2:hover{
+    color:#ffd541;
   }
   p{
     color:#fff;
   }
-  
-ol{
-    color:#fff;
-}
-a{
-    color:#ffd541;
-}

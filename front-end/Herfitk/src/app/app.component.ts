@@ -22,6 +22,7 @@ import { RegsHerifyComponent } from './Account/regs-herify/regs-herify.component
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { TermsofservicesComponent } from './termsofservices/termsofservices.component';
 import { UserprofileComponent } from './Profile/userprofile/userprofile.component';
+import { PaymentComponent } from './payment/payment/payment.component';
 
 @Component({
   selector: 'app-root',
@@ -46,6 +47,7 @@ import { UserprofileComponent } from './Profile/userprofile/userprofile.componen
     TermsofservicesComponent,
     RegsHerifyComponent,
     UserprofileComponent,
+    PaymentComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
