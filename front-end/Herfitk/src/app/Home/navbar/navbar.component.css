@@ -221,7 +221,7 @@ header.sticky ul li a:hover {
   border-radius: 20px;
   left: 0.3em;
   bottom: 0.3em;
-  background-color: rgb(219, 198, 2);
+  background-color: #ffd541;
   transition: .4s;
 }
 
