@@ -1,24 +1,24 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 .container {
-    /* max-width: 600px;  */
-    width: 800px; 
-    height: 600px;
-    margin: 50px 50px; 
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    color: #fff;
-    align-items: center;
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, 10%); 
+  /* max-width: 600px;  */
+  width: 800px;
+  height: 600px;
+  /* margin: 50px 50px;
+  padding: 20px; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  color: #fff;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 10%);
 }
 .space-above-image {
   margin-top: 20px;
@@ -26,216 +26,209 @@ body {
 .profile-image {
   float: right;
   width: 200px;
-  height: 200px;
-  border-radius: 50%;
+  height: 300px;
+  /* border-radius: 50%; */
   margin-left: 20px;
   border: black;
 }
 .profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
-  }
-  .input-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; 
-    
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    position: relative;
-    color: white;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  color: white;
+  position: relative;
   align-items: center;
   display: inline-block;
-  
-  }
-  
-  .label {
-    font-size: 15px;
-    padding-left: 20px;
-    position: absolute;
-    top: 50%;
-    left: 0; /* Align to the start */
-    transform: translate(0, -50%);
-    transition: 0.3s;
-    pointer-events: none;
-    margin-right: 50px; /* Adjust as needed */
-    display: inline-block;
-    width: 100px; /* تحديد عرض العلامة */
-    text-align: right; /* تحديد محاذاة النص إلى اليمين */
-  }
-  
-  .input {
-    width: 300px;
-    height: 45px;
-    border: none;
-    outline: none;
-    padding: 0px 20px;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 15px;
-    background-color: transparent;
-    box-shadow: 3px 3px 10px rgb(221, 217, 11),
+}
+
+.label {
+  font-size: 15px;
+  padding-left: 20px;
+  position: absolute;
+  top: 50%;
+  left: 0; /* Align to the start */
+  transform: translate(0, -50%);
+  transition: 0.3s;
+  pointer-events: none;
+  margin-right: 50px; /* Adjust as needed */
+  display: inline-block;
+  width: 100px; /* تحديد عرض العلامة */
+  text-align: right; /* تحديد محاذاة النص إلى اليمين */
+}
+
+.input {
+  width: 300px;
+  height: 45px;
+  border: none;
+  outline: none;
+  padding: 0px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgb(221, 217, 11),
     -1px -1px 6px rgba(255, 255, 255, 0.4);
-    margin-left: 100px; /* Adjust as needed */
-    margin-right:40px; /* Add margin between input and label */
-    justify-content: center; /* Center horizontally */
-  }
-  .input:focus {
-    border: 2px solid transparent;
-    color: #fff;
-    box-shadow: 3px 3px 10px rgba(0,0,0,1),
-    -1px -1px 6px rgba(255, 255, 255, 0.4),
-    inset 3px 3px 10px rgba(0,0,0,1),
+  /*margin-left: 100px;  Adjust as needed */
+  margin-right: 40px; /* Add margin between input and label */
+  justify-content: center; /* Center horizontally */
+}
+.input:focus {
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4), inset 3px 3px 10px rgba(0, 0, 0, 1),
     inset -1px -1px 6px rgba(255, 255, 255, 0.4);
-  }
-  
-  .container .input:valid ~ .label,
-  .container .input:focus ~ .label {
-    transition: 0.3s;
-    padding-left: 2px;
-    transform: translateY(-35px);
-  }
-  
-  .container .input:valid,
-  .container .input:focus {
-    box-shadow: 3px 3px 10px rgba(0,0,0,1),
-    -1px -1px 6px rgba(255, 255, 255, 0.4),
-    inset 3px 3px 10px rgba(0,0,0,1),
+}
+
+.container .input:valid ~ .label,
+.container .input:focus ~ .label {
+  transition: 0.3s;
+  padding-left: 2px;
+  transform: translateY(-35px);
+}
+
+.container .input:valid,
+.container .input:focus {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4), inset 3px 3px 10px rgba(0, 0, 0, 1),
     inset -1px -1px 6px rgba(255, 255, 255, 0.4);
-  }
+}
 
-  .buttons {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-  }
-  
- 
- 
-  /* pay button */
-  .pay {
-    width: 150px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color:#6e6e6e;
-    border: none;
-    color: white;
-    font-weight: 600;
-    gap: 8px;
-    cursor: pointer;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
-    position: relative;
-    overflow: hidden;
-    transition-duration: .3s;
-  }
-  
-  .svgIcon {
-    width: 16px;
-  }
-  
-  .svgIcon path {
-    fill: white;
-  }
-  
-  .pay::before {
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    content: "";
-    background-color: white;
-    border-radius: 50%;
-    left: -100%;
-    top: 0;
-    transition-duration: .3s;
-    mix-blend-mode: difference;
-  }
-  
-  .pay:hover::before {
-    transition-duration: .3s;
-    transform: translate(100%,-50%);
-    border-radius: 0;
-  }
-  
-  .pay:active {
-    transform: translate(5px,5px);
-    transition-duration: .3s;
-  }
+.buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
 
-  /* edit button */
-  .edit-container {
-    display: flex;
+/* pay button */
+.pay {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6e6e6e;
+  border: none;
+  color: white;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
+
+.svgIcon {
+  width: 16px;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.pay::before {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  content: "";
+  background-color: white;
+  border-radius: 50%;
+  left: -100%;
+  top: 0;
+  transition-duration: 0.3s;
+  mix-blend-mode: difference;
+}
+
+.pay:hover::before {
+  transition-duration: 0.3s;
+  transform: translate(100%, -50%);
+  border-radius: 0;
+}
+
+.pay:active {
+  transform: translate(5px, 5px);
+  transition-duration: 0.3s;
+}
+
+/* edit button */
+.edit-container {
+  display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px; 
-  margin-bottom: 0; 
-  }
-  .Btn {
-    margin-bottom: 20px; /* تحديد المسافة بين الزرار والصورة */
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 200px;
-    height: 40px;
-    border: none;
-    background-color: #6e6e6e;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 5px 5px 0px #6e6e6e;
-    transition-duration: 0.3s;
-    margin-bottom: 5px; 
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    margin-left: 500px; /* Shifts the button to the right */
-  }
-  
-  .svg {
-    width: 13px;
-    position: absolute;
-    right: 0;
-    margin-right: 20px;
-    fill: white;
-    transition-duration: 0.3s;
-  }
-  
-  .Btn:hover {
-    color: transparent;
-  }
-  
-  .Btn:hover svg {
-    right: 43%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    transition-duration: 0.3s;
-  }
-  
-  .Btn:active {
-    transform: translate(3px, 3px);
-    transition-duration: 0.3s;
-    box-shadow: 2px 2px 0px white;
-  }
-  
+  padding-top: 20px;
+  margin-bottom: 0;
+}
+.Btn {
+  margin-bottom: 20px; /* تحديد المسافة بين الزرار والصورة */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 200px;
+  height: 40px;
+  border: none;
+  background-color: #6e6e6e;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 5px 5px 0px #6e6e6e;
+  transition-duration: 0.3s;
+  margin-bottom: 5px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-left: 500px; /* Shifts the button to the right */
+}
 
-  .button-row {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    gap: 10px;
-  }
-  
+.svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: white;
+  transition-duration: 0.3s;
+}
+
+.Btn:hover {
+  color: transparent;
+}
+
+.Btn:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+.Btn:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px white;
+}
+
+.button-row {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
 /* submit button */
 .submit {
   width: 150px;
@@ -273,7 +266,7 @@ body {
 
 .submit::before,
 .submit::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   bottom: 0;
@@ -282,7 +275,8 @@ body {
   border-radius: 50%;
   background: #fff;
   opacity: 0;
-  transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1),
+    opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
   z-index: -1;
   transform: translate(100%, -25%) translate3d(0, 0, 0);
 }
@@ -290,7 +284,8 @@ body {
 .submit:hover::before,
 .submit:hover::after {
   opacity: 0.15;
-  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1),
+    opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
 
 .submit:hover::before {
