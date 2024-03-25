@@ -1,26 +1,21 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{touser}}</h4>
-    <button type="button" class="btn-close" (click)="activemodal.dismiss('Cross click')"></button>
+  <h4 class="modal-title">{{touser}}</h4>
+  <button type="button" class="btn-close" (click)="activemodal.dismiss('Cross click')">Close</button>
 </div>
 <div class="modal-body">
-    <h4 class="modal-title">{{touser}}</h4>
-    <button type="button" class="btn-close" (click)="activemodal.dismiss('Cross click')"></button>
+  <h4 class="modal-title">{{touser}}</h4>
+  <button type="button" class="btn-close" (click)="activemodal.dismiss('Cross click')"></button>
 </div>
-
-
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-body">
-      <div class="card border-secondary">
-        <div class="card-header h3 text -muted text-center">Message</div>
-        <div class="card-body">
-         <app-messages [messages]="service.privateMessages"></app-messages>
-        </div>
-        <div class="card-footer">
-            <app-chatinput></app-chatinput>
-        </div>
+  <div class="modal-body">
+    <div class="card border-secondary">
+      <div class="card-header h3 text -muted text-center">Message</div>
+      <div class="card-body">
+        <app-messages [messages]="service.privateMessages"></app-messages>
+      </div>
+      <div class="card-footer">
+        <app-chatinput></app-chatinput>
       </div>
     </div>
+  </div>
 </div>
-
-  

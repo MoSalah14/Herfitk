@@ -1,9 +1,9 @@
-<div style="overflow-y: auto; height: 400px; ">
+<div style="overflow-y: auto; height: 400px; width: 300px   ; ">
     @for (Message of messages; track $index){
-        <p class="card-text">
-            <span class="text-primary">{{Message.from}} :</span>
-            <span class="ml-1">{{Message.content}}</span>               
-        </p> 
+    <p class="card-text">
+        <span class="text-primary">{{Message.from}} :</span>
+        <span class="ml-1">{{Message.content}}</span>
+    </p>
     }
-  
-</div>  
+
+</div>

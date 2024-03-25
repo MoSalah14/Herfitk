@@ -1,7 +1,5 @@
 import { HttpClientModule ,HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-
 import { environment } from './environments/environment';
 import { User } from './Chats/chat/models/User';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
@@ -10,7 +8,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrivateChatComponent } from './Chats/chat/PrivateChats/private-chat/private-chat.component';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 
+  'root',
 })
 export class DataSharingService {
   sharedObject: any;
@@ -21,8 +20,8 @@ export class DataSharingService {
   privateMessages:Message[]=[];
   privateMessageInitial=false;
   URLAPI=environment.apiUrl;
-  constructor(private myclient:HttpClient,private modalservice:NgbModal ) {}
-
+  constructor(private myclient:HttpClient,public modalservice:NgbModal )
+   { }
   getSharedObject(): any {
     return this.sharedObject;
   }
@@ -93,6 +92,7 @@ export class DataSharingService {
      .catch(error=>console.log(error));
      
     }
+
     async sendPrivateMessage(to:string,content:string){
       const message:Message={
         from:this.MyName,
@@ -111,8 +111,9 @@ export class DataSharingService {
      .catch(error=>console.log(error));
       }
     }
+       
     async closePrivateChatMessage(otheruser:string){
-      return this.chatconnection?.invoke('RecievePrivateMessage',this.MyName,otheruser)
+      return this.chatconnection?.invoke('RemovePrivateChat',this.MyName,otheruser)
       .catch(error=>console.log(error));
     }
    

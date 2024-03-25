@@ -12,14 +12,13 @@ import { ChatHomeComponent } from './NGCChat/chat-home/chat-home.component';
   selector: 'app-chat',
   standalone: true,
   imports: [
-  
   RouterModule,
   CommonModule,
   ReactiveFormsModule,
   HttpClientModule,
   FormsModule,
   ChatHomeComponent
-  
+
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'

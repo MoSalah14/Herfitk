@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild, viewChild } from '@angular/core';
 import { DataSharingService } from '../../../../data-sharing.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatinputComponent } from '../../Chat_Input/chatinput/chatinput.component';
 import { MessagesComponent } from '../../showMessages/messages/messages.component';
 import { User } from '../../models/User';
@@ -19,21 +19,27 @@ import { PrivateChatComponent } from '../../PrivateChats/private-chat/private-ch
     HttpClientModule,
     ReactiveFormsModule,
     ChatinputComponent,
-    MessagesComponent
+    MessagesComponent,
+    FormsModule
   ],
   templateUrl: './chat-home.component.html',
   styleUrl: './chat-home.component.css'
 })
-export class ChatHomeComponent implements OnInit ,OnDestroy{
+export class ChatHomeComponent implements OnInit ,OnDestroy ,AfterViewInit{
    @Output() CloseChatEmiter=new EventEmitter();
+   touser:string='';
+   @ViewChild('exampleModal',{static:false}) exampleModal?:ElementRef<HTMLElement>;
 
+ 
 constructor(public service:DataSharingService ,private modalservice:NgbModal) {}
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnDestroy(): void {
     this.service.stopchatconnection();
     throw new Error('Method not implemented.');
   }
-
   ngOnInit(): void {
     this.service.createchatconnection();
   }
@@ -43,8 +49,27 @@ this.CloseChatEmiter.emit();
 sendmessage(content:string){
   this.service.SendMessage(content);
 }
-openPrivateChat(touser:string){
-const modalref=this.modalservice.open(PrivateChatComponent);
-modalref.componentInstance.touser=touser;
+
+sendprivatemessage(contentprivate:string){
+  this.service.sendPrivateMessage(this.service.MyName,contentprivate);
+
 }
+openPrivateChat(touser:string){
+  console.log("hiiii");
+//const modalref=this.modalservice.open(PrivateChatComponent);
+const modalRef = this.modalservice.open(PrivateChatComponent, { size: 'lg' });
+modalRef.componentInstance.touser=touser;
+}
+
+Close(){
+  (this.exampleModal?.nativeElement as HTMLElement).style.display='none';
+   document.body.classList.remove('modal-open');
+}
+
+open(){
+  (this.exampleModal?.nativeElement as HTMLElement).style.display='block';
+  document.body.classList.add('modal-open');
+}
+
+
 }

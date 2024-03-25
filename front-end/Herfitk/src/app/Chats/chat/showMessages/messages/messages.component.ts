@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
-
   ],
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.css'

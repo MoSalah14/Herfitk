@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataSharingService } from '../../data-sharing.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterModule,Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 // import { Router, RouterModule } from '@angular/router';
@@ -9,7 +9,11 @@ import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-display-herfiys',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HttpClientModule
+  ],
   templateUrl: './display-herfiys.component.html',
   styleUrl: './display-herfiys.component.css',
 })

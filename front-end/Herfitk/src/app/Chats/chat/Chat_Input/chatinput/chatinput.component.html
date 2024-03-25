@@ -1,14 +1,15 @@
 <!--  -->
 
-<form autocomplete="off" #messageform="ngForm" (submit)="submitform()">   
-     <div class="row">
+<form autocomplete="off" #messageform="ngForm" (submit)="submitform()">
+    <div class="row">
         <div class="col-9">
-            <input type="text" [(ngModel)]="content" name="content" class="form-control" placeholder="Send Message" required>
+            <input type="text" [(ngModel)]="content" name="content" class="form-control" placeholder="Send Message"
+                required>
         </div>
         <div class="col-3">
             <div class="d-grid">
-                <button  [disabled]="!messageform.valid" class="btn btn-primary " type="submit">Send</button>
+                <button [disabled]="!messageform.valid" class="btn btn-primary " type="submit">Send</button>
             </div>
         </div>
-    </div>               
-</form>  
+    </div>
+</form>
