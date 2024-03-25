@@ -14,6 +14,7 @@ import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component'
 import { TermsofservicesComponent } from './termsofservices/termsofservices.component';
 import { UserprofileComponent } from './Profile/userprofile/userprofile.component';
 import { ChatComponent } from './Chats/chat/chat.component';
+import { PaymentComponent } from './payment/payment/payment.component';
 
 export const routes: Routes = [
   //  { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'user', component:UserprofileComponent  },
   {path: 'chat', component:ChatComponent },
   { path: 'user/:id', component: UserprofileComponent },
+  { path: 'payment', component: PaymentComponent },
 
   { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},

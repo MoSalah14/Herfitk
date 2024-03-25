@@ -1,13 +1,13 @@
 h1 {
   text-align: center;
-  color: #cdcccb;
+  color: #fff;
   font-family: Arial, Helvetica, sans-serif;
 
   padding: 20px 0;
 }
 
 h1:hover {
-  color: #f6fa11; /* Change the color on hover */
+  color:#ffd541; /* Change the color on hover */
 }
 body{
   display: flex;
@@ -52,7 +52,7 @@ body{
   background:#434343;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 5px 10px #b8c506;
+  box-shadow: 0 5px 10px #ffd541;
   transition: all 0.4s ease;
 }
 .main-card .cards .card:hover{
@@ -77,14 +77,14 @@ body{
 .card .content .img img {
   height: 100%;
   width: 100%;
-  border: 1px solid #b8c506;
+  border: 1px solid#ffd541;
   object-fit: cover;
 }
 
 .card .content .img {
   height: 200px;
   width: 150px;
-  border: 3px solid #b8c506;
+  border: 3px solid #ffd541;
   object-fit: cover;
 }
 .card .content .name{
@@ -106,7 +106,7 @@ body{
   height: 20px;
   width: 20px;
   border-radius: 20px;
-  background: #d0da0a;
+  background:#ffd541;
   margin: 0 4px;
   cursor: pointer;
   transition: all 0.5s ease;
@@ -118,10 +118,11 @@ body{
   height: 15px;
   width: 15px;
   border-radius: 20px;
-  background: #e3ed21;
+  background: #ffd541;
   margin: 0 4px;
   cursor: pointer;
   transition: all 0.5s ease;
+  align-items: center;
 }
 .button label.active{
   width: 35px;
@@ -159,7 +160,7 @@ input[type="radio"]{
  .contactButton {
   text-align: center;
   background: #31312e;
-  color: rgb(237, 240, 55);
+  color: #ffd541;
   font-family: inherit;
   padding: 0.45em;
   padding-left: 1em;
@@ -182,11 +183,14 @@ input[type="radio"]{
 
 .contactButton:hover {
   transform: translate(-0.05em, -0.05em);
-  box-shadow: 0.15em 0.15em #fafa05;
+  box-shadow: 0.15em 0.15em#ffd541;
 }
 
 .contactButton:active {
   transform: translate(0.05em, 0.05em);
-  box-shadow: 0.05em 0.05em#fafa05;
+  box-shadow: 0.05em 0.05em#ffd541;
 }
  
+.btn{
+  align-items: center;
+}

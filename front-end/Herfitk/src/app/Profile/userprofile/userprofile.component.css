@@ -51,34 +51,35 @@ body {
   position: relative;
   align-items: center;
   display: inline-block;
-}
-
-.label {
-  font-size: 15px;
-  padding-left: 20px;
-  position: absolute;
-  top: 50%;
-  left: 0; /* Align to the start */
-  transform: translate(0, -50%);
-  transition: 0.3s;
-  pointer-events: none;
-  margin-right: 50px; /* Adjust as needed */
-  display: inline-block;
-  width: 100px; /* تحديد عرض العلامة */
-  text-align: right; /* تحديد محاذاة النص إلى اليمين */
-}
-
-.input {
-  width: 300px;
-  height: 45px;
-  border: none;
-  outline: none;
-  padding: 0px 20px;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 15px;
-  background-color: transparent;
-  box-shadow: 3px 3px 10px rgb(221, 217, 11),
+  
+  }
+  
+  .label {
+    font-size: 15px;
+    padding-left: 20px;
+    position: absolute;
+    top: 50%;
+    left: 0; /* Align to the start */
+    transform: translate(0, -50%);
+    transition: 0.3s;
+    pointer-events: none;
+    margin-right: 50px; /* Adjust as needed */
+    display: inline-block;
+    width: 100px; /* تحديد عرض العلامة */
+    text-align: right; /* تحديد محاذاة النص إلى اليمين */
+  }
+  
+  .input {
+    width: 300px;
+    height: 45px;
+    border: none;
+    outline: none;
+    padding: 0px 20px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 15px;
+    background-color: transparent;
+    box-shadow: 3px 3px 10px #ffd541,
     -1px -1px 6px rgba(255, 255, 255, 0.4);
   /*margin-left: 100px;  Adjust as needed */
   margin-right: 40px; /* Add margin between input and label */
