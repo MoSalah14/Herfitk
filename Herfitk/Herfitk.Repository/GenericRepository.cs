@@ -24,8 +24,11 @@ namespace Herfitk.Repository
             => await _context.Set<T>().ToListAsync();
 
 
+
         public async Task<T?> GetByIdAsync(int id)
-            => await _context.Set<T>().FindAsync(id);
+             => await _context.Set<T>().FindAsync(id);
+
+
 
         public async Task<T> AddAsync(T name)
         {

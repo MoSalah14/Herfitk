@@ -20,7 +20,7 @@
   height: 400px;
   background: #17191a;
   border-radius: 15px;
-  box-shadow: 1px 1px 20px 0px #dcf404e0;
+  box-shadow: 1px 1px 20px 0px#ffd541;
   margin: 30px; /* إضافة مسافة من الجوانب */
   overflow: hidden; /* لمنع التمدد عند التحويل */
   transition: transform 0.3s ease; /* إضافة تأثير انتقالي للتحويل */
@@ -85,7 +85,7 @@
  }
  
  .card button:hover {
-  background: #dcf404e0;
+  background: #ffd541;
   transform: scale(1.2);
  
  } 

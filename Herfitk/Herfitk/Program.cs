@@ -41,14 +41,17 @@ namespace Herfitk
             builder.Services.AddSwaggerGen();
 
 
-            //Allow  Repository
+            #region Allow  Repository Service
+            //Allow  Repository Service
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
             builder.Services.AddScoped(typeof(IHerifyCategoriesRepository), typeof(HerifyCategoriesRepository));
             builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
+            builder.Services.AddScoped(typeof(IClientHerifyRepository), typeof(ClientHerifyRepository));
             builder.Services.AddSingleton<ChatService>();
-            builder.Services.AddSignalR();
-            
+            builder.Services.AddSignalR(); 
+            #endregion
+
 
             //Allow DbContext D_Injection
 

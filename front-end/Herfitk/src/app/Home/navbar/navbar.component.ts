@@ -83,4 +83,20 @@ export class NavbarComponent implements OnInit {
   goToDisplay() {
     this.router.navigate(['/user/' + this.userId]); // Navigate to '/user/:id' route
   }
+
+  //Dark and Light Mode
+  toggleBackground() {
+    const switchInput = document.getElementById('switch') as HTMLInputElement;
+    // const body = document.body;
+    const headTirle = document.getElementById('headTirle') as HTMLInputElement;
+    // const li = document.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
+    // const overlay = document.getElementsByClassName("overlay") as HTMLCollectionOf<HTMLLIElement>;
+    // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
+
+    if (switchInput.checked) {
+      headTirle.style.color = 'black';
+    } else {
+      headTirle.style.color = 'white';
+    }
+  }
 }

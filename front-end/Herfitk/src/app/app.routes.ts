@@ -15,6 +15,7 @@ import { TermsofservicesComponent } from './termsofservices/termsofservices.comp
 import { UserprofileComponent } from './Profile/userprofile/userprofile.component';
 import { ChatComponent } from './Chats/chat/chat.component';
 import { PrivateChatComponent } from './Chats/chat/PrivateChats/private-chat/private-chat.component';
+import { PaymentComponent } from './payment/payment/payment.component';
 
 export const routes: Routes = [
   //  { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -31,7 +32,6 @@ export const routes: Routes = [
   { path: 'user', component:UserprofileComponent  },
   {path: 'chat', component:ChatComponent },
   { path: 'user/:id', component: UserprofileComponent },
-   {path:'privatechat',component:PrivateChatComponent},
 
   { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},

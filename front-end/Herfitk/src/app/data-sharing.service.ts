@@ -1,4 +1,4 @@
-import { HttpClientModule ,HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './environments/environment';
 import { User } from './Chats/chat/models/User';
@@ -20,45 +20,53 @@ export class DataSharingService {
   privateMessages:Message[]=[];
   privateMessageInitial=false;
   URLAPI=environment.apiUrl;
-  constructor(private myclient:HttpClient,public modalservice:NgbModal )
-   { }
+  constructor(private myclient:HttpClient,private modalservice:NgbModal ) {}
+
   getSharedObject(): any {
     return this.sharedObject;
   }
-  getherifybyid(id:any){
-    return this.myclient.get(this.URLAPI+'Herify'+'/' +id);
+  getherifybyid(id: any) {
+    return this.myclient.get(`${this.URLAPI}Herify/${id}`);
   }
-  getreviewherify(){
-    return this.myclient.get(this.URLAPI+'ClientHerifies');
+  getreviewherify(id: number) {
+    return this.myclient.get(this.URLAPI + 'ClientHerifies/GetAll/' + id);
   }
-  registeruser(user: User){
-    return this.myclient.post(this.URLAPI+'Chat/register-user',user,{responseType:'text'});
-  }
-  createchatconnection(){
-    this.chatconnection=new HubConnectionBuilder().withUrl('https://localhost:44346/hubs/chat')
-    .withAutomaticReconnect().build();
 
-    this.chatconnection.start().catch(
-      error=>{
-        console.log(error);
-      });
-//receiving commands from Chathub
-      this.chatconnection.on('UserConnected',()=>{
-     this.adduserconnectionid();
-      });
+  SendReview(Obj: any) {
+    return this.myclient.post(`${this.URLAPI}ClientHerifies/Create`, Obj);
+  }
 
-      this.chatconnection.on('OnlinneUsers',(OnlinneUsers)=>{
-        this.OnlinneUsers=[...OnlinneUsers];
-         });
-         this.chatconnection.on("NewMessage",(newMessage:Message)=>{
-        this.messages=[...this.messages,newMessage];
-         });
-         this.chatconnection.on("OpenPrivateChat",(newMessage:Message)=>{
-          this.privateMessages=[...this.privateMessages,newMessage];
-          this.privateMessageInitial=true;
-          const modalRef=this.modalservice.open(PrivateChatComponent);
-          modalRef.componentInstance.touser=newMessage.from;
-           });
+  registeruser(user: User) {
+    return this.myclient.post(this.URLAPI + 'Chat/register-user', user, {
+      responseType: 'text',
+    });
+  }
+  createchatconnection() {
+    this.chatconnection = new HubConnectionBuilder()
+      .withUrl('https://localhost:44346/hubs/chat')
+      .withAutomaticReconnect()
+      .build();
+
+    this.chatconnection.start().catch((error) => {
+      console.log(error);
+    });
+    //receiving commands from Chathub
+    this.chatconnection.on('UserConnected', () => {
+      this.adduserconnectionid();
+    });
+
+    this.chatconnection.on('OnlinneUsers', (OnlinneUsers) => {
+      this.OnlinneUsers = [...OnlinneUsers];
+    });
+    this.chatconnection.on('NewMessage', (newMessage: Message) => {
+      this.messages = [...this.messages, newMessage];
+    });
+    this.chatconnection.on('OpenPrivateChat', (newMessage: Message) => {
+      this.privateMessages = [...this.privateMessages, newMessage];
+      this.privateMessageInitial = true;
+      const modalRef = this.modalservice.open(PrivateChatComponent);
+      modalRef.componentInstance.touser = newMessage.from;
+    });
 
            this.chatconnection.on("RecievePrivateMessage",(newMessage:Message)=>{
             this.privateMessages=[...this.privateMessages,newMessage];
@@ -92,7 +100,6 @@ export class DataSharingService {
      .catch(error=>console.log(error));
      
     }
-
     async sendPrivateMessage(to:string,content:string){
       const message:Message={
         from:this.MyName,
@@ -111,9 +118,8 @@ export class DataSharingService {
      .catch(error=>console.log(error));
       }
     }
-       
     async closePrivateChatMessage(otheruser:string){
-      return this.chatconnection?.invoke('RemovePrivateChat',this.MyName,otheruser)
+      return this.chatconnection?.invoke('RecievePrivateMessage',this.MyName,otheruser)
       .catch(error=>console.log(error));
     }
    

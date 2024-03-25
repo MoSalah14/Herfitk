@@ -34,7 +34,7 @@ const passwordMatchValidator = (control: FormGroup) => {
 })
 export class RegisterComponent {
   @ViewChild('firstNameInput') firstNameInput!: ElementRef;
-  selectedRole: string = ''; // Define clientVerification property
+  selectedRole: string = 'client'; // Define clientVerification property
 
   submitted: boolean = false; // Define submitted property only once
   registrationForm: FormGroup;
@@ -127,9 +127,9 @@ export class RegisterComponent {
     let RoleId: number = 0;
 
     if (this.selectedRole === 'client') {
-      RoleId = 3; // Assuming 3 represents the client role ID
+      RoleId = 3;
     } else if (this.selectedRole === 'herify') {
-      RoleId = 4; // Assuming 4 represents the Herify role ID
+      RoleId = 4;
     }
 
     // Add userRoleID to formData
@@ -168,7 +168,7 @@ export class RegisterComponent {
       .subscribe(
         (clientResponse: any) => {
           console.log('Registration successful!', clientResponse);
-          alert('Registration as Client successful!');
+          alert('Registration successful!');
           this.router.navigate([endpoint]);
         },
         (clientError) => {

@@ -192,20 +192,51 @@ namespace Herfitk.API.Controllers
                 Address = user.Address
             };
 
-            
+
             if (user.UserHerify != null)
             {
                 userProfileDto.Speciality = user.UserHerify.Speciality;
                 userProfileDto.Zone = user.UserHerify.Zone;
             }
 
-            
+
             if (!string.IsNullOrEmpty(user.PersonalImage))
-                         userProfileDto.Image = user.PersonalImage;
-            
+                userProfileDto.Image = user.PersonalImage;
+
 
             return Ok(userProfileDto);
         }
+
+
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UpdateProfileDto register)
+            {
+            if (ModelState.IsValid)
+            {
+                var getUser = await userManager.FindByIdAsync(id.ToString());
+
+                if (getUser != null)
+                {
+                    getUser.Id = id;
+                    getUser.DisplayName = register.DisplayName;
+                    getUser.Email = register.Email;
+                    getUser.PhoneNumber = register.PhoneNumber;
+                    getUser.Address = register.Address;
+                    getUser.UserName = register.Email;
+
+                    await userManager.UpdateAsync(getUser);
+                    return Ok();
+                }
+
+                return BadRequest("Failed to update user.");
+
+            }
+
+            return BadRequest(ModelState);
+        }
+
+
 
 
     }

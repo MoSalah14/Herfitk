@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Herfitk.Core.Models.Data;
+using Herfitk.Core.Repository;
+using AutoMapper;
+using Herfitk.API.DTO;
 
 namespace Herfitk.API.Controllers
 {
@@ -13,95 +16,84 @@ namespace Herfitk.API.Controllers
     [ApiController]
     public class ClientHerifiesController : ControllerBase
     {
-        private readonly HerfitkContext _context;
+        private readonly IClientHerifyRepository repository;
+        private readonly IMapper mapper;
 
-        public ClientHerifiesController(HerfitkContext context)
+        public ClientHerifiesController(IClientHerifyRepository repository,IMapper mapper)
         {
-            _context = context;
+            this.repository = repository;
+            this.mapper = mapper;
         }
 
-        // GET: api/ClientHerifies
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClientHerify>>> GetClientHerifies()
+
+        [HttpGet("GetAll/{id}")]
+        public async Task<IActionResult> GetClientHerifies(int id)
         {
-            return await _context.ClientHerifies.ToListAsync();
+            var GetAll = await repository.GetAllReviewsAsync();
+            var GetALlByID = GetAll.Where(x => x.HerifyId == id);
+           var MapData =  mapper.Map<List<Herify_ReviewDto>>(GetALlByID);
+
+            return Ok(MapData);
         }
 
-        // GET: api/ClientHerifies/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ClientHerify>> GetClientHerify(int id)
-        {
-            var clientHerify = await _context.ClientHerifies.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetClientHerify(int id)
+        //{
+        //    var clientHerify = await repository.GetByIdAsync(id);
 
-            if (clientHerify == null)
+        //    if (clientHerify == null)
+        //        return NotFound();
+
+        //    var GetReview = mapper.Map<Herify_ReviewDto>(clientHerify);
+        //    return Ok(GetReview);
+        //}
+
+
+        //[HttpPut("Update/{id}")]
+        //public async Task<IActionResult> PutClientHerify(int id, ClientHerify clientHerify)
+        //{
+        //    try
+        //    {
+        //        await repository.UpdateAsync(clientHerify, id);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {  
+        //        throw new Exception("Error While Updating Please Try Again Later");
+        //    }
+
+        //    return NoContent();
+        //}
+
+
+        [HttpPost("Create")]
+        public async Task<IActionResult> PostClientHerify(Client_ReviewReturnDto clientHerify)
+        {
+            var MapData = new ClientHerify
             {
-                return NotFound();
-            }
+                HerifyId = clientHerify.HerifyID,
+                ClientReview = clientHerify.Review,
+                Date = clientHerify.ReviewDate,
+                Rate = clientHerify.Rate
+            };
+            var GetClientID = await repository.GetClientByIdAsync(clientHerify.ClientId);
 
-            return clientHerify;
+            MapData.ClientId = GetClientID.Id;
+
+            var CreateReview = await repository.AddAsync(MapData);
+            return Ok(CreateReview);
         }
 
-        // PUT: api/ClientHerifies/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutClientHerify(int id, ClientHerify clientHerify)
-        {
-            if (id != clientHerify.Id)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(clientHerify).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClientHerifyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/ClientHerifies
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<ClientHerify>> PostClientHerify(ClientHerify clientHerify)
-        {
-            _context.ClientHerifies.Add(clientHerify);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetClientHerify", new { id = clientHerify.Id }, clientHerify);
-        }
-
-        // DELETE: api/ClientHerifies/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteClientHerify(int id)
         {
-            var clientHerify = await _context.ClientHerifies.FindAsync(id);
+            var clientHerify = await repository.DeleteAsync(id);
             if (clientHerify == null)
-            {
                 return NotFound();
-            }
-
-            _context.ClientHerifies.Remove(clientHerify);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ClientHerifyExists(int id)
-        {
-            return _context.ClientHerifies.Any(e => e.Id == id);
-        }
+
     }
 }

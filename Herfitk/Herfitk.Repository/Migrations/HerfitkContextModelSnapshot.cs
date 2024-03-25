@@ -190,23 +190,15 @@ namespace Herfitk.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Client_Review");
 
-                    b.Property<decimal?>("Cost")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<DateOnly?>("Date")
+                    b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
                     b.Property<int?>("HerifyId")
                         .HasColumnType("int")
                         .HasColumnName("Herify_ID");
 
-                    b.Property<string>("HerifyReview")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Herify_Review");
-
-                    b.Property<string>("State")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("Rate")
+                        .HasColumnType("int");
 
                     b.HasKey("Id")
                         .HasName("PK__Client_H__3214EC27824A65FA");

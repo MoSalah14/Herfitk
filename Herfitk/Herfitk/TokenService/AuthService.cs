@@ -3,6 +3,7 @@ using Herfitk.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -13,7 +14,7 @@ namespace Herfitk.API.TokenService
         private readonly IConfiguration config;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AuthService(IConfiguration configuration , IHttpContextAccessor httpContextAccessor)
+        public AuthService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             config = configuration;
             this.httpContextAccessor = httpContextAccessor;
@@ -24,7 +25,8 @@ namespace Herfitk.API.TokenService
             {
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.Name,user.DisplayName),
-                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new Claim("UserRole", user.UserRoleID.ToString()) // Custom claim
 
             };
             var userRoles = await userManager.GetRolesAsync(user);

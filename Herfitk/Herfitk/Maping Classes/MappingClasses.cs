@@ -36,7 +36,12 @@ namespace Herfitk.API.Maping_Classes
 
             CreateMap<Client, ClientDto>().ReverseMap();
 
-            //CreateMap<ClientDto, Client>()
+
+            CreateMap<ClientHerify, Herify_ReviewDto>()
+                .ForMember(s => s.Review, s => s.MapFrom(s => s.ClientReview))
+                .ForMember(s => s.Name, s => s.MapFrom(s => s.Client.ClientUser.DisplayName))
+                .ForMember(s => s.ReviewDate, s => s.MapFrom(s => s.Date))
+                .ForMember(s => s.Rate, s => s.MapFrom(s => s.Rate));
             
 
         }
