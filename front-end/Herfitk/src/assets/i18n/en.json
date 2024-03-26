@@ -9,7 +9,7 @@
     "Welcom": "Welcom"
   },
   "header": {
-    "title": "21 Egypt, Cairo, Down Twon"
+    "title": "We are at your service 24 hours"
   },
   "formContactUs": {
     "firstName": "firstName",
@@ -199,5 +199,13 @@
       "Clients": "Reviews",
       "no_reviews": "No Review For This Herify"
     }
+  },
+  "payment": {
+    "title": " Why pay us the monthly subscription?",
+    "parg1": " 1- Subscribing to a monthly service fee of 50 EGP provides a dedicated platform to showcase your work and services. ",
+    "parg2": " 2. It offers a way to reach a wide audience, potentially attracting new clients and opportunities. ",
+    "parg3": " 3.Such subscriptions often include customization options, analytics, and tools to optimize your online presence.",
+    "parg4": " 4. Access to ongoing support and updates ensures that your online profile remains current and competitive.",
+    "parg5": " 5. Ultimately, the modest monthly fee is an investment in your professional visibility and growth, offering a cost-effective means to your business and enhance your brand reputation."
   }
 }
