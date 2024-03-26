@@ -1,7 +1,16 @@
 {
-  "Hamo": {
-    "Hello": "FuckYou"
+  "navbar": {
+    "Home": "Home",
+    "About Us": "About Us",
+    "Category": "Category",
+    "Contact US": "Contact Us",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Welcom": "Welcom"
   },
+  "header": {
+    "title": "WE ARE AT YOUR SERVICE 24 HOURS"
+   },
 
   "registration": {
     "heading": "Registration",

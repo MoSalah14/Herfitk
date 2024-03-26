@@ -137,7 +137,7 @@ export class NavbarComponent implements OnInit {
     //page contact us
     var text_darkmode=document.getElementsByClassName("text_darkmode") as HTMLCollectionOf<HTMLLIElement>;
     var form_label= document.getElementsByClassName("form-label") as HTMLCollectionOf<HTMLLIElement>;
-   
+
     if (switchInput.checked) {
       headTirle.style.color = 'black';
       body.style.backgroundColor='#d1d1d1';
@@ -153,7 +153,7 @@ export class NavbarComponent implements OnInit {
      top.style.backgroundColor='#d1d1d1';
      footbody.style.backgroundColor='#d1d1d1';
      down.style.backgroundColor='#d1d1d1';
-     down.style.color='Black';  
+     down.style.color='Black';
      foot.style.backgroundColor='#d1d1d1';
      contact.style.backgroundColor='#d1d1d1';
      word1.style.color='Black';
@@ -237,12 +237,12 @@ export class NavbarComponent implements OnInit {
     }
   }
 }
-// const listItems = document.querySelectorAll('single-footer-widget ul li'); 
+// const listItems = document.querySelectorAll('single-footer-widget ul li');
 
 // listItems.forEach(listItem => {
 //   const anchor = listItem.querySelector('a')
 //   if (anchor) {
 //     anchor.style.backgroundColor = 'blue';
- 
+
 //   }
 // });

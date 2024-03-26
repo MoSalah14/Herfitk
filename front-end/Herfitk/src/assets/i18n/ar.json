@@ -1,7 +1,16 @@
 {
-  "Hamo": {
-    "Hello": "مرحبا يا عبدو"
+  "navbar": {
+    "Home": "الصفحه الرئيسيه",
+    "About Us": "معلومات عنا",
+    "Category": "الأقسام",
+    "Contact US": "تواصل معنا",
+    "Login": "تسجيل الدخول",
+    "Logout": "تسجيل الخروج",
+    "Welcom": "مرحبا"
   },
+  "header": {
+    "title": "نحن في خدمتكم 24 ساعة"
+   },
 
   "registration": {
     "heading": "التسجيل",
