@@ -41,11 +41,15 @@
       </button>
     </li>
     <li>
-    <label class="switch">
-      <input type="checkbox" id="switch" (change)="toggleBackground()">
-      <span class="slider"></span>
-    </label>
-  </li>
+      <label class="switch">
+        <input type="checkbox" id="switch" (change)="toggleBackground()" />
+        <span class="slider"></span>
+      </label>
+    </li>
+    <li>
+      <button class="btn1" (click)="SwitchLanguage('en')"></button>
+      <button class="btn2" (click)="SwitchLanguage('ar')"></button>
+    </li>
   </ul>
 </header>
 <!-- Login Popup -->
