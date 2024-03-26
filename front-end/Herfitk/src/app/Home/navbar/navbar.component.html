@@ -8,9 +8,6 @@
     <img src="assets/Image/17.png" alt="Herfitk Logo" />
     Herfitk
   </h1>
-
-  <button (click)="SwitchLanguage('ar')">arabic</button>
-  <button (click)="SwitchLanguage('en')">english</button>
   <ul>
     <li
       *ngIf="
@@ -21,18 +18,16 @@
       <a href="https://localhost:7021">Dashboard</a>
     </li>
     <li><a href="#">Home</a></li>
-    <li>
-      <a href="#About">{{ "" | translate }}</a>
-    </li>
+    <li><a href="#About">About US</a></li>
     <li><a href="#category">Category</a></li>
     <li><a href="#contact">Contact US</a></li>
-     <!-- Dark And Light Mode -->
-     <!-- <li>
+    <!-- Dark And Light Mode -->
+    <!-- <li>
       <input type="checkbox" id="switch" (change)="toggleBackground()">
       <label for="switch"></label>
-      </li>
+      </li> -->
+
     <li>
-     
       <a *ngIf="!isLoggedIn" (click)="openLoginForm()" href="/login">Login</a>
       <a *ngIf="isLoggedIn" (click)="logout()" href="/">Logout</a>
     </li>
@@ -46,11 +41,11 @@
       </button>
     </li>
     <li>
-    <label class="switch">
-      <input type="checkbox" id="switch" (change)="toggleBackground()">
-      <span class="slider"></span>
-    </label>
-  </li>
+      <label class="switch">
+        <input type="checkbox" id="switch" (change)="toggleBackground()" />
+        <span class="slider"></span>
+      </label>
+    </li>
   </ul>
 </header>
 <!-- Login Popup -->
