@@ -10,8 +10,8 @@
   },
   "header": {
     "title": "21 Egypt, Cairo, Down Twon"
-   },
-   "formContactUs": {
+  },
+  "formContactUs": {
     "firstName": "firstName",
     "email": "email",
     "subject": "subject",
@@ -139,17 +139,16 @@
     "content": "Thank you for visiting Herfia web. Your privacy is important to us. This Privacy Policy outlines the types of personal information we receive and collect when you use Herfia web, as well as how we safeguard your information. By using Herfia web, you consent to the data practices described in this policy.",
     "howWeUseInformation": {
       "title": "How We Use Your Information",
-      "listItems": [
-        "Provide and improve Herfia web services",
-        "Personalize your experience",
-        "Communicate with you about updates, promotions, and other relevant information",
-        "Analyze usage trends and optimize performance"
-      ],
+      "listItems": "Provide and improve Herfia web services",
+      "listItems1": "Personalize your experience",
+      "listItems2": "Communicate with you about updates, promotions, and other relevant information",
+      "listItems3": "Analyze usage trends and optimize performance",
       "disclaimer": "We do not sell or rent your personal information to third parties. However, we may share your information with trusted service providers who assist us in operating our website, conducting business, or servicing you, as long as those parties agree to keep this information confidential."
     },
     "contactUs": {
       "title": "Contact Us",
-      "content": "If you have any questions or concerns about this Privacy Policy, please contact us at"
+      "content": "If you have any questions or concerns about this Privacy Policy, please contact us at",
+      "cliclHere": "Click Here"
     }
   },
   "userProfile": {

@@ -6,11 +6,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userprofile',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, TranslateModule],
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css',
   providers: [
