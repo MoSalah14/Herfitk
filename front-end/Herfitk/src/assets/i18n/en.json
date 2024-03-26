@@ -9,9 +9,19 @@
     "Welcom": "Welcom"
   },
   "header": {
-    "title": "WE ARE AT YOUR SERVICE 24 HOURS"
+    "title": "21 Egypt, Cairo, Down Twon"
    },
-
+   "formContactUs": {
+    "firstName": "firstName",
+    "email": "email",
+    "subject": "subject",
+    "message": "message",
+    "sendMessage": "sendMessage",
+    "youerName": "youer name...",
+    "youerEmail": "youer Email... ",
+    "youerSubject": "write subject...",
+    "youerMessage": "write somthing..."
+  },
   "registration": {
     "heading": "Registration",
     "nameRequired": "Name is required (minimum 2 characters, maximum 20 characters)",

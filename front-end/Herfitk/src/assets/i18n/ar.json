@@ -90,7 +90,18 @@
   },
   "location": {
     "title": "الموقع",
-    "address": "121 Rock Street, 21 Egypt, Cairo, NY 92103-9000"
+    "address": " مصر, 21القاهرة, وسط المدينه"
+  },
+  "formContactUs": {
+    "firstName": "الاسم الأول",
+    "email": "البريد الإلكتروني",
+    "subject": "الموضوع",
+    "message": "رساله",
+    "sendMessage": "ارسال",
+    "youerName": "اسمك",
+    "youerEmail": "بريدك الألكتروني",
+    "youerSubject": "أكتب نبذه عن الموضوع",
+    "youerMessage": "اترك رساله"
   },
   "business_hours": {
     "title": "ساعات العمل",
