@@ -11,11 +11,18 @@ import { Router, RouterModule } from '@angular/router';
 import { RegHerifyService } from './reg-herify.service';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-regs-herify',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TranslateModule,
+  ],
   templateUrl: './regs-herify.component.html',
   styleUrl: './regs-herify.component.css',
   providers: [RegHerifyService],
@@ -30,7 +37,8 @@ export class RegsHerifyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: RegHerifyService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private translate: TranslateService
   ) {
     this.FormValidation = this.formBuilder.group({
       Zone: ['', [Validators.required]],
@@ -38,8 +46,13 @@ export class RegsHerifyComponent implements OnInit {
       Speciality: ['', Validators.required],
       CategoryName: ['', Validators.required],
     });
-  }
 
+    this.translate.setDefaultLang;
+    ('en');
+  }
+  SwitchLanguage(language: string) {
+    this.translate.use(language);
+  }
   ngOnInit(): void {
     this.getUserIdFromToken();
     this.fetchCategories();

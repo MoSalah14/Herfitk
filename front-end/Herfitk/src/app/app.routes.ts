@@ -16,6 +16,7 @@ import { UserprofileComponent } from './Profile/userprofile/userprofile.componen
 import { ChatComponent } from './Chats/chat/chat.component';
 import { PrivateChatComponent } from './Chats/chat/PrivateChats/private-chat/private-chat.component';
 import { PaymentComponent } from './payment/payment/payment.component';
+import { VodafoneComponent } from './vodafone/vodafone.component';
 
 export const routes: Routes = [
   //  { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,10 +30,11 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacypolicyComponent },
   { path: 'termofservices', component: TermsofservicesComponent },
   { path: 'display/:id', component: DisplayHerfiysComponent },
-  { path: 'user', component:UserprofileComponent  },
-  {path: 'chat', component:ChatComponent },
+  { path: 'user', component: UserprofileComponent },
+  { path: 'chat', component: ChatComponent },
   { path: 'user/:id', component: UserprofileComponent },
-  {path: 'payment', component:PaymentComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'vodafone', component: VodafoneComponent },
 
   { path: '**', redirectTo: '/Home' },
   // {path: "about" , component:AboutComponent},

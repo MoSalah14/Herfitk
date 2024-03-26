@@ -133,57 +133,7 @@ header.sticky ul li a:hover {
   }
 }
 
-
-
-
 /* Dark and Light Mode */
-/* Satart input*/
-/* #switch {
-  width: 0;
-  height: 0;
-  visibility: hidden;
-} */
-/* End input */
-/* Start label */
-/* label {
-  display: block;
-  border-radius: 50px;
-  width: 120px;
-  height: 40px;
-  background-color: black;
-  position: relative;
-  transition: 0.5s;
-  cursor: pointer;
-} */
-/* End label */
-/* Start after */
-/* label::after {
-  content: "";
-  background-color: white;
-  width: 40px;
-  height: 30px;
-  border-radius: 70px;
-  position: absolute;
-  top: 5px;
-  left: 5px;
-} */
-/* End after */
-/* Start mochan*/
-/* #switch:checked + label {
-  background-color: white;
-} */
-/* #switch:checked + label::after {
-  background-color: black;
-
-  left: calc(100% - 5px);
-  transition: 0.5s;
-  transform: translate(-100%);
-} */
-/* End mochan*/
-/* label:active:after  {
-  width: 50px;
-} */
-
 /* The switch - the box around the slider */
 .switch {
   font-size: 17px;
@@ -253,4 +203,38 @@ input:checked + .slider::after {
   left: 80%;
   width: 0px;
   height: 0px;
+}
+/* language button */
+.btn1 {
+  background: url("../../../assets/Image/united.png");
+  
+  background-size: cover; 
+  background-position: center; 
+  width: 40px; 
+  height: 30px; 
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: opacity 0.3s;
+  margin-right: 10px; /* المسافة بين الزرارين */
+}
+
+.btn1:hover {
+  opacity: 0.8; /* تغيير الشفافية عند التحويل */
+}
+.btn2 {
+  background: url("../../../assets/Image/egypt.png");
+ 
+  background-size: cover; 
+  background-position: center; 
+  width: 40px; 
+  height: 30px; 
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: opacity 0.3s;
+}
+
+.btn2:hover {
+  opacity: 0.8; 
 }

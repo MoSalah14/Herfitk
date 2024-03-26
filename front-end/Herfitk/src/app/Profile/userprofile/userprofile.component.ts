@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from './user.service';
-import { RouterModule } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
+import { PaymentService } from '../../payment.service';
 
 @Component({
   selector: 'app-userprofile',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, TranslateModule],
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css',
   providers: [
@@ -29,16 +31,29 @@ export class UserprofileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private cookieService: CookieService,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private paymentService: PaymentService
   ) {
     this.checkUserRole();
   }
-
+  makeCardPayment(): void {
+    console.log('Make payment clicked');
+    this.paymentService.CardRequest();
+  }
   ngOnInit(): void {
     this.getUserIdFromToken();
     this.fetchUserData();
   }
-
+  openInNewWindow(): void {
+    const newWindow = window.open('http://localhost:4200/vodafone', '_blank');
+    if (newWindow) {
+      newWindow.focus();
+    } else {
+      alert(
+        'Your browser blocked opening the new window. Please allow pop-ups for this site.'
+      );
+    }
+  }
   getUserIdFromToken(): void {
     const token = this.cookieService.get('authToken');
     if (token) {
@@ -62,6 +77,14 @@ export class UserprofileComponent implements OnInit {
         console.error('Failed to fetch user data:', error);
       }
     );
+  }
+  openVodafonePage() {
+    // Navigate to the HTML page using its route
+    window.location.href = 'assets/VodafonePayment.html';
+  }
+  openCardPage() {
+    // Navigate to the HTML page using its route
+    window.location.href = 'assets/CardPay.html';
   }
   checkUserRole() {
     const authToken = this.cookieService.get('authToken');

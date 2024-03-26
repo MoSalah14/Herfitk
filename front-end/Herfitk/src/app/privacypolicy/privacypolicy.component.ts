@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-privacypolicy',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './privacypolicy.component.html',
-  styleUrl: './privacypolicy.component.css'
+  styleUrl: './privacypolicy.component.css',
 })
 export class PrivacypolicyComponent {
+  
+
 
 }

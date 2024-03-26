@@ -34,11 +34,21 @@ export class NavbarComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.checkAuthStatus();
-    this.languageService.setDefaultLang('en');
+    const selectedLanguage = this.cookieService.get('selectedLanguage');
+    if (selectedLanguage) {
+      this.languageService.setDefaultLang(selectedLanguage);
+      this.languageService.use(selectedLanguage);
+    } else {
+      // Set default language if no cookie is found
+      this.languageService.setDefaultLang('en');
+      this.languageService.use('en');
+    }
   }
 
   SwitchLanguage(language: string) {
+    this.cookieService.set('selectedLanguage', language, 30);
     this.languageService.setDefaultLang(language);
+    window.location.reload();
   }
 
   checkAuthStatus(): void {
@@ -106,143 +116,146 @@ export class NavbarComponent implements OnInit {
     //Category
     // const cardcat=document.getElementById('cardcat')  as HTMLInputElement;
     //footer
-    const footer=document.getElementById('footer') as HTMLInputElement;
-    const top=document.getElementById('top') as HTMLInputElement;
-    const footbody=document.getElementById('footbody') as HTMLInputElement;
-    const down=document.getElementById('down') as HTMLInputElement;
-    const foot=document.getElementById('foot') as HTMLInputElement;
-    const contact=document.getElementById('contact') as HTMLInputElement;
-    const word1=document.getElementById('word1') as HTMLInputElement;
-    const word2=document.getElementById('word2') as HTMLInputElement;
-    const word3=document.getElementById('word3') as HTMLInputElement;
-    const herf=document.getElementById('herf') as HTMLInputElement;
-    const aboutherf=document.getElementById('aboutherf') as HTMLInputElement;
-    const newh=document.getElementById('newh') as HTMLInputElement;
-    const sub=document.getElementById('sub') as HTMLInputElement;
-    const cop=document.getElementById('cop') as HTMLInputElement;
-    const linkfoot=document.getElementById('linkfoot') as HTMLInputElement;
+    const footer = document.getElementById('footer') as HTMLInputElement;
+    const top = document.getElementById('top') as HTMLInputElement;
+    const footbody = document.getElementById('footbody') as HTMLInputElement;
+    const down = document.getElementById('down') as HTMLInputElement;
+    const foot = document.getElementById('foot') as HTMLInputElement;
+    const contact = document.getElementById('contact') as HTMLInputElement;
+    const word1 = document.getElementById('word1') as HTMLInputElement;
+    const word2 = document.getElementById('word2') as HTMLInputElement;
+    const word3 = document.getElementById('word3') as HTMLInputElement;
+    const herf = document.getElementById('herf') as HTMLInputElement;
+    const aboutherf = document.getElementById('aboutherf') as HTMLInputElement;
+    const newh = document.getElementById('newh') as HTMLInputElement;
+    const sub = document.getElementById('sub') as HTMLInputElement;
+    const cop = document.getElementById('cop') as HTMLInputElement;
+    const linkfoot = document.getElementById('linkfoot') as HTMLInputElement;
     //terms
-    const term=document.getElementById('term') as HTMLInputElement;
-    const th2 =document.getElementById('th2') as HTMLInputElement;
+    const term = document.getElementById('term') as HTMLInputElement;
+    const th2 = document.getElementById('th2') as HTMLInputElement;
     //privacy
-    const privacybody=document.getElementById('privacybody') as HTMLInputElement;
+    const privacybody = document.getElementById(
+      'privacybody'
+    ) as HTMLInputElement;
     //pay
-    const pay=document.getElementById('pay') as HTMLInputElement;
+    const pay = document.getElementById('pay') as HTMLInputElement;
     // const li = document.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
     // const overlay = document.getElementsByClassName("overlay") as HTMLCollectionOf<HTMLLIElement>;
-   // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
+    // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
     //const contact = document.getElementsByClassName("contact") as HTMLCollectionOf<HTMLLIElement>;
     // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
 
     //page contact us
-    var text_darkmode=document.getElementsByClassName("text_darkmode") as HTMLCollectionOf<HTMLLIElement>;
-    var form_label= document.getElementsByClassName("form-label") as HTMLCollectionOf<HTMLLIElement>;
-   
+    var text_darkmode = document.getElementsByClassName(
+      'text_darkmode'
+    ) as HTMLCollectionOf<HTMLLIElement>;
+    var form_label = document.getElementsByClassName(
+      'form-label'
+    ) as HTMLCollectionOf<HTMLLIElement>;
+
     if (switchInput.checked) {
       headTirle.style.color = 'black';
-      body.style.backgroundColor='#d1d1d1';
+      body.style.backgroundColor = '#d1d1d1';
       //About
-      aboutbody.style.backgroundColor='#d1d1d1';
-      abouth1.style.color='Black';
-      abouth2.style.color='Black';
-      aboutp.style.color='Black';
+      aboutbody.style.backgroundColor = '#d1d1d1';
+      abouth1.style.color = 'Black';
+      abouth2.style.color = 'Black';
+      aboutp.style.color = 'Black';
       //Category
       // cardcat.style.backgroundColor='black';
       //footer
-      footer.style.backgroundColor='#d1d1d1';
-     top.style.backgroundColor='#d1d1d1';
-     footbody.style.backgroundColor='#d1d1d1';
-     down.style.backgroundColor='#d1d1d1';
-     down.style.color='Black';  
-     foot.style.backgroundColor='#d1d1d1';
-     contact.style.backgroundColor='#d1d1d1';
-     word1.style.color='Black';
-     word2.style.color='Black';
-     word3.style.color='Black';
-     herf.style.color='Black';
-     aboutherf.style.color='Black';
-     newh.style.color='Black';
-     sub.style.color='Black';
-     cop.style.color='Black';
-     linkfoot.style.color='Black';
+      footer.style.backgroundColor = '#d1d1d1';
+      top.style.backgroundColor = '#d1d1d1';
+      footbody.style.backgroundColor = '#d1d1d1';
+      down.style.backgroundColor = '#d1d1d1';
+      down.style.color = 'Black';
+      foot.style.backgroundColor = '#d1d1d1';
+      contact.style.backgroundColor = '#d1d1d1';
+      word1.style.color = 'Black';
+      word2.style.color = 'Black';
+      word3.style.color = 'Black';
+      herf.style.color = 'Black';
+      aboutherf.style.color = 'Black';
+      newh.style.color = 'Black';
+      sub.style.color = 'Black';
+      cop.style.color = 'Black';
+      linkfoot.style.color = 'Black';
       //terms
-      term.style.backgroundColor='#d1d1d1';
-      term.style.color='Black';
-      th2.style.color='Black';
+      term.style.backgroundColor = '#d1d1d1';
+      term.style.color = 'Black';
+      th2.style.color = 'Black';
       //privacy
-      privacybody.style.backgroundColor='#d1d1d1';
-      privacybody.style.color='Black';
+      privacybody.style.backgroundColor = '#d1d1d1';
+      privacybody.style.color = 'Black';
       //payment
-      pay.style.backgroundColor='#d1d1d1';
-      pay.style.color='Black';
+      pay.style.backgroundColor = '#d1d1d1';
+      pay.style.color = 'Black';
 
-
-
-    for(var i=0; i< text_darkmode.length; i++ ){
-      const item=text_darkmode[i];
-      item.style.color='black';
-    }
-// all label
-    for(var i=0; i< form_label.length; i++ ){
-      const item=form_label[i];
-      item.style.color='black';
-    }
-
+      for (var i = 0; i < text_darkmode.length; i++) {
+        const item = text_darkmode[i];
+        item.style.color = 'black';
+      }
+      // all label
+      for (var i = 0; i < form_label.length; i++) {
+        const item = form_label[i];
+        item.style.color = 'black';
+      }
     } else {
       headTirle.style.color = 'white';
-      body.style.backgroundColor='#17191a';
+      body.style.backgroundColor = '#17191a';
       //About
-      aboutbody.style.backgroundColor="#17191a";
-      abouth1.style.color='white';
-      abouth2.style.color='white';
-      aboutp.style.color='white';
+      aboutbody.style.backgroundColor = '#17191a';
+      abouth1.style.color = 'white';
+      abouth2.style.color = 'white';
+      aboutp.style.color = 'white';
 
       // cardcat.style.backgroundColor='black';
-      footer.style.backgroundColor='#17191a';
-      top.style.backgroundColor='#17191a';
-      footbody.style.backgroundColor='#17191a';
-      down.style.backgroundColor='#17191a';
-      down.style.color='white';
-      foot.style.backgroundColor='#d1d1d1';
-      contact.style.backgroundColor='#17191a';
-      word1.style.color='white';
-      word2.style.color='white';
-      word3.style.color='white';
-      herf.style.color='white';
-      aboutherf.style.color='white';
-      newh.style.color='white';
-      sub.style.color='white';
-      cop.style.color='white';
-      linkfoot.style.color='white';
+      footer.style.backgroundColor = '#17191a';
+      top.style.backgroundColor = '#17191a';
+      footbody.style.backgroundColor = '#17191a';
+      down.style.backgroundColor = '#17191a';
+      down.style.color = 'white';
+      foot.style.backgroundColor = '#d1d1d1';
+      contact.style.backgroundColor = '#17191a';
+      word1.style.color = 'white';
+      word2.style.color = 'white';
+      word3.style.color = 'white';
+      herf.style.color = 'white';
+      aboutherf.style.color = 'white';
+      newh.style.color = 'white';
+      sub.style.color = 'white';
+      cop.style.color = 'white';
+      linkfoot.style.color = 'white';
       //term
-      term.style.backgroundColor='#17191a';
-      term.style.color='white';
-      th2.style.color='white';
+      term.style.backgroundColor = '#17191a';
+      term.style.color = 'white';
+      th2.style.color = 'white';
       //privacy
-      privacybody.style.backgroundColor='#17191a';
-      privacybody.style.color='white';
+      privacybody.style.backgroundColor = '#17191a';
+      privacybody.style.color = 'white';
       //payment
-      pay.style.backgroundColor='#17191a';
-      pay.style.color='white';
+      pay.style.backgroundColor = '#17191a';
+      pay.style.color = 'white';
 
-      for(var i=0; i< text_darkmode.length; i++ ){
-        const item=text_darkmode[i];
-        item.style.color='white';
+      for (var i = 0; i < text_darkmode.length; i++) {
+        const item = text_darkmode[i];
+        item.style.color = 'white';
       }
 
-      for(var i=0; i< form_label.length; i++ ){
-        const item=form_label[i];
-        item.style.color='white';
+      for (var i = 0; i < form_label.length; i++) {
+        const item = form_label[i];
+        item.style.color = 'white';
       }
     }
   }
 }
-// const listItems = document.querySelectorAll('single-footer-widget ul li'); 
+// const listItems = document.querySelectorAll('single-footer-widget ul li');
 
 // listItems.forEach(listItem => {
 //   const anchor = listItem.querySelector('a')
 //   if (anchor) {
 //     anchor.style.backgroundColor = 'blue';
- 
+
 //   }
 // });
