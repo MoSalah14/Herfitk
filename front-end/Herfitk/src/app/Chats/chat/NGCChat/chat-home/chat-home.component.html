@@ -1,62 +1,46 @@
 <div class="row mt-3">
 
 	<!-- button back to home -->
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-lg-2">
 			<div class="d-grid">
 				<button class="btn btn-primary btn-block" type="button" (click)="backtohome()">Back To Home</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
-<!-- show online user -->
-	<div class="col-lg-2">		
+	<!-- show online user -->
+
+	<div class="col-lg-2">
 		<div class="card-border-secondary mb-3">
+
+		
+
 			<div class="card-header h3 text-muted text center">Oline Users</div>
 			<br>
-			
-			<!-- <button id="btn-message" class="button-message">
-				<div class="content-avatar">
-					<div class="status-user"></div>
-					<div class="avatar">
-						<svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z"></path></svg>
-					</div>
-				</div>
-				<div class="notice-content">
-					<div class="username">Message</div>
-					<div class="lable-message"> Jessica Sanders<span class="number-message">3</span></div>
-					<div class="user-id">Online User</div>
-				</div>
-			</button> -->
-
 
 			<div class="card-body" style="height:555px">
 				@for (user of service.OnlinneUsers; track $index)
 				{
 				<div class="row mt-1">
+				
 
-					<!-- <div class="col">
-						<div class="d-grid">
-							<button class="btn btn-success card-text btn-block" type="button"
-								[ngClass]="{'btn-success': user === service.MyName, 'btn-primary': user !== service.MyName}"
-								(dblclick)="open()" [disabled]="user === service.MyName">
-								{{user}}</button>
-						</div>
-					</div> -->
-					
 					<button id="btn-message" class="button-message"
-					[ngClass]="{'style: background-color: red': user === service.MyName, 'style: background-color : blue': user !== service.MyName}"
-					(dblclick)="open()" [disabled]="user === service.MyName"
-					>
+						[ngClass]="{'style: background-color: red': user === service.MyName, 'style: background-color : blue': user !== service.MyName}"
+						(dblclick)="open()" [disabled]="user === service.MyName">
 						<div class="content-avatar">
 							<div class="status-user"></div>
 							<div class="avatar">
-								<svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z"></path></svg>
+								<svg class="user-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+									<path
+										d="M12,12.5c-3.04,0-5.5,1.73-5.5,3.5s2.46,3.5,5.5,3.5,5.5-1.73,5.5-3.5-2.46-3.5-5.5-3.5Zm0-.5c1.66,0,3-1.34,3-3s-1.34-3-3-3-3,1.34-3,3,1.34,3,3,3Z">
+									</path>
+								</svg>
 							</div>
 						</div>
 						<div class="notice-content">
 							<div class="username">Message</div>
-							<div class="lable-message"> {{user}}     <span class="number-message">3</span></div>
+							<div class="lable-message"> {{user}} <span class="number-message">3</span></div>
 							<div class="user-id">Online User</div>
 						</div>
 					</button>
@@ -67,16 +51,17 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- //part message -->
 	<div class="col-lg-9">
 		<div class="card-border-secondary">
-			<div class="card-header h3 text-muted text center" style="background-color: rgb(221, 221, 214);">
+			<div class="card-header h3 text-muted text center">
 				{{service.MyName}}</div>
 			<hr>
 			<h4 style="text-align: left; color: #eee8e8;">Chat</h4>
 			<div class="card-body" style="height: 500px;">
 				<app-messages [messages]="service.messages"></app-messages>
-		
+
 			</div>
 			<div class="card-footer">
 
@@ -87,16 +72,22 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade show" #exampleModal style="display: none;" id="exampleModal" tabindex="-1" role="dialog"
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+<div id="modaldesign" class="modal fade show" #exampleModal style="display: none;" id="exampleModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">{{service.MyName}}</h5>
-
 			</div>
-			<div class="modal-body">
-
+			<div class="modal-body" style="width: 200px;">
 				<app-messages [messages]="service.privateMessages"></app-messages>
 			</div>
 			<div class="modal-footer">
@@ -107,4 +98,6 @@
 			</div>
 		</div>
 	</div>
+</div>
+
 </div>
