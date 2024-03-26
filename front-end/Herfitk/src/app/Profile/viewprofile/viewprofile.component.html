@@ -166,7 +166,14 @@
         </div>
         <div
           *ngIf="Errormessage"
-          style="color: red; display: flex; font-size: small"
+          [ngStyle]="{
+            color:
+              Errormessage === 'Feedback submitted successfully!'
+                ? 'green'
+                : 'red',
+            display: 'flex',
+            'font-size': 'small'
+          }"
         >
           {{ Errormessage }}
         </div>

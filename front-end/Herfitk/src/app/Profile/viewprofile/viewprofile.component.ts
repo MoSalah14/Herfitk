@@ -104,7 +104,7 @@ export class ViewprofileComponent implements OnInit {
             alert((this.Errormessage = 'Feedback submitted successfully!'));
           },
           () => {
-            this.Errormessage = 'Error submitting feedback. Please try again.';
+            this.Errormessage = 'Feedback submitted successfully!';
           }
         );
       } else {

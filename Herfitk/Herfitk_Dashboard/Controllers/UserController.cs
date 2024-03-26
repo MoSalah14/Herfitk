@@ -96,7 +96,8 @@ namespace Herfitk_Dashboard.Controllers
                             UserName = registerViewModel.Email,
                             PhoneNumber = registerViewModel.PhoneNumber,
                             NationalId = registerViewModel.NationalId,
-                            UserRoleID = registerViewModel.RoleId
+                            UserRoleID = registerViewModel.RoleId,
+                            PasswordHash = registerViewModel.Password
                         };
 
 
@@ -193,7 +194,7 @@ namespace Herfitk_Dashboard.Controllers
                     PhoneNumber = EditeUser.PhoneNumber,
                     NationalId = EditeUser.NationalId,
                     RoleId = EditeUser.UserRoleID,
-                    Password = EditeUser.NationalId,
+                    Password = EditeUser.PasswordHash,
                 };
 
 
@@ -223,6 +224,8 @@ namespace Herfitk_Dashboard.Controllers
                         GetAppUser.Email = UserView.Email;
                         GetAppUser.PhoneNumber = UserView.PhoneNumber;
                         GetAppUser.NationalId = UserView.NationalId;
+                        GetAppUser.PasswordHash = UserView.Password;
+                        GetAppUser.UserRoleID = UserView.RoleId;
                     }
 
                     // Handle National ID Image Upload
