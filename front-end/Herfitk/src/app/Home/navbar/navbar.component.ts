@@ -4,11 +4,12 @@ import { LoginComponent } from '../../Account/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, LoginComponent],
+  imports: [CommonModule, LoginComponent, TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   providers: [
@@ -28,10 +29,16 @@ export class NavbarComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private jwtHelper: JwtHelperService, // Inject JwtHelperService
-    private router: Router
+    private router: Router,
+    private languageService: TranslateService
   ) {}
   ngOnInit(): void {
     this.checkAuthStatus();
+    this.languageService.setDefaultLang('en');
+  }
+
+  SwitchLanguage(language: string) {
+    this.languageService.setDefaultLang(language);
   }
 
   checkAuthStatus(): void {
@@ -122,9 +129,15 @@ export class NavbarComponent implements OnInit {
     //pay
     const pay=document.getElementById('pay') as HTMLInputElement;
     // const li = document.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
+    // const overlay = document.getElementsByClassName("overlay") as HTMLCollectionOf<HTMLLIElement>;
+   // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
     //const contact = document.getElementsByClassName("contact") as HTMLCollectionOf<HTMLLIElement>;
     // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
 
+    //page contact us
+    var text_darkmode=document.getElementsByClassName("text_darkmode") as HTMLCollectionOf<HTMLLIElement>;
+    var form_label= document.getElementsByClassName("form-label") as HTMLCollectionOf<HTMLLIElement>;
+   
     if (switchInput.checked) {
       headTirle.style.color = 'black';
       body.style.backgroundColor='#d1d1d1';
@@ -165,6 +178,16 @@ export class NavbarComponent implements OnInit {
 
 
 
+    for(var i=0; i< text_darkmode.length; i++ ){
+      const item=text_darkmode[i];
+      item.style.color='black';
+    }
+// all label
+    for(var i=0; i< form_label.length; i++ ){
+      const item=form_label[i];
+      item.style.color='black';
+    }
+
     } else {
       headTirle.style.color = 'white';
       body.style.backgroundColor='#17191a';
@@ -201,6 +224,16 @@ export class NavbarComponent implements OnInit {
       //payment
       pay.style.backgroundColor='#17191a';
       pay.style.color='white';
+
+      for(var i=0; i< text_darkmode.length; i++ ){
+        const item=text_darkmode[i];
+        item.style.color='white';
+      }
+
+      for(var i=0; i< form_label.length; i++ ){
+        const item=form_label[i];
+        item.style.color='white';
+      }
     }
   }
 }
