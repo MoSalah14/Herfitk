@@ -116,15 +116,14 @@
     "hours": "Mon – Fri …… 10 am – 8 pm, Sat, Sun ....… Closed"
   },
   "footer": {
+    "Herfitk": "Herfitk",
+    "About": "About",
     "aboutHerfitk": "About Herfitk",
     "category": "Category",
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
     "monthlySubscription": "Monthly Subscription",
-    "newsletter": {
-      "title": "Newsletter",
-      "subscribeText": "Subscribe to get the latest news, updates, and information."
-    },
+
     "contactInfo": {
       "phone": "+201234567911",
       "address": "121 Rock Street, 21 Egypt, Cairo, NY 92103-9000"
@@ -133,6 +132,10 @@
       "text": "&copy; Copyright. Designed and developed by",
       "companyName": "Herfitk"
     }
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subscribeText": "Subscribe to get the latest news, updates, and information."
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
