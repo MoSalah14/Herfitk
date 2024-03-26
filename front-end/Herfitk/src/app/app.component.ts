@@ -68,8 +68,7 @@ export class AppComponent implements AfterViewInit {
     private elementRef: ElementRef,
     private translate: TranslateService
   ) {
-    this.translate.setDefaultLang;
-    ('en');
+    this.translate.setDefaultLang('en');
   }
 
   SwitchLanguage(language: string) {
