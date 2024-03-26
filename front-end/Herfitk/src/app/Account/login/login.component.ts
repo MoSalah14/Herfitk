@@ -18,6 +18,7 @@ import { LoginService } from './login.service';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from '../register/register.component';
 import { CookieService } from 'ngx-cookie-service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   providers: [LoginService, CookieService],
 })
@@ -46,14 +48,19 @@ export class LoginComponent {
     private loginService: LoginService,
     private fb: FormBuilder,
     private cookieService: CookieService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private translate: TranslateService
   ) {
     this.FormValidation = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+    this.translate.setDefaultLang;
+    ('en');
   }
-
+  SwitchLanguage(language: string) {
+    this.translate.use(language);
+  }
   FormValidation = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [

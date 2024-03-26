@@ -3,8 +3,8 @@
   <div class="card">
     <div class="card2">
       <form class="form" [formGroup]="FormValidation" (ngSubmit)="logSuc()">
-        <p id="heading">Login</p>
-        <label class="form-label">Email</label>
+        <p id="heading">{{ "login.heading" | translate }}</p>
+        <label class="form-label">{{ "login.email" | translate }}</label>
         <div class="field">
           <svg
             viewBox="0 0 16 16"
@@ -30,15 +30,15 @@
           />
         </div>
         <div *ngIf="!validEmail && submitted" style="color: red" id="not">
-          Email is not valid
+          {{ "login.emailInvalid" | translate }}
         </div>
         <div
           *ngIf="showEmailRequiredMessage && !inputEmail.value"
           style="color: red"
         >
-          Email is required
+          {{ "login.emailRequired" | translate }}
         </div>
-        <label class="form-label">Password</label>
+        <label class="form-label">{{ "login.password" | translate }}</label>
         <div class="field">
           <svg
             viewBox="0 0 16 16"
