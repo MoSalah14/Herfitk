@@ -23,6 +23,12 @@ import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component'
 import { TermsofservicesComponent } from './termsofservices/termsofservices.component';
 import { UserprofileComponent } from './Profile/userprofile/userprofile.component';
 import { PaymentComponent } from './payment/payment/payment.component';
+import {
+  TranslateModule,
+  TranslateService,
+  TranslateStore,
+} from '@ngx-translate/core';
+import { AppModuleModule } from './app-module.module';
 
 @Component({
   selector: 'app-root',
@@ -47,16 +53,28 @@ import { PaymentComponent } from './payment/payment/payment.component';
     TermsofservicesComponent,
     RegsHerifyComponent,
     UserprofileComponent,
-    PaymentComponent
+    PaymentComponent,
+    TranslateModule,
+    AppModuleModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [DataSharingService],
+  providers: [DataSharingService, TranslateService, TranslateStore],
 })
 export class AppComponent implements AfterViewInit {
   title = 'Herfitk';
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private translate: TranslateService
+  ) {
+    this.translate.setDefaultLang;
+    ('en');
+  }
+
+  SwitchLanguage(language: string) {
+    this.translate.use(language);
+  }
 
   @ViewChild('translateElement') translateElement!: ElementRef;
 

@@ -1,0 +1,139 @@
+{
+  "Hamo": {
+    "Hello": "FuckYou"
+  },
+
+  "registration": {
+    "heading": "Registration",
+    "nameRequired": "Name is required (minimum 2 characters, maximum 20 characters)",
+    "emailInvalid": "Please enter a valid email address",
+    "phoneInvalid": "Please enter a valid phone number (e.g., 010xxxxxxxx)",
+    "addressRequired": "Please enter your address (minimum 3 characters, maximum 30 characters)",
+    "nationalIdInvalid": "Please enter a valid 14-digit national ID",
+    "passwordRequired": "Please enter a password (minimum 8 characters)",
+    "passwordMismatch": "Passwords do not match",
+    "photoRequired": "Please select a photo.",
+    "roleRequired": "You Should Choose your Role.",
+    "selectRole": "Select Role",
+    "client": "Client",
+    "herify": "Herify",
+    "signUp": "Sign Up"
+  },
+  "login": {
+    "heading": "Login",
+    "email": "Email",
+    "emailPlaceholder": "email@example.com",
+    "password": "Password",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email is not valid",
+    "passwordRequired": "Password is required",
+    "passwordInvalid": "Password is not valid",
+    "loginButton": "Login",
+    "signUpButton": "Sign Up",
+    "forgotPasswordButton": "Forgot Password"
+  },
+  "craftForm": {
+    "heading": "Select Your Craft",
+    "zone": {
+      "label": "Zone",
+      "placeholder": "Select Zone",
+      "required": "Zone is required."
+    },
+    "history": {
+      "label": "History",
+      "placeholder": "Write about Your History",
+      "required": "History is required."
+    },
+    "category": {
+      "label": "Category",
+      "placeholder": "Select Category",
+      "required": "Category is required."
+    },
+    "specialist": {
+      "label": "Specialist",
+      "placeholder": "Select Specialist",
+      "required": "Specialist is required."
+    },
+    "uploadPictures": "Upload Pictures of your work :",
+    "confirmButton": "Confirm",
+    "cancelButton": "Cancel"
+  },
+  "cards": {
+    "readMoreButton": "Read More",
+    "viewProfileButton": "View Profile",
+    "madeWith": "Made with ♡"
+  },
+  "aboutUs": {
+    "title": "About Us",
+    "welcomeTitle": "Welcome to Herfitk",
+    "description": "We, Herfitk.com, act as intermediaries between craftsmen and clients. We help you connect with craftsmen in various specialties quickly and with the highest quality. Additionally, we assist craftsmen in showcasing their work to gain opportunities in multiple locations for a nominal fee."
+  },
+  "category": {
+    "title": "Category"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "You Can Contact Us 24 hours"
+  },
+  "phone": {
+    "title": "Phone",
+    "numbers": ["01234567911", "01234567911"]
+  },
+  "location": {
+    "title": "Location",
+    "address": "121 Rock Street, 21 Egypt, Cairo, NY 92103-9000"
+  },
+  "business_hours": {
+    "title": "Business Hours",
+    "hours": "Mon – Fri …… 10 am – 8 pm, Sat, Sun ....… Closed"
+  },
+  "footer": {
+    "aboutHerfitk": "About Herfitk",
+    "category": "Category",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "monthlySubscription": "Monthly Subscription",
+    "newsletter": {
+      "title": "Newsletter",
+      "subscribeText": "Subscribe to get the latest news, updates, and information."
+    },
+    "contactInfo": {
+      "phone": "+201234567911",
+      "address": "121 Rock Street, 21 Egypt, Cairo, NY 92103-9000"
+    },
+    "copyright": {
+      "text": "&copy; Copyright. Designed and developed by",
+      "companyName": "Herfitk"
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "content": "Thank you for visiting Herfia web. Your privacy is important to us. This Privacy Policy outlines the types of personal information we receive and collect when you use Herfia web, as well as how we safeguard your information. By using Herfia web, you consent to the data practices described in this policy.",
+    "howWeUseInformation": {
+      "title": "How We Use Your Information",
+      "listItems": [
+        "Provide and improve Herfia web services",
+        "Personalize your experience",
+        "Communicate with you about updates, promotions, and other relevant information",
+        "Analyze usage trends and optimize performance"
+      ],
+      "disclaimer": "We do not sell or rent your personal information to third parties. However, we may share your information with trusted service providers who assist us in operating our website, conducting business, or servicing you, as long as those parties agree to keep this information confidential."
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "content": "If you have any questions or concerns about this Privacy Policy, please contact us at"
+    }
+  },
+  "userProfile": {
+    "cancel": "Cancel",
+    "edit_profile": "Edit My Profile",
+    "name": "Name",
+    "email": "E-mail",
+    "phone": "Phone",
+    "address": "Address",
+    "submit": "Submit",
+    "subscribe_with": "Subscribe With",
+    "zone": "Zone",
+    "speciality": "Speciality"
+  }
+}

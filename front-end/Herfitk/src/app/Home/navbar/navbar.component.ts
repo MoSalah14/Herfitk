@@ -4,11 +4,12 @@ import { LoginComponent } from '../../Account/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, LoginComponent],
+  imports: [CommonModule, LoginComponent, TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   providers: [
@@ -28,10 +29,16 @@ export class NavbarComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private jwtHelper: JwtHelperService, // Inject JwtHelperService
-    private router: Router
+    private router: Router,
+    private languageService: TranslateService
   ) {}
   ngOnInit(): void {
     this.checkAuthStatus();
+    this.languageService.setDefaultLang('en');
+  }
+
+  SwitchLanguage(language: string) {
+    this.languageService.setDefaultLang(language);
   }
 
   checkAuthStatus(): void {
@@ -89,10 +96,43 @@ export class NavbarComponent implements OnInit {
     const switchInput = document.getElementById('switch') as HTMLInputElement;
     // const body = document.body;
     const headTirle = document.getElementById('headTirle') as HTMLInputElement;
+    const body = document.body;
 
+    //About
+    const aboutbody = document.getElementById('aboutbody') as HTMLInputElement;
+    const abouth1 = document.getElementById('abouth1') as HTMLInputElement;
+    const abouth2 = document.getElementById('abouth2') as HTMLInputElement;
+    const aboutp = document.getElementById('aboutp') as HTMLInputElement;
+    //Category
+    // const cardcat=document.getElementById('cardcat')  as HTMLInputElement;
+    //footer
+    const footer=document.getElementById('footer') as HTMLInputElement;
+    const top=document.getElementById('top') as HTMLInputElement;
+    const footbody=document.getElementById('footbody') as HTMLInputElement;
+    const down=document.getElementById('down') as HTMLInputElement;
+    const foot=document.getElementById('foot') as HTMLInputElement;
+    const contact=document.getElementById('contact') as HTMLInputElement;
+    const word1=document.getElementById('word1') as HTMLInputElement;
+    const word2=document.getElementById('word2') as HTMLInputElement;
+    const word3=document.getElementById('word3') as HTMLInputElement;
+    const herf=document.getElementById('herf') as HTMLInputElement;
+    const aboutherf=document.getElementById('aboutherf') as HTMLInputElement;
+    const newh=document.getElementById('newh') as HTMLInputElement;
+    const sub=document.getElementById('sub') as HTMLInputElement;
+    const cop=document.getElementById('cop') as HTMLInputElement;
+    const linkfoot=document.getElementById('linkfoot') as HTMLInputElement;
+    //terms
+    const term=document.getElementById('term') as HTMLInputElement;
+    const th2 =document.getElementById('th2') as HTMLInputElement;
+    //privacy
+    const privacybody=document.getElementById('privacybody') as HTMLInputElement;
+    //pay
+    const pay=document.getElementById('pay') as HTMLInputElement;
     // const li = document.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
     // const overlay = document.getElementsByClassName("overlay") as HTMLCollectionOf<HTMLLIElement>;
    // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
+    //const contact = document.getElementsByClassName("contact") as HTMLCollectionOf<HTMLLIElement>;
+    // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
 
     //page contact us
     var text_darkmode=document.getElementsByClassName("text_darkmode") as HTMLCollectionOf<HTMLLIElement>;
@@ -100,6 +140,44 @@ export class NavbarComponent implements OnInit {
    
     if (switchInput.checked) {
       headTirle.style.color = 'black';
+      body.style.backgroundColor='#d1d1d1';
+      //About
+      aboutbody.style.backgroundColor='#d1d1d1';
+      abouth1.style.color='Black';
+      abouth2.style.color='Black';
+      aboutp.style.color='Black';
+      //Category
+      // cardcat.style.backgroundColor='black';
+      //footer
+      footer.style.backgroundColor='#d1d1d1';
+     top.style.backgroundColor='#d1d1d1';
+     footbody.style.backgroundColor='#d1d1d1';
+     down.style.backgroundColor='#d1d1d1';
+     down.style.color='Black';  
+     foot.style.backgroundColor='#d1d1d1';
+     contact.style.backgroundColor='#d1d1d1';
+     word1.style.color='Black';
+     word2.style.color='Black';
+     word3.style.color='Black';
+     herf.style.color='Black';
+     aboutherf.style.color='Black';
+     newh.style.color='Black';
+     sub.style.color='Black';
+     cop.style.color='Black';
+     linkfoot.style.color='Black';
+      //terms
+      term.style.backgroundColor='#d1d1d1';
+      term.style.color='Black';
+      th2.style.color='Black';
+      //privacy
+      privacybody.style.backgroundColor='#d1d1d1';
+      privacybody.style.color='Black';
+      //payment
+      pay.style.backgroundColor='#d1d1d1';
+      pay.style.color='Black';
+
+
+
     for(var i=0; i< text_darkmode.length; i++ ){
       const item=text_darkmode[i];
       item.style.color='black';
@@ -112,6 +190,40 @@ export class NavbarComponent implements OnInit {
 
     } else {
       headTirle.style.color = 'white';
+      body.style.backgroundColor='#17191a';
+      //About
+      aboutbody.style.backgroundColor="#17191a";
+      abouth1.style.color='white';
+      abouth2.style.color='white';
+      aboutp.style.color='white';
+
+      // cardcat.style.backgroundColor='black';
+      footer.style.backgroundColor='#17191a';
+      top.style.backgroundColor='#17191a';
+      footbody.style.backgroundColor='#17191a';
+      down.style.backgroundColor='#17191a';
+      down.style.color='white';
+      foot.style.backgroundColor='#d1d1d1';
+      contact.style.backgroundColor='#17191a';
+      word1.style.color='white';
+      word2.style.color='white';
+      word3.style.color='white';
+      herf.style.color='white';
+      aboutherf.style.color='white';
+      newh.style.color='white';
+      sub.style.color='white';
+      cop.style.color='white';
+      linkfoot.style.color='white';
+      //term
+      term.style.backgroundColor='#17191a';
+      term.style.color='white';
+      th2.style.color='white';
+      //privacy
+      privacybody.style.backgroundColor='#17191a';
+      privacybody.style.color='white';
+      //payment
+      pay.style.backgroundColor='#17191a';
+      pay.style.color='white';
 
       for(var i=0; i< text_darkmode.length; i++ ){
         const item=text_darkmode[i];
@@ -125,3 +237,12 @@ export class NavbarComponent implements OnInit {
     }
   }
 }
+// const listItems = document.querySelectorAll('single-footer-widget ul li'); 
+
+// listItems.forEach(listItem => {
+//   const anchor = listItem.querySelector('a')
+//   if (anchor) {
+//     anchor.style.backgroundColor = 'blue';
+ 
+//   }
+// });
