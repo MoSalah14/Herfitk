@@ -56,7 +56,6 @@ sendprivatemessage(contentprivate:string){
 }
 openPrivateChat(touser:string){
   console.log("hiiii");
-//const modalref=this.modalservice.open(PrivateChatComponent);
 const modalRef = this.modalservice.open(PrivateChatComponent, { size: 'lg' });
 modalRef.componentInstance.touser=touser;
 }
@@ -67,7 +66,7 @@ Close(){
 }
 
 open(){
-  (this.exampleModal?.nativeElement as HTMLElement).style.display='block';
+  (this.exampleModal?.nativeElement as HTMLElement).style.display='inline';
   document.body.classList.add('modal-open');
 }
 
