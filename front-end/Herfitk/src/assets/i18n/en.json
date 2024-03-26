@@ -97,7 +97,8 @@
     "description": "We, Herfitk.com, act as intermediaries between craftsmen and clients. We help you connect with craftsmen in various specialties quickly and with the highest quality. Additionally, we assist craftsmen in showcasing their work to gain opportunities in multiple locations for a nominal fee."
   },
   "category": {
-    "title": "Category"
+    "title": "Category",
+    "show": "show more"
   },
   "contact": {
     "title": "Contact Us",
@@ -165,5 +166,14 @@
     "subscribe_with": "Subscribe With",
     "zone": "Zone",
     "speciality": "Speciality"
-  }
+  },
+  "termsofService": {
+    "TermsofService": "Terms of Service",
+    "Acceptance":"1. Acceptance of Terms",
+    "Byaccessing":"By accessing or using Herfia web, you agree to comply with and be bound by these Terms of Service.",
+    "Use License": "2. Use License",
+    "mation": "Permission is granted to temporarily download one copy of the materials (information or software) on Herfia web for personal, non-commercial transitory viewing only.",
+    "Disclaimer": "3. Disclaimer",
+    "Thematerials": "The materials on Herfia web are provided on an 'as is' basis. Herfia web makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights."
+}
 }

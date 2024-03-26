@@ -1,5 +1,5 @@
 <br /><br /><br />
-<h1 id="category">Category</h1>
+<h1 id="category">{{"category.title" | translate}}</h1>
 <br /><br />
 <div class="container" >
   <input type="radio" name="dot" id="one" />
@@ -19,7 +19,7 @@
             <div class="descraption">{{ item.descraption }}</div>
           </div>
           <button class="contactButton" (click)="goToDisplay(item.id)">
-            Show More
+            {{"category.show"}} | translate
           </button>
         </div>
       </div>
