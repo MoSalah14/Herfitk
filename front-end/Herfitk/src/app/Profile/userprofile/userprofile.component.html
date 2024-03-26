@@ -127,6 +127,7 @@
           background-color: rgb(33, 30, 30);
           color: aliceblue;
         "
+        (click)="makeCardPayment()"
       >
         {{ "userProfile.subscribe_with" | translate }}
         <svg
@@ -160,6 +161,7 @@
           color: aliceblue;
           transition: background-color 0.3s ease;
         "
+        (click)="openInNewWindow()"
       >
         {{ "userProfile.subscribe_with" | translate }}
         <svg
