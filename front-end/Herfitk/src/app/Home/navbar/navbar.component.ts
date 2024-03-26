@@ -4,11 +4,12 @@ import { LoginComponent } from '../../Account/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, LoginComponent],
+  imports: [CommonModule, LoginComponent, TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   providers: [
@@ -28,10 +29,16 @@ export class NavbarComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private jwtHelper: JwtHelperService, // Inject JwtHelperService
-    private router: Router
+    private router: Router,
+    private languageService: TranslateService
   ) {}
   ngOnInit(): void {
     this.checkAuthStatus();
+    this.languageService.setDefaultLang('en');
+  }
+
+  SwitchLanguage(language: string) {
+    this.languageService.setDefaultLang(language);
   }
 
   checkAuthStatus(): void {
