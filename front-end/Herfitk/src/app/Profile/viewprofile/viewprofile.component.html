@@ -18,25 +18,37 @@
         <p class="profile" style="font-size: 1.5rem">
           {{ profile.speciality }}
         </p>
-        <div>
-          <button id="btn">Message</button>
-        </div>
+
         <div class="Information">
-          <h1 style="color:#ffd541">Information</h1>
+          <h1 style="color: #ffd541; font-size: x-large">
+            {{ "ViewProfile.information.title" | translate }}
+          </h1>
           <p>___________________________________________</p>
 
           <div style="text-align: left">
             <h4 class="m-1 my-3">
-              <span style="color: #ffd541">Name:</span> {{ profile.name }}
+              <span style="color: #ffd541">{{
+                "ViewProfile.information.name" | translate
+              }}</span>
+              {{ profile.name }}
             </h4>
             <h4 class="m-1 my-3">
-              <span style="color: #ffd541">Phone:</span> {{ profile.phone }}
+              <span style="color: #ffd541">{{
+                "ViewProfile.information.phone" | translate
+              }}</span>
+              {{ profile.phone }}
             </h4>
             <h4 class="m-1 my-3">
-              <span style="color: #ffd541">Address:</span> {{ profile.zone }}
+              <span style="color: #ffd541">{{
+                "ViewProfile.information.address" | translate
+              }}</span>
+              {{ profile.zone }}
             </h4>
             <h4 class="m-1 my-3">
-              <span style="color: #ffd541">Business Hours:</span> All Day
+              <span style="color: #ffd541">{{
+                "ViewProfile.information.business_hours" | translate
+              }}</span>
+              {{ "ViewProfile.information.all_day" | translate }}
             </h4>
           </div>
           <!-- <h4>Phone:</h4> -->
@@ -51,7 +63,9 @@
   >
     <div class="images">
       <br />
-      <h2 style="color: #ffd541">Previous works:</h2>
+      <h2 style="color: #ffd541">
+        {{ "ViewProfile.information.prevWorks" | translate }}
+      </h2>
       <p>
         ____________________________________________________________________
       </p>
@@ -72,7 +86,10 @@
 <!-- Add Review By Client -->
 <div>
   <h1 style="text-align: center; color: white">
-    Add Your <span style="color: #ffd541">Review:</span>
+    {{ "ViewProfile.review.add" | translate }}
+    <span style="color: #ffd541">{{
+      "ViewProfile.review.yourReview" | translate
+    }}</span>
   </h1>
 
   <div class="row row justify-content-center" style="color: white">
@@ -83,10 +100,11 @@
         #feedbackForm="ngForm"
       >
         <div class="wrapper">
-          <h3 class="title">Rate your experience</h3>
+          <h3 class="title">
+            {{ "ViewProfile.review.rate_experience" | translate }}
+          </h3>
           <div class="content">
-            We highly value your feedback! Kindly take a moment to rate your
-            experience and provide us with your valuable feedback.
+            {{ "ViewProfile.review.feedback_placeholder" | translate }}
           </div>
           <div class="rate-box">
             <input
@@ -160,7 +178,10 @@
 <!-- Reviews  -->
 
 <h1 style="text-align: center; color: white">
-  Customer's <span style="color: #ffd541">Reviews:</span>
+  {{ "ViewProfile.reviews_section.title" | translate }}
+  <span style="color: #ffd541">{{
+    "ViewProfile.reviews_section.Clients" | translate
+  }}</span>
 </h1>
 <!-- to show form review -->
 @for (item of alldata; track $index) {
@@ -203,5 +224,7 @@
   </div>
 </div>
 } } @else{
-<div style="color: white">No Review For This Herify</div>
+<div style="color: white">
+  {{ "ViewProfile.reviews_section.no_reviews" | translate }}
+</div>
 }

@@ -162,5 +162,29 @@
     "subscribe_with": "Subscribe With",
     "zone": "Zone",
     "speciality": "Speciality"
+  },
+  "ViewProfile": {
+    "cancel": "Cancel",
+    "edit_profile": "Edit Profile",
+    "information": {
+      "title": "Information",
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "business_hours": "Business Hours",
+      "all_day": "All Day",
+      "prevWorks": "Previews Photo"
+    },
+    "review": {
+      "add": "Add",
+      "yourReview": "Your Review",
+      "rate_experience": "Rate Your Experience",
+      "feedback_placeholder": "Tell us about your experience!"
+    },
+    "reviews_section": {
+      "title": "Customer's ",
+      "Clients": "Reviews",
+      "no_reviews": "No Review For This Herify"
+    }
   }
 }

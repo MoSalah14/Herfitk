@@ -156,12 +156,36 @@
     "cancel": "إلغاء",
     "edit_profile": "تعديل الملف الشخصي",
     "name": "الاسم",
-    "email": "البريد الإلكتروني",
+    "email": "البريد",
     "phone": "الهاتف",
     "address": "العنوان",
     "submit": "إرسال",
     "subscribe_with": "الاشتراك مع",
     "zone": "المنطقة",
     "speciality": "التخصص"
+  },
+  "ViewProfile": {
+    "cancel": "إلغاء",
+    "edit_profile": "تعديل الملف الشخصي",
+    "information": {
+      "title": "معلومات المستخدم",
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "address": "العنوان",
+      "business_hours": "ساعات العمل",
+      "all_day": "طوال اليوم",
+      "prevWorks": "صور لاعمالك"
+    },
+    "review": {
+      "add": "أضف",
+      "yourReview": " تقييمك",
+      "rate_experience": "قيم تجربتك",
+      "feedback_placeholder": "أخبرنا عن تجربتك!"
+    },
+    "reviews_section": {
+      "title": "تقييمات",
+      "Clients": "العملاء",
+      "no_reviews": "لا توجد تقييمات لهذا الحريفي"
+    }
   }
 }

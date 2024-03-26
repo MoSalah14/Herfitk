@@ -7,6 +7,7 @@ import { DataSharingService } from '../../data-sharing.service';
 import { concatWith } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-viewprofile',
@@ -19,6 +20,7 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
+    TranslateModule,
   ],
   providers: [
     DataSharingService,
