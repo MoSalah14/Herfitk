@@ -5,7 +5,9 @@
 .container {
 
 }
-
+#back{
+  background-color:rgb(23, 25, 26);
+}
 .row {
   margin: 10px auto;
   background: #fff;
