@@ -5,6 +5,15 @@
 
   "registration": {
     "heading": "التسجيل",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "address": "العنوان",
+    "nationalId": "الرقم القومي",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "uploadPhoto": "رفع الصورة الشخصية",
+    "registerAs": "التسجيل كـ",
     "nameRequired": "الاسم مطلوب (الحد الأدنى 2 أحرف، الحد الأقصى 20 حرفًا)",
     "emailInvalid": "الرجاء إدخال عنوان بريد إلكتروني صحيح",
     "phoneInvalid": "الرجاء إدخال رقم هاتف صحيح (مثل: 010xxxxxxxx)",
@@ -14,8 +23,8 @@
     "passwordMismatch": "كلمات المرور غير متطابقة",
     "photoRequired": "الرجاء اختيار صورة شخصية.",
     "roleRequired": "يجب عليك اختيار نوع التسجيل.",
-    "selectRole": "اختر نوع التسجيل",
-    "client": "العميل",
+    "selectRole": "اختر نوع الحساب",
+    "client": "عميل",
     "herify": "حرفي",
     "signUp": "تسجيل"
   },
@@ -40,9 +49,9 @@
       "required": "المنطقة مطلوبة."
     },
     "history": {
-      "label": "التاريخ",
-      "placeholder": "اكتب نبذة عن تاريخك",
-      "required": "نبذة مطلوبة."
+      "label": "اكتب اعمالك",
+      "placeholder": "اكتب نبذة عن اعمالك",
+      "required": "النبذة مطلوبة."
     },
     "category": {
       "label": "الفئة",
@@ -50,9 +59,9 @@
       "required": "الفئة مطلوبة."
     },
     "specialist": {
-      "label": "المتخصص",
-      "placeholder": "اختر المتخصص",
-      "required": "المتخصص مطلوب."
+      "label": "التخصص",
+      "placeholder": "اختر التخصص",
+      "required": "التخصص مطلوب."
     },
     "uploadPictures": "تحميل صور عملك :",
     "confirmButton": "تأكيد",

@@ -5,6 +5,15 @@
 
   "registration": {
     "heading": "Registration",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "address": "Address",
+    "nationalId": "National ID",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "uploadPhoto": "Upload Personal Photo",
+    "registerAs": "Register As",
     "nameRequired": "Name is required (minimum 2 characters, maximum 20 characters)",
     "emailInvalid": "Please enter a valid email address",
     "phoneInvalid": "Please enter a valid phone number (e.g., 010xxxxxxxx)",
@@ -40,9 +49,9 @@
       "required": "Zone is required."
     },
     "history": {
-      "label": "History",
-      "placeholder": "Write about Your History",
-      "required": "History is required."
+      "label": "Previeus Work",
+      "placeholder": "Write about Your Work",
+      "required": "Previeus is required."
     },
     "category": {
       "label": "Category",

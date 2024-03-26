@@ -7,8 +7,8 @@
       [formGroup]="registrationForm"
       (ngSubmit)="onSubmit()"
     >
-      <p id="heading">Registration</p>
-      <label class="form-label">Name</label>
+      <p id="heading">{{ "registration.heading" | translate }}</p>
+      <label class="form-label">{{ "registration.name" | translate }}</label>
       <div class="field">
         <input
           formControlName="DisplayName"
@@ -16,7 +16,7 @@
           id="name"
           name="name"
           class="input-field"
-          placeholder="Enter Your Name"
+          [placeholder]="'registration.name' | translate"
           required
           autocomplete="on"
           appAutofocus
@@ -27,10 +27,10 @@
         style="color: red"
         id="not"
       >
-        Name is required (minimum 2 characters, maximum 20 characters)
+        {{ "registration.nameRequired" | translate }}
       </div>
 
-      <label class="form-label">Email</label>
+      <label class="form-label">{{ "registration.email" | translate }}</label>
       <div class="field">
         <input
           formControlName="Email"
@@ -46,17 +46,17 @@
         *ngIf="formControls['Email'].invalid && submitted"
         style="color: red"
       >
-        Please enter a valid email address
+        {{ "registration.emailInvalid" | translate }}
       </div>
 
-      <label class="form-label">Phone</label>
+      <label class="form-label">{{ "registration.phone" | translate }}</label>
       <div class="field">
         <input
           formControlName="PhoneNumber"
           type="tel"
           name="phone"
           class="input-field"
-          placeholder="Enter Phone Number"
+          [placeholder]="'registration.phone' | translate"
           required
           autocomplete="on"
         />
@@ -65,17 +65,19 @@
         *ngIf="formControls['PhoneNumber'].invalid && submitted"
         style="color: red"
       >
-        Please enter a valid phone number (e.g., 010xxxxxxxx)
+        {{ "registration.phoneInvalid" | translate }}
       </div>
 
-      <label class="form-label">Address</label>
+      <label class="form-label">
+        {{ "registration.address" | translate }}</label
+      >
       <div class="field">
         <input
           formControlName="Address"
           type="text"
           name="address"
           class="input-field"
-          placeholder="Enter Your Address"
+          [placeholder]="'registration.address' | translate"
           required
           autocomplete="on"
         />
@@ -84,17 +86,19 @@
         *ngIf="formControls['Address'].invalid && submitted"
         style="color: red"
       >
-        Please enter your address (minimum 3 characters, maximum 30 characters)
+        {{ "registration.addressRequired" | translate }}
       </div>
 
-      <label class="form-label">National ID</label>
+      <label class="form-label">
+        {{ "registration.nationalId" | translate }}</label
+      >
       <div class="field">
         <input
           formControlName="NationalId"
           type="text"
           name="naId"
           class="input-field"
-          placeholder="Enter Your National ID"
+          [placeholder]="'registration.nationalId' | translate"
           required
           autocomplete="on"
         />
@@ -103,17 +107,19 @@
         *ngIf="formControls['NationalId'].invalid && submitted"
         style="color: red"
       >
-        Please enter a valid 14-digit national ID
+        {{ "registration.nationalIdInvalid" | translate }}
       </div>
 
-      <label class="form-label">Password</label>
+      <label class="form-label">
+        {{ "registration.password" | translate }}</label
+      >
       <div class="field">
         <input
           formControlName="Password"
           type="password"
           name="password"
           class="input-field"
-          placeholder="Password"
+          [placeholder]="'registration.password' | translate"
           required
         />
       </div>
@@ -121,17 +127,19 @@
         *ngIf="formControls['Password'].invalid && submitted"
         style="color: red"
       >
-        Please enter a password (minimum 8 characters)
+        {{ "registration.passwordRequired" | translate }}
       </div>
 
-      <label class="form-label">Confirm Password</label>
+      <label class="form-label">
+        {{ "registration.confirmPassword" | translate }}</label
+      >
       <div class="field">
         <input
           formControlName="confirmPassword"
           type="password"
           name="confirmPassword"
           class="input-field"
-          placeholder="Confirm Password"
+          [placeholder]="'registration.confirmPassword' | translate"
           required
         />
       </div>
@@ -142,13 +150,13 @@
         "
         style="color: red"
       >
-        Passwords do not match
+        {{ "registration.passwordMismatch" | translate }}
       </div>
 
       <div class="form-group">
-        <label for="personalImage" class="form-label"
-          >Upload Personal Photo:</label
-        >
+        <label for="personalImage" class="form-label">{{
+          "registration.uploadPhoto" | translate
+        }}</label>
         <br />
         <input
           class="m-2 text-light"
@@ -161,11 +169,13 @@
           *ngIf="formControls['PersonalImage'].invalid && submitted"
           style="color: red"
         >
-          Please select a photo.
+          {{ "registration.photoRequired" | translate }}
         </div>
       </div>
 
-      <label class="form-label">Register AS</label>
+      <label class="form-label">
+        {{ "registration.selectRole" | translate }}</label
+      >
       <div class="field">
         <select
           id="role"
@@ -175,16 +185,24 @@
           (change)="onRoleChange($event)"
           style="background-color: #171717; color: white"
         >
-          <option value="" disabled>Select Role</option>
-          <option value="client">Client</option>
-          <option value="herify">Herify</option>
+          <option value="" disabled>
+            {{ "registration.selectRole" | translate }}
+          </option>
+          <option value="client">
+            {{ "registration.client" | translate }}
+          </option>
+          <option value="herify">
+            {{ "registration.herify" | translate }}
+          </option>
         </select>
       </div>
       <div *ngIf="!selectedRole && submitted" style="color: red" id="not">
-        You Should Choose your Role.
+        {{ "registration.roleRequired" | translate }}
       </div>
       <div class="btn">
-        <button class="button3" type="submit">Sign Up</button>
+        <button class="button3" type="submit">
+          {{ "registration.signUp" | translate }}
+        </button>
       </div>
     </form>
   </div>

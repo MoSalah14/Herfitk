@@ -14,6 +14,7 @@ import { AutofocusDirective } from './autofocus.directive';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import { EMPTY, concatMap } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 const passwordMatchValidator = (control: FormGroup) => {
   const password = control.get('Password');
@@ -29,7 +30,13 @@ const passwordMatchValidator = (control: FormGroup) => {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, AutofocusDirective],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    AutofocusDirective,
+    TranslateModule,
+  ],
   providers: [RegisterService],
 })
 export class RegisterComponent {
@@ -47,11 +54,16 @@ export class RegisterComponent {
     private router: Router,
     private fb: FormBuilder,
     private registerService: RegisterService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private translate: TranslateService
   ) {
     this.registrationForm = this.createRegistrationForm();
+    this.translate.setDefaultLang;
+    ('en');
   }
-
+  SwitchLanguage(language: string) {
+    this.translate.use(language);
+  }
   createRegistrationForm(): FormGroup {
     return this.fb.group({
       DisplayName: [
