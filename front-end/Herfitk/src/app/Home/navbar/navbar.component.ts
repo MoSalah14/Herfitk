@@ -89,14 +89,39 @@ export class NavbarComponent implements OnInit {
     const switchInput = document.getElementById('switch') as HTMLInputElement;
     // const body = document.body;
     const headTirle = document.getElementById('headTirle') as HTMLInputElement;
+
     // const li = document.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
     // const overlay = document.getElementsByClassName("overlay") as HTMLCollectionOf<HTMLLIElement>;
-    // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
+   // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
 
+    //page contact us
+    var text_darkmode=document.getElementsByClassName("text_darkmode") as HTMLCollectionOf<HTMLLIElement>;
+    var form_label= document.getElementsByClassName("form-label") as HTMLCollectionOf<HTMLLIElement>;
+   
     if (switchInput.checked) {
       headTirle.style.color = 'black';
+    for(var i=0; i< text_darkmode.length; i++ ){
+      const item=text_darkmode[i];
+      item.style.color='black';
+    }
+// all label
+    for(var i=0; i< form_label.length; i++ ){
+      const item=form_label[i];
+      item.style.color='black';
+    }
+
     } else {
       headTirle.style.color = 'white';
+
+      for(var i=0; i< text_darkmode.length; i++ ){
+        const item=text_darkmode[i];
+        item.style.color='white';
+      }
+
+      for(var i=0; i< form_label.length; i++ ){
+        const item=form_label[i];
+        item.style.color='white';
+      }
     }
   }
 }

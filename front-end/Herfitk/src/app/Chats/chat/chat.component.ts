@@ -25,9 +25,9 @@ import { ChatHomeComponent } from './NGCChat/chat-home/chat-home.component';
 })
 export class ChatComponent implements OnInit {
   myform:FormGroup=new FormGroup({});
-  submitted=false;
+  submitted=true;
   apierrormessage:[]=[];
-  openchat=false;
+  openchat=true;
 
 
   constructor(private formbilder:FormBuilder,private service:DataSharingService){
