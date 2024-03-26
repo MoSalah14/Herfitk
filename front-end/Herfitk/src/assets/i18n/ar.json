@@ -1,7 +1,16 @@
 {
-  "Hamo": {
-    "Hello": "مرحبا يا عبدو"
+  "navbar": {
+    "Home": "الصفحه الرئيسيه",
+    "About Us": "معلومات عنا",
+    "Category": "الأقسام",
+    "Contact US": "تواصل معنا",
+    "Login": "تسجيل الدخول",
+    "Logout": "تسجيل الخروج",
+    "Welcom": "مرحبا"
   },
+  "header": {
+    "title": "نحن في خدمتكم 24 ساعة"
+   },
 
   "registration": {
     "heading": "التسجيل",
@@ -90,7 +99,18 @@
   },
   "location": {
     "title": "الموقع",
-    "address": "121 Rock Street, 21 Egypt, Cairo, NY 92103-9000"
+    "address": " مصر, 21القاهرة, وسط المدينه"
+  },
+  "formContactUs": {
+    "firstName": "الاسم الأول",
+    "email": "البريد الإلكتروني",
+    "subject": "الموضوع",
+    "message": "رساله",
+    "sendMessage": "ارسال",
+    "youerName": "اسمك",
+    "youerEmail": "بريدك الألكتروني",
+    "youerSubject": "أكتب نبذه عن الموضوع",
+    "youerMessage": "اترك رساله"
   },
   "business_hours": {
     "title": "ساعات العمل",

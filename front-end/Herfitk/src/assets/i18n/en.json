@@ -1,8 +1,27 @@
 {
-  "Hamo": {
-    "Hello": "FuckYou"
+  "navbar": {
+    "Home": "Home",
+    "About Us": "About Us",
+    "Category": "Category",
+    "Contact US": "Contact Us",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Welcom": "Welcom"
   },
-
+  "header": {
+    "title": "21 Egypt, Cairo, Down Twon"
+   },
+   "formContactUs": {
+    "firstName": "firstName",
+    "email": "email",
+    "subject": "subject",
+    "message": "message",
+    "sendMessage": "sendMessage",
+    "youerName": "youer name...",
+    "youerEmail": "youer Email... ",
+    "youerSubject": "write subject...",
+    "youerMessage": "write somthing..."
+  },
   "registration": {
     "heading": "Registration",
     "name": "Name",
