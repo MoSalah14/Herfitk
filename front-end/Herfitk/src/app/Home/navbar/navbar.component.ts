@@ -129,9 +129,15 @@ export class NavbarComponent implements OnInit {
     //pay
     const pay=document.getElementById('pay') as HTMLInputElement;
     // const li = document.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
+    // const overlay = document.getElementsByClassName("overlay") as HTMLCollectionOf<HTMLLIElement>;
+   // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
     //const contact = document.getElementsByClassName("contact") as HTMLCollectionOf<HTMLLIElement>;
     // const overlay = document.querySelectorAll('.overlay') as NodeListOf<HTMLElement>;
 
+    //page contact us
+    var text_darkmode=document.getElementsByClassName("text_darkmode") as HTMLCollectionOf<HTMLLIElement>;
+    var form_label= document.getElementsByClassName("form-label") as HTMLCollectionOf<HTMLLIElement>;
+   
     if (switchInput.checked) {
       headTirle.style.color = 'black';
       body.style.backgroundColor='#d1d1d1';
@@ -172,6 +178,16 @@ export class NavbarComponent implements OnInit {
 
 
 
+    for(var i=0; i< text_darkmode.length; i++ ){
+      const item=text_darkmode[i];
+      item.style.color='black';
+    }
+// all label
+    for(var i=0; i< form_label.length; i++ ){
+      const item=form_label[i];
+      item.style.color='black';
+    }
+
     } else {
       headTirle.style.color = 'white';
       body.style.backgroundColor='#17191a';
@@ -208,6 +224,16 @@ export class NavbarComponent implements OnInit {
       //payment
       pay.style.backgroundColor='#17191a';
       pay.style.color='white';
+
+      for(var i=0; i< text_darkmode.length; i++ ){
+        const item=text_darkmode[i];
+        item.style.color='white';
+      }
+
+      for(var i=0; i< form_label.length; i++ ){
+        const item=form_label[i];
+        item.style.color='white';
+      }
     }
   }
 }

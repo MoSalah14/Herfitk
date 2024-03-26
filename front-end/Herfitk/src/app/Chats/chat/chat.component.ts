@@ -29,10 +29,10 @@ import { ChatHomeComponent } from './NGCChat/chat-home/chat-home.component';
   styleUrl: './chat.component.css',
 })
 export class ChatComponent implements OnInit {
-  myform: FormGroup = new FormGroup({});
-  submitted = false;
-  apierrormessage: [] = [];
-  openchat = false;
+  myform:FormGroup=new FormGroup({});
+  submitted=false;
+  apierrormessage:[]=[];
+  openchat=false;
 
   constructor(
     private formbilder: FormBuilder,

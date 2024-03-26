@@ -78,7 +78,6 @@ export class DataSharingService {
            this.privateMessageInitial=false;
            this.privateMessages=[];
               this.modalservice.dismissAll();
-
                });
     }
     stopchatconnection(){
@@ -98,7 +97,6 @@ export class DataSharingService {
      }
      return this.chatconnection?.invoke('ReceiveMessage',message)
      .catch(error=>console.log(error));
-     
     }
     async sendPrivateMessage(to:string,content:string){
       const message:Message={
