@@ -49,7 +49,7 @@ namespace Herfitk_Dashboard.Controllers
                     return RedirectToAction(nameof(IndexId), new { id });
                 }
                 //Continu Later ****
-               // var mappedData = mapper.Map<List<Herfiy>, List<HerfiyReturnDto>>(herifys);
+               //var mappedData = mapper.Map<List<Herfiy>, List<HerfiyReturnDto>>(herifys);
 
                 return View(herifys);
             }
