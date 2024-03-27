@@ -30,10 +30,17 @@ namespace Herfitk_Dashboard.Controllers
 
                 if (users == null)
                     return NotFound();
-
-                // Filter herifys based on the searchString
+                // Filter users based on the searchString
                 if (!string.IsNullOrEmpty(searchString))
-                    users = users.Where(users => users.DisplayName.Contains(searchString)).ToList();
+                {
+                    // Convert search string to upper case or lower case
+                    var searchLower = searchString.ToLower();
+                    var searchUpper = searchString.ToUpper();
+
+                    // Filter users based on case-insensitive comparison
+                    users = users.Where(user => user.DisplayName.ToLower().Contains(searchLower) ||
+                                                 user.DisplayName.ToUpper().Contains(searchUpper)).ToList();
+                }
 
                 // Redirect to IndexId action if the searchString is a valid ID
                 if (int.TryParse(searchString, out int id))
