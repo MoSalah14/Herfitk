@@ -21,21 +21,24 @@
   <div class="profile-info">
     <div class="input-row">
       <label for="name"> {{ "userProfile.name" | translate }} </label>
-      <input id="input1"
+      <input
+        id="input1"
         required=""
         type="text"
         id="name"
         name="text"
         class="input"
-        style="margin-left: 100px"
+        style="margin-left: 170px"
         [value]="userData.displayName"
         [readonly]="!isEditing"
         (input)="updateUserData($event, 'displayName')"
       />
     </div>
-    <div class="input-row" >
-      <label id="email" for="email">{{"userProfile.email"|translate}}</label>
-      <br>
+    <div class="input-row">
+      <label id="email" for="email">{{
+        "userProfile.email" | translate
+      }}</label>
+      <br />
       <input
         required=""
         type="text"
@@ -49,25 +52,23 @@
       />
     </div>
     <div class="input-row">
-
-          <label for="Phone">{{"userProfile.phone"|translate}}</label>
-       <br>
-        <input
+      <label for="Phone">{{ "userProfile.phone" | translate }}</label>
+      <br />
+      <input
         required=""
         type="text"
         id="Phone"
         name="text"
         class="input"
-        style="margin-left: 100px"
+        style="margin-left: 160px"
         [value]="userData.phoneNumber"
         [readonly]="!isEditing"
         (input)="updateUserData($event, 'phoneNumber')"
       />
-      <br>
-      
+      <br />
     </div>
     <div class="input-row">
-      <label for="adress">{{"userProfile.address"|translate}}</label>
+      <label for="adress">{{ "userProfile.address" | translate }}</label>
       <input
         required=""
         type="text"
@@ -75,7 +76,7 @@
         name="text"
         style="padding-left: 50px"
         class="input"
-        style="margin-left: 90px"
+        style="margin-left: 155px"
         [value]="userData.address"
         [readonly]="!isEditing"
         (input)="updateUserData($event, 'address')"
@@ -91,7 +92,7 @@
         id="zone"
         name="text"
         class="input"
-        style="margin-left: 110px"
+        style="margin-left: 150px"
         [value]="userData.zone"
         readonly
         (input)="updateUserData($event, 'zone')"
@@ -105,7 +106,7 @@
         id="special"
         name="text"
         class="input"
-        style="margin-left: 80px"
+        style="margin-left: 140px"
         [value]="userData.speciality"
         readonly
         (input)="updateUserData($event, 'speciality')"
