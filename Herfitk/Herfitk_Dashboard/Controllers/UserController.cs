@@ -4,6 +4,7 @@ using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
 using Herfitk_Dashboard.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,12 @@ namespace Herfitk_Dashboard.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository repository;
-        private readonly IMapper mapper;
-        public UserController(IUserRepository repository, IMapper mapper)
+        private readonly UserManager<AppUser> userManager;
+
+        public UserController(UserManager<AppUser> userManager, IUserRepository repository)
         {
             this.repository = repository;
-            this.mapper = mapper;
+            this.userManager = userManager;
         }
         public async Task<IActionResult> Index(string searchString)
         {
@@ -86,84 +88,89 @@ namespace Herfitk_Dashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (registerViewModel != null)
+                    var existingUser = await userManager.FindByEmailAsync(registerViewModel.Email);
+
+                    if (existingUser != null)
                     {
-                        var newUser = new AppUser
-                        {
-                            DisplayName = registerViewModel.DisplayName,
-                            Address = registerViewModel.Address,
-                            Email = registerViewModel.Email,
-                            UserName = registerViewModel.Email,
-                            PhoneNumber = registerViewModel.PhoneNumber,
-                            NationalId = registerViewModel.NationalId,
-                            UserRoleID = registerViewModel.RoleId,
-                            PasswordHash = registerViewModel.Password
-                        };
-
-
-                        // Handle National ID Image Upload
-                        if (registerViewModel.NationalIdImage != null && registerViewModel.NationalIdImage.Length > 0)
-                        {
-                            var currentDirectory = Directory.GetCurrentDirectory();
-                            var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
-                            var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "imageID");
-                            var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "imageID");
-
-                            if (!Directory.Exists(wwwrootUploadsDirectory))
-                                Directory.CreateDirectory(wwwrootUploadsDirectory);
-
-                            if (!Directory.Exists(assetsUploadsDirectory))
-                                Directory.CreateDirectory(assetsUploadsDirectory);
-
-                            var uniqueFileName = Guid.NewGuid().ToString() + "_" + registerViewModel.NationalIdImage.FileName;
-                            var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
-                            var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
-
-                            using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
-                            using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
-                            {
-                                await registerViewModel.NationalIdImage.CopyToAsync(wwwrootFileStream);
-                                await registerViewModel.NationalIdImage.CopyToAsync(assetsFileStream);
-                            }
-
-                            newUser.NationalIdImage = "/imageID/" + uniqueFileName; // Assuming NationalIdImage is the property to store the image path
-                        }
-
-                        // Handle Personal Image Upload
-                        if (registerViewModel.PersonalImage != null && registerViewModel.PersonalImage.Length > 0)
-                        {
-                            var currentDirectory = Directory.GetCurrentDirectory();
-                            var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
-                            var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "PersonalImage");
-                            var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "PersonalImage");
-
-                            if (!Directory.Exists(wwwrootUploadsDirectory))
-                                Directory.CreateDirectory(wwwrootUploadsDirectory);
-
-                            if (!Directory.Exists(assetsUploadsDirectory))
-                                Directory.CreateDirectory(assetsUploadsDirectory);
-
-                            var uniqueFileName = Guid.NewGuid().ToString() + "_" + registerViewModel.PersonalImage.FileName;
-                            var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
-                            var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
-
-                            using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
-                            using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
-                            {
-                                await registerViewModel.PersonalImage.CopyToAsync(wwwrootFileStream);
-                                await registerViewModel.PersonalImage.CopyToAsync(assetsFileStream);
-                            }
-
-                            newUser.PersonalImage = "/PersonalImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
-                        }
-
-
-
-                        await repository.AddAsync(newUser);
-
-                        return RedirectToAction(nameof(Index));
+                        ModelState.AddModelError(nameof(RegisterViewModel.Email), "Email already exists.");
+                        return View(registerViewModel);
                     }
+                    var newUser = new AppUser
+                    {
+                        DisplayName = registerViewModel.DisplayName,
+                        Address = registerViewModel.Address,
+                        Email = registerViewModel.Email,
+                        UserName = registerViewModel.Email,
+                        PhoneNumber = registerViewModel.PhoneNumber,
+                        NationalId = registerViewModel.NationalId,
+                        UserRoleID = registerViewModel.RoleId,
+                        PasswordHash = registerViewModel.Password
+                    };
+
+
+                    // Handle National ID Image Upload
+                    if (registerViewModel.NationalIdImage != null && registerViewModel.NationalIdImage.Length > 0)
+                    {
+                        var currentDirectory = Directory.GetCurrentDirectory();
+                        var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
+                        var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "imageID");
+                        var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "imageID");
+
+                        if (!Directory.Exists(wwwrootUploadsDirectory))
+                            Directory.CreateDirectory(wwwrootUploadsDirectory);
+
+                        if (!Directory.Exists(assetsUploadsDirectory))
+                            Directory.CreateDirectory(assetsUploadsDirectory);
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + registerViewModel.NationalIdImage.FileName;
+                        var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
+                        var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
+
+                        using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
+                        using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
+                        {
+                            await registerViewModel.NationalIdImage.CopyToAsync(wwwrootFileStream);
+                            await registerViewModel.NationalIdImage.CopyToAsync(assetsFileStream);
+                        }
+
+                        newUser.NationalIdImage = "/imageID/" + uniqueFileName; // Assuming NationalIdImage is the property to store the image path
+                    }
+
+                    // Handle Personal Image Upload
+                    if (registerViewModel.PersonalImage != null && registerViewModel.PersonalImage.Length > 0)
+                    {
+                        var currentDirectory = Directory.GetCurrentDirectory();
+                        var herfitkDirectory = Path.Combine(currentDirectory, "..", "..", "..", "..", "GitHub", "Herfitk");
+                        var wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "PersonalImage");
+                        var assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "PersonalImage");
+
+                        if (!Directory.Exists(wwwrootUploadsDirectory))
+                            Directory.CreateDirectory(wwwrootUploadsDirectory);
+
+                        if (!Directory.Exists(assetsUploadsDirectory))
+                            Directory.CreateDirectory(assetsUploadsDirectory);
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + registerViewModel.PersonalImage.FileName;
+                        var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
+                        var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
+
+                        using (var wwwrootFileStream = new FileStream(wwwrootFilePath, FileMode.Create))
+                        using (var assetsFileStream = new FileStream(assetsFilePath, FileMode.Create))
+                        {
+                            await registerViewModel.PersonalImage.CopyToAsync(wwwrootFileStream);
+                            await registerViewModel.PersonalImage.CopyToAsync(assetsFileStream);
+                        }
+
+                        newUser.PersonalImage = "/PersonalImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
+                    }
+
+
+
+                    var result = await userManager.CreateAsync(newUser, registerViewModel.Password);
+
+                    return RedirectToAction(nameof(Index));
                 }
+
                 return View(/*appUser*/);
 
             }
@@ -194,7 +201,6 @@ namespace Herfitk_Dashboard.Controllers
                     PhoneNumber = EditeUser.PhoneNumber,
                     NationalId = EditeUser.NationalId,
                     RoleId = EditeUser.UserRoleID,
-                    Password = EditeUser.PasswordHash,
                 };
 
 
@@ -214,19 +220,25 @@ namespace Herfitk_Dashboard.Controllers
             {
                 try
                 {
+                    var existingUser = await userManager.FindByEmailAsync(UserView.Email);
+                    if (existingUser != null && existingUser.Id != id)
+                    {
+                        ModelState.AddModelError(nameof(RegisterViewModel.Email), "Email already exists.");
+                        return View(UserView);
+                    }
+
+
                     var GetAppUser = await repository.GetByIdAsync(id);
                     if (GetAppUser == null)
                         return NotFound();
-                    else
-                    {
+                   
                         GetAppUser.DisplayName = UserView.DisplayName;
                         GetAppUser.Address = UserView.Address;
                         GetAppUser.Email = UserView.Email;
                         GetAppUser.PhoneNumber = UserView.PhoneNumber;
                         GetAppUser.NationalId = UserView.NationalId;
-                        GetAppUser.PasswordHash = UserView.Password;
                         GetAppUser.UserRoleID = UserView.RoleId;
-                    }
+                    
 
                     // Handle National ID Image Upload
                     if (UserView.NationalIdImage != null && UserView.NationalIdImage.Length > 0)
@@ -287,7 +299,7 @@ namespace Herfitk_Dashboard.Controllers
 
 
 
-                    await repository.UpdateAsync(GetAppUser, id);
+                    var result = await userManager.UpdateAsync(GetAppUser);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception)

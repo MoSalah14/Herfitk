@@ -1,7 +1,9 @@
+using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
 using Herfitk.Repository;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,9 @@ builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
 
 builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = false)
+               .AddEntityFrameworkStores<HerfitkContext>().AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<HerfitkContext>(Use =>
 Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
