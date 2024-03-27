@@ -1,12 +1,11 @@
 <div class="container" style="width: 100%">
-  <div class="edit-container">
+  <div class="edit-container" id="btnedit">
     <button class="Btn" (click)="toggleEdit()">
       {{
         isEditing
           ? ("userProfile.cancel" | translate)
           : ("userProfile.edit_profile" | translate)
       }}
-
       <svg class="svg" viewBox="0 0 512 512">
         <!-- SVG path code -->
       </svg>
@@ -22,7 +21,7 @@
   <div class="profile-info">
     <div class="input-row">
       <label for="name"> {{ "userProfile.name" | translate }} </label>
-      <input
+      <input id="input1"
         required=""
         type="text"
         id="name"
@@ -34,8 +33,9 @@
         (input)="updateUserData($event, 'displayName')"
       />
     </div>
-    <div class="input-row">
-      <label for="email">{{ "userProfile.email" | translate }} </label>
+    <div class="input-row" >
+      <label id="email" for="email">{{"userProfile.email"|translate}}</label>
+      <br>
       <input
         required=""
         type="text"
@@ -49,8 +49,10 @@
       />
     </div>
     <div class="input-row">
-      <label for="Phone">{{ "userProfile.phone" | translate }}</label>
-      <input
+
+          <label for="Phone">{{"userProfile.phone"|translate}}</label>
+       <br>
+        <input
         required=""
         type="text"
         id="Phone"
@@ -61,9 +63,11 @@
         [readonly]="!isEditing"
         (input)="updateUserData($event, 'phoneNumber')"
       />
+      <br>
+      
     </div>
     <div class="input-row">
-      <label for="adress">{{ "userProfile.address" | translate }}</label>
+      <label for="adress">{{"userProfile.address"|translate}}</label>
       <input
         required=""
         type="text"

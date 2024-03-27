@@ -5,8 +5,9 @@ body {
 }
 .container {
   /* max-width: 600px;  */
-  width: 800px;
+  width: 100%;
   height: 600px;
+  
   /* margin: 50px 50px;
   padding: 20px; */
   border: 1px solid #ccc;
@@ -23,6 +24,7 @@ body {
 .space-above-image {
   margin-top: 20px;
 }
+
 .profile-image {
   float: right;
   width: 200px;
@@ -40,6 +42,8 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  float: right;
+  
 }
 
 .container {
@@ -54,6 +58,10 @@ body {
   
   }
   
+ #btnedit{
+   margin-left: 250px;
+  }
+  
   .label {
     font-size: 15px;
     padding-left: 20px;
@@ -63,16 +71,22 @@ body {
     transform: translate(0, -50%);
     transition: 0.3s;
     pointer-events: none;
-    margin-right: 50px; /* Adjust as needed */
+    margin-right: 1000px; /* Adjust as needed */
     display: inline-block;
     width: 100px; /* تحديد عرض العلامة */
     text-align: right; /* تحديد محاذاة النص إلى اليمين */
   }
-  
+
+  input{
+   padding: 100px;
+   float: left;
+    right: 150px;
+    margin-right:100px ;
+  }
   .input {
     width: 300px;
     height: 45px;
-    border: none;
+    border:none;
     outline: none;
     padding: 0px 20px;
     border-radius: 6px;
@@ -81,9 +95,10 @@ body {
     background-color: transparent;
     box-shadow: 3px 3px 10px #ffd541,
     -1px -1px 6px rgba(255, 255, 255, 0.4);
-  /*margin-left: 100px;  Adjust as needed */
-  margin-right: 40px; /* Add margin between input and label */
+  margin-left: 100px;  /*Adjust as needed */
+  margin-right: 100px; /* Add margin between input and label */
   justify-content: center; /* Center horizontally */
+  /* float: right; */
 }
 .input:focus {
   border: 2px solid transparent;
