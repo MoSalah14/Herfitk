@@ -16,7 +16,7 @@ namespace Herfitk_Dashboard.Models
         [RegularExpression(@"^[\w-\.]+@(?:(?:gmail|outlook|yahoo)\.com)$", ErrorMessage = "Email must contain '@' and end with gmail.com, outlook.com, or yahoo.com")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Phone number is required")]
-        [RegularExpression(@"^01\d{9}$", ErrorMessage = "Phone number must start with '01' and contain 11 digits.")]
+        [RegularExpression(@"^011\d{9}$", ErrorMessage = "Phone number must start with '01' and contain 11 digits.")]
         public string PhoneNumber { get; set; }
         public string? Password { get; set; }
         [Required(ErrorMessage = "National ID is required")]
