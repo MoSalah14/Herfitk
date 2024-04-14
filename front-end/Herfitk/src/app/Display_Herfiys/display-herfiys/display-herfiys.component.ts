@@ -10,7 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-display-herfiys',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, TranslateModule],
+  imports: [CommonModule, RouterModule, /*HttpClientModule,*/ TranslateModule],
   templateUrl: './display-herfiys.component.html',
   styleUrl: './display-herfiys.component.css',
 })

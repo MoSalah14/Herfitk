@@ -1,17 +1,20 @@
 <app-navbar></app-navbar>
- <!-- <app-header></app-header> -->
+<!-- <app-header></app-header> -->
 <!-- <app-about></app-about>
 <app-category></app-category> -->
 <!-- <app-contactus></app-contactus>  -->
 
 <router-outlet></router-outlet>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#d7e60f"
+  type="ball-zig-zag"
+  [fullScreen]="true"
+  ><p style="color: #f9f9f9">Loading...</p></ngx-spinner
+>
+
 <app-footer></app-footer>
-
-
 
 <!-- profile -->
 <!-- <app-viewprofile></app-viewprofile> -->
-
-
-
-

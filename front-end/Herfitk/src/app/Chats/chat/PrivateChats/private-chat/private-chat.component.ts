@@ -17,7 +17,7 @@ import { routes } from '../../../../app.routes';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
+    // HttpClientModule,
     MessagesComponent,
     ChatinputComponent,
     FormsModule,

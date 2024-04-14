@@ -14,7 +14,7 @@ import { CategoryComponent } from './Home/category/category.component';
 import { HeaderComponent } from './Home/header/header.component';
 import { NavbarComponent } from './Home/navbar/navbar.component';
 import { FooterComponent } from './Home/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DisplayHerfiysComponent } from './Display_Herfiys/display-herfiys/display-herfiys.component';
 import { HomePageComponent } from './Home/home-page/home-page.component';
 import { DataSharingService } from './data-sharing.service';
@@ -29,6 +29,9 @@ import {
   TranslateStore,
 } from '@ngx-translate/core';
 import { AppModuleModule } from './app-module.module';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { loaderInterceptor } from './Interceptors/loader.interceptor';
 
 @Component({
   selector: 'app-root',
@@ -46,7 +49,7 @@ import { AppModuleModule } from './app-module.module';
     ContactusComponent,
     NavbarComponent,
     FooterComponent,
-    HttpClientModule,
+    // HttpClientModule,
     DisplayHerfiysComponent,
     HomePageComponent,
     PrivacypolicyComponent,
@@ -56,6 +59,7 @@ import { AppModuleModule } from './app-module.module';
     PaymentComponent,
     TranslateModule,
     AppModuleModule,
+    NgxSpinnerModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

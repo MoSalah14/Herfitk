@@ -21,7 +21,7 @@ import { ChatHomeComponent } from './NGCChat/chat-home/chat-home.component';
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    // HttpClientModule,
     FormsModule,
     ChatHomeComponent,
   ],

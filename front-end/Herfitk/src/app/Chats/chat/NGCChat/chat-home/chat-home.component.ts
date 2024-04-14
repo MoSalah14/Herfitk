@@ -16,7 +16,7 @@ import { PrivateChatComponent } from '../../PrivateChats/private-chat/private-ch
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule,
+    // HttpClientModule,
     ReactiveFormsModule,
     ChatinputComponent,
     MessagesComponent,
