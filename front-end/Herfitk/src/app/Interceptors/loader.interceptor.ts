@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { delay, finalize } from 'rxjs';
 
+// Dont forget delete all references of HttpClientModule to make interceptor working
 export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   const spinner = inject(NgxSpinnerService);
   spinner.show();
