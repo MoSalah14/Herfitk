@@ -1,9 +1,6 @@
-﻿using Herfitk.API.Dto;
-using Herfitk.Core.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Herfitk.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -19,6 +16,7 @@ namespace Herfitk.API.TokenService
             config = configuration;
             this.httpContextAccessor = httpContextAccessor;
         }
+
         public async Task<string> GenerateTokinString(AppUser user, UserManager<AppUser> userManager)
         {
             var claims = new List<Claim>
@@ -27,7 +25,6 @@ namespace Herfitk.API.TokenService
                 new Claim(ClaimTypes.Name,user.DisplayName),
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim("UserRole", user.UserRoleID.ToString()) // Custom claim
-
             };
             var userRoles = await userManager.GetRolesAsync(user);
 
@@ -49,9 +46,7 @@ namespace Herfitk.API.TokenService
 
             string TokinString = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
-
             return TokinString;
-
         }
     }
 }

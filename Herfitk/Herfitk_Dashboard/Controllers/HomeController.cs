@@ -1,6 +1,5 @@
 using Herfitk_Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace Herfitk_Dashboard.Controllers

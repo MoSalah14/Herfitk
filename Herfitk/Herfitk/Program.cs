@@ -1,9 +1,9 @@
 using Herfitk.API.ChatServices;
 using Herfitk.API.Hubs;
 using Herfitk.API.TokenService;
+using Herfitk.Core;
 using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
-using Herfitk.Core.Repository;
 
 using Herfitk.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,11 +11,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 //using Herfitk.Repository.Data.DbContextBase;
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection.PortableExecutable;
 using System.Text;
 
 namespace Herfitk
@@ -28,11 +25,12 @@ namespace Herfitk
 
             builder.Services.AddAuthorization();
 
-
             #region Configure Services
+
             // Add services to the container.
             builder.Services.AddSignalR();
-            builder.Services.AddCors(options => {
+            builder.Services.AddCors(options =>
+            {
                 options.AddPolicy("CORSPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed((hosts) => true));
             });
             builder.Services.AddControllers();
@@ -40,18 +38,14 @@ namespace Herfitk
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
             #region Allow  Repository Service
-            //Allow  Repository Service
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
-            builder.Services.AddScoped(typeof(IHerifyCategoriesRepository), typeof(HerifyCategoriesRepository));
-            builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
-            builder.Services.AddScoped(typeof(IClientHerifyRepository), typeof(ClientHerifyRepository));
-            builder.Services.AddSingleton<ChatService>();
-            builder.Services.AddSignalR(); 
-            #endregion
 
+            //Allow  Repository Service
+            builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
+            builder.Services.AddSingleton<ChatService>();
+            builder.Services.AddSignalR();
+
+            #endregion Allow  Repository Service
 
             //Allow DbContext D_Injection
 
@@ -60,7 +54,6 @@ namespace Herfitk
 
             builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
             builder.Services.AddAutoMapper(typeof(Program));
-
 
             builder.Services.AddAuthentication();
             builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -84,21 +77,14 @@ namespace Herfitk
                     ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
                     (builder.Configuration.GetSection("Jwt:Key").Value))
-
                 };
             });
-
 
             builder.Services.ConfigureApplicationCookie(options => { options.Cookie.SameSite = SameSiteMode.None; }); ///////
 
             //builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<IdentityContext>();
 
-
-            #endregion
-
-
-
-
+            #endregion Configure Services
 
             var app = builder.Build();
 
@@ -107,9 +93,10 @@ namespace Herfitk
                         await signInManager.SignOutAsync().ConfigureAwait(false);
                     }).RequireAuthorization(); // So that only authorized users can use this endpoint
 
-
             //app.MapIdentityApi<AppUser>();
+
             #region AutoUpdate Database
+
             using var scope = app.Services.CreateScope();
 
             var services = scope.ServiceProvider;
@@ -127,10 +114,9 @@ namespace Herfitk
             {
                 var logger = loggerFactory.CreateLogger<Program>();
                 logger.LogError(ex, "Error When Try Update Database");
-
             }
-            #endregion
 
+            #endregion AutoUpdate Database
 
             #region MiddleWares
 
@@ -152,7 +138,8 @@ namespace Herfitk
             app.MapControllers();
             app.UseAuthentication();
             app.UseAuthorization();
-            #endregion
+
+            #endregion MiddleWares
 
             app.Run();
         }

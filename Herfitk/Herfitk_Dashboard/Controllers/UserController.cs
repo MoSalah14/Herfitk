@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using Herfitk.API.Dto;
-using Herfitk.Core.Models;
-using Herfitk.Core.Models.Data;
+﻿using Herfitk.Core.Models;
 using Herfitk.Core.Repository;
 using Herfitk_Dashboard.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace Herfitk_Dashboard.Controllers
@@ -22,6 +18,7 @@ namespace Herfitk_Dashboard.Controllers
             this.repository = repository;
             this.userManager = userManager;
         }
+
         public async Task<IActionResult> Index(string searchString)
         {
             try
@@ -56,6 +53,7 @@ namespace Herfitk_Dashboard.Controllers
                 return Content("Error With Data");
             }
         }
+
         public async Task<IActionResult> IndexId(int id)
         {
             try
@@ -86,9 +84,9 @@ namespace Herfitk_Dashboard.Controllers
                 return Content("Error With Data");
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //
         public async Task<IActionResult> Add(RegisterViewModel registerViewModel)
         {
             try
@@ -113,7 +111,6 @@ namespace Herfitk_Dashboard.Controllers
                         UserRoleID = registerViewModel.RoleId,
                         PasswordHash = registerViewModel.Password
                     };
-
 
                     // Handle National ID Image Upload
                     if (registerViewModel.NationalIdImage != null && registerViewModel.NationalIdImage.Length > 0)
@@ -171,15 +168,12 @@ namespace Herfitk_Dashboard.Controllers
                         newUser.PersonalImage = "/PersonalImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
                     }
 
-
-
                     var result = await userManager.CreateAsync(newUser, registerViewModel.Password);
 
                     return RedirectToAction(nameof(Index));
                 }
 
                 return View(/*appUser*/);
-
             }
             catch (Exception)
             {
@@ -199,7 +193,6 @@ namespace Herfitk_Dashboard.Controllers
                 var roles = await repository.GetAllRole();
                 ViewBag.UserRoleList = new SelectList(roles, "Id", "Name");
 
-
                 var newUser = new RegisterViewModel
                 {
                     DisplayName = EditeUser.DisplayName,
@@ -210,9 +203,7 @@ namespace Herfitk_Dashboard.Controllers
                     RoleId = EditeUser.UserRoleID,
                 };
 
-
                 return View(newUser);
-
             }
             catch (Exception)
             {
@@ -234,18 +225,16 @@ namespace Herfitk_Dashboard.Controllers
                         return View(UserView);
                     }
 
-
                     var GetAppUser = await repository.GetByIdAsync(id);
                     if (GetAppUser == null)
                         return NotFound();
-                   
-                        GetAppUser.DisplayName = UserView.DisplayName;
-                        GetAppUser.Address = UserView.Address;
-                        GetAppUser.Email = UserView.Email;
-                        GetAppUser.PhoneNumber = UserView.PhoneNumber;
-                        GetAppUser.NationalId = UserView.NationalId;
-                        GetAppUser.UserRoleID = UserView.RoleId;
-                    
+
+                    GetAppUser.DisplayName = UserView.DisplayName;
+                    GetAppUser.Address = UserView.Address;
+                    GetAppUser.Email = UserView.Email;
+                    GetAppUser.PhoneNumber = UserView.PhoneNumber;
+                    GetAppUser.NationalId = UserView.NationalId;
+                    GetAppUser.UserRoleID = UserView.RoleId;
 
                     // Handle National ID Image Upload
                     if (UserView.NationalIdImage != null && UserView.NationalIdImage.Length > 0)
@@ -303,9 +292,6 @@ namespace Herfitk_Dashboard.Controllers
                         GetAppUser.PersonalImage = "/PersonalImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
                     }
 
-
-
-
                     var result = await userManager.UpdateAsync(GetAppUser);
                     return RedirectToAction(nameof(Index));
                 }
@@ -317,16 +303,13 @@ namespace Herfitk_Dashboard.Controllers
 
             return View(UserView);
         }
-        //Delete User 
+
+        //Delete User
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var deleteUser = await repository.DeleteAsync(id);
-                if (deleteUser == null)
-                {
-                    return NotFound();
-                }
+                await repository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -334,6 +317,5 @@ namespace Herfitk_Dashboard.Controllers
                 return Content("Error With Data");
             }
         }
-
     }
 }

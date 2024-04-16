@@ -1,32 +1,25 @@
 ﻿using AutoMapper;
-using Herfitk.API.DTO;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
-using Herfitk.Repository;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.VisualBasic;
-using System.Threading.Tasks;
 using Herfitk_Dashboard.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+
 namespace Herfitk_Dashboard.Controllers
 {
     public class HerifyController : Controller
     {
-       
         private readonly IHerifyRepository repository;
         private readonly IMapper mapper;
+
         public HerifyController(IHerifyRepository repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
         }
 
-       // Get All Herifys
-       //Search String First Step Path Parameter To Search  
-       public async Task<IActionResult> Index(string searchString)
+        // Get All Herifys
+        //Search String First Step Path Parameter To Search
+        public async Task<IActionResult> Index(string searchString)
         {
             try
             {
@@ -41,7 +34,6 @@ namespace Herfitk_Dashboard.Controllers
                 if (!string.IsNullOrEmpty(searchString))
                 {
                     herifys = herifys.Where(herify => herify.Speciality.Contains(searchString)).ToList();
-
                 }
                 if (int.TryParse(searchString, out int id))
                 {
@@ -49,23 +41,24 @@ namespace Herfitk_Dashboard.Controllers
                     return RedirectToAction(nameof(IndexId), new { id });
                 }
                 //Continu Later ****
-               //var mappedData = mapper.Map<List<Herfiy>, List<HerfiyReturnDto>>(herifys);
+                //var mappedData = mapper.Map<List<Herfiy>, List<HerfiyReturnDto>>(herifys);
 
                 return View(herifys);
             }
             catch (Exception)
             {
-                return Content("Error With Data"); 
+                return Content("Error With Data");
             }
         }
-        //Add This for get the search 
-        //notUsed Make OverLoad 
+
+        //Add This for get the search
+        //notUsed Make OverLoad
         //[HttpPost]
         //public string Index(string searchString, bool notUsed)
         //{
         //    return "From [HttpPost]Index: filter on " + searchString;
         //}
-        //Get Herifys By Id 
+        //Get Herifys By Id
         public async Task<IActionResult> IndexId(int id)
         {
             //var herify = await repository.GetByIdAsync(id);
@@ -79,15 +72,16 @@ namespace Herfitk_Dashboard.Controllers
                 {
                     return NotFound(); // Return 404 Not Found if no Herfiy with the given id is found
                 }
-               // var mappedDataId = mapper.Map<Herfiy, HerfiyReturnDto>(herify);
+                // var mappedDataId = mapper.Map<Herfiy, HerfiyReturnDto>(herify);
                 return View(herify);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return Content("Error With Data");
             }
         }
-        //Add new Herifys 
+
+        //Add new Herifys
         public IActionResult Add()
         {
             try
@@ -97,11 +91,12 @@ namespace Herfitk_Dashboard.Controllers
             catch
             {
                 return Content("Error With Data");
-            }      
+            }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("UserId,Zone,History,Speciality")] HerifyViewModel herifyViewModel , Herfiy herfiy)
+        public async Task<IActionResult> Add([Bind("UserId,Zone,History,Speciality")] HerifyViewModel herifyViewModel, Herfiy herfiy)
         {
             try
             {
@@ -116,21 +111,21 @@ namespace Herfitk_Dashboard.Controllers
                             Speciality = herifyViewModel.Speciality,
                             UserId = herifyViewModel.UserId
                         };
-                        //Must Be 4 ....Herfy 
+                        //Must Be 4 ....Herfy
                         await repository.AddAsync(newHerfy);
 
                         return RedirectToAction(nameof(Index));
                     }
                 }
                 return View(herfiy);
-
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return Content("Error With Data");
-            }       
+            }
         }
-        //Edite Herifys 
+
+        //Edite Herifys
         public async Task<IActionResult> Edite(int id)
         {
             try
@@ -143,16 +138,15 @@ namespace Herfitk_Dashboard.Controllers
                 //Continu ....
                 //var editeHerifyReturnDto = mapper.Map<Herfiy, HerfiyReturnDto>(editeHerify);
                 return View(editeHerify);
-
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return Content("Error With Data");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edite(int id , [Bind("Id,UserId,Zone,History,Speciality")] HerifyViewModel herifyViewModel)
+        public async Task<IActionResult> Edite(int id, [Bind("Id,UserId,Zone,History,Speciality")] HerifyViewModel herifyViewModel)
         {
             if (id != herifyViewModel.Id)
                 return NotFound();
@@ -167,14 +161,13 @@ namespace Herfitk_Dashboard.Controllers
                     }
                     else
                     {
-                        
                         herfyUpdate.Zone = herifyViewModel.Zone;
                         herfyUpdate.History = herifyViewModel.History;
                         herfyUpdate.Speciality = herifyViewModel.Speciality;
-                        //I don't no the edite here right or not ... tell the logic 
+                        //I don't no the edite here right or not ... tell the logic
                         herfyUpdate.UserId = herifyViewModel.UserId;
                     }
-                    
+
                     await repository.UpdateAsync(herfyUpdate, id);
                     return RedirectToAction(nameof(Index));
                 }
@@ -186,6 +179,7 @@ namespace Herfitk_Dashboard.Controllers
 
             return View(herifyViewModel);
         }
+
         //Delete Herifys
         public async Task<IActionResult> Delete(int id)
         {
@@ -198,11 +192,10 @@ namespace Herfitk_Dashboard.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return Content("Error With Data");
             }
         }
-
     }
 }

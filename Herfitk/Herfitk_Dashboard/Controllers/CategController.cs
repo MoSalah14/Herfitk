@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
-using AutoMapper;
 using Herfitk_Dashboard.Models;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using NuGet.Protocol.Core.Types;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Herfitk_Dashboard.Controllers
 {
@@ -21,7 +14,6 @@ namespace Herfitk_Dashboard.Controllers
 
         public CategController(IGenericRepository<Category> context, IMapper mapper)
         {
-
             this.context = context;
             this.mapper = mapper;
         }
@@ -34,7 +26,6 @@ namespace Herfitk_Dashboard.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 category = category.Where(category => category.CategoryName.Contains(searchString)).ToList();
-
             }
             if (int.TryParse(searchString, out int id))
             {
@@ -88,7 +79,6 @@ namespace Herfitk_Dashboard.Controllers
                         if (!Directory.Exists(assetsUploadsDirectory))
                             Directory.CreateDirectory(assetsUploadsDirectory);
 
-
                         var uniqueFileName = Guid.NewGuid().ToString() + "_" + category.Image.FileName;
                         var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
                         var assetsFilePath = Path.Combine(assetsUploadsDirectory, uniqueFileName);
@@ -111,22 +101,15 @@ namespace Herfitk_Dashboard.Controllers
 
                         return RedirectToAction(nameof(Index));
                     }
-
-
                     else
                         ModelState.AddModelError("Image", "The file is too large.");
-
                 }
                 else
                     ModelState.AddModelError("Image", "Please select a file.");
-
             }
 
             return View(category);
         }
-
-
-
 
         // GET: Categ/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -146,7 +129,6 @@ namespace Herfitk_Dashboard.Controllers
             if (id != categoryViewModel.Id)
                 return NotFound();
 
-
             if (ModelState.IsValid)
             {
                 try
@@ -154,7 +136,6 @@ namespace Herfitk_Dashboard.Controllers
                     var categoryToUpdate = await context.GetByIdAsync(id);
                     if (categoryToUpdate == null)
                         return NotFound();
-
 
                     // Check if a new image is uploaded
                     if (categoryViewModel.Image != null && categoryViewModel.Image.Length > 0)
@@ -169,16 +150,12 @@ namespace Herfitk_Dashboard.Controllers
                             string wwwrootUploadsDirectory = Path.Combine(herfitkDirectory, "Herfitk", "Herfitk_Dashboard", "wwwroot", "UploadsPhotos");
                             string assetsUploadsDirectory = Path.Combine(herfitkDirectory, "front-end", "Herfitk", "src", "assets", "UploadsPhotos");
 
-
-
-
                             // Check if the uploadsDirectories exist, and create them if they don't
                             if (!Directory.Exists(wwwrootUploadsDirectory))
                                 Directory.CreateDirectory(wwwrootUploadsDirectory);
 
                             if (!Directory.Exists(assetsUploadsDirectory))
                                 Directory.CreateDirectory(assetsUploadsDirectory);
-
 
                             var uniqueFileName = Guid.NewGuid().ToString() + "_" + categoryViewModel.Image.FileName;
                             var wwwrootFilePath = Path.Combine(wwwrootUploadsDirectory, uniqueFileName);
@@ -221,7 +198,6 @@ namespace Herfitk_Dashboard.Controllers
             return View(categoryViewModel);
         }
 
-
         // GET: Categ/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
@@ -229,7 +205,6 @@ namespace Herfitk_Dashboard.Controllers
 
             if (category == null)
                 return NotFound();
-
 
             return View(category);
         }
@@ -246,6 +221,5 @@ namespace Herfitk_Dashboard.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

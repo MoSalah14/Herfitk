@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Herfitk.API.DTO;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
-using Herfitk.Repository;
 using Herfitk_Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace Herfitk_Dashboard.Controllers
 {
@@ -13,12 +10,14 @@ namespace Herfitk_Dashboard.Controllers
     {
         private readonly IStaffRepository repository;
         private readonly IMapper mapper;
+
         public StaffController(IStaffRepository repository, IMapper mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
         }
-        //Get All Satff 
+
+        //Get All Satff
         public async Task<IActionResult> Index(string searchString)
         {
             //var getAllStaffDto = mapper.Map<List<Staff>, List<StaffDto>>(getAllSataff);
@@ -56,8 +55,8 @@ namespace Herfitk_Dashboard.Controllers
             {
                 return Content("Error With Data");
             }
-
         }
+
         public async Task<IActionResult> IndexId(int id)
         {
             // var getStaffByIdDto = mapper.Map<Staff, StaffDto>(getStaffById);
@@ -89,10 +88,11 @@ namespace Herfitk_Dashboard.Controllers
                 return Content("Error With Data");
             }
         }
-        //Add Staff 
+
+        //Add Staff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("Salary,HireDate,WorkHours,UserId")] StaffViewModel staffViewModel , Staff staff)
+        public async Task<IActionResult> Add([Bind("Salary,HireDate,WorkHours,UserId")] StaffViewModel staffViewModel, Staff staff)
         {
             try
             {
@@ -106,26 +106,23 @@ namespace Herfitk_Dashboard.Controllers
                             HireDate = staffViewModel.HireDate,
                             WorkHours = staffViewModel.WorkHours,
                             UserId = staffViewModel.UserId
-                            
                         };
                         //Must Be Check To 1 or 2 Admin Or Herfy ..........................
-                  
+
                         await repository.AddAsync(newStaff);
 
                         return RedirectToAction(nameof(Index));
                     }
                 }
                 return View(staff);
-
             }
             catch (Exception)
             {
                 return Content("Error With Data");
             }
-
         }
 
-        //Edit Herifys 
+        //Edit Herifys
         public async Task<IActionResult> Edite(int id)
         {
             try
@@ -137,15 +134,15 @@ namespace Herfitk_Dashboard.Controllers
                 }
                 //Continu .... Map
                 return View(editeStaff);
-
             }
             catch (Exception)
             {
                 return Content("Error With Data");
             }
         }
+
         [HttpPost]
-        public async Task<IActionResult> Edite(int id, [Bind("Id,UserId,Salary,HireDate,WorkHours")] StaffViewModel staffViewModel , Staff staff)
+        public async Task<IActionResult> Edite(int id, [Bind("Id,UserId,Salary,HireDate,WorkHours")] StaffViewModel staffViewModel, Staff staff)
         {
             if (id != staffViewModel.Id)
                 return NotFound();
@@ -165,7 +162,7 @@ namespace Herfitk_Dashboard.Controllers
                         herfyUpdate.WorkHours = herfyUpdate.WorkHours;
                         herfyUpdate.UserId = herfyUpdate.UserId;
                     }
-                    //Must Be 1 Or 2 Admin Or Staff 
+                    //Must Be 1 Or 2 Admin Or Staff
                     await repository.UpdateAsync(herfyUpdate, id);
                     return RedirectToAction(nameof(Index));
                 }
@@ -176,7 +173,6 @@ namespace Herfitk_Dashboard.Controllers
             }
 
             return View(staff);
-
         }
 
         //Delete Herifys
@@ -195,10 +191,6 @@ namespace Herfitk_Dashboard.Controllers
             {
                 return Content("Error With Data");
             }
-
-
         }
-
-
     }
 }

@@ -9,7 +9,7 @@
 
         public string? PhoneNumber { get; set; }
 
-        public string? Image { get; set;}
+        public string? Image { get; set; }
 
         public string? Zone { get; set; }
         public string? Speciality { get; set; }

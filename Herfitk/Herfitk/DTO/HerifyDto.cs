@@ -14,7 +14,5 @@
         public string? DisplayImage { get; set; }
 
         public IFormFile? Image { get; set; }
-
-
     }
 }

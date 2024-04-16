@@ -10,9 +10,10 @@ namespace Herfitk_Dashboard.Models
         [Required(ErrorMessage = "Name is Required")]
         [DisplayName("Name")]
         public string? CategoryName { get; set; }
+
         [Required(ErrorMessage = "Description is Required")]
         public string? Descraption { get; set; }
-        
+
         public IFormFile? Image { get; set; }
     }
 }

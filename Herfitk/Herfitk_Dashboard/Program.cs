@@ -2,12 +2,8 @@ using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
 using Herfitk.Repository;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-//Allow Debdancy Injection 
+//Allow Debdancy Injection
 builder.Services.AddScoped(typeof(IHerifyRepository), typeof(HerifyRepository));
 
 builder.Services.AddScoped(typeof(IStaffRepository), typeof(StaffRepository));
@@ -27,7 +23,6 @@ builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.Sign
 builder.Services.AddDbContext<HerfitkContext>(Use =>
 Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
 builder.Services.AddAutoMapper(typeof(Program));
-
 
 var app = builder.Build();
 

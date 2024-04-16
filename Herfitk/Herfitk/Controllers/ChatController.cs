@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Herfitk.API.ChatServices;
+﻿using Herfitk.API.ChatServices;
 using Herfitk.API.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Herfitk.API.Controllers
 {
@@ -10,10 +9,12 @@ namespace Herfitk.API.Controllers
     public class ChatController : ControllerBase
     {
         private readonly ChatService chatservice;
+
         public ChatController(ChatService _chatService)
         {
-            chatservice=_chatService;
+            chatservice = _chatService;
         }
+
         [HttpPost("register-user")]
         public IActionResult RegisterUser(UserChatDto user)
         {
@@ -21,11 +22,10 @@ namespace Herfitk.API.Controllers
             {
                 return NoContent();
             }
-            else {
+            else
+            {
                 return BadRequest("This name is taken please choose another name");
-
             }
-
         }
     }
 }

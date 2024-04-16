@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Herfitk.API.DTO;
+using Herfitk.Core;
 using Herfitk.Core.Models.Data;
-using Herfitk.Core.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Herfitk.API.Controllers
@@ -11,12 +10,12 @@ namespace Herfitk.API.Controllers
     [ApiController]
     public class HerifyController : ControllerBase
     {
-        private readonly IHerifyRepository repository;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public HerifyController(IHerifyRepository genericRepository, IMapper mapper)
+        public HerifyController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            repository = genericRepository;
+            this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
 
@@ -25,33 +24,19 @@ namespace Herfitk.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var alldata = await repository.GetAllAsync();
+                var alldata = await unitOfWork.herifyRepository.GetAllAsync();
                 var mappedData = alldata.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
                 return Ok(mappedData);
             }
             return BadRequest(ModelState);
         }
-        
-        //[HttpGet("Specialist/{catName}")]
-        //public async Task<IActionResult> GetAllHerfiysByCategory(string catName)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var alldata = await repository.GetAllAsync();
-        //        var GetDataWithFilter = alldata.Where(e => e.Speciality == catName).ToList();
-        //        var mappedData = GetDataWithFilter.Select(item => mapper.Map<Herfiy, HerfiyReturnDto>(item));
-        //        return Ok(mappedData);
-        //    }
-        //    return BadRequest(ModelState);
-        //}
-
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             if (ModelState.IsValid)
             {
-                var herify = await repository.GetByIdAsyncWithInclude(id);
+                var herify = await unitOfWork.herifyRepository.GetByIdAsyncWithInclude(id);
                 if (herify == null)
                     return NotFound();
 
@@ -101,7 +86,7 @@ namespace Herfitk.API.Controllers
                     HerifyUser.Image = "/HerifyImage/" + uniqueFileName; // Assuming PersonalImage is the property to store the image path
                 }
 
-                var entity = await repository.AddAsync(HerifyUser);
+                var entity = await unitOfWork.herifyRepository.AddAsync(HerifyUser);
                 return Ok(entity);
             }
             else
@@ -113,15 +98,15 @@ namespace Herfitk.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingEntity = await repository.GetByIdAsync(id);
+                var existingEntity = await unitOfWork.herifyRepository.GetByIdAsync(id);
 
                 if (existingEntity == null)
                     return NotFound();
 
                 mapper.Map(herify, existingEntity);
-                var updatedEntity = await repository.UpdateAsync(existingEntity, id);
+                await unitOfWork.herifyRepository.Update(existingEntity, id);
 
-                return Ok(updatedEntity);
+                return Ok();
             }
             return BadRequest(ModelState);
         }
@@ -129,7 +114,7 @@ namespace Herfitk.API.Controllers
         [HttpGet("lastId")]
         public async Task<IActionResult> GetLastHerify()
         {
-            var getLastHerifyID = await repository.GetLastHerifyIdAsync();
+            var getLastHerifyID = await unitOfWork.herifyRepository.GetLastHerifyIdAsync();
             return Ok(getLastHerifyID);
         }
     }

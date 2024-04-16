@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace Herfitk_Dashboard.Models
+﻿namespace Herfitk_Dashboard.Models
 {
     public class HerifyViewModel
     {
@@ -9,7 +7,5 @@ namespace Herfitk_Dashboard.Models
         public string? History { get; set; }
         public string? Speciality { get; set; }
         public int UserId { get; set; }
-
-
     }
 }

@@ -1,11 +1,5 @@
 ﻿using Herfitk.Core.Models.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Herfitk.Core.Models
 {
@@ -28,8 +22,5 @@ namespace Herfitk.Core.Models
         public virtual Client? UserClient { get; set; }
 
         public virtual IdentityRole<int>? Role { get; set; }
-
-
-
     }
 }

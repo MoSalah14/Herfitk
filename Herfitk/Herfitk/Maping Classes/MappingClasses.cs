@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Herfitk.API.Dto;
 using Herfitk.API.DTO;
-using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
 
 namespace Herfitk.API.Maping_Classes
@@ -15,7 +13,6 @@ namespace Herfitk.API.Maping_Classes
                 .ForMember(e => e.Phone, e => e.MapFrom(e => e.HerfiyUser.PhoneNumber))
                 .ForMember(e => e.PersonalImage, e => e.MapFrom(e => e.HerfiyUser.PersonalImage))
                 .ForMember(e => e.ImageWork, e => e.MapFrom(e => e.Image));
-
 
             CreateMap<HerifyCategory, HerifyDto>()
                .ForMember(e => e.DisplayImage, e => e.MapFrom(e => e.Herify.HerfiyUser.PersonalImage))
@@ -32,18 +29,13 @@ namespace Herfitk.API.Maping_Classes
                 .ForMember(s => s.WorkHours, s => s.MapFrom(s => s.StaffUser.UserStaff.WorkHours))
                 .ForMember(s => s.UserRole, s => s.MapFrom(s => s.StaffUser.Role));
 
-
-
             CreateMap<Client, ClientDto>().ReverseMap();
-
 
             CreateMap<ClientHerify, Herify_ReviewDto>()
                 .ForMember(s => s.Review, s => s.MapFrom(s => s.ClientReview))
                 .ForMember(s => s.Name, s => s.MapFrom(s => s.Client.ClientUser.DisplayName))
                 .ForMember(s => s.ReviewDate, s => s.MapFrom(s => s.Date))
                 .ForMember(s => s.Rate, s => s.MapFrom(s => s.Rate));
-            
-
         }
     }
 }

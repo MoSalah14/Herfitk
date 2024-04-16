@@ -5,15 +5,10 @@ using Herfitk.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 
 //using Herfitk.Repository.Data.DbContextBase;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using Talabat.API.DTOs;
 using Talabat.API.Errors;
 
@@ -34,14 +29,12 @@ namespace Herfitk.API.Controllers
             this.authService = authService;
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto login)
         {
             var user = await userManager.FindByEmailAsync(login.Email);
             if (user is null)
                 return Unauthorized(new ApiResponse(401, "Invalid email or password."));
-
 
             var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
@@ -65,7 +58,7 @@ namespace Herfitk.API.Controllers
         public async Task<IActionResult> Register(RegisterDto model)
         {
             if (CheckEmailExists(model.Email).Result.Value)
-                return BadRequest(new ApiValidationErrorResponse() { Errors = new string[] { "This Email is Already Exist" } });
+                return BadRequest(new ApiValidationErrorResponse() { Errors = ["This Email is Already Exist"] });
 
             var user = new AppUser()
             {
@@ -152,26 +145,26 @@ namespace Herfitk.API.Controllers
             return BadRequest();
         }
 
-
-
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             if (!ModelState.IsValid) return BadRequest();
             var Email = User.FindFirstValue(ClaimTypes.Email);
-
-            var user = await userManager.FindByEmailAsync(Email);
-
-            return Ok(new UserDto()
+            if (!string.IsNullOrEmpty(Email))
             {
-                DisplayName = user.DisplayName,
-                Email = user.Email,
-                //Token = await _authService.CreateTokinAsync(user, _userManager)
-            });
-
+                var user = await userManager.FindByEmailAsync(Email);
+                if (user != null)
+                {
+                    return Ok(new UserDto()
+                    {
+                        DisplayName = user.DisplayName,
+                        Email = user.Email,
+                    });
+                }
+            }
+            return BadRequest("Email not found");
         }
-
 
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckEmailExists(string email)
@@ -192,26 +185,21 @@ namespace Herfitk.API.Controllers
                 Address = user.Address
             };
 
-
             if (user.UserHerify != null)
             {
                 userProfileDto.Speciality = user.UserHerify.Speciality;
                 userProfileDto.Zone = user.UserHerify.Zone;
             }
 
-
             if (!string.IsNullOrEmpty(user.PersonalImage))
                 userProfileDto.Image = user.PersonalImage;
-
 
             return Ok(userProfileDto);
         }
 
-
-
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUser(int id, UpdateProfileDto register)
-            {
+        {
             if (ModelState.IsValid)
             {
                 var getUser = await userManager.FindByIdAsync(id.ToString());
@@ -230,17 +218,9 @@ namespace Herfitk.API.Controllers
                 }
 
                 return BadRequest("Failed to update user.");
-
             }
 
             return BadRequest(ModelState);
         }
-
-
-
-
     }
 }
-
-
-

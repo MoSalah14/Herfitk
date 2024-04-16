@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +10,7 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
         : base(options)
     {
     }
+
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -26,12 +25,9 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
 
     public virtual DbSet<Staff> Staff { get; set; }
 
-
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
 
         modelBuilder.Entity<AppUser>(entity =>
         {
@@ -41,7 +37,6 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
                 .HasForeignKey<AppUser>(u => u.UserRoleID);
         });
 
-
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Category__3214EC279B2D105D");
@@ -50,7 +45,6 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CategoryName).HasMaxLength(100);
-
         });
 
         modelBuilder.Entity<Client>(entity =>
@@ -171,8 +165,7 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
         });
 
         OnModelCreatingPartial(modelBuilder);
-
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    private partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

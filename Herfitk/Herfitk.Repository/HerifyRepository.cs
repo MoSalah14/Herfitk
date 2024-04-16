@@ -1,12 +1,6 @@
-﻿using Herfitk.Core.Models;
-using Herfitk.Core.Models.Data;
+﻿using Herfitk.Core.Models.Data;
 using Herfitk.Core.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Herfitk.Repository
 {
@@ -31,7 +25,6 @@ namespace Herfitk.Repository
 
         public async Task<List<Herfiy>> GetAllHerfyIncluding()
         {
-
             var getData = await context.Herfiys
                                 .Include(x => x.HerfiyUser)
                                 .Include(x => x.ClientHerifies)
@@ -45,6 +38,5 @@ namespace Herfitk.Repository
             var lastHerfiy = await context.Herfiys.OrderByDescending(e => e.Id).FirstOrDefaultAsync();
             return lastHerfiy?.Id;
         }
-
     }
 }

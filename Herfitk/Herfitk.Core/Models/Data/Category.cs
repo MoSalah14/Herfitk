@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Herfitk.Core.Models.Data;
+﻿namespace Herfitk.Core.Models.Data;
 
 public partial class Category
 {
@@ -10,5 +7,4 @@ public partial class Category
     public string? CategoryName { get; set; }
     public string? Descraption { get; set; }
     public string? Image { get; set; }
-
 }

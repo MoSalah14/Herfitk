@@ -17,8 +17,6 @@ namespace Herfitk_Dashboard.Mapp
             CreateMap<HerfiyReturnDto, Herfiy>();
 
             CreateMap<Category, CategoryViewModel>().ReverseMap();
-
         }
-
     }
 }

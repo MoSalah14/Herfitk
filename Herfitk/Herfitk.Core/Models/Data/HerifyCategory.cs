@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Herfitk.Core.Models.Data;
+﻿namespace Herfitk.Core.Models.Data;
 
 public partial class HerifyCategory
 {

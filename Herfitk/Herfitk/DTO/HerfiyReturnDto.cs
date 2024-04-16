@@ -1,5 +1,4 @@
-﻿
-namespace Herfitk.API.DTO
+﻿namespace Herfitk.API.DTO
 {
     public class HerfiyReturnDto
     {
@@ -12,6 +11,5 @@ namespace Herfitk.API.DTO
         public string? PersonalImage { get; set; }
 
         public string? ImageWork { get; set; }
-
     }
 }

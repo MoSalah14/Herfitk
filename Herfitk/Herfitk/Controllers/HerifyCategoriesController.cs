@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Herfitk.API.DTO;
+using Herfitk.Core;
+using Herfitk.Core.Models.Data;
+using Herfitk.Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Herfitk.Core.Models.Data;
-using Herfitk.Core.Repository;
-using Herfitk.Repository;
-using AutoMapper;
-using Herfitk.API.DTO;
+using Talabat.API.Errors;
 
 namespace Herfitk.API.Controllers
 {
@@ -17,12 +13,12 @@ namespace Herfitk.API.Controllers
     [ApiController]
     public class HerifyCategoriesController : ControllerBase
     {
-        private readonly IHerifyCategoriesRepository context;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public HerifyCategoriesController(IHerifyCategoriesRepository context, IMapper mapper)
+        public HerifyCategoriesController(IUnitOfWork unitOfwork, IMapper mapper)
         {
-            this.context = context;
+            unitOfWork = unitOfwork;
             this.mapper = mapper;
         }
 
@@ -30,7 +26,9 @@ namespace Herfitk.API.Controllers
         [HttpGet("{catid}")]
         public async Task<IActionResult> GetAllHerifyByCatID(int catid)
         {
-            var GetAll = await context.GetAllHerfiyWithIncludeAsync();
+            var spec = new HerifyCategoryWithSpec();
+
+            var GetAll = await unitOfWork.Repository<HerifyCategory>().GetAllWithSpecAsync(spec);
 
             var HerfiyInCategory = GetAll.Where(e => e.CategoryId == catid).ToList();
             var herifyDtos = mapper.Map<List<HerifyCategory>, List<HerifyDto>>(HerfiyInCategory);
@@ -38,29 +36,15 @@ namespace Herfitk.API.Controllers
             return Ok(herifyDtos);
         }
 
-        // GET: api/HerifyCategories/5
-        //[HttpGet("get/{id}")]
-        //public async Task<IActionResult> GetHerifyCategory(int id) // This Make error Because table is composite primary Key
-        //{
-        //    var herifyCategory = await context.GetByIdAsync(id);   // This Get one value but must get 2 value
-
-        //    if (herifyCategory == null)
-        //        return NotFound();
-
-
-        //    return Ok(herifyCategory);
-        //}
-
-
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateHerifyCategory(int id, HerifyCategory herifyCategory)
+        public IActionResult UpdateHerifyCategory(int id, HerifyCategory herifyCategory)
         {
             if (id != herifyCategory.CategoryId)
                 return BadRequest();
 
             try
             {
-                await context.UpdateAsync(herifyCategory, id);
+                unitOfWork.Repository<HerifyCategory>().Update(herifyCategory, id);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,7 +53,6 @@ namespace Herfitk.API.Controllers
 
             return NoContent();
         }
-
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateHerifyCategory(HerifyCategoryDto herifyCategory)
@@ -82,9 +65,9 @@ namespace Herfitk.API.Controllers
                     HerifyId = herifyCategory.HerifyID
                 };
 
-                await context.AddAsync(getHerifyAndCategoryID);
+                await unitOfWork.Repository<HerifyCategory>().AddAsync(getHerifyAndCategoryID);
+                await unitOfWork.CompleteAsync();
                 return Ok();
-
             }
             catch (DbUpdateException)
             {
@@ -96,14 +79,21 @@ namespace Herfitk.API.Controllers
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteHerifyCategory(int id)
         {
-            var herifyCategory = await context.GetByIdAsync(id);
-            if (herifyCategory == null)
-                return NotFound();
+            try
+            {
+                var herifyCategory = await unitOfWork.Repository<HerifyCategory>().GetByIdAsync(id);
+                if (herifyCategory == null)
+                    return NotFound();
 
-            await context.DeleteAsync(id);
-
-            return NoContent();
+                await unitOfWork.Repository<HerifyCategory>().Delete(id);
+                await unitOfWork.CompleteAsync();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new ApiResponse(500, "Error message : " + ex.Message);
+                return StatusCode(errorResponse.StatusCode, errorResponse);
+            }
         }
-
     }
 }
