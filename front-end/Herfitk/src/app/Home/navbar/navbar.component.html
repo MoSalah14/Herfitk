@@ -1,4 +1,4 @@
-<header [ngClass]="{ sticky: isSticky }">
+<header class="reem-kufi-fun" [ngClass]="{ sticky: isSticky }">
   <!-- <a href="#" class="logo">Herfitk</a>  -->
   <!-- For Translat -->
   <!-- <div id="google_translate_element" ></div> -->
@@ -17,19 +17,40 @@
     >
       <a href="https://localhost:7021" target="_blank">Dashboard</a>
     </li>
-    <li><a href="#">{{"navbar.Home" | translate}}</a></li>
-    <li><a href="#About">{{"navbar.About Us" | translate}}</a></li>
-    <li><a href="#category">{{"navbar.Category" | translate}}</a></li>
-    <li><a href="#contact">{{"navbar.Contact US" | translate}}</a></li>
-    <!-- Dark And Light Mode -->
-    <!-- <li>
-      <input type="checkbox" id="switch" (change)="toggleBackground()">
-      <label for="switch"></label>
-      </li> -->
+    <ul>
+      <li>
+        <a routerLink="/Home">{{ "navbar.Home" | translate }}</a>
+      </li>
+      <li>
+        <a
+          (click)="scrollToSection('aboutUsContent')"
+          style="cursor: pointer"
+          >{{ "navbar.About Us" | translate }}</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="scrollToSection('categoryContent')"
+          style="cursor: pointer"
+          >{{ "navbar.Category" | translate }}</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="scrollToSection('contactContent')"
+          style="cursor: pointer"
+          >{{ "navbar.Contact US" | translate }}</a
+        >
+      </li>
+    </ul>
 
     <li>
-      <a *ngIf="!isLoggedIn" (click)="openLoginForm()" href="/login">{{"navbar.Login" | translate}}</a>
-      <a *ngIf="isLoggedIn" (click)="logout()" href="/">{{"navbar.Logout" | translate}}</a>
+      <a *ngIf="!isLoggedIn" (click)="openLoginForm()" routerLink="/login">{{
+        "navbar.Login" | translate
+      }}</a>
+      <a *ngIf="isLoggedIn" (click)="logout()" routerLink="/">{{
+        "navbar.Logout" | translate
+      }}</a>
     </li>
     <li *ngIf="isLoggedIn">
       <!-- <span style="color: #ffd700">Welcome {{ UserName }}</span> -->
@@ -37,7 +58,9 @@
         (click)="goToDisplay()"
         style="background: transparent; border: none"
       >
-        <span style="color: #ffd700">{{"navbar.Welcom" | translate}} {{ UserName }}</span>
+        <span style="color: #ffd700"
+          >{{ "navbar.Welcom" | translate }} {{ UserName }}</span
+        >
       </button>
     </li>
     <li>
@@ -56,6 +79,6 @@
 <app-login *ngIf="isLoginPopupOpen" (close)="closeLoginForm()"></app-login>
 <section class="banner">
   <div class="overlay">
-    <h1 id="headTirle">{{"header.title" | translate}}</h1>
+    <h1 id="headTirle">{{ "header.title" | translate }}</h1>
   </div>
 </section>

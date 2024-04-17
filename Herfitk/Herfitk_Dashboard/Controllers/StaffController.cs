@@ -180,11 +180,7 @@ namespace Herfitk_Dashboard.Controllers
         {
             try
             {
-                var deleteStaff = await repository.DeleteAsync(id);
-                if (deleteStaff == null)
-                {
-                    return NotFound();
-                }
+                await repository.DeleteAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

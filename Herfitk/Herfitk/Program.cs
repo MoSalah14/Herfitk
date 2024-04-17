@@ -1,5 +1,6 @@
 using Herfitk.API.ChatServices;
 using Herfitk.API.Hubs;
+using Herfitk.API.SendEmail;
 using Herfitk.API.TokenService;
 using Herfitk.Core;
 using Herfitk.Core.Models;
@@ -11,8 +12,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 //using Herfitk.Repository.Data.DbContextBase;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
 using System.Text;
 
 namespace Herfitk
@@ -38,14 +41,14 @@ namespace Herfitk
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            #region Allow  Repository Service
+            #region Allow  UnitOFWork Service
 
             //Allow  Repository Service
             builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
             builder.Services.AddSingleton<ChatService>();
             builder.Services.AddSignalR();
 
-            #endregion Allow  Repository Service
+            #endregion Allow  UnitOFWork Service
 
             //Allow DbContext D_Injection
 
@@ -56,10 +59,12 @@ namespace Herfitk
             builder.Services.AddAutoMapper(typeof(Program));
 
             builder.Services.AddAuthentication();
-            builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = false)
+            builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<HerfitkContext>().AddDefaultTokenProviders();
 
-            //builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddTransient<IEmailService, EmailService>();
+
             builder.Services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

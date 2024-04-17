@@ -7,8 +7,5 @@ import { delay, finalize } from 'rxjs';
 export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   const spinner = inject(NgxSpinnerService);
   spinner.show();
-  return next(req).pipe(
-    delay(2000),
-    finalize(() => spinner.hide())
-  );
+  return next(req).pipe(finalize(() => spinner.hide()));
 };

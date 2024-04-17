@@ -104,7 +104,7 @@ namespace Herfitk.API.Controllers
                     return NotFound();
 
                 mapper.Map(herify, existingEntity);
-                await unitOfWork.herifyRepository.Update(existingEntity, id);
+                await unitOfWork.herifyRepository.UpdateAsync(existingEntity, id);
 
                 return Ok();
             }

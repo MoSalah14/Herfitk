@@ -164,8 +164,8 @@ public partial class HerfitkContext : IdentityDbContext<AppUser, IdentityRole<in
                 .HasConstraintName("FK__Staff__User_ID__3C69FB99");
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        //OnModelCreatingPartial(modelBuilder);
     }
 
-    private partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    //private partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

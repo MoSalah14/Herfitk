@@ -44,7 +44,7 @@ namespace Herfitk.API.Controllers
 
             try
             {
-                unitOfWork.Repository<HerifyCategory>().Update(herifyCategory, id);
+                unitOfWork.Repository<HerifyCategory>().UpdateAsync(herifyCategory, id);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -85,7 +85,7 @@ namespace Herfitk.API.Controllers
                 if (herifyCategory == null)
                     return NotFound();
 
-                await unitOfWork.Repository<HerifyCategory>().Delete(id);
+                await unitOfWork.Repository<HerifyCategory>().DeleteAsync(id);
                 await unitOfWork.CompleteAsync();
                 return NoContent();
             }

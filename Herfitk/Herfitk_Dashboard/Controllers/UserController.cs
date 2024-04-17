@@ -309,7 +309,7 @@ namespace Herfitk_Dashboard.Controllers
         {
             try
             {
-                await repository.Delete(id);
+                await repository.DeleteAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

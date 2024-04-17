@@ -62,7 +62,7 @@ namespace Herfitk.API.Controllers
             if (clientHerify == null)
                 return NotFound();
 
-            await unitOfWork.Repository<ClientHerify>().Delete(clientHerify.Id);
+            await unitOfWork.Repository<ClientHerify>().DeleteAsync(clientHerify.Id);
             await unitOfWork.CompleteAsync();
 
             return NoContent();

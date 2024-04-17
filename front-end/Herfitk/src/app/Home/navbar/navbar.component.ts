@@ -3,13 +3,13 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { LoginComponent } from '../../Account/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, LoginComponent, TranslateModule],
+  imports: [CommonModule, LoginComponent, TranslateModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   providers: [
@@ -249,13 +249,10 @@ export class NavbarComponent implements OnInit {
       }
     }
   }
+  scrollToSection(sectionId: string) {
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
-// const listItems = document.querySelectorAll('single-footer-widget ul li');
-
-// listItems.forEach(listItem => {
-//   const anchor = listItem.querySelector('a')
-//   if (anchor) {
-//     anchor.style.backgroundColor = 'blue';
-
-//   }
-// });

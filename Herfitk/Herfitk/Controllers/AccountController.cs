@@ -1,14 +1,18 @@
 ﻿using Herfitk.API.Dto;
 using Herfitk.API.DTO;
+using Herfitk.API.SendEmail;
 using Herfitk.API.TokenService;
 using Herfitk.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 
 //using Herfitk.Repository.Data.DbContextBase;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using Talabat.API.DTOs;
 using Talabat.API.Errors;
 
@@ -21,12 +25,15 @@ namespace Herfitk.API.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
         private readonly IAuthService authService;
+        private readonly IEmailService _emailSender;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAuthService authService)
+        public AccountController
+            (UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAuthService authService, IEmailService emailSender)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.authService = authService;
+            _emailSender = emailSender;
         }
 
         [HttpPost("login")]
@@ -35,6 +42,9 @@ namespace Herfitk.API.Controllers
             var user = await userManager.FindByEmailAsync(login.Email);
             if (user is null)
                 return Unauthorized(new ApiResponse(401, "Invalid email or password."));
+
+            if (!await userManager.IsEmailConfirmedAsync(user))
+                return BadRequest(new ApiResponse(400, "Email not confirmed."));
 
             var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
@@ -57,8 +67,9 @@ namespace Herfitk.API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDto model)
         {
-            if (CheckEmailExists(model.Email).Result.Value)
-                return BadRequest(new ApiValidationErrorResponse() { Errors = ["This Email is Already Exist"] });
+            var existingUser = await userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+                return BadRequest("This Email is Already Exist");
 
             var user = new AppUser()
             {
@@ -131,23 +142,64 @@ namespace Herfitk.API.Controllers
             var result = await userManager.CreateAsync(user, user.PasswordHash);
             if (!result.Succeeded)
                 return BadRequest(new ApiResponse(400));
-            if (result.Succeeded)
-            {
-                var TokenString = await authService.GenerateTokinString(user, userManager);
-                return Ok(new UserDto()
-                {
-                    DisplayName = user.DisplayName,
-                    Email = user.Email,
-                    Token = TokenString
-                });
-            }
 
-            return BadRequest();
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+            var buttonHtml = $"<a href=\"{confirmationLink}\" style=\"display: inline-block; padding: 10px 20px; background-color: green; color: white; text-decoration: none;\">Click here to confirm email</a>";
+            var SendMail = new EmailData
+            {
+                To = model.Email,
+                Subject = "Confirm Your Email",
+                //Body = $"Please click the link below to confirm your email :  <a href=\"{confirmationLink}\">{confirmationLink}</a>",
+                Body = $"Please {buttonHtml} to confirm your email.",
+            };
+            _emailSender.SendEmail(SendMail);
+
+            return Ok("Registration successful. Confirmation email sent.");
+        }
+
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+                return BadRequest("User ID or token is invalid.");
+
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+                return Ok("Email confirmed successfully.");
+
+            return BadRequest("Email confirmation failed.");
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPasswod(ResetUserPassword resetUserPassword)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(resetUserPassword.Email);
+                if (user != null)
+                {
+                    resetUserPassword.Token = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var result = await userManager.ResetPasswordAsync(user, resetUserPassword.Token, resetUserPassword.NewPassword);
+                    if (result.Succeeded)
+                        return Ok("Successfully Reset Password");
+                    else
+                    {
+                        var errorMessage = result.Errors.Select(error => error.Description).FirstOrDefault();
+                        return BadRequest($"Password reset failed: {errorMessage}");
+                    }
+                }
+            }
+            return BadRequest("Invalid Data");
         }
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUser()
         {
             if (!ModelState.IsValid) return BadRequest();
             var Email = User.FindFirstValue(ClaimTypes.Email);
@@ -165,10 +217,6 @@ namespace Herfitk.API.Controllers
             }
             return BadRequest("Email not found");
         }
-
-        [HttpGet("emailexists")]
-        public async Task<ActionResult<bool>> CheckEmailExists(string email)
-             => await userManager.FindByEmailAsync(email) is not null;
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByID(int id)

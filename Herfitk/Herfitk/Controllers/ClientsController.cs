@@ -56,7 +56,7 @@ namespace Herfitk.API.Controllers
                 existingClient.History = client.History;
                 existingClient.Review = client.Review;
 
-                await unitOfWork.Repository<Client>().Update(existingClient, id);
+                await unitOfWork.Repository<Client>().UpdateAsync(existingClient, id);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -89,7 +89,7 @@ namespace Herfitk.API.Controllers
             if (client == null)
                 return NotFound();
 
-            await unitOfWork.Repository<Client>().Delete(id);
+            await unitOfWork.Repository<Client>().DeleteAsync(id);
             return NoContent();
         }
     }

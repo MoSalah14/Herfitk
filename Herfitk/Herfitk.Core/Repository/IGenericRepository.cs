@@ -12,8 +12,8 @@
 
         Task<T> AddAsync(T name);
 
-        public Task Update(T name, int id);
+        public Task UpdateAsync(T name, int id);
 
-        public Task Delete(int id);
+        public Task DeleteAsync(int id);
     }
 }

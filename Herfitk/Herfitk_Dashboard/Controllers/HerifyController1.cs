@@ -185,7 +185,7 @@ namespace Herfitk_Dashboard.Controllers
         {
             try
             {
-                var deleteHerify = await repository.DeleteAsync(id);
+                var deleteHerify = repository.DeleteAsync(id);
                 if (deleteHerify == null)
                 {
                     return NotFound();

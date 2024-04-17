@@ -26,7 +26,7 @@ namespace Herfitk.Repository
             return name;
         }
 
-        public async Task Update(T entity, int id)
+        public async Task UpdateAsync(T entity, int id)
         {
             T existingEntity = await _context.FindAsync<T>(id);
             if (existingEntity != null)
@@ -35,7 +35,7 @@ namespace Herfitk.Repository
                 throw new ArgumentException($"Entity with ID {id} not found.");
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
             if (entity != null)
