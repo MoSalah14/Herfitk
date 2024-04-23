@@ -107,13 +107,11 @@ export class LoginComponent {
             setTimeout(() => {
               window.location.reload();
             }, 1000);
-          } else {
-            console.error('Invalid response:', response);
-            this.errorText = 'Email or Password Incorrect.';
           }
         },
         error: (error) => {
-          console.error('Login error:', error);
+          console.error(error.error.message);
+          this.errorText = error.error.message;
         },
       });
     }

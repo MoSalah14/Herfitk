@@ -12,6 +12,9 @@ namespace Herfitk.Repository
             if (spec.Criteria != null)
                 getQuery = getQuery.Where(spec.Criteria);
 
+            if (spec.IspaginationEnable)
+                getQuery = getQuery.Skip(spec.Skip).Take(spec.Take);
+
             getQuery = spec.Includes.Aggregate(getQuery, (curQery, includeexpre) => curQery.Include(includeexpre));
             return getQuery;
         }

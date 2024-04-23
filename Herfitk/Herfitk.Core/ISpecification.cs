@@ -8,5 +8,9 @@ namespace Herfitk.Core
         public Expression<Func<T, bool>>? Criteria { get; set; }
 
         public List<Expression<Func<T, object>>> Includes { get; set; }
+        public int Skip { get; set; }
+        public int Take { get; set; }
+
+        public bool IspaginationEnable { get; set; }
     }
 }

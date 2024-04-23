@@ -2,11 +2,8 @@
   background-color: white;
 }
 
-.container {
-
-}
-#back{
-  background-color:rgb(23, 25, 26);
+#back {
+  background-color: rgb(23, 25, 26);
 }
 .row {
   margin: 10px auto;
@@ -23,23 +20,22 @@
   .no-gutters {
     padding: 0;
   }
+}
+.right {
+  float: right;
+}
 
-  &--right {
-    float: right;
+.right i {
+  margin-top: 10px;
+  font-size: 25px;
+  color: grey;
+  margin-left: 14px;
+  transition: 0.3s;
+}
 
-    i {
-      margin-top: 10px;
-      font-size: 25px;
-      color: grey;
-      margin-left: 14px;
-      transition: 0.3s;
-
-      &:hover {
-        color: blue;
-        cursor: pointer;
-      }
-    }
-  }
+.right i:hover {
+  color: blue;
+  cursor: pointer;
 }
 
 .col-lg-2 {

@@ -193,8 +193,35 @@ namespace Herfitk.API.Controllers
                         return BadRequest($"Password reset failed: {errorMessage}");
                     }
                 }
+                else
+                    ModelState.AddModelError(string.Empty, "Invalid Email");
             }
             return BadRequest("Invalid Data");
+        }
+
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return BadRequest("Email is required.");
+
+            var user = await userManager.FindByEmailAsync(email);
+            var message = user == null ? "Invalid email address." : !await userManager.IsEmailConfirmedAsync(user) ? "Email not confirmed." : null;
+            if (message != null)
+                return Ok(message);
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, token }, protocol: HttpContext.Request.Scheme);
+            var buttonHtml = $"<a href=\"{callbackUrl}\" style=\"display: inline-block; padding: 10px 20px; background-color: green; color: white; text-decoration: none;\">Click here to confirm email</a>";
+
+            var SendMail = new EmailData
+            {
+                To = email,
+                Subject = "Reset Password",
+                Body = $"Please {buttonHtml} to confirm your email.",
+            };
+            _emailSender.SendEmail(SendMail);
+            return Ok("If an account with this email exists, we've sent a password reset link.");
         }
 
         [Authorize]

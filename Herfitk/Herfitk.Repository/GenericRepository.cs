@@ -10,9 +10,7 @@ namespace Herfitk.Repository
         private readonly HerfitkContext _context;
 
         public GenericRepository(HerfitkContext context)
-        {
-            _context = context;
-        }
+          => _context = context;
 
         public async Task<IEnumerable<T>> GetAllAsync()
             => await _context.Set<T>().ToListAsync();

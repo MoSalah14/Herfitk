@@ -5,6 +5,7 @@ using Herfitk.Core.Models.Data;
 using Herfitk.Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using Talabat.API.Errors;
 
 namespace Herfitk.API.Controllers
@@ -23,15 +24,14 @@ namespace Herfitk.API.Controllers
         }
 
         // GET: api/HerifyCategories
-        [HttpGet("{catid}")]
-        public async Task<IActionResult> GetAllHerifyByCatID(int catid)
+        [HttpGet]
+        public async Task<IActionResult> GetAllHerifyByCatID([FromQuery] HerifySpecParam herifySpec)
         {
-            var spec = new HerifyCategoryWithSpec();
+            var spec = new HerifyCategoryWithSpec(herifySpec);
 
             var GetAll = await unitOfWork.Repository<HerifyCategory>().GetAllWithSpecAsync(spec);
 
-            var HerfiyInCategory = GetAll.Where(e => e.CategoryId == catid).ToList();
-            var herifyDtos = mapper.Map<List<HerifyCategory>, List<HerifyDto>>(HerfiyInCategory);
+            var herifyDtos = mapper.Map<IEnumerable<HerifyCategory>, List<HerifyDto>>(GetAll);
 
             return Ok(herifyDtos);
         }

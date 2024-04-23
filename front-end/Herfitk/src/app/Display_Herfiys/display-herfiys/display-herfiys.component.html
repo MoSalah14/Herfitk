@@ -1,41 +1,22 @@
-<!-- <div class="main">
-  <ul class="cards">
-    <li class="cards_item">
-      @for (item of herfiys; track $index) {
-      <div class="card">
-        <div class="card_image">
-          <img src="{{ item.image }}" />
-        </div>
-        <div class="card_content">
-          <h2 class="card_title">{{ item.zone }}</h2>
-          <p class="card_text">
-            {{ item.speciality }}
-          </p> -->
-<!-- <div>{{ item.history }}</div>  -->
-<!-- we will add id here -->
-<!-- <button class="btn card_btn">Read sa More</button>
-        </div>
-      </div>
-      }
-    </li>
-  </ul>
-</div> -->
-
-<div class="card-container">
+<div class="card-container d-flex flex-wrap justify-content-start">
   @for (item of herfiys; track $index) {
-  <div class="card">
-    <div class="card-border-top"></div>
-    <div class="img">
-      <!-- <img src="assets/Image/1.jpg" alt="Image"> -->
-      <img src="assets{{ item.displayImage }}" />
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <!-- Use Bootstrap grid classes -->
+
+    <div class="card">
+      <div class="card-border-top"></div>
+      <div class="img">
+        <!-- <img src="assets/Image/1.jpg" alt="Image"> -->
+        <img src="assets{{ item.displayImage }}" />
+      </div>
+      <span>{{ item.name }}</span>
+      <p class="job">{{ item.speciality }}</p>
+      <p class="job">{{ item.zone }}</p>
+      <!-- <button class="btn card_btn">View Profile</button> -->
+      <button class="contactButton" (click)="goToDisplay(item.herifyId)">
+        {{ "cards.viewProfileButton" | translate }}
+      </button>
     </div>
-    <span>{{ item.name }}</span>
-    <p class="job">{{ item.speciality }}</p>
-    <p class="job">{{ item.zone }}</p>
-    <!-- <button class="btn card_btn">View Profile</button> -->
-    <button class="contactButton" (click)="goToDisplay(item.herifyId)">
-      {{ "cards.viewProfileButton" | translate }}
-    </button>
   </div>
   }
 </div>

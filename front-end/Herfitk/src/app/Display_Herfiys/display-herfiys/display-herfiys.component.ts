@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataSharingService } from '../../data-sharing.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -38,13 +38,21 @@ export class DisplayHerfiysComponent implements OnInit {
     });
   }
 
-  getHerfiysByCategory(categoryId: number) {
+  getHerfiysByCategory(
+    categoryId: number,
+    pageIndex: number = 1,
+    pageSize: number = 5
+  ) {
+    let params = new HttpParams()
+      .set('categoryId', categoryId.toString())
+      .set('PageIndex', pageIndex.toString())
+      .set('PageSize', pageSize.toString());
+
     this.http
-      .get<any[]>(`${this.apiUrl}HerifyCategories/${categoryId}`)
+      .get<any[]>(`${this.apiUrl}HerifyCategories`, { params })
       .subscribe((data) => {
         this.herfiys = data;
         console.log('Herfiys:', this.herfiys);
-        // You can now use this.herfiys in your template or component logic
       });
   }
 
