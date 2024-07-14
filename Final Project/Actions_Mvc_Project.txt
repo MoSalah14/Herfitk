@@ -1,0 +1,12 @@
+Actions : 
+
+--Admin ==>  
+
+--Customer Serv ==>  
+1- CRUD opearation For Elhirfa what coming from Elharfy 
+2- Delete Elharfy or Customer or Customer Serv(user)
+
+3-Views 
+-Filtration by Feadback 
+-Get Herfi by id 
+-Get all Lik upwork

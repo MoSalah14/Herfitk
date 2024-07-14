@@ -9,12 +9,10 @@ namespace Herfitk.API.TokenService
     public class AuthService : IAuthService
     {
         private readonly IConfiguration config;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AuthService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public AuthService(IConfiguration configuration)
         {
             config = configuration;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<string> GenerateTokinString(AppUser user, UserManager<AppUser> userManager)
