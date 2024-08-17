@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Herfitk.API.Helpers
 {
-    public class CashedAttribute : Attribute, IAsyncActionFilter
+    public class CachedAttribute : Attribute, IAsyncActionFilter
     {
         private readonly int TimeLiveInSecond;
 
-        public CashedAttribute(int timeToLiveInSecond)
+        public CachedAttribute(int timeToLiveInSecond)
         {
             TimeLiveInSecond = timeToLiveInSecond;
         }
@@ -19,11 +19,12 @@ namespace Herfitk.API.Helpers
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var ResponseCachService = context.HttpContext.RequestServices.GetRequiredService<IResponseCashService>();
+            // Allow Exeplicty Injection
+            var ResponseCachService = context.HttpContext.RequestServices.GetRequiredService<IResponseCachService>();
 
-            var cacheKey = GenerateCacheKeyFromRequest(context.HttpContext.Request);
+            var CacheKey = GenerateCacheKeyFromRequest(context.HttpContext.Request);
 
-            var Response = await ResponseCachService.GetCashedResponseAsync(cacheKey);
+            var Response = await ResponseCachService.GetCachedResponseAsync(CacheKey);
 
             if (!string.IsNullOrEmpty(Response))
             {
@@ -39,7 +40,7 @@ namespace Herfitk.API.Helpers
             var executedActionContext = await next.Invoke();
 
             if (executedActionContext.Result is OkObjectResult okObjectResult && okObjectResult.Value is not null)
-                await ResponseCachService.SetCashResponseAsync(cacheKey, okObjectResult.Value, TimeSpan.FromSeconds(TimeLiveInSecond));
+                await ResponseCachService.SetCachResponseAsync(CacheKey, okObjectResult.Value, TimeSpan.FromSeconds(TimeLiveInSecond));
 
 
         }
@@ -49,7 +50,7 @@ namespace Herfitk.API.Helpers
             KeyBuilder.Append(request.Path); // api/ControllerName/
 
 
-            // Get QueryStringFromUrlTo Make it Uniqe and add it on the string
+            // Get QueryString From Url To Make it Uniqe and add it on the string
             foreach (var (key,value) in request.Query)
             {
                 KeyBuilder.Append($"|{key}-{value}");

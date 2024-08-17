@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Herfitk.Repository
 {
-    public class ResponseCashService : IResponseCashService
+    public class ResponseCachService : IResponseCachService
     {
         private readonly IDatabase dataBase;
 
-        public ResponseCashService(IConnectionMultiplexer _redis)
+        public ResponseCachService(IConnectionMultiplexer _redis)
         {
             dataBase = _redis.GetDatabase();
         }
-        public async Task SetCashResponseAsync(string CashKey, object Response, TimeSpan LiveTime)
+        public async Task SetCachResponseAsync(string CachKey, object Response, TimeSpan LiveTime)
         {
             if (Response is null) return;
             // Convert Json To CamelCase to support json when send it to front end
@@ -27,10 +27,10 @@ namespace Herfitk.Repository
             //Convert data to Json
             var serializedResponse = JsonSerializer.Serialize(Response, SerializeOptions);
 
-            await dataBase.StringSetAsync(CashKey, serializedResponse, LiveTime);
+            await dataBase.StringSetAsync(CachKey, serializedResponse, LiveTime);
         }
 
-        public async Task<string?> GetCashedResponseAsync(string CashKey)
+        public async Task<string?> GetCachedResponseAsync(string CashKey)
         {
             var CashResponse = await dataBase.StringGetAsync(CashKey);
             if (CashResponse.IsNullOrEmpty) return null;

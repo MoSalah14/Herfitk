@@ -22,7 +22,7 @@ namespace Herfitk.API.Helpers
         {
             Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
 
-            Services.AddSingleton<IResponseCashService, ResponseCashService>();
+            Services.AddSingleton<IResponseCachService, ResponseCachService>();
 
             Services.AddSingleton<ChatService>();
             Services.AddSignalR();
