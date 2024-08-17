@@ -1,4 +1,5 @@
-﻿using Herfitk.Core;
+﻿using Herfitk.API.Helpers;
+using Herfitk.Core;
 using Herfitk.Core.Models.Data;
 
 //using Herfitk.Repository.Data.DbContextBase;
@@ -18,6 +19,7 @@ namespace Herfitk.Controllers
         }
 
         //[Authorize]
+        [Cashed(600)] // Create This Attribute to Check if this Action Executed Before
         [HttpGet("Getall")]
         public async Task<ActionResult> GetAll()
         {
@@ -29,8 +31,9 @@ namespace Herfitk.Controllers
             return BadRequest(ModelState);
         }
 
+        [Cashed(600)]
         [HttpGet("{id:int}")]
-        public async Task<ActionResult> GetOne(int id)
+        public async Task<ActionResult> GetCategoryByID(int id)
         {
             if (ModelState.IsValid)
             {

@@ -15,9 +15,9 @@ namespace Herfitk.Repository
 
         public IStaffRepository staffRepository { get; private set; }
 
-        public UnitOfWork(HerfitkContext talabatContext)
+        public UnitOfWork(HerfitkContext herfutkContext)
         {
-            _HerfitkContext = talabatContext;
+            _HerfitkContext = herfutkContext;
             _repositories = new Hashtable();
             herifyRepository = new HerifyRepository(_HerfitkContext);
             staffRepository = new StaffRepository(_HerfitkContext);

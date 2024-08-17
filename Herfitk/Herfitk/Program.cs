@@ -1,11 +1,12 @@
 using Herfitk.API.ChatServices;
+using Herfitk.API.Helpers;
 using Herfitk.API.Hubs;
 using Herfitk.API.SendEmail;
 using Herfitk.API.TokenService;
 using Herfitk.Core;
 using Herfitk.Core.Models;
 using Herfitk.Core.Models.Data;
-
+using Herfitk.Core.Service_Contract;
 using Herfitk.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -15,7 +16,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System.Configuration;
+using System.Reflection.PortableExecutable;
 using System.Text;
 
 namespace Herfitk
@@ -28,68 +31,25 @@ namespace Herfitk
 
             builder.Services.AddAuthorization();
 
-            #region Configure Services
 
-            // Add services to the container.
-            builder.Services.AddSignalR();
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("CORSPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed((hosts) => true));
             });
+
+
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-            #region Allow  UnitOFWork Service
-
-            //Allow  Repository Service
-            builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
-            builder.Services.AddSingleton<ChatService>();
-            builder.Services.AddSignalR();
-
-            #endregion Allow  UnitOFWork Service
-
-            //Allow DbContext D_Injection
-
-            builder.Services.AddDbContext<HerfitkContext>(Use =>
-            Use.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnection")));
-
-            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
-            builder.Services.AddAutoMapper(typeof(Program));
-
-            builder.Services.AddAuthentication();
-            builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<HerfitkContext>().AddDefaultTokenProviders();
-
-            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-            builder.Services.AddTransient<IEmailService, EmailService>();
-
-            builder.Services.AddAuthentication(option =>
-            {
-                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(opt =>
-            {
-                opt.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateActor = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    RequireExpirationTime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
-                    ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
-                    (builder.Configuration.GetSection("Jwt:Key").Value))
-                };
-            });
-
             builder.Services.ConfigureApplicationCookie(options => { options.Cookie.SameSite = SameSiteMode.None; }); ///////
 
-            //builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<IdentityContext>();
+            #region Configure Services
+
+            builder.Services.AddApplicationService(builder.Configuration);
 
             #endregion Configure Services
+
+
 
             var app = builder.Build();
 
@@ -98,7 +58,6 @@ namespace Herfitk
                         await signInManager.SignOutAsync().ConfigureAwait(false);
                     }).RequireAuthorization(); // So that only authorized users can use this endpoint
 
-            //app.MapIdentityApi<AppUser>();
 
             #region AutoUpdate Database
 
